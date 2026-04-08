@@ -48,6 +48,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);position:stick
 .nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{font-size:13px;font-weight:500;letter-spacing:0.04em;color:var(--slate);transition:color 0.2s}
 .nav-links a:hover{color:var(--navy)}
+@media(max-width:768px){.nav-links{display:none}.nav-search-btn{display:none}}
 .nav-actions{display:flex;align-items:center;gap:16px}
 .nav-search-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-size:12px;color:var(--slate);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s}
 .nav-search-btn:hover{border-color:var(--gold);color:var(--ink)}
@@ -71,7 +72,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);position:stick
 .hero{background:var(--linen);position:relative;overflow:hidden;padding:90px 40px 80px;border-bottom:1px solid var(--border)}
 .hero-grid{position:absolute;inset:0;opacity:0.04;background-size:52px 52px;background-image:linear-gradient(to right,var(--gold) 1px,transparent 1px),linear-gradient(to bottom,var(--gold) 1px,transparent 1px)}
 /* hero-circle replaced by DNA SVG */
-.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center}
 .hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(196,162,101,0.12);border:1px solid rgba(196,162,101,0.25);border-radius:2px;padding:6px 14px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
 .hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
 .hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(36px,4.5vw,58px);font-weight:400;line-height:1.12;color:var(--navy);letter-spacing:-0.01em;margin-bottom:24px}
@@ -90,11 +91,11 @@ nav{background:var(--white);border-bottom:1px solid var(--border);position:stick
 /* Hero right panel */
 .hero-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:32px;box-shadow:0 4px 24px rgba(15,27,61,0.06)}
 .hero-card-title{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
-.hero-card-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.hero-card-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);gap:12px}
 .hero-card-row:last-child{border-bottom:none}
-.hero-card-name{font-family:'Libre Baskerville',serif;font-size:14px;color:var(--navy)}
-.hero-card-purity{font-size:12px;font-weight:600;color:var(--gold)}
-.hero-card-price{font-size:13px;color:var(--slate)}
+.hero-card-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'Libre Baskerville',serif;font-size:14px;color:var(--navy)}
+.hero-card-purity{font-size:12px;font-weight:600;color:var(--gold);flex-shrink:0;white-space:nowrap}
+.hero-card-price{font-size:13px;color:var(--slate);white-space:nowrap;flex-shrink:0}
 
 /* ─── TRUST BAR ─── */
 .trust-bar{background:var(--white);border-bottom:1px solid var(--border)}
@@ -288,14 +289,39 @@ footer{background:var(--linen);border-top:1px solid var(--border);padding:60px 4
 .checkout-btn{width:100%;background:var(--navy);color:var(--white);border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s}
 .checkout-btn:hover{background:var(--navy2)}
 
+
+/* --- MISSION SECTION --- */
+.mission-wrap{background:var(--navy);padding:80px 40px;color:var(--white)}
+.mission-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.mission-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.mission-h2{font-family:'Libre Baskerville',serif;font-size:clamp(26px,3vw,38px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:20px}
+.mission-p{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.8;font-weight:300}
+.mission-cards{display:flex;flex-direction:column;gap:16px}
+.mission-card{background:rgba(255,255,255,0.06);border:1px solid rgba(196,162,101,0.2);border-radius:4px;padding:22px 24px}
+.mission-card-h{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--gold);margin-bottom:6px}
+.mission-card-p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;font-weight:300}
+
+/* --- CTA SECTION --- */
+.cta-wrap{background:var(--gold);padding:72px 40px;text-align:center}
+.cta-inner{max-width:620px;margin:0 auto}
+.cta-h2{font-family:'Libre Baskerville',serif;font-size:clamp(24px,3vw,34px);color:var(--navy);margin-bottom:14px}
+.cta-p{font-size:15px;color:rgba(15,27,61,0.75);line-height:1.7;margin-bottom:28px;font-weight:300}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--white);padding:14px 36px;border:none;border-radius:2px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.25s}
+.cta-btn:hover{background:var(--navy2);box-shadow:0 6px 24px rgba(15,27,61,0.3)}
+
+@media(max-width:960px){
+  .mission-inner{grid-template-columns:1fr;gap:36px}
+}
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:960px){
   .nav-inner,.hero-inner,.catalog-inner,.science-inner,.quality-inner,.value-inner,.faq-inner,.foot-inner{padding:0 20px;max-width:100%}
   .trust-inner{padding:0 20px}
   .hero{padding:80px 20px 60px}
   .hero-inner{grid-template-columns:1fr;gap:40px}
-  .hero-card{display:none}
-  .journal-grid,.pipeline,.value-grid{grid-template-columns:1fr 1fr}
+  .hero-card{order:-1}
+  .journal-grid,.pipeline{grid-template-columns:1fr 1fr}
+  .value-grid{grid-template-columns:1fr}
   .catalog-layout{grid-template-columns:1fr}
   .cat-sidebar{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--border);padding-bottom:16px}
   .cat-header-label{width:100%}
@@ -305,7 +331,7 @@ footer{background:var(--linen);border-top:1px solid var(--border);padding:60px 4
   .prod-row{grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:4px;padding:14px 8px}
   .prod-row .prod-spec{display:none}
   .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
-  .trust-inner{grid-template-columns:repeat(2,1fr)}
+  .trust-inner{grid-template-columns:1fr 1fr}
   .trust-item:nth-child(2){border-right:none}
   .cart-panel{width:100%;max-width:420px}
 }
@@ -537,26 +563,53 @@ footer{background:var(--linen);border-top:1px solid var(--border);padding:60px 4
 </section>
 
 <!-- Value Props -->
+
+<!-- Mission -->
+<section class="mission-wrap">
+  <div class="mission-inner">
+    <div>
+      <div class="mission-eyebrow">Our Mission</div>
+      <h2 class="mission-h2">Living your best life — longer.</h2>
+      <p class="mission-p">We combine cutting-edge AI with the latest longevity science to give you protocols that were previously only available to those with access to expensive private clinics. Our tools are personalised, science-backed, and built around real human life — not just biomarkers on a spreadsheet.</p>
+    </div>
+    <div class="mission-cards">
+      <div class="mission-card">
+        <div class="mission-card-h">Longevity Assessments</div>
+        <div class="mission-card-p">Our AI analyses your lifestyle, habits, and health data to generate a personalised longevity score and optimisation protocol — in minutes.</div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-h">Peptide Protocols</div>
+        <div class="mission-card-p">We build personalised peptide stacks from our clinical catalogue, matched to your goals, experience level, and budget.</div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="value-wrap">
   <div class="value-inner">
-    <div class="section-eyebrow">Why Aevivo</div>
-    <h2 class="section-h2">The Aevivo Standard</h2>
+    <div class="section-eyebrow">Our Approach</div>
+    <h2 class="section-h2">The Aevivo Difference</h2>
     <div class="value-grid">
-      <div class="val-card"><div class="val-icon">🇪🇺</div><div class="val-title">100% EU Synthesized</div><div class="val-desc">All compounds manufactured in European GMP-certified facilities. No Chinese-sourced intermediates. Full traceability from raw materials to finished product.</div></div>
-      <div class="val-card"><div class="val-icon">⏳</div><div class="val-title">30+ Years Experience</div><div class="val-desc">Our manufacturing partners bring over three decades of peptide synthesis expertise. Proven processes, consistent quality, institutional-grade reliability.</div></div>
-      <div class="val-card"><div class="val-icon">🔬</div><div class="val-title">Third Party Verified</div><div class="val-desc">Every batch tested independently. HPLC and mass spectrometry data included with every shipment.</div></div>
-      <div class="val-card"><div class="val-icon">📄</div><div class="val-title">Transparent Documentation</div><div class="val-desc">Full CoA with raw chromatograms and spectra. No vague purity claims. Verify our standards yourself.</div></div>
-      <div class="val-card"><div class="val-icon">🏭</div><div class="val-title">GMP Manufacturing</div><div class="val-desc">ISO 9001 certified EU facilities ensure batch to batch consistency across our entire compound catalog.</div></div>
-      <div class="val-card"><div class="val-icon">🚚</div><div class="val-title">EU Based Shipping</div><div class="val-desc">Temperature controlled packaging with tracking. Shipped directly from Europe within 48 hours of placement.</div></div>
+      <div class="val-card"><div class="val-icon" style="font-size:24px">✨</div><div class="val-title">Personalised</div><div class="val-desc">No two people are the same. Every protocol we generate is built around your specific data — not a generic template.</div></div>
+      <div class="val-card"><div class="val-icon" style="font-size:24px">🔬</div><div class="val-title">Science-backed</div><div class="val-desc">Our recommendations are grounded in the latest longevity research and clinical peptide science. Evidence first, always.</div></div>
+      <div class="val-card"><div class="val-icon" style="font-size:24px">❤️</div><div class="val-title">Human first</div><div class="val-desc">We believe in living fully — not just longer. Our approach is warm, accessible, and built around real life.</div></div>
     </div>
   </div>
 </section>
 
 <!-- Peptide Assessment -->
+
+<!-- CTA -->
+<section class="cta-wrap">
+  <div class="cta-inner">
+    <h2 class="cta-h2">Ready to live your best life?</h2>
+    <p class="cta-p">Take our free assessment and receive a personalised longevity or peptide protocol in under 5 minutes.</p>
+    <a href="#assessment"><button class="cta-btn">Start your assessment →</button></a>
+  </div>
+</section>
 <section class="assess-wrap" id="assessment">
   <div class="assess-inner">
     <div class="assess-pill"><span class="assess-pill-dot"></span>Peptide Assessment</div>
-    <h2 class="assess-h2">Your personalised peptide protocol</h2>
+    <h2 class="assess-h2">Your Personalised Protocol</h2>
     <p class="assess-sub">Answer a few questions and receive a personalised peptide stack built around your goals, health profile, and budget.</p>
     <p class="assess-meta">5 min · 6 sections · AI-powered protocol</p>
 
