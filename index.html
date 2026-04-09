@@ -1312,7 +1312,7 @@ function nlSubmit(form) {
   if (!email) return false;
   const btn = form.querySelector('button');
   if (btn) { btn.disabled = true; btn.textContent = 'Subscribing...'; }
-  fetch('https://formsubmit.co/ajax/suzannahowse@yahoo.com', {
+  fetch('https://formsubmit.co/ajax/0c159d937fb7b8856255d85e29272cc7', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({
@@ -1409,7 +1409,7 @@ function submitAssessment() {
   if (Object.keys(answers).length === 0) { showToast('Please answer at least one question.'); return; }
   var resultsDiv = document.getElementById('assessResults');
   if (resultsDiv) resultsDiv.style.display = 'block';
-  fetch('https://formsubmit.co/ajax/suzannahowse@yahoo.com', {
+  fetch('https://formsubmit.co/ajax/0c159d937fb7b8856255d85e29272cc7', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({
