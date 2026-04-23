@@ -3,16 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
 <title>Shipping &amp; Billing · Aevivo Longevity</title>
 <meta name="description" content="Confirm your shipping and billing details to complete your Aevivo order.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225;background-attachment:fixed;overflow-x:hidden;font-family:'Libre Baskerville',Georgia,serif;position:relative}
-#loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0C1225;z-index:9999;transition:opacity .4s ease}
+body{background-attachment:fixed;overflow-x:hidden;font-family:'Libre Baskerville',Georgia,serif;position:relative;transition:background 0.4s ease}
+html[data-theme="dark"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225}
+html[data-theme="light"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%),#FBF7EF}
+#loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s ease}
+html[data-theme="dark"] #loading{background:#0C1225}
+html[data-theme="light"] #loading{background:#FBF7EF}
 #loading .mark{width:48px;height:48px;border:1px solid #C4A265;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Libre Baskerville',serif;font-size:22px;color:#C4A265;font-weight:700;margin-bottom:18px}
-#loading .lbl{font-family:system-ui,-apple-system,sans-serif;font-size:9px;letter-spacing:3.5px;color:rgba(251,247,239,0.5);text-transform:uppercase;font-weight:500}
+#loading .lbl{font-family:system-ui,-apple-system,sans-serif;font-size:9px;letter-spacing:3.5px;text-transform:uppercase;font-weight:500}
+html[data-theme="dark"] #loading .lbl{color:rgba(251,247,239,0.5)}
+html[data-theme="light"] #loading .lbl{color:rgba(58,63,75,0.6)}
 </style>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -22,7 +31,8 @@ body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.
 <canvas id="bgnet" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:1"></canvas>
 <script>
 (function(){
-  const canvas = document.getElementById('bgnet'); const ctx = canvas.getContext('2d');
+  const canvas = document.getElementById('bgnet'); if(!canvas) return;
+  const ctx = canvas.getContext('2d');
   const DPR = Math.min(window.devicePixelRatio || 1, 2); let W, H;
   function resize(){W=window.innerWidth;H=window.innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.scale(DPR,DPR);}
   resize(); window.addEventListener('resize', resize);
@@ -32,17 +42,22 @@ body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.
   window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
   window.addEventListener('mouseleave',()=>{mx=-9999;my=-9999});
   function frame(){
+    var isDark = (window.__aevivo_theme || document.documentElement.dataset.theme || 'light') === 'dark';
+    var lineRGB = isDark ? '196,162,101' : '138,106,42';
+    var dotRGB = isDark ? '214,194,148' : '138,106,42';
+    var dotAlpha = isDark ? 0.85 : 0.65;
+    var lineMul = isDark ? 1 : 0.85;
     ctx.clearRect(0,0,W,H);
     for(const p of particles){p.x+=p.vx;p.y+=p.vy;if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;}
     for(let i=0;i<N;i++){
       for(let j=i+1;j<N;j++){
         const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d2=dx*dx+dy*dy;
-        if(d2<maxDist2){const d=Math.sqrt(d2),a=0.28*(1-d/maxDist);ctx.strokeStyle='rgba(196,162,101,'+a+')';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}
+        if(d2<maxDist2){const d=Math.sqrt(d2),a=0.28*(1-d/maxDist)*lineMul;ctx.strokeStyle='rgba('+lineRGB+','+a+')';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}
       }
       const mdx=particles[i].x-mx,mdy=particles[i].y-my,md2=mdx*mdx+mdy*mdy;
-      if(md2<32400){const md=Math.sqrt(md2),a=0.25*(1-md/180);ctx.strokeStyle='rgba(196,162,101,'+a+')';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mx,my);ctx.stroke();}
+      if(md2<32400){const md=Math.sqrt(md2),a=0.25*(1-md/180)*lineMul;ctx.strokeStyle='rgba('+lineRGB+','+a+')';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mx,my);ctx.stroke();}
     }
-    for(const p of particles){ctx.fillStyle='rgba(214,194,148,0.85)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
+    for(const p of particles){ctx.fillStyle='rgba('+dotRGB+','+dotAlpha+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
     requestAnimationFrame(frame);
   }
   frame();
@@ -51,12 +66,19 @@ body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.
 <div id="loading"><div class="mark">A</div><div class="lbl">Aevivo Longevity</div></div>
 <div id="root" style="position:relative;z-index:2"></div>
 <script type="text/babel" data-presets="react">
-const { useState, useEffect } = React;
+const { useState, useEffect, useMemo } = React;
 
-const C = {
+const DARK_PALETTE = {
   bg:"#0C1225", white:"#141B2E", navy:"#FBF7EF", char:"#141A2E", gold:"#C4A265",
   copper:"#D4B67A", copperL:"#DEC18B", cream:"#0F1525", border:"rgba(196,162,101,0.14)",
   text:"#FBF7EF", muted:"rgba(251,247,239,0.6)", light:"#121829",
+  navBg:"rgba(12,18,37,0.88)",
+};
+const LIGHT_PALETTE = {
+  bg:"#FBF7EF", white:"#FFFFFF", navy:"#060A14", char:"#1A2744", gold:"#C4A265",
+  copper:"#8A6A2A", copperL:"#A06A4A", cream:"#F0EDE6", border:"rgba(100,85,50,0.18)",
+  text:"#3A3F4B", muted:"#8B90A0", light:"#EEEEE9",
+  navBg:"rgba(251,247,239,0.88)",
 };
 
 const RESERVE_FORM_ID = "185461944980866798";
@@ -72,6 +94,10 @@ function Field({label, required, children}) {
 }
 
 function App() {
+  const [theme, setTheme] = useState(()=>{try{return localStorage.getItem('aevivo-theme')||'light'}catch(e){return 'light'}});
+  useEffect(()=>{try{localStorage.setItem('aevivo-theme',theme)}catch(e){}document.documentElement.dataset.theme=theme;window.__aevivo_theme=theme;},[theme]);
+  const C = theme==='dark' ? DARK_PALETTE : LIGHT_PALETTE;
+  const toggleTheme = ()=>setTheme(t=>t==='dark'?'light':'dark');
   const [order, setOrder] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [sameAsShip, setSameAsShip] = useState(true);
@@ -182,8 +208,8 @@ Tax/VAT: ${bill.tax || "—"}
         @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
         .s{font-family:'Inter',-apple-system,sans-serif}
-        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:9px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
-        .nb{position:fixed;top:28px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:rgba(12,18,37,0.88);border-bottom:1px solid ${C.border};padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
+        .nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:${C.navBg};border-bottom:1px solid ${C.border};padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
         .bp{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 32px;background:${C.gold};color:${C.bg};border:none;border-radius:999px;cursor:pointer;transition:all 0.25s}
         .bp:hover{background:${C.copperL};transform:translateY(-1px)}
         .bp:disabled{opacity:0.4;cursor:not-allowed;transform:none}
@@ -207,6 +233,15 @@ Tax/VAT: ${bill.tax || "—"}
           <span className="s" style={{fontSize:13,letterSpacing:"0.52em",textTransform:"uppercase",color:C.navy,fontWeight:300,fontFamily:"'Outfit',sans-serif"}}>Aevivo</span>
         </a>
         <div style={{display:"flex",alignItems:"center",gap:16}}>
+
+          <button onClick={toggleTheme} title={theme==='dark'?'Switch to light mode':'Switch to dark mode'} aria-label="Toggle theme" style={{width:34,height:34,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",cursor:"pointer",padding:0}} onMouseEnter={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.background="rgba(196,162,101,0.1)";e.currentTarget.style.borderColor=C.border}}>
+            {theme==='dark' ? (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill={C.gold}><path d="M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z"/></svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill={C.gold}><circle cx="12" cy="12" r="5"/><path d="M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z"/></svg>
+            )}
+          </button>
+
           <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:34,height:34,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.background="rgba(196,162,101,0.1)";e.currentTarget.style.borderColor=C.border}}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill={C.gold}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>

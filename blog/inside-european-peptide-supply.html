@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
 <title>Inside a European peptide supply chain · Aevivo Longevity</title>
 <meta name="description" content="Step-by-step: what happens when a peptide is made inside an EU GMP-certified facility.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
@@ -10,21 +13,38 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
+html[data-theme="dark"] {
   --bg: #0C1225; --white: #141B2E; --navy: #FBF7EF; --char: #141A2E;
   --gold: #C4A265; --copper: #D4B67A; --cream: #0F1525;
   --border: rgba(196,162,101,0.14); --text: #FBF7EF; --muted: rgba(251,247,239,0.6);
+  --nav-bg: rgba(12,18,37,0.88);
+  --card-bg: rgba(20,27,46,0.5); --card-bg-hover: rgba(20,27,46,0.85);
+  --callout-bg: rgba(196,162,101,0.06);
+  --redflag-bg: rgba(251,247,239,0.03);
+  --page-bg-grad: radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225;
+  --footer-bg: #060A14;
+}
+html[data-theme="light"] {
+  --bg: #FBF7EF; --white: #FFFFFF; --navy: #060A14; --char: #1A2744;
+  --gold: #C4A265; --copper: #8A6A2A; --cream: #F0EDE6;
+  --border: rgba(100,85,50,0.18); --text: #3A3F4B; --muted: #8B90A0;
+  --nav-bg: rgba(251,247,239,0.88);
+  --card-bg: rgba(255,255,255,0.75); --card-bg-hover: rgba(255,255,255,1);
+  --callout-bg: rgba(196,162,101,0.1);
+  --redflag-bg: rgba(138,106,42,0.04);
+  --page-bg-grad: radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%),#FBF7EF;
+  --footer-bg: #060A14;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225;background-attachment:fixed;color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-weight:400;font-size:17px;line-height:1.75;overflow-x:hidden;position:relative}
+body{background:var(--page-bg-grad);background-attachment:fixed;color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-weight:400;font-size:17px;line-height:1.75;overflow-x:hidden;position:relative}
 
-.ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:9px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12);font-family:'Inter',sans-serif}
+.ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12);font-family:'Inter',sans-serif}
 .ruo-bar .lbl{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:2px}
 .ruo-bar .sep{color:rgba(196,162,101,0.3)}
 .ruo-bar .note{font-size:12px;color:var(--muted);letter-spacing:0.3px}
 
-nav.nb{position:fixed;top:28px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:rgba(12,18,37,0.88);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+nav.nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
 nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 nav .brand .mark{width:28px;height:28px;border:1px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);font-family:'Libre Baskerville',serif;font-weight:700}
 nav .brand .name{font-family:'Outfit',sans-serif;font-size:13px;letter-spacing:0.52em;text-transform:uppercase;color:var(--navy);font-weight:300}
@@ -61,7 +81,7 @@ li{margin-bottom:6px;max-width:700px}
 .callout strong{color:var(--gold)}
 .callout p{margin-bottom:0;font-size:16px}
 
-.redflag{margin:20px 0;padding:16px 22px;border:1px solid var(--border);background:rgba(251,247,239,0.03);border-radius:8px;font-size:15px;max-width:720px}
+.redflag{margin:20px 0;padding:16px 22px;border:1px solid var(--border);background:var(--redflag-bg);border-radius:8px;font-size:15px;max-width:720px}
 .redflag strong{color:var(--gold)}
 
 .pullquote{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,30px);line-height:1.3;color:var(--gold);font-weight:400;font-style:italic;margin:40px 0;padding:0 0 0 28px;border-left:3px solid var(--gold);max-width:720px}
@@ -76,8 +96,8 @@ li{margin-bottom:6px;max-width:700px}
 .tag-pill{display:inline-block;padding:5px 12px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);border-radius:999px}
 
 /* Blog listing */
-.article-card{display:block;padding:36px 32px;background:rgba(20,27,46,0.5);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;text-decoration:none;transition:all 0.3s}
-.article-card:hover{border-color:var(--gold);transform:translateY(-2px);background:rgba(20,27,46,0.85)}
+.article-card{display:block;padding:36px 32px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;text-decoration:none;transition:all 0.3s}
+.article-card:hover{border-color:var(--gold);transform:translateY(-2px);background:var(--card-bg-hover)}
 .article-card .cat{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
 .article-card h3{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.4vw,28px);font-weight:400;color:var(--navy);margin:0 0 12px;line-height:1.2;text-transform:none;letter-spacing:0}
 .article-card .excerpt{font-family:'Inter',sans-serif;font-size:15px;line-height:1.65;color:var(--muted);font-weight:300;margin-bottom:14px;max-width:720px}
@@ -90,6 +110,7 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
 
 @media(max-width:768px){main{padding:120px 20px 80px}}
 </style>
+<script>window.AEVIVO_MOON='<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"#C4A265\"><path d=\"M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z\"/></svg>';window.AEVIVO_SUN='<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"#C4A265\"><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z\"/></svg>';document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('tgl-icon');if(b){var t=document.documentElement.dataset.theme||'light';b.innerHTML=t==='dark'?window.AEVIVO_MOON:window.AEVIVO_SUN}});</script>
 </head>
 <body>
 <canvas id="bgnet"></canvas>
@@ -108,6 +129,7 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
     <span class="name">Aevivo</span>
   </a>
   <div style="display:flex;align-items:center;gap:16px">
+    <button onclick="(function(){var h=document.documentElement;var next=h.dataset.theme==='dark'?'light':'dark';h.dataset.theme=next;window.__aevivo_theme=next;try{localStorage.setItem('aevivo-theme',next)}catch(e){}var b=document.getElementById('tgl-icon');if(b){b.innerHTML=next==='dark'?AEVIVO_MOON:AEVIVO_SUN}})()" title="Toggle theme" aria-label="Toggle theme" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;cursor:pointer;padding:0" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'"><span id="tgl-icon"></span></button>
     <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="#C4A265"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>

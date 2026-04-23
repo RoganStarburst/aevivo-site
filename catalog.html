@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
 <title>Full Catalog · Aevivo Longevity</title>
 <meta name="description" content="European-synthesized research peptides. HPLC verified at >98% purity. Certificate of Analysis on record for every compound. Pre-filled pen format.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
@@ -24,10 +27,17 @@ body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useRef } = React;
 
-const C = {
+const DARK_PALETTE = {
   bg:"#0C1225", white:"#141B2E", navy:"#FBF7EF", char:"#141A2E", gold:"#C4A265",
   copper:"#D4B67A", copperL:"#DEC18B", cream:"#0F1525", border:"rgba(196,162,101,0.14)",
-  text:"#FBF7EF", muted:"rgba(251,247,239,0.6)", light:"#121829", greenD:"#A8D9BC", greenBg:"rgba(168,217,188,0.12)",
+  text:"#FBF7EF", muted:"rgba(251,247,239,0.6)", light:"#121829",
+  navBg:"rgba(12,18,37,0.88)",
+};
+const LIGHT_PALETTE = {
+  bg:"#FBF7EF", white:"#FFFFFF", navy:"#060A14", char:"#1A2744", gold:"#C4A265",
+  copper:"#8A6A2A", copperL:"#A06A4A", cream:"#F0EDE6", border:"rgba(100,85,50,0.18)",
+  text:"#3A3F4B", muted:"#8B90A0", light:"#EEEEE9",
+  navBg:"rgba(251,247,239,0.88)",
 };
 
 function useV(t=0.08){const r=useRef(null);const[v,s]=useState(false);useEffect(()=>{const e=r.current;if(!e)return;const o=new IntersectionObserver(([x])=>{if(x.isIntersecting){s(true);o.disconnect()}},{threshold:t});o.observe(e);return()=>o.disconnect()},[t]);return[r,v]}
@@ -116,6 +126,10 @@ const featuredNames=new Set(["BPC 157","TB 500","Epitalon","GHK Cu","CJC 1295 (N
 const featuredItems=catalog.flatMap(c=>c.items.filter(i=>featuredNames.has(i.n)));
 
 function Aevivo(){
+  const [theme, setTheme] = useState(()=>{try{return localStorage.getItem('aevivo-theme')||'light'}catch(e){return 'light'}});
+  useEffect(()=>{try{localStorage.setItem('aevivo-theme',theme)}catch(e){}document.documentElement.dataset.theme=theme;window.__aevivo_theme=theme;},[theme]);
+  const C = theme==='dark' ? DARK_PALETTE : LIGHT_PALETTE;
+  const toggleTheme = ()=>setTheme(t=>t==='dark'?'light':'dark');
   const[openCat,setOpenCat]=useState(0);
   const[search,setSearch]=useState("");
   const[faqOpen,setFaqOpen]=useState(-1);
@@ -159,9 +173,9 @@ function Aevivo(){
         ::selection{background:rgba(160,106,74,0.2)}
         a{color:${C.copper};text-decoration:none}
 
-        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:9px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
+        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
 
-        .nb{position:fixed;top:28px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:rgba(12,18,37,0.88);border-bottom:1px solid ${C.border}}
+        .nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:${C.navBg};border-bottom:1px solid ${C.border}}
 
         .bp{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:12px 28px;background:${C.gold};color:${C.bg};border:none;border-radius:999px;cursor:pointer;transition:all 0.25s}
         .bp:hover{background:${C.copperL};transform:translateY(-1px)}
@@ -213,6 +227,15 @@ function Aevivo(){
           <a href="index.html" style={{color:C.muted,transition:"color 0.2s"}} onMouseEnter={e=>e.target.style.color=C.gold} onMouseLeave={e=>e.target.style.color=C.muted}>← Back to home</a>
         </div>
         <div style={{display:"flex",alignItems:"center",gap:18}}>
+
+          <button onClick={toggleTheme} title={theme==='dark'?'Switch to light mode':'Switch to dark mode'} aria-label="Toggle theme" style={{width:34,height:34,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",cursor:"pointer",padding:0}} onMouseEnter={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.background="rgba(196,162,101,0.1)";e.currentTarget.style.borderColor=C.border}}>
+            {theme==='dark' ? (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill={C.gold}><path d="M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z"/></svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill={C.gold}><circle cx="12" cy="12" r="5"/><path d="M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z"/></svg>
+            )}
+          </button>
+
           <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:36,height:36,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.background="rgba(196,162,101,0.1)";e.currentTarget.style.borderColor=C.border}}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill={C.gold}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>
