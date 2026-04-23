@@ -84,10 +84,10 @@ const LIGHT_PALETTE = {
 const RESERVE_FORM_ID = "185461944980866798";
 const ACCOUNT_ID = "2284207";
 
-function Field({label, required, children}) {
+function Field({label, required, children, gold}) {
   return (
     <label style={{display:"block",marginBottom:14}}>
-      <div className="s" style={{fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:C.gold,fontWeight:600,marginBottom:6,fontFamily:"'Inter',sans-serif"}}>{label}{required && <span style={{opacity:0.5}}> *</span>}</div>
+      <div className="s" style={{fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:gold,fontWeight:600,marginBottom:6,fontFamily:"'Inter',sans-serif"}}>{label}{required && <span style={{opacity:0.5}}> *</span>}</div>
       {children}
     </label>
   );
@@ -297,27 +297,27 @@ Tax/VAT: ${bill.tax || "—"}
             {/* Shipping */}
             <div className="section-card">
               <div className="h3">Shipping address</div>
-              <Field label="Full name" required>
+              <Field label="Full name" required gold={C.gold}>
                 <input required className="inp" value={shipName} onChange={e=>setShipName(e.target.value)}/>
               </Field>
-              <Field label="Street + number" required>
+              <Field label="Street + number" required gold={C.gold}>
                 <input required className="inp" value={shipStreet} onChange={e=>setShipStreet(e.target.value)} placeholder="e.g. Rua da Liberdade 12"/>
               </Field>
-              <Field label="Apartment / floor / unit (optional)">
+              <Field label="Apartment / floor / unit (optional)" gold={C.gold}>
                 <input className="inp" value={shipApt} onChange={e=>setShipApt(e.target.value)} placeholder="Apt 3B"/>
               </Field>
               <div style={{display:"grid",gridTemplateColumns:"1fr 2fr",gap:12}}>
-                <Field label="Postal code" required>
+                <Field label="Postal code" required gold={C.gold}>
                   <input required className="inp" value={shipPostal} onChange={e=>setShipPostal(e.target.value)}/>
                 </Field>
-                <Field label="City" required>
+                <Field label="City" required gold={C.gold}>
                   <input required className="inp" value={shipCity} onChange={e=>setShipCity(e.target.value)}/>
                 </Field>
               </div>
-              <Field label="Country" required>
+              <Field label="Country" required gold={C.gold}>
                 <input required className="inp" value={shipCountry} onChange={e=>setShipCountry(e.target.value)} placeholder="Portugal"/>
               </Field>
-              <Field label="Phone (for delivery)" required>
+              <Field label="Phone (for delivery)" required gold={C.gold}>
                 <input required type="tel" className="inp" value={shipPhone} onChange={e=>setShipPhone(e.target.value)}/>
               </Field>
             </div>
@@ -332,24 +332,24 @@ Tax/VAT: ${bill.tax || "—"}
             {!sameAsShip && (
               <div className="section-card">
                 <div className="h3">Billing address</div>
-                <Field label="Full name (or company)" required>
+                <Field label="Full name (or company)" required gold={C.gold}>
                   <input required className="inp" value={billName} onChange={e=>setBillName(e.target.value)}/>
                 </Field>
-                <Field label="Street + number" required>
+                <Field label="Street + number" required gold={C.gold}>
                   <input required className="inp" value={billStreet} onChange={e=>setBillStreet(e.target.value)}/>
                 </Field>
-                <Field label="Apartment / floor / unit (optional)">
+                <Field label="Apartment / floor / unit (optional)" gold={C.gold}>
                   <input className="inp" value={billApt} onChange={e=>setBillApt(e.target.value)}/>
                 </Field>
                 <div style={{display:"grid",gridTemplateColumns:"1fr 2fr",gap:12}}>
-                  <Field label="Postal code" required>
+                  <Field label="Postal code" required gold={C.gold}>
                     <input required className="inp" value={billPostal} onChange={e=>setBillPostal(e.target.value)}/>
                   </Field>
-                  <Field label="City" required>
+                  <Field label="City" required gold={C.gold}>
                     <input required className="inp" value={billCity} onChange={e=>setBillCity(e.target.value)}/>
                   </Field>
                 </div>
-                <Field label="Country" required>
+                <Field label="Country" required gold={C.gold}>
                   <input required className="inp" value={billCountry} onChange={e=>setBillCountry(e.target.value)}/>
                 </Field>
               </div>
@@ -359,7 +359,7 @@ Tax/VAT: ${bill.tax || "—"}
             <div className="section-card">
               <div className="h3">Tax / VAT (optional)</div>
               
-              <Field label="Tax / VAT number">
+              <Field label="Tax / VAT number" gold={C.gold}>
                 <input className="inp" value={billTax} onChange={e=>setBillTax(e.target.value)} placeholder="e.g. PT123456789"/>
               </Field>
             </div>

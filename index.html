@@ -327,7 +327,7 @@ function PeptideDetail({data, close, navy, bg, white, gold, copperL, muted, bord
             <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:20,color:muted,textDecoration:"line-through",textDecorationColor:"rgba(251,247,239,0.35)",lineHeight:1}}>€{data.pr}</span>
             <span style={{fontFamily:"'Inter',sans-serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:muted,fontWeight:500,opacity:0.8}}>VAT incl.</span>
           </div>
-          <div style={{fontFamily:"'Inter',sans-serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:gold,fontWeight:600,opacity:0.8,marginBottom:22}}>Founder's Price · Until End of June</div>
+          <div style={{fontFamily:"'Inter',sans-serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:gold,fontWeight:600,opacity:0.8,marginBottom:22}}>Until End of June</div>
           <div style={{display:"flex",gap:14,alignItems:"center",marginBottom:20,flexWrap:"wrap"}}>
             <div style={{display:"flex",alignItems:"center",gap:10,background:"rgba(12,18,37,0.4)",border:`1px solid ${border}`,borderRadius:999,padding:4}}>
               <button type="button" onClick={()=>setQty(Math.max(1,qty-1))} disabled={qty<=1} style={{width:32,height:32,borderRadius:"50%",border:"none",background:"transparent",color:text,cursor:qty<=1?"not-allowed":"pointer",fontSize:18,fontFamily:"'Inter',sans-serif",opacity:qty<=1?0.3:1}}>−</button>
