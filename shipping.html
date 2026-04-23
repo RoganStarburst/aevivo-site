@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shipping &amp; Billing · Aevivo Longevity</title>
+<meta name="description" content="Confirm your shipping and billing details to complete your Aevivo order.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225;background-attachment:fixed;overflow-x:hidden;font-family:'Libre Baskerville',Georgia,serif;position:relative}
+#loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0C1225;z-index:9999;transition:opacity .4s ease}
+#loading .mark{width:48px;height:48px;border:1px solid #C4A265;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Libre Baskerville',serif;font-size:22px;color:#C4A265;font-weight:700;margin-bottom:18px}
+#loading .lbl{font-family:system-ui,-apple-system,sans-serif;font-size:9px;letter-spacing:3.5px;color:rgba(251,247,239,0.5);text-transform:uppercase;font-weight:500}
+</style>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<canvas id="bgnet" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:1"></canvas>
+<script>
+(function(){
+  const canvas = document.getElementById('bgnet'); const ctx = canvas.getContext('2d');
+  const DPR = Math.min(window.devicePixelRatio || 1, 2); let W, H;
+  function resize(){W=window.innerWidth;H=window.innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.scale(DPR,DPR);}
+  resize(); window.addEventListener('resize', resize);
+  const N = Math.max(40, Math.min(140, Math.floor(W * H * 0.00008))); const particles = [];
+  for (let i=0;i<N;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.18,vy:(Math.random()-0.5)*0.18,r:Math.random()*1.3+0.4});
+  const maxDist=150,maxDist2=maxDist*maxDist; let mx=-9999,my=-9999;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  window.addEventListener('mouseleave',()=>{mx=-9999;my=-9999});
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of particles){p.x+=p.vx;p.y+=p.vy;if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;}
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d2=dx*dx+dy*dy;
+        if(d2<maxDist2){const d=Math.sqrt(d2),a=0.28*(1-d/maxDist);ctx.strokeStyle='rgba(196,162,101,'+a+')';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}
+      }
+      const mdx=particles[i].x-mx,mdy=particles[i].y-my,md2=mdx*mdx+mdy*mdy;
+      if(md2<32400){const md=Math.sqrt(md2),a=0.25*(1-md/180);ctx.strokeStyle='rgba(196,162,101,'+a+')';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mx,my);ctx.stroke();}
+    }
+    for(const p of particles){ctx.fillStyle='rgba(214,194,148,0.85)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+<div id="loading"><div class="mark">A</div><div class="lbl">Aevivo Longevity</div></div>
+<div id="root" style="position:relative;z-index:2"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+const C = {
+  bg:"#0C1225", white:"#141B2E", navy:"#FBF7EF", char:"#141A2E", gold:"#C4A265",
+  copper:"#D4B67A", copperL:"#DEC18B", cream:"#0F1525", border:"rgba(196,162,101,0.14)",
+  text:"#FBF7EF", muted:"rgba(251,247,239,0.6)", light:"#121829",
+};
+
+const RESERVE_FORM_ID = "185461944980866798";
+const ACCOUNT_ID = "2284207";
+
+function Field({label, required, children}) {
+  return (
+    <label style={{display:"block",marginBottom:14}}>
+      <div className="s" style={{fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:C.gold,fontWeight:600,marginBottom:6,fontFamily:"'Inter',sans-serif"}}>{label}{required && <span style={{opacity:0.5}}> *</span>}</div>
+      {children}
+    </label>
+  );
+}
+
+function App() {
+  const [order, setOrder] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [sameAsShip, setSameAsShip] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // Shipping fields
+  const [shipName, setShipName] = useState("");
+  const [shipStreet, setShipStreet] = useState("");
+  const [shipApt, setShipApt] = useState("");
+  const [shipPostal, setShipPostal] = useState("");
+  const [shipCity, setShipCity] = useState("");
+  const [shipCountry, setShipCountry] = useState("");
+  const [shipPhone, setShipPhone] = useState("");
+
+  // Billing fields
+  const [billName, setBillName] = useState("");
+  const [billStreet, setBillStreet] = useState("");
+  const [billApt, setBillApt] = useState("");
+  const [billPostal, setBillPostal] = useState("");
+  const [billCity, setBillCity] = useState("");
+  const [billCountry, setBillCountry] = useState("");
+  const [billTax, setBillTax] = useState("");
+
+  useEffect(() => {
+    try {
+      const d = JSON.parse(sessionStorage.getItem("aevivoLead") || "null");
+      if (d) {
+        setOrder(d);
+        setShipName(d.name || "");
+        setShipPhone(d.phone || "");
+        setBillName(d.name || "");
+        setBillTax(d.tax || "");
+      }
+    } catch(e) {}
+    setLoaded(true);
+  }, []);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!order) return;
+    setSubmitting(true);
+    const bill = sameAsShip
+      ? { name:shipName, street:shipStreet, apt:shipApt, postal:shipPostal, city:shipCity, country:shipCountry, tax:billTax }
+      : { name:billName, street:billStreet, apt:billApt, postal:billPostal, city:billCity, country:billCountry, tax:billTax };
+
+    const orderSummary = `
+ORDER
+${Object.entries(order.qty || {}).map(([n,q])=>`  ${n} x${q}`).join("\n")}
+Total: €${order.totalFF} (Founder's) · ${order.totalPens} pens
+
+SHIP TO
+${shipName}
+${shipStreet}${shipApt ? " " + shipApt : ""}
+${shipPostal} ${shipCity}
+${shipCountry}
+${shipPhone}
+
+BILL TO${sameAsShip ? " (same as shipping)" : ""}
+${bill.name}
+${bill.street}${bill.apt ? " " + bill.apt : ""}
+${bill.postal} ${bill.city}
+${bill.country}
+Tax/VAT: ${bill.tax || "—"}
+`.trim();
+
+    const body = new URLSearchParams();
+    body.append("fields[email]", order.email);
+    body.append("fields[name]", order.name || shipName);
+    if (order.phone || shipPhone) body.append("fields[phone]", order.phone || shipPhone);
+    if (bill.tax) body.append("fields[role]", "Order · Tax: " + bill.tax);
+    body.append("fields[compounds]", orderSummary);
+    body.append("ml-submit", "1");
+    body.append("anticsrf", "true");
+    try {
+      await fetch(`https://assets.mailerlite.com/jsonp/${ACCOUNT_ID}/forms/${RESERVE_FORM_ID}/subscribe`, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type":"application/x-www-form-urlencoded"},
+        body: body.toString(),
+      });
+    } catch(err) {}
+
+    // Save locally as final state
+    try {
+      sessionStorage.setItem("aevivoOrderConfirmed", JSON.stringify({...order, shipping:{shipName,shipStreet,shipApt,shipPostal,shipCity,shipCountry,shipPhone}, billing:bill, submittedAt:Date.now()}));
+      sessionStorage.removeItem("aevivoLead");
+    } catch(e) {}
+    setSubmitted(true);
+  };
+
+  if (!loaded) return null;
+  if (!order) {
+    return (
+      <div style={{padding:"180px 20px",textAlign:"center",color:C.text,fontFamily:"'Inter',sans-serif"}}>
+        <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:16,fontWeight:600}}>No order in progress</div>
+        <h1 style={{fontSize:"clamp(28px,4vw,42px)",color:C.navy,fontFamily:"'Libre Baskerville',serif",fontWeight:400,marginBottom:24}}>Start an order first</h1>
+        <a href="index.html" className="bo">← Back to Aevivo</a>
+      </div>
+    );
+  }
+
+  const entries = Object.entries(order.qty || {});
+
+  return (
+    <div style={{fontFamily:"'Libre Baskerville',Georgia,serif",background:"transparent",color:C.text,minHeight:"100vh",position:"relative",zIndex:2}}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        .s{font-family:'Inter',-apple-system,sans-serif}
+        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:9px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
+        .nb{position:fixed;top:28px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:rgba(12,18,37,0.88);border-bottom:1px solid ${C.border};padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+        .bp{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 32px;background:${C.gold};color:${C.bg};border:none;border-radius:999px;cursor:pointer;transition:all 0.25s}
+        .bp:hover{background:${C.copperL};transform:translateY(-1px)}
+        .bp:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+        .bo{font-family:'Inter',-apple-system,sans-serif;font-weight:500;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:12px 28px;background:transparent;color:${C.navy};border:1px solid ${C.border};border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block}
+        .bo:hover{border-color:${C.gold};color:${C.gold}}
+        .inp{font-family:'Inter',-apple-system,sans-serif;font-size:14px;padding:13px 16px;background:${C.white};border:1px solid ${C.border};border-radius:12px;color:${C.navy};outline:none;transition:all 0.25s;width:100%}
+        .inp:focus{border-color:${C.gold}}
+        .section-card{background:${C.white};border:1px solid ${C.border};border-radius:16px;padding:28px;margin-bottom:20px}
+        .h3{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.5vw,28px);font-weight:400;color:${C.navy};margin-bottom:18px;line-height:1.2}
+      `}</style>
+
+      <div className="ruo-bar">
+        <span className="s" style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2}}>FOR RESEARCH USE ONLY</span>
+        <span style={{color:"rgba(196,162,101,0.3)"}}>|</span>
+        <span className="s" style={{fontSize:12,color:C.muted,letterSpacing:0.3}}>Not for human consumption.</span>
+      </div>
+
+      <nav className="nb">
+        <a href="index.html" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none"}}>
+          <div style={{width:28,height:28,border:`1px solid ${C.gold}`,borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,color:C.gold,fontFamily:"'Libre Baskerville',serif",fontWeight:700}}>A</div>
+          <span className="s" style={{fontSize:13,letterSpacing:"0.52em",textTransform:"uppercase",color:C.navy,fontWeight:300,fontFamily:"'Outfit',sans-serif"}}>Aevivo</span>
+        </a>
+        <div style={{display:"flex",alignItems:"center",gap:16}}>
+          <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:34,height:34,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.background="rgba(196,162,101,0.1)";e.currentTarget.style.borderColor=C.border}}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill={C.gold}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+          <a href="orderlist.html" className="s" style={{fontSize:13,color:C.muted,textDecoration:"none",letterSpacing:0.3,transition:"color 0.2s"}} onMouseEnter={e=>e.target.style.color=C.gold} onMouseLeave={e=>e.target.style.color=C.muted}>← Edit selection</a>
+        </div>
+      </nav>
+
+      <main style={{maxWidth:920,margin:"0 auto",padding:"140px clamp(20px,5vw,60px) 120px"}}>
+        {submitted ? (
+          <div style={{textAlign:"center",padding:"40px 0"}}>
+            <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:16,fontWeight:600}}>Order received</div>
+            <h1 style={{fontSize:"clamp(36px,5vw,54px)",color:C.navy,fontWeight:400,lineHeight:1.1,marginBottom:22,fontFamily:"'Libre Baskerville',serif"}}>Thank you, {shipName.split(" ")[0] || "there"}.</h1>
+            <p className="s" style={{fontSize:16,color:C.muted,lineHeight:1.7,fontWeight:300,maxWidth:560,margin:"0 auto 30px"}}>
+              Your order is with us. A member of our team will be in touch within 24 hours to confirm pricing, shipping window, and payment details before anything becomes binding.
+            </p>
+            <p className="s" style={{fontSize:14,color:C.muted,lineHeight:1.7,fontWeight:300,maxWidth:500,margin:"0 auto 30px"}}>
+              A confirmation email is on its way to <strong style={{color:C.gold,fontWeight:500}}>{order.email}</strong>.
+            </p>
+            <a href="index.html" className="bo">Back to Aevivo</a>
+          </div>
+        ) : (
+          <form onSubmit={submit}>
+            <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Step 3 of 3 · Shipping &amp; Billing</div>
+            <h1 style={{fontSize:"clamp(32px,4vw,48px)",color:C.navy,fontWeight:400,lineHeight:1.1,marginBottom:16,fontFamily:"'Libre Baskerville',serif"}}>Where should we send it?</h1>
+            <p className="s" style={{fontSize:16,color:C.muted,lineHeight:1.7,fontWeight:300,marginBottom:36,maxWidth:720}}>
+              Your order summary is on the right. Give us a ship-to address. Billing uses the same address unless you tell us otherwise.
+            </p>
+
+            {/* Order summary */}
+            <div className="section-card" style={{background:"rgba(196,162,101,0.06)",borderColor:"rgba(196,162,101,0.3)"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:14,flexWrap:"wrap",gap:8}}>
+                <div className="h3" style={{margin:0}}>Your order</div>
+                <div className="s" style={{fontSize:13,color:C.gold,fontWeight:600,letterSpacing:1.5}}>FOUNDER'S PRICING</div>
+              </div>
+              <div style={{marginBottom:14}}>
+                {entries.map(([n,q])=>(
+                  <div key={n} className="s" style={{display:"flex",justifyContent:"space-between",padding:"8px 0",borderBottom:`1px dashed ${C.border}`,fontSize:14,color:C.text,fontWeight:300}}>
+                    <span>{n}</span>
+                    <span style={{color:C.gold,fontFamily:"'Libre Baskerville',serif"}}>× {q}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="s" style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",paddingTop:6}}>
+                <span style={{fontSize:12,letterSpacing:2,textTransform:"uppercase",color:C.gold,fontWeight:600}}>Total ({order.totalPens} pen{order.totalPens>1?"s":""})</span>
+                <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:32,color:C.gold,fontWeight:400}}>€{order.totalFF} <span style={{fontSize:11,fontFamily:"'Inter',sans-serif",color:C.muted,opacity:0.7,letterSpacing:1.5,textTransform:"uppercase",fontWeight:500,marginLeft:8}}>VAT incl.</span></span>
+              </div>
+              <div className="s" style={{fontSize:11,color:C.muted,marginTop:4,textAlign:"right"}}>
+                <span style={{textDecoration:"line-through",opacity:0.6}}>€{order.totalRetail} retail</span>
+                <span style={{marginLeft:8,color:C.gold,opacity:0.8}}>You save €{order.totalRetail - order.totalFF}</span>
+              </div>
+            </div>
+
+            {/* Shipping */}
+            <div className="section-card">
+              <div className="h3">Shipping address</div>
+              <Field label="Full name" required>
+                <input required className="inp" value={shipName} onChange={e=>setShipName(e.target.value)}/>
+              </Field>
+              <Field label="Street + number" required>
+                <input required className="inp" value={shipStreet} onChange={e=>setShipStreet(e.target.value)} placeholder="e.g. Rua da Liberdade 12"/>
+              </Field>
+              <Field label="Apartment / floor / unit (optional)">
+                <input className="inp" value={shipApt} onChange={e=>setShipApt(e.target.value)} placeholder="Apt 3B"/>
+              </Field>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 2fr",gap:12}}>
+                <Field label="Postal code" required>
+                  <input required className="inp" value={shipPostal} onChange={e=>setShipPostal(e.target.value)}/>
+                </Field>
+                <Field label="City" required>
+                  <input required className="inp" value={shipCity} onChange={e=>setShipCity(e.target.value)}/>
+                </Field>
+              </div>
+              <Field label="Country" required>
+                <input required className="inp" value={shipCountry} onChange={e=>setShipCountry(e.target.value)} placeholder="Portugal"/>
+              </Field>
+              <Field label="Phone (for delivery)" required>
+                <input required type="tel" className="inp" value={shipPhone} onChange={e=>setShipPhone(e.target.value)}/>
+              </Field>
+            </div>
+
+            {/* Same as shipping toggle */}
+            <label style={{display:"flex",alignItems:"center",gap:12,padding:"18px 22px",background:C.white,border:`1px solid ${C.border}`,borderRadius:12,marginBottom:20,cursor:"pointer"}}>
+              <input type="checkbox" checked={sameAsShip} onChange={e=>setSameAsShip(e.target.checked)} style={{width:18,height:18,accentColor:C.gold,cursor:"pointer"}}/>
+              <div className="s" style={{fontSize:14,color:C.navy,fontWeight:500}}>Billing address is the same as shipping</div>
+            </label>
+
+            {/* Billing (conditional) */}
+            {!sameAsShip && (
+              <div className="section-card">
+                <div className="h3">Billing address</div>
+                <Field label="Full name (or company)" required>
+                  <input required className="inp" value={billName} onChange={e=>setBillName(e.target.value)}/>
+                </Field>
+                <Field label="Street + number" required>
+                  <input required className="inp" value={billStreet} onChange={e=>setBillStreet(e.target.value)}/>
+                </Field>
+                <Field label="Apartment / floor / unit (optional)">
+                  <input className="inp" value={billApt} onChange={e=>setBillApt(e.target.value)}/>
+                </Field>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 2fr",gap:12}}>
+                  <Field label="Postal code" required>
+                    <input required className="inp" value={billPostal} onChange={e=>setBillPostal(e.target.value)}/>
+                  </Field>
+                  <Field label="City" required>
+                    <input required className="inp" value={billCity} onChange={e=>setBillCity(e.target.value)}/>
+                  </Field>
+                </div>
+                <Field label="Country" required>
+                  <input required className="inp" value={billCountry} onChange={e=>setBillCountry(e.target.value)}/>
+                </Field>
+              </div>
+            )}
+
+            {/* Tax / VAT */}
+            <div className="section-card">
+              <div className="h3">Tax / VAT (optional)</div>
+              
+              <Field label="Tax / VAT number">
+                <input className="inp" value={billTax} onChange={e=>setBillTax(e.target.value)} placeholder="e.g. PT123456789"/>
+              </Field>
+            </div>
+
+            <div style={{textAlign:"center",marginTop:36}}>
+              <button type="submit" className="bp" disabled={submitting}>
+                {submitting ? "Submitting..." : "Place my order →"}
+              </button>
+              <div className="s" style={{fontSize:12,color:C.muted,marginTop:14,fontWeight:300}}>
+                No payment now. Within 24 hours we'll send you an invoice by email with bank transfer details to finalise the order. All prices include VAT.
+              </div>
+            </div>
+          </form>
+        )}
+      </main>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+var l=document.getElementById('loading');if(l){l.style.opacity='0';setTimeout(function(){l.remove()},400)}
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to read a CoA in under a minute · Aevivo Longevity</title>
+<meta name="description" content="The three things to check on every Certificate of Analysis, the four red flags most buyers miss.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C1225; --white: #141B2E; --navy: #FBF7EF; --char: #141A2E;
+  --gold: #C4A265; --copper: #D4B67A; --cream: #0F1525;
+  --border: rgba(196,162,101,0.14); --text: #FBF7EF; --muted: rgba(251,247,239,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225;background-attachment:fixed;color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-weight:400;font-size:17px;line-height:1.75;overflow-x:hidden;position:relative}
+
+.ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:9px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12);font-family:'Inter',sans-serif}
+.ruo-bar .lbl{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:2px}
+.ruo-bar .sep{color:rgba(196,162,101,0.3)}
+.ruo-bar .note{font-size:12px;color:var(--muted);letter-spacing:0.3px}
+
+nav.nb{position:fixed;top:28px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:rgba(12,18,37,0.88);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+nav .brand .mark{width:28px;height:28px;border:1px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);font-family:'Libre Baskerville',serif;font-weight:700}
+nav .brand .name{font-family:'Outfit',sans-serif;font-size:13px;letter-spacing:0.52em;text-transform:uppercase;color:var(--navy);font-weight:300}
+nav .back{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;transition:color 0.2s}
+nav .back:hover{color:var(--gold)}
+
+main{max-width:820px;margin:0 auto;padding:140px clamp(20px,5vw,60px) 100px;position:relative;z-index:2}
+
+.breadcrumb{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+.breadcrumb a{color:var(--gold);text-decoration:none;opacity:0.8;transition:opacity 0.2s}
+.breadcrumb a:hover{opacity:1}
+.breadcrumb .sep{margin:0 10px;opacity:0.5}
+
+.eyebrow{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
+.meta{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);margin-bottom:40px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.meta span.dot{opacity:0.4}
+
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(36px,5vw,58px);font-weight:400;line-height:1.05;color:var(--navy);margin-bottom:22px;letter-spacing:-0.3px}
+h1 em{color:var(--gold);font-style:italic}
+h2{font-family:'Libre Baskerville',serif;font-size:clamp(24px,3vw,32px);font-weight:400;color:var(--navy);margin:48px 0 16px;line-height:1.2}
+h2 em{color:var(--gold);font-style:italic}
+h3{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--navy);margin:32px 0 10px;letter-spacing:0.08em;text-transform:uppercase}
+
+.lede{font-family:'Libre Baskerville',serif;font-size:clamp(20px,2.3vw,26px);line-height:1.45;color:var(--navy);font-weight:400;font-style:italic;margin:0 0 36px;max-width:720px}
+.lede em{color:var(--gold);font-style:italic}
+
+p{font-size:17px;line-height:1.8;color:var(--text);font-weight:300;margin-bottom:18px;max-width:720px}
+p strong{color:var(--gold);font-weight:600}
+
+ul,ol{margin:10px 0 22px 22px;font-size:17px;line-height:1.8;font-weight:300;color:var(--text)}
+li{margin-bottom:6px;max-width:700px}
+
+.callout{margin:28px 0;padding:20px 24px;border-left:3px solid var(--gold);background:rgba(196,162,101,0.06);border-radius:0 8px 8px 0;max-width:720px}
+.callout strong{color:var(--gold)}
+.callout p{margin-bottom:0;font-size:16px}
+
+.redflag{margin:20px 0;padding:16px 22px;border:1px solid var(--border);background:rgba(251,247,239,0.03);border-radius:8px;font-size:15px;max-width:720px}
+.redflag strong{color:var(--gold)}
+
+.pullquote{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,30px);line-height:1.3;color:var(--gold);font-weight:400;font-style:italic;margin:40px 0;padding:0 0 0 28px;border-left:3px solid var(--gold);max-width:720px}
+
+.cta-box{margin:60px 0 0;padding:40px 38px;background:rgba(196,162,101,0.08);border:1px solid rgba(196,162,101,0.3);border-radius:16px;text-align:center}
+.cta-box h4{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,28px);font-weight:400;color:var(--navy);margin-bottom:10px;line-height:1.2}
+.cta-box h4 em{color:var(--gold);font-style:italic}
+.cta-box p{font-size:15px;color:var(--muted);margin:0 auto 24px;max-width:520px}
+.bp{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--bg);border:none;border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block}
+.bp:hover{background:var(--copper);transform:translateY(-1px)}
+
+.tag-pill{display:inline-block;padding:5px 12px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);border-radius:999px}
+
+/* Blog listing */
+.article-card{display:block;padding:36px 32px;background:rgba(20,27,46,0.5);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;text-decoration:none;transition:all 0.3s}
+.article-card:hover{border-color:var(--gold);transform:translateY(-2px);background:rgba(20,27,46,0.85)}
+.article-card .cat{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
+.article-card h3{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.4vw,28px);font-weight:400;color:var(--navy);margin:0 0 12px;line-height:1.2;text-transform:none;letter-spacing:0}
+.article-card .excerpt{font-family:'Inter',sans-serif;font-size:15px;line-height:1.65;color:var(--muted);font-weight:300;margin-bottom:14px;max-width:720px}
+.article-card .meta-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);font-weight:400}
+.article-card .meta-row .read{color:var(--gold);font-weight:600;letter-spacing:0.3px}
+
+footer{padding:30px clamp(20px,5vw,60px);border-top:1px solid var(--border);background:#060A14;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);line-height:1.7;font-weight:300;text-align:center;position:relative;z-index:2}
+
+canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+
+@media(max-width:768px){main{padding:120px 20px 80px}}
+</style>
+</head>
+<body>
+<canvas id="bgnet"></canvas>
+<script>
+(function(){const canvas=document.getElementById('bgnet');const ctx=canvas.getContext('2d');const DPR=Math.min(window.devicePixelRatio||1,2);let W,H;function resize(){W=window.innerWidth;H=window.innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.scale(DPR,DPR);}resize();window.addEventListener('resize',resize);const N=Math.max(40,Math.min(140,Math.floor(W*H*0.00008)));const particles=[];for(let i=0;i<N;i++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.18,vy:(Math.random()-0.5)*0.18,r:Math.random()*1.3+0.4});const maxDist=150,maxDist2=maxDist*maxDist;let mx=-9999,my=-9999;window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});window.addEventListener('mouseleave',()=>{mx=-9999;my=-9999});function frame(){ctx.clearRect(0,0,W,H);for(const p of particles){p.x+=p.vx;p.y+=p.vy;if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;}for(let i=0;i<N;i++){for(let j=i+1;j<N;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d2=dx*dx+dy*dy;if(d2<maxDist2){const d=Math.sqrt(d2),a=0.28*(1-d/maxDist);ctx.strokeStyle='rgba(196,162,101,'+a+')';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}}const mdx=particles[i].x-mx,mdy=particles[i].y-my,md2=mdx*mdx+mdy*mdy;if(md2<32400){const md=Math.sqrt(md2),a=0.25*(1-md/180);ctx.strokeStyle='rgba(196,162,101,'+a+')';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mx,my);ctx.stroke();}}for(const p of particles){ctx.fillStyle='rgba(214,194,148,0.85)';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}requestAnimationFrame(frame);}frame();})();
+</script>
+
+<div class="ruo-bar">
+  <span class="lbl">FOR RESEARCH USE ONLY</span>
+  <span class="sep">|</span>
+  <span class="note">Not for human consumption. Not evaluated by any regulatory body.</span>
+</div>
+<nav class="nb">
+  <a href="../index.html" class="brand">
+    <div class="mark">A</div>
+    <span class="name">Aevivo</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:16px">
+    <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#C4A265"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a href="../index.html" class="back">← Back to home</a>
+  </div>
+</nav>
+
+<main>
+  <div class="breadcrumb"><a href="../index.html">Home</a><span class="sep">·</span><a href="index.html">Journal</a><span class="sep">·</span>How to Read a CoA</div>
+  <div class="eyebrow">How to Buy · 4 min read</div>
+  <h1>How to read a Certificate of Analysis <em>in under a minute.</em></h1>
+  <p class="lede">The one document that tells you whether a peptide supplier actually knows what is in the pen they just sold you. Here is how to read it in sixty seconds.</p>
+
+  <p>A Certificate of Analysis is the difference between buying research material and buying a brochure. Most buyers either never see one or get a generic PDF that could belong to anyone. Here is how to read a real CoA in sixty seconds, and the four red flags to run from.</p>
+
+  <h2>The three things to check <em>first</em></h2>
+
+  <p>Before you read anything else, look at three numbers. Together they tell you ninety percent of what you need to know.</p>
+
+  <h3>1. Purity by HPLC</h3>
+  <p>Find the chromatogram. Look for the main peak. Next to it, there should be a percentage. That number is the area under the main peak as a percent of all peaks in the sample. If the main peak is 99.13% of the total area, the compound is 99.13% pure by HPLC.</p>
+  <p>A credible supplier shows you ≥97% for a release specification and &gt;98% for a typical lot result. If you cannot find a percentage on the chromatogram, the CoA is not useful.</p>
+
+  <h3>2. Molecular weight confirmation by mass spectrometry</h3>
+  <p>Find the MS section. It will show a theoretical mass (what the target molecule should weigh) and an observed mass (what the lab actually measured). If those two numbers match within a small tolerance, the compound you are holding is the one on the label.</p>
+  <p>A sequence check is often included next to the MS data. You do not need to read it yourself. You just need to see that it is there.</p>
+
+  <h3>3. The batch and date</h3>
+  <p>A real CoA is tied to a specific batch number, a production date, and an expiry. If you cannot find a batch reference on the CoA you were sent, the CoA is generic, and generic CoAs are marketing.</p>
+
+  <h2>A worked example</h2>
+
+  <p>Here is what a healthy CoA line looks like in practice:</p>
+
+  <div class="callout">
+    <p><strong>Product:</strong> Epitalon &nbsp;·&nbsp; <strong>Lot:</strong> 25AUG03EPI<br>
+    <strong>Purity (HPLC):</strong> main peak at 6.477 min, 99.13% area<br>
+    <strong>MS:</strong> theoretical 390.35, observed 390.36<br>
+    <strong>Release spec:</strong> ≥97% · <strong>Lot result:</strong> &gt;98%</p>
+  </div>
+
+  <p>Four numbers. Together they tell you the compound is what the label says it is, and that the specific batch you received hits a purity level you can verify.</p>
+
+  <h2>The four <em>red flags</em></h2>
+
+  <p>You will see all of these in the wild. If you see any of them, ask for a better document or walk.</p>
+
+  <div class="redflag"><strong>Red flag 1 · A CoA that is not lot-specific.</strong> A generic PDF that says "typical purity &gt;97%" with no batch number, no date, and no chromatogram is a brochure, not a certificate.</div>
+
+  <div class="redflag"><strong>Red flag 2 · No mass spectrometry.</strong> HPLC alone tells you the main peak is ninety-something percent of <em>something</em>. Mass spec tells you <em>what</em> that something is. Without MS, you are trusting the label.</div>
+
+  <div class="redflag"><strong>Red flag 3 · Images instead of data.</strong> A CoA should have numeric tables. If it is a rendered marketing graphic with large percentages and no supporting data, it was made by marketing, not QA.</div>
+
+  <div class="redflag"><strong>Red flag 4 · A CoA that refuses to name the manufacturer.</strong> A credible CoA is traceable to a named facility. "Hybrid synthesis, EU GMP certified" without a facility name or address is a dodge.</div>
+
+  <h2>What to do with the CoA <em>once you have it</em></h2>
+
+  <p>Save it. Archive it with the batch number and date. If anything ever goes wrong with a compound, the CoA is your starting point for resolving it. If your supplier cannot give you one at all, you do not have a supplier. You have a dealer.</p>
+
+  <div class="cta-box">
+    <h4>Ready to buy from a supplier that shows its work?</h4>
+    <p>Aevivo compounds ship with lot-matched documentation on request. Start with a Founder's Price order until the end of June.</p>
+    <a href="../orderlist.html" class="bp">Order your peptides →</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 Aevivo Longevity, a trademark of GENESE SOBRANCEIRA, LDA. Calçada da Ajuda 35, 1300-006 Lisboa · For research use only · <a href="../terms.html" style="color:var(--gold);text-decoration:none">Terms</a> · <a href="../privacy.html" style="color:var(--gold);text-decoration:none">Privacy</a>
+</footer>
+</body></html>

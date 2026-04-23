@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Before You Buy Peptides - A Buyer's Decision Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #060A14;
+  --navy2: #0C1225;
+  --cream: #F5F2EB;
+  --white: #FAFAF8;
+  --gold: #A08540;
+  --goldL: #C4A265;
+  --copper: #A06A4A;
+  --muted: #6B7086;
+  --border: #C4A265;
+  --softNavy: #EEF0F6;
+}
+@page {
+  size: A4;
+  margin: 20mm 18mm 18mm;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  background: var(--white);
+  color: var(--navy);
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  font-size: 11pt;
+  line-height: 1.7;
+}
+h1, h2, h3 { font-family: 'Cormorant Garamond', 'Georgia', serif; font-weight: 400; color: var(--navy); line-height: 1.15; }
+.eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 600;
+  margin-bottom: 12pt;
+}
+em { color: var(--copper); font-style: italic; }
+strong { font-weight: 600; color: var(--navy); }
+
+/* COVER */
+.cover {
+  height: 257mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--navy);
+  color: var(--cream);
+  padding: 28mm 20mm 20mm;
+  margin: -20mm -18mm 0;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+.cover .dna {
+  position: absolute;
+  right: -20mm;
+  top: 30mm;
+  bottom: 30mm;
+  width: 100mm;
+  opacity: 0.4;
+}
+.cover .mark {
+  width: 56pt; height: 56pt;
+  border: 1pt solid var(--border);
+  border-radius: 12pt;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28pt; font-weight: 700; color: var(--border);
+  position: relative; z-index: 2;
+}
+.cover .brand { position: relative; z-index: 2; }
+.cover .title-block { position: relative; z-index: 2; }
+.cover h1 {
+  font-size: 50pt;
+  color: var(--cream);
+  line-height: 1.02;
+  margin-top: 20mm;
+  font-weight: 400;
+}
+.cover h1 em { color: var(--border); }
+.cover .subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19pt;
+  font-style: italic;
+  color: var(--border);
+  margin-top: 10pt;
+  font-weight: 300;
+  max-width: 130mm;
+}
+.cover .meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 242, 235, 0.6);
+  font-weight: 500;
+}
+.cover .ruo {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8pt;
+  color: rgba(214,197,164,0.55);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  position: relative; z-index: 2;
+}
+
+/* PAGES */
+section.page {
+  page-break-before: always;
+  break-before: page;
+  padding-top: 3mm;
+}
+section.page:first-of-type { page-break-before: auto; }
+
+h2 {
+  font-size: 26pt;
+  margin-bottom: 14pt;
+  max-width: 140mm;
+}
+h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9pt;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+  margin: 16pt 0 6pt;
+  text-transform: uppercase;
+}
+
+p { margin-bottom: 10pt; max-width: 164mm; }
+ul, ol { margin: 8pt 0 12pt 16pt; }
+li { margin-bottom: 5pt; }
+
+.lede {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16pt;
+  line-height: 1.4;
+  color: var(--navy);
+  font-weight: 400;
+  max-width: 160mm;
+  margin-bottom: 12pt;
+  font-style: italic;
+}
+
+.pullquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22pt;
+  line-height: 1.25;
+  color: var(--navy);
+  font-weight: 400;
+  max-width: 148mm;
+  margin: 14pt 0 14pt;
+  font-style: italic;
+  padding-left: 14pt;
+  border-left: 2pt solid var(--goldL);
+}
+.pullquote em { color: var(--copper); }
+
+.callout {
+  margin: 12pt 0;
+  padding: 11pt 14pt;
+  border-left: 2pt solid var(--copper);
+  background: var(--cream);
+  font-size: 10pt;
+  color: var(--navy);
+  border-radius: 0 4pt 4pt 0;
+}
+.callout strong { color: var(--copper); }
+
+.redflag {
+  margin: 10pt 0;
+  padding: 10pt 14pt;
+  border: 0.5pt solid var(--border);
+  border-radius: 4pt;
+  background: #FBF6EA;
+  font-size: 10pt;
+}
+.redflag strong { color: var(--copper); }
+
+.divider { height: 0.5pt; background: var(--border); margin: 12pt 0; opacity: 0.5; }
+
+.example {
+  margin: 12pt 0;
+  padding: 12pt 16pt;
+  border: 0.5pt solid var(--border);
+  border-radius: 4pt;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5pt;
+  color: var(--navy);
+  line-height: 1.9;
+  background: var(--white);
+}
+.example strong { color: var(--copper); }
+
+/* AT A GLANCE summary box */
+.glance {
+  margin: 12pt 0;
+  padding: 12pt 14pt;
+  background: var(--softNavy);
+  border-left: 2pt solid var(--navy);
+  border-radius: 0 4pt 4pt 0;
+  font-size: 10pt;
+}
+.glance .label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+  margin-bottom: 4pt;
+}
+.glance p { margin-bottom: 4pt; max-width: none; }
+
+.checklist {
+  counter-reset: qitem;
+  list-style: none;
+  padding-left: 0;
+  margin: 10pt 0;
+}
+.checklist li {
+  counter-increment: qitem;
+  padding: 7pt 0 7pt 30pt;
+  position: relative;
+  border-bottom: 0.5pt dashed var(--border);
+  font-size: 11pt;
+  line-height: 1.4;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: counter(qitem);
+  position: absolute;
+  left: 0;
+  top: 7pt;
+  width: 22pt; height: 22pt;
+  background: var(--navy);
+  color: var(--border);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 11pt;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* BACK COVER */
+.back {
+  page-break-before: always;
+  height: 260mm;
+  background: var(--navy);
+  color: var(--cream);
+  padding: 28mm 20mm;
+  margin: 0 -18mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.back .eyebrow { color: var(--border); }
+.back h2 {
+  color: var(--cream);
+  font-size: 30pt;
+  max-width: 150mm;
+}
+.back h2 em { color: var(--border); }
+.back p { color: rgba(245,242,235,0.8); font-size: 11pt; }
+.back .contactblock {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10pt;
+  color: var(--cream);
+  line-height: 1.8;
+}
+.back .contactblock a { color: var(--border); text-decoration: none; }
+.back .legal {
+  font-size: 8pt;
+  color: rgba(245,242,235,0.45);
+  line-height: 1.6;
+  margin-top: 18pt;
+  max-width: 160mm;
+}
+
+.footer-note {
+  margin-top: 16pt;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8pt;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* VISUAL: CHROMATOGRAM */
+.chromatogram {
+  width: 100%;
+  max-width: 160mm;
+  margin: 10pt auto 14pt;
+  padding: 12pt 14pt 16pt;
+  background: var(--cream);
+  border-radius: 6pt;
+  border: 0.5pt solid var(--border);
+}
+.chromatogram .caption {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8pt;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 600;
+  margin-bottom: 8pt;
+  text-align: center;
+}
+
+/* VISUAL: VIAL vs PEN */
+.compare {
+  display: flex;
+  gap: 14pt;
+  margin: 12pt 0;
+}
+.compare-col {
+  flex: 1;
+  border: 0.5pt solid var(--border);
+  border-radius: 6pt;
+  padding: 14pt;
+  background: var(--cream);
+}
+.compare-col h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16pt;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 6pt;
+}
+.compare-col .tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+  font-weight: 600;
+  margin-bottom: 10pt;
+}
+.compare-col ul { margin: 6pt 0 0 14pt; font-size: 9pt; }
+.compare-col li { margin-bottom: 3pt; }
+.compare-col .drawing { text-align: center; margin: 8pt 0 12pt; min-height: 70pt; }
+
+/* SUPPLY CHAIN VISUAL */
+.chain {
+  width: 100%;
+  margin: 12pt 0 14pt;
+  padding: 14pt;
+  background: var(--softNavy);
+  border-radius: 6pt;
+}
+
+/* QUICK MAP (intro page) */
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8pt;
+  margin: 12pt 0;
+}
+.map-item {
+  padding: 10pt 12pt;
+  background: var(--cream);
+  border-left: 2pt solid var(--goldL);
+  border-radius: 0 4pt 4pt 0;
+  font-size: 9.5pt;
+}
+.map-item .n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12pt;
+  color: var(--copper);
+  font-weight: 600;
+}
+.map-item .t {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10pt;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 2pt 0 2pt;
+}
+.map-item .d {
+  font-size: 8.5pt;
+  color: var(--muted);
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <svg class="dna" viewBox="0 0 400 700" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#C4A265" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#C4A265" stop-opacity="0.5"/>
+      </linearGradient>
+    </defs>
+    <path d="M100,0 C250,80 170,180 330,260 C170,340 250,440 100,520 C250,600 170,700 330,780" fill="none" stroke="url(#g1)" stroke-width="3"/>
+    <path d="M330,0 C170,80 250,180 100,260 C250,340 170,440 330,520 C170,600 250,700 100,780" fill="none" stroke="#F5F2EB" stroke-width="3" opacity="0.35"/>
+    <circle cx="140" cy="60" r="4" fill="#C4A265" opacity="0.8"/>
+    <circle cx="290" cy="60" r="4" fill="#F5F2EB" opacity="0.5"/>
+    <circle cx="190" cy="160" r="4" fill="#F5F2EB" opacity="0.5"/>
+    <circle cx="240" cy="160" r="4" fill="#C4A265" opacity="0.8"/>
+    <circle cx="260" cy="260" r="4" fill="#C4A265" opacity="0.8"/>
+    <circle cx="170" cy="260" r="4" fill="#F5F2EB" opacity="0.5"/>
+    <circle cx="190" cy="360" r="4" fill="#F5F2EB" opacity="0.5"/>
+    <circle cx="240" cy="360" r="4" fill="#C4A265" opacity="0.8"/>
+    <circle cx="170" cy="460" r="4" fill="#C4A265" opacity="0.8"/>
+    <circle cx="260" cy="460" r="4" fill="#F5F2EB" opacity="0.5"/>
+    <line x1="145" y1="60" x2="285" y2="60" stroke="#C4A265" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="160" x2="235" y2="160" stroke="#C4A265" stroke-width="1" opacity="0.5"/>
+    <line x1="175" y1="260" x2="255" y2="260" stroke="#C4A265" stroke-width="1" opacity="0.5"/>
+    <line x1="195" y1="360" x2="235" y2="360" stroke="#C4A265" stroke-width="1" opacity="0.5"/>
+    <line x1="175" y1="460" x2="255" y2="460" stroke="#C4A265" stroke-width="1" opacity="0.5"/>
+  </svg>
+  <div class="brand">
+    <div class="mark">A</div>
+    <div style="margin-top: 6mm; font-family: 'Cormorant Garamond', serif; font-size: 22pt; color: var(--cream); letter-spacing: 0.2em; font-weight: 500;">AEVIVO</div>
+    <div class="meta" style="margin-top: 4pt; color: rgba(245,242,235,0.5);">Longevity Research</div>
+  </div>
+  <div class="title-block">
+    <div class="meta" style="color: var(--border);">A Buyer's Decision Guide</div>
+    <h1>Before you<br>buy <em>peptides.</em></h1>
+    <div class="subtitle">What to look for before you order from anyone, including us.</div>
+  </div>
+  <div class="ruo">For Research Use Only · Not for human consumption</div>
+</div>
+
+<!-- PAGE 1: WHY -->
+<section class="page">
+  <div class="eyebrow">Introduction</div>
+  <h2>Most buyers have no way to verify what they're receiving.</h2>
+  <p class="lede">Peptides are everywhere. Rigor is rare. This guide gives you a short, practical framework for telling the difference.</p>
+  <p>The peptide market has exploded in the last five years. Along with it, a quiet secondary market of vague suppliers, generic Certificates of Analysis, and prices that look too good to be true. Most buyers have no trained way to tell a serious supplier from a surface one.</p>
+  <p>What follows is seven things that matter, one short section each, plus a one-page checklist you can print. Read it in under fifteen minutes. Keep it on hand.</p>
+  <div class="callout">
+    <strong>A note on language.</strong> All peptides discussed here, and all products supplied by Aevivo, are For Research Use Only. This document does not discuss human administration, therapeutic use, or dosing. It discusses how to buy research material responsibly.
+  </div>
+  <div class="footer-note">Aevivo Longevity · Buyer's Decision Guide · 2026 · Page 1</div>
+</section>
+
+<!-- PAGE 2: QUICK MAP -->
+<section class="page">
+  <div class="eyebrow">At a Glance</div>
+  <h2>The seven things that matter.</h2>
+  <p>Use the following framework when evaluating any peptide supplier, online or offline. Most failures in the peptide supply chain are a missing answer in one of these seven categories.</p>
+  <div class="map-grid">
+    <div class="map-item"><span class="n">01</span><div class="t">Purity</div><div class="d">What percentage of the product is actually the target compound, by HPLC.</div></div>
+    <div class="map-item"><span class="n">02</span><div class="t">Identity</div><div class="d">Proof, via mass spectrometry, that the compound is what the label says.</div></div>
+    <div class="map-item"><span class="n">03</span><div class="t">Origin</div><div class="d">Country of synthesis, named facility, certifications.</div></div>
+    <div class="map-item"><span class="n">04</span><div class="t">Delivery Format</div><div class="d">Lyophilised vial, pre-filled vial, or sealed pen. They are not equivalents.</div></div>
+    <div class="map-item"><span class="n">05</span><div class="t">Storage &amp; Shipping</div><div class="d">Cold-chain handling, arrival inspection, damage policy.</div></div>
+    <div class="map-item"><span class="n">06</span><div class="t">Pricing Signals</div><div class="d">What a fair price looks like, and what a dangerous one looks like.</div></div>
+    <div class="map-item"><span class="n">07</span><div class="t">Supplier Identity</div><div class="d">Named humans, registered entity, responsive support, written policies.</div></div>
+    <div class="map-item" style="background: var(--navy); color: var(--cream); border-left-color: var(--border);">
+      <span class="n" style="color: var(--border);">08</span>
+      <div class="t" style="color: var(--cream);">The Checklist</div>
+      <div class="d" style="color: rgba(245,242,235,0.7);">Ten yes/no questions. Run them before any order.</div>
+    </div>
+  </div>
+  <div class="footer-note">Page 2</div>
+</section>
+
+<!-- PAGE 3: PURITY -->
+<section class="page">
+  <div class="eyebrow">01 · The Purity Question</div>
+  <h2>Purity is the first test. Most suppliers fail it.</h2>
+  <p>When a peptide is synthesised, the process produces a mixture: the target compound, incomplete chains, deletion sequences, and by-products. "Purity" is the proportion of the final product that is the target compound. It is measured by High-Performance Liquid Chromatography (HPLC).</p>
+
+  <div class="chromatogram">
+    <div class="caption">Simplified HPLC Chromatogram</div>
+    <svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- Axes -->
+      <line x1="40" y1="150" x2="480" y2="150" stroke="#6B7086" stroke-width="1"/>
+      <line x1="40" y1="20" x2="40" y2="150" stroke="#6B7086" stroke-width="1"/>
+      <!-- X label -->
+      <text x="260" y="172" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" text-anchor="middle">Retention time (minutes)</text>
+      <!-- Y label -->
+      <text x="20" y="85" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" transform="rotate(-90, 20, 85)" text-anchor="middle">Signal intensity</text>
+      <!-- Small early peak (impurity) -->
+      <path d="M80,150 L85,148 L90,130 L95,148 L100,150" fill="#A06A4A" opacity="0.5" stroke="#A06A4A" stroke-width="1"/>
+      <!-- Small peak (impurity) -->
+      <path d="M160,150 L165,148 L170,140 L175,148 L180,150" fill="#A06A4A" opacity="0.5" stroke="#A06A4A" stroke-width="1"/>
+      <!-- Main peak (target) -->
+      <path d="M230,150 L240,147 L248,138 L254,110 L258,55 L262,30 L266,55 L270,110 L276,138 L284,147 L294,150" fill="#C4A265" stroke="#A08540" stroke-width="1.2"/>
+      <!-- Another tiny peak -->
+      <path d="M360,150 L365,149 L370,144 L375,149 L380,150" fill="#A06A4A" opacity="0.5" stroke="#A06A4A" stroke-width="1"/>
+      <!-- Annotations: Main peak -->
+      <text x="260" y="24" font-family="Cormorant Garamond, serif" font-size="12" fill="#060A14" font-weight="600" text-anchor="middle">Main peak · &gt;98% area</text>
+      <line x1="260" y1="28" x2="260" y2="38" stroke="#060A14" stroke-width="1"/>
+      <!-- Label impurities -->
+      <text x="90" y="118" font-family="DM Sans, sans-serif" font-size="8" fill="#A06A4A" text-anchor="middle">impurity</text>
+      <line x1="90" y1="122" x2="90" y2="128" stroke="#A06A4A" stroke-width="0.5"/>
+      <text x="170" y="128" font-family="DM Sans, sans-serif" font-size="8" fill="#A06A4A" text-anchor="middle">impurity</text>
+      <line x1="170" y1="132" x2="170" y2="138" stroke="#A06A4A" stroke-width="0.5"/>
+      <!-- Baseline -->
+      <text x="450" y="145" font-family="DM Sans, sans-serif" font-size="7" fill="#6B7086" text-anchor="end">baseline</text>
+    </svg>
+  </div>
+
+  <h3>What to look for</h3>
+  <ul>
+    <li>A chromatogram that shows the main peak and the smaller peaks around it.</li>
+    <li>A percentage next to the main peak, usually labelled as % area.</li>
+    <li>A release specification (the minimum the supplier commits to) and a lot result (actual measurement for this batch).</li>
+  </ul>
+  <div class="redflag"><strong>Red flag.</strong> Generic PDF not linked to a batch, no chromatogram at all, or a percentage with no supporting image.</div>
+  <div class="footer-note">Page 3</div>
+</section>
+
+<!-- PAGE 4: IDENTITY -->
+<section class="page">
+  <div class="eyebrow">02 · Identity</div>
+  <h2>Verify the compound is the compound on the label.</h2>
+  <p>HPLC tells you the main peak is some percent of the total. It does not tell you <em>what</em> that peak is. Credible suppliers run mass spectrometry (MS) to confirm it.</p>
+  <p>Mass spec reports two numbers: the theoretical mass (what the target molecule should weigh, calculable from its formula) and the observed mass (what was measured in the sample). If the two match within a small tolerance, the compound is what the label says.</p>
+
+  <div class="glance">
+    <div class="label">Example: Epitalon</div>
+    <p style="font-size: 10pt;"><strong>Theoretical mass:</strong> 390.35 Da &nbsp;·&nbsp; <strong>Observed mass:</strong> 390.36 Da</p>
+    <p style="font-size: 9pt; color: var(--muted);">Difference of 0.01 Da is well within instrument tolerance. Compound identity confirmed.</p>
+  </div>
+
+  <h3>What to look for</h3>
+  <ul>
+    <li>An MS spectrum image or table showing theoretical vs. observed mass.</li>
+    <li>The peptide sequence spelled out on the CoA (for example, Ala-Glu-Asp-Gly for Epitalon).</li>
+    <li>For recombinant peptides, a separate N-terminal or DNA sequencing check of the expression strain.</li>
+  </ul>
+  <div class="redflag"><strong>Red flag.</strong> Purity data shown but no identity verification. The compound could be anything with the right molecular size distribution.</div>
+  <div class="footer-note">Page 4</div>
+</section>
+
+<!-- PAGE 5: ORIGIN -->
+<section class="page">
+  <div class="eyebrow">03 · Origin &amp; Provenance</div>
+  <h2>Country of synthesis is part of the product.</h2>
+  <p>The peptide market has three broad origin classes. They produce three very different products, at three very different price points.</p>
+
+  <div class="chain">
+    <svg viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- Three origin circles -->
+      <circle cx="80" cy="40" r="28" fill="#060A14"/>
+      <text x="80" y="38" font-family="Cormorant Garamond, serif" font-size="11" fill="#C4A265" text-anchor="middle" font-weight="600">EU</text>
+      <text x="80" y="50" font-family="DM Sans, sans-serif" font-size="6" fill="#C4A265" text-anchor="middle">GMP</text>
+      <text x="80" y="90" font-family="Cormorant Garamond, serif" font-size="11" fill="#060A14" text-anchor="middle" font-style="italic">European GMP</text>
+      <text x="80" y="104" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" text-anchor="middle">Regulated, audited</text>
+      <text x="80" y="114" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" text-anchor="middle">Highest cost, highest trust</text>
+
+      <circle cx="260" cy="40" r="28" fill="#A06A4A"/>
+      <text x="260" y="38" font-family="Cormorant Garamond, serif" font-size="11" fill="#F5F2EB" text-anchor="middle" font-weight="600">US</text>
+      <text x="260" y="50" font-family="DM Sans, sans-serif" font-size="6" fill="#F5F2EB" text-anchor="middle">LABS</text>
+      <text x="260" y="90" font-family="Cormorant Garamond, serif" font-size="11" fill="#060A14" text-anchor="middle" font-style="italic">US Research Labs</text>
+      <text x="260" y="104" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" text-anchor="middle">Variable quality</text>
+      <text x="260" y="114" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" text-anchor="middle">Ask for certifications</text>
+
+      <circle cx="440" cy="40" r="28" fill="#6B7086"/>
+      <text x="440" y="38" font-family="Cormorant Garamond, serif" font-size="10" fill="#F5F2EB" text-anchor="middle" font-weight="600">Asia</text>
+      <text x="440" y="50" font-family="DM Sans, sans-serif" font-size="6" fill="#F5F2EB" text-anchor="middle">BULK</text>
+      <text x="440" y="90" font-family="Cormorant Garamond, serif" font-size="11" fill="#060A14" text-anchor="middle" font-style="italic">Asian Bulk Suppliers</text>
+      <text x="440" y="104" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" text-anchor="middle">Cheapest, least verifiable</text>
+      <text x="440" y="114" font-family="DM Sans, sans-serif" font-size="8" fill="#6B7086" text-anchor="middle">Often resold as "EU"</text>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <strong>The resale trick.</strong> Many Western European and US "research-grade" suppliers actually buy their raw material from bulk manufacturers in China, Pakistan, or India, repackage it, and market it as EU-synthesised. Some of it is fine. Some of it is not. Without a named facility, there is no way to know which.
+  </div>
+  <div class="redflag"><strong>Red flag.</strong> "EU research-grade" or "GMP-inspired" with no named manufacturing facility, country, or certification documents.</div>
+  <div class="footer-note">Page 5</div>
+</section>
+
+<!-- PAGE 6: DELIVERY FORMAT -->
+<section class="page">
+  <div class="eyebrow">04 · Delivery Format</div>
+  <h2>How the peptide arrives changes what you received.</h2>
+  <p>Research peptides reach buyers in three formats. They are not interchangeable. The format determines stability, contamination risk, dosing reproducibility, and price.</p>
+
+  <div class="compare">
+    <div class="compare-col">
+      <div class="tag">Cheapest</div>
+      <h4>Lyophilised vial</h4>
+      <div class="drawing">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="width: 48pt; height: 48pt;">
+          <rect x="28" y="8" width="24" height="10" fill="#6B7086" rx="2"/>
+          <rect x="30" y="18" width="20" height="54" fill="none" stroke="#060A14" stroke-width="1.5"/>
+          <rect x="30" y="45" width="20" height="27" fill="#F5F2EB" opacity="0.7"/>
+          <text x="40" y="62" font-family="DM Sans, sans-serif" font-size="5" fill="#6B7086" text-anchor="middle">powder</text>
+        </svg>
+      </div>
+      <ul>
+        <li>Freeze-dried powder</li>
+        <li>Buyer reconstitutes with water</li>
+        <li>Introduces measurement errors</li>
+        <li>Multi-puncture contamination risk</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="tag">Mid-Tier</div>
+      <h4>Pre-filled vial</h4>
+      <div class="drawing">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="width: 48pt; height: 48pt;">
+          <rect x="28" y="8" width="24" height="10" fill="#6B7086" rx="2"/>
+          <rect x="30" y="18" width="20" height="54" fill="none" stroke="#060A14" stroke-width="1.5"/>
+          <rect x="30" y="28" width="20" height="44" fill="#C4A265" opacity="0.55"/>
+          <text x="40" y="54" font-family="DM Sans, sans-serif" font-size="5" fill="#060A14" text-anchor="middle">liquid</text>
+        </svg>
+      </div>
+      <ul>
+        <li>Ready to use</li>
+        <li>Still requires septum puncture</li>
+        <li>Each use exposes compound to air</li>
+        <li>Dose measurement by syringe</li>
+      </ul>
+    </div>
+    <div class="compare-col" style="background: #FBF6EA; border-color: #C4A265;">
+      <div class="tag" style="color: #A08540;">Premium</div>
+      <h4>Sealed pen cartridge</h4>
+      <div class="drawing">
+        <svg viewBox="0 0 110 80" xmlns="http://www.w3.org/2000/svg" style="width: 75pt; height: 48pt;">
+          <rect x="4" y="30" width="95" height="20" fill="#060A14" rx="4"/>
+          <rect x="8" y="34" width="70" height="12" fill="#C4A265"/>
+          <rect x="80" y="32" width="18" height="16" fill="#A08540" rx="2"/>
+          <circle cx="98" cy="40" r="3" fill="#060A14"/>
+          <text x="50" y="42" font-family="DM Sans, sans-serif" font-size="4.5" fill="#060A14" text-anchor="middle">compound · buffer · argon</text>
+          <text x="88" y="62" font-family="DM Sans, sans-serif" font-size="5" fill="#060A14" text-anchor="middle">dial</text>
+          <text x="43" y="62" font-family="DM Sans, sans-serif" font-size="5" fill="#060A14" text-anchor="middle">sealed cartridge</text>
+        </svg>
+      </div>
+      <ul>
+        <li>Closed-system, no puncture</li>
+        <li>Dial-based precision dosing</li>
+        <li>Inert atmosphere inside</li>
+        <li>Reproducible across series</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="redflag"><strong>Red flag.</strong> The supplier does not specify the delivery format on the listing, gives no storage protocol, or sells only lyophilised material with no reconstitution guidance.</div>
+  <div class="footer-note">Page 6</div>
+</section>
+
+<!-- PAGE 7: PENS vs VIALS - PRICE STORY - NEW -->
+<section class="page">
+  <div class="eyebrow">The Price Story</div>
+  <h2>Pens and vials are not the same product.</h2>
+  <div class="pullquote">
+    Comparing a <em>vial</em> to a <em>pen</em> is like comparing <em>flour</em> to <em>bread</em>. Both contain the same ingredient. One of them is ready to use.
+  </div>
+  <p>This is the most common mistake buyers make: assuming a pen and a vial of the same peptide should cost roughly the same. They should not. They are categorically different products, at different points in the manufacturing chain.</p>
+
+  <h3>What you get in a vial</h3>
+  <p>The compound, dissolved or lyophilised, in a glass container with a rubber septum. The buyer provides: the needle, the syringe, the reconstitution water (if lyophilised), the sterile technique, the dose measurement, and the risk of every one of those steps going wrong.</p>
+
+  <h3>What you get in a pen</h3>
+  <p>The compound, pre-dissolved in a stability buffer, sealed inside a medical-grade cartridge under inert atmosphere, loaded into a dial-dosing device, tested for sterility and endotoxin levels, and formulated for refrigerated shelf life. No reconstitution, no puncture, no dose guesswork.</p>
+
+  <div class="callout">
+    <strong>Why pens cost three to five times more.</strong> You are not paying three times as much for peptide. You are paying for the dissolution, the buffer, the stabilisers, the sterile fill-and-finish, the inert-gas seal, the dial mechanism, the sterility testing, and the quality release process. The peptide is the cheapest ingredient on that list.
+  </div>
+
+  <h3>How to think about pricing across formats</h3>
+  <p>Compare pen to pen. Compare vial to vial. Compare lyophilised to lyophilised. If a supplier quotes a vial price next to a competitor's pen price and claims their offer is better value, they are either misinformed or deliberately obscuring the comparison.</p>
+
+  <div class="glance">
+    <div class="label">At a glance</div>
+    <p>A vial is raw material. A pen is a delivered system.</p>
+    <p>Across the market, pens typically run 3-5x the equivalent vial price for the same compound, and the gap is real manufacturing cost, not markup.</p>
+  </div>
+  <div class="footer-note">Page 7</div>
+</section>
+
+<!-- PAGE 8: STORAGE -->
+<section class="page">
+  <div class="eyebrow">05 · Storage &amp; Shipping</div>
+  <h2>Most peptides that arrive broken were broken in transit.</h2>
+  <p>Peptides are proteins. Many of them degrade above certain temperatures. A compound that ships in an ambient box across a warm climate in July may arrive intact in structure but with reduced potency that no visible inspection will reveal.</p>
+
+  <div class="glance">
+    <div class="label">Typical storage window</div>
+    <p><strong>+2°C to +8°C refrigerated.</strong> Most liquid peptide formulations.</p>
+    <p><strong>Do not freeze.</strong> Freeze-thaw cycles denature many compounds.</p>
+    <p><strong>Away from direct light and heat.</strong> UV and high temperature accelerate degradation.</p>
+  </div>
+
+  <h3>What to look for</h3>
+  <ul>
+    <li>A named storage temperature range on the CoA and the product listing.</li>
+    <li>Cold-chain shipping (gel packs, insulated box) when destination climate or compound stability requires it.</li>
+    <li>Written instructions for what the buyer should check on arrival: appearance, temperature indicator strip, documentation match.</li>
+    <li>A 24-72 hour inspection window to report damage or documentation issues.</li>
+  </ul>
+  <div class="redflag"><strong>Red flag.</strong> No cold-chain option offered, no inspection window, no replacement policy if the shipment arrives out of spec.</div>
+  <div class="footer-note">Page 8</div>
+</section>
+
+<!-- PAGE 9: PRICING SIGNALS -->
+<section class="page">
+  <div class="eyebrow">06 · Pricing Signals</div>
+  <h2>Prices that look too good usually are.</h2>
+  <p>Each step in a legitimate peptide supply chain has a real cost. GMP synthesis, HPLC purification, analytical QC, sealed-pen formulation, cold-chain shipping. A supplier charging significantly below market is either absorbing losses they cannot sustain, or skipping steps.</p>
+  <p>We are not publishing a market price table here because prices shift quarterly. The better rule: get quotes from at least three suppliers for the same compound at the same spec before deciding. If one is 40% below the other two, the 40% is a signal, not a deal.</p>
+  <h3>What to look for</h3>
+  <ul>
+    <li>Prices that fall within a reasonable spread of the market.</li>
+    <li>A clear specification alongside the price (concentration, volume, format, purity spec).</li>
+    <li>Clarity about what is and is not included (shipping, customs, taxes).</li>
+    <li>Batch-cycle pricing: serious suppliers that produce in waves often quote per-cycle rather than flat retail.</li>
+  </ul>
+  <div class="redflag"><strong>Red flag.</strong> Prices far below market, paired with no CoA, no named manufacturer, no defined delivery format, no return policy.</div>
+  <div class="footer-note">Page 9</div>
+</section>
+
+<!-- PAGE 10: SUPPLIER IDENTITY -->
+<section class="page">
+  <div class="eyebrow">07 · Who You Are Buying From</div>
+  <h2>A named human beats an anonymous LLC every time.</h2>
+  <p>If something goes wrong with a compound, a shipment, or a documentation gap, you want a person to talk to. This is the single most underweighted factor in peptide purchasing, and the one most likely to matter when you need it.</p>
+  <h3>What to look for</h3>
+  <ul>
+    <li>Named founders or leadership on the supplier's site.</li>
+    <li>A registered business entity with a real address and a country of registration.</li>
+    <li>A direct support channel, not just a generic contact form.</li>
+    <li>A written refund and quality policy.</li>
+    <li>Evidence of operational longevity and a reputation to protect.</li>
+  </ul>
+  <div class="redflag"><strong>Red flag.</strong> Anonymous brand, no team page, only a generic contact form, no registered address, no written policy.</div>
+  <div class="footer-note">Page 10</div>
+</section>
+
+<!-- PAGE 11: CHECKLIST -->
+<section class="page">
+  <div class="eyebrow">The Checklist</div>
+  <h2>Ten questions for any peptide supplier.</h2>
+  <p style="margin-bottom: 14pt;">Run this before every order. If more than two answers are "no," treat the supplier as unverified.</p>
+  <ol class="checklist">
+    <li>Is the country of synthesis named on the CoA or product page?</li>
+    <li>Is a GMP or equivalent facility certification documented?</li>
+    <li>Is a Certificate of Analysis available for the specific compound?</li>
+    <li>Does the CoA show ≥97% purity by HPLC?</li>
+    <li>Does the CoA include mass spectrometry confirmation of identity?</li>
+    <li>Is the delivery format (lyophilised, pre-filled vial, pen) specified?</li>
+    <li>Is a storage protocol provided, with cold-chain shipping where needed?</li>
+    <li>Is the pricing within a reasonable market range for the spec?</li>
+    <li>Is a human or named entity clearly responsible for the supply?</li>
+    <li>Is there a direct support channel and a written quality policy?</li>
+  </ol>
+  <div class="footer-note">Page 11</div>
+</section>
+
+<!-- PAGE 12: EXAMPLE -->
+<section class="page">
+  <div class="eyebrow">Applied Example</div>
+  <h2>What a credible CoA actually looks like.</h2>
+  <p>To make the framework concrete: a simplified CoA summary line for a single compound. Every item below is either numeric or traceable. Nothing is marketing language.</p>
+  <div class="example">
+    <strong>Product:</strong> Epitalon<br>
+    <strong>Lot:</strong> 25AUG03EPI<br>
+    <strong>Manufacturer:</strong> EU GMP-certified facility (Lithuania)<br>
+    <strong>Purity (HPLC):</strong> main peak at 6.477 min, 99.13% area<br>
+    <strong>Identity (MS):</strong> theoretical 390.35 Da, observed 390.36 Da<br>
+    <strong>Release spec:</strong> ≥97% / Lot result: &gt;98%<br>
+    <strong>Sterility:</strong> complies (Eur. Pharm. inoculation method)<br>
+    <strong>Endotoxin level:</strong> &lt; 0.20 EU/mg (limit &lt; 10)<br>
+    <strong>Storage:</strong> +2°C to +8°C, do not freeze<br>
+    <strong>Expiry:</strong> 08/2027
+  </div>
+  <p>Ten data points. Together they answer whether the compound is what the label says, whether the specific batch meets a purity threshold you can verify, and whether the manufacturer is traceable and accountable.</p>
+  <p>When a CoA gives you this much information, you have something to work with. When it does not, you are trusting a brochure.</p>
+  <div class="footer-note">Page 12</div>
+</section>
+
+<!-- BACK COVER -->
+<div class="back">
+  <div>
+    <div class="eyebrow">About Aevivo</div>
+    <h2>Precision peptides, delivered with the documentation that should be <em>standard.</em></h2>
+    <p style="margin-top: 16pt; max-width: 145mm;">Aevivo Longevity is a European research peptide supplier. Our compounds are synthesised in EU GMP-certified facilities, HPLC verified above 98% purity across lot release testing, and delivered in sealed pen cartridges under inert atmosphere. A Certificate of Analysis is on record for every compound and shared during the reservation process.</p>
+    <p style="margin-top: 10pt; max-width: 145mm;">We produce in limited batch cycles. If you want to be on the list for the next one, the shortest path is a reply to the email this guide came in.</p>
+  </div>
+  <div>
+    <div style="margin-top: 22pt; margin-bottom: 26pt; padding: 18pt 22pt; background: var(--border); color: var(--navy); border-radius: 6pt; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="font-family: 'Inter', sans-serif; font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); font-weight: 600; opacity: 0.75;">Ready to order</div>
+      <div style="font-family: 'Libre Baskerville', serif; font-size: 16pt; line-height: 1.3; color: var(--navy); font-weight: 400;">Pre-order your peptides at aevivolongevity.com/orderlist.html</div>
+      <div style="font-family: 'Inter', sans-serif; font-size: 10pt; color: var(--navy); font-weight: 400; opacity: 0.8; line-height: 1.5;">Select the compounds and quantities you want. We confirm pricing and shipping before anything becomes a binding order.</div>
+    </div>
+    <div class="contactblock">
+      <div style="margin-bottom: 6pt; color: var(--border); letter-spacing: 0.15em; text-transform: uppercase; font-size: 8.5pt; font-weight: 600;">Contact</div>
+      Suzanna Howse, Co-Founder<br>
+      <a href="mailto:info@aevivolongevity.com">info@aevivolongevity.com</a><br>
+      aevivolongevity.com
+    </div>
+    <div class="legal">
+      © 2026 Aevivo Longevity, a trademark of GENESE SOBRANCEIRA, LDA. Registered in Portugal.
+      All products are For Research Use Only. Not drugs, supplements, or medical devices.
+      Not for human or animal consumption, clinical, diagnostic, therapeutic, or veterinary use.
+      No statements in this document constitute medical claims.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
