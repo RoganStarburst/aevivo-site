@@ -65,10 +65,10 @@ html[data-theme="light"] #loading .lbl{color:rgba(58,63,75,0.6)}
   
   function frame(){
     var isDark = (window.__aevivo_theme || document.documentElement.dataset.theme || 'light') === 'dark';
-    var lineRGB = isDark ? '196,162,101' : '138,106,42';
-    var dotRGB = isDark ? '214,194,148' : '138,106,42';
-    var dotAlpha = isDark ? 0.85 : 0.65;
-    var lineMul = isDark ? 1 : 0.85;
+    var lineRGB = isDark ? '196,162,101' : '12,18,37';
+    var dotRGB = isDark ? '214,194,148' : '12,18,37';
+    var dotAlpha = isDark ? 0.85 : 0.7;
+    var lineMul = isDark ? 1 : 0.9;
     ctx.clearRect(0, 0, W, H);
     for (const p of particles) {
       p.x += p.vx; p.y += p.vy;
