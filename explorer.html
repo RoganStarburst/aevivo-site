@@ -35,7 +35,7 @@ const { useState, useEffect, useMemo } = React;
 
 // ====== CONFIG — drop in your links here ======
 const CALENDLY_URL = "https://calendly.com/thomasweidlich/aevivo-concierge"; // TODO: replace with your actual Calendly link
-const WA_NUMBER = "4915126628914";
+const WA_NUMBER = "351934126762";
 const INFO_EMAIL = "info@aevivolongevity.com";
 
 // ====== DESIGN TOKENS (match orderlist.html / index.html) ======
@@ -68,7 +68,7 @@ const TAGS = [
   {id:"tlr-th1", label:"Immune resilience", sub:"TLR9 / Th1 immune modulation"},
   {id:"nf-kb", label:"Gut health & inflammation", sub:"NF-kB / cytokine anti-inflammatory pathway"},
   {id:"melanocortin", label:"Skin pigmentation research", sub:"Melanocortin receptor signalling"},
-  {id:"sexual", label:"Libido & sexual health", sub:"Central (brain-based) arousal pathway"},
+  {id:"sexual", label:"Libido", sub:"Central (brain-based) arousal pathway"},
 ];
 
 // ====== PHASE I PEPTIDES (21) — mirrors Aevivo Full Catalog ★ PICK items ======
@@ -98,14 +98,6 @@ const PEPTIDES = [
     desc:"Selective pentapeptide ghrelin-receptor (GHS-R1a) agonist. Research shows clean GH release without cortisol, prolactin, or ACTH crossover (the cleanest of the GHRPs in this respect).",
     plain:"Commonly researched for: recovery, sleep, growth-hormone optimisation without hormonal side effects.",
     ref:"Raun K et al., Eur J Endocrinol 1998."},
-  {n:"Sermorelin", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["somatotropic"], format:"injectable", cat:"GH Secretagogues", grade:"A", pf:160, pr:240,
-    desc:"Synthetic peptide corresponding to the first 29 amino acids of endogenous GHRH. Decades of published clinical research on pulsatile GH release with preserved somatostatin feedback.",
-    plain:"Commonly researched for: natural growth-hormone restoration with the body's own feedback loop intact.",
-    ref:"Thorner MO et al., NEJM 1988 (historical Geref)."},
-  {n:"Semaglutide", sp:"5 mg / 0.88 ml pen", tags:["incretin"], format:"injectable", cat:"Metabolic", grade:"A", pf:215, pr:325,
-    desc:"Long-acting acylated GLP-1 receptor agonist (Aib-substituted, C18 fatty-acid chain). Tier-1 published clinical research (STEP, SUSTAIN, SELECT programs) on GLP-1R biology.",
-    plain:"Commonly researched for: body weight, blood glucose, appetite control. Most-studied incretin with strong cardiovascular data.",
-    ref:"Wilding JPH et al., STEP-1, NEJM 2021."},
   {n:"Tirzepatide", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["incretin"], format:"injectable", cat:"Metabolic", grade:"A", pf:340, pr:515,
     desc:"Dual GIP / GLP-1 receptor co-agonist (39-aa with C20 fatty-di-acid chain). Tier-1 research on supra-additive GIP + GLP-1 biology (SURPASS, SURMOUNT).",
     plain:"Commonly researched for: body weight and blood glucose, with stronger effects than single-target GLP-1s in head-to-head trials.",
@@ -164,8 +156,8 @@ const PRIMARY_MAP = {
   "cytoprotection": ["BPC-157"],
   "actin": ["TB-500"],
   "collagen-ecm": ["GHK-Cu"],
-  "somatotropic": ["CJC-1295 + Ipamorelin","Ipamorelin","Sermorelin"],
-  "incretin": ["Semaglutide","Tirzepatide","Retatrutide"],
+  "somatotropic": ["CJC-1295 + Ipamorelin","Ipamorelin"],
+  "incretin": ["Tirzepatide","Retatrutide"],
   "ampk-mito": ["MOTS-C","SS-31"],
   "telomerase": ["Epithalon"],
   "nad-sirtuin": ["NAD+ 300mg","NAD+ 600mg"],
@@ -179,8 +171,7 @@ const PRIMARY_MAP = {
 
 // Never stack two peptides that share a mechanism class
 const COLLISION_SETS = [
-  ["Semaglutide","Tirzepatide","Retatrutide"], // incretins
-  ["Sermorelin","CJC-1295 + Ipamorelin"], // GHRH pairs
+  ["Tirzepatide","Retatrutide"], // incretins
   ["CJC-1295 + Ipamorelin","Ipamorelin"], // bundle vs component
   ["NAD+ 600mg","NAD+ 300mg"], // same molecule
   ["PT-141","Melanotan 2"], // melanocortin agonists
@@ -203,13 +194,14 @@ const OFF_LIST_NOTES = {
 
 const GRADE_RANK = {"A":4, "B":3, "C":2, "D":1};
 
+// uncoveredTags is an array of {id, priority} objects. Priority 1-6 multiplies the match score.
 function coverageScore(peptide, uncoveredTags){
   let s = 0;
   const hit = [];
   for (const t of uncoveredTags){
-    const primaries = PRIMARY_MAP[t] || [];
-    if (primaries.includes(peptide.n)) { s += 2; hit.push(t); }
-    else if (peptide.tags.includes(t)) { s += 1; hit.push(t); }
+    const primaries = PRIMARY_MAP[t.id] || [];
+    if (primaries.includes(peptide.n)) { s += 2 * t.priority; hit.push(t.id); }
+    else if (peptide.tags.includes(t.id)) { s += 1 * t.priority; hit.push(t.id); }
   }
   return {score: s, coveredTags: hit};
 }
@@ -223,12 +215,15 @@ function hasCollision(picked, candidate){
   return false;
 }
 
-function runMatch({tags, experience, format, budget}){
-  // Filter by format
-  let pool = PEPTIDES.slice();
-  if (format === "nasal") pool = pool.filter(p => p.format === "nasal");
-  if (format === "topical") pool = pool.filter(p => p.n === "GHK-Cu");
-  if (format === "oral") pool = [];
+// tagPriorities = { tagId: priority 1-6 }. Returns matched peptide stack.
+function runMatch({tagPriorities, experience, budget}){
+  // Build tags array with priorities, sorted by priority desc (most important first)
+  const tags = Object.entries(tagPriorities)
+    .filter(([,p]) => p > 0)
+    .map(([id, priority]) => ({id, priority}))
+    .sort((a,b) => b.priority - a.priority);
+
+  const pool = PEPTIDES.slice();
 
   // Stack-size rules
   let maxStack = 1;
@@ -238,7 +233,7 @@ function runMatch({tags, experience, format, budget}){
   if (budget === "200-400" && maxStack > 2) maxStack = 2;
   if (budget === "400-600") maxStack = Math.min(maxStack, 3);
 
-  // Greedy coverage loop
+  // Greedy coverage loop - priorities weight the scoring
   const picked = [];
   let uncovered = tags.slice();
   while (picked.length < maxStack && uncovered.length > 0) {
@@ -246,7 +241,6 @@ function runMatch({tags, experience, format, budget}){
     for (const p of pool) {
       if (picked.some(x => x.n === p.n)) continue;
       if (hasCollision(picked, p)) continue;
-      // Budget check
       const runningCost = picked.reduce((a,b)=>a+b.pf,0);
       if (budget === "<200" && (runningCost + p.pf) > 200) continue;
       if (budget === "200-400" && (runningCost + p.pf) > 400) continue;
@@ -260,26 +254,23 @@ function runMatch({tags, experience, format, budget}){
     }
     if (!best) break;
     picked.push(best.peptide);
-    uncovered = uncovered.filter(t => !best.coveredTags.includes(t));
+    uncovered = uncovered.filter(t => !best.coveredTags.includes(t.id));
   }
 
-  // Map uncovered tags → suggested off-list peptide names (for Concierge Call block)
-  const uncoveredSuggestions = [];
-  for (const t of uncovered) {
-    const primaries = PRIMARY_MAP[t] || [];
-    // Find first primary peptide that wasn't picked
-    const suggested = primaries.find(name => !picked.some(p => p.n === name));
-    const tagLabel = (TAGS.find(x => x.id === t) || {}).label || t;
-    if (suggested) uncoveredSuggestions.push({tag: tagLabel, peptide: suggested});
-    else uncoveredSuggestions.push({tag: tagLabel, peptide: null});
-  }
+  // Uncovered tags → suggest off-list peptide, ordered by priority
+  const uncoveredSuggestions = uncovered
+    .sort((a,b) => b.priority - a.priority)
+    .map(t => {
+      const primaries = PRIMARY_MAP[t.id] || [];
+      const suggested = primaries.find(name => !picked.some(p => p.n === name));
+      const tagLabel = (TAGS.find(x => x.id === t.id) || {}).label || t.id;
+      return {tag: tagLabel, peptide: suggested || null, priority: t.priority};
+    });
 
-  // Additional off-list notes
   const offList = [];
-  if (format === "oral") offList.push("oral");
-  if (format === "topical" && tags.length && !picked.length) offList.push("topical");
-  if (tags.includes("telomerase") && budget === "600+") offList.push("telomerase-deep");
-  if (tags.includes("tlr-th1") && experience === "experienced") offList.push("tlr-th1-deep");
+  const tagIds = tags.map(t => t.id);
+  if (tagIds.includes("telomerase") && budget === "600+") offList.push("telomerase-deep");
+  if (tagIds.includes("tlr-th1") && experience === "experienced") offList.push("tlr-th1-deep");
 
   const routeToCall = picked.length === 0;
 
@@ -302,11 +293,9 @@ function App(){
   // Step state: 'landing' | 1 | 2 | 3 | 'results'
   const [step, setStep] = useState('landing');
 
-  // Form state
-  const [tags, setTags] = useState([]);
+  // Form state. tagOrder = array of tag ids in selection order. First = most important (rank 1). Max 6.
+  const [tagOrder, setTagOrder] = useState([]);
   const [experience, setExperience] = useState("new");
-  const [format, setFormat] = useState("injectable");
-  const [duration, setDuration] = useState("medium");
   const [budget, setBudget] = useState("200-400");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -321,23 +310,34 @@ function App(){
   const [result, setResult] = useState(null);
 
   const MAX_TAGS = 6;
-  const toggleTag = (id) => setTags(prev => {
-    if (prev.includes(id)) return prev.filter(x=>x!==id);
-    if (prev.length >= MAX_TAGS) return prev;
-    return [...prev, id];
-  });
+  const selectedTagCount = tagOrder.length;
+  const toggleTag = (id) => {
+    setTagOrder(prev => {
+      const idx = prev.indexOf(id);
+      if (idx >= 0) return prev.filter(x => x !== id); // deselect
+      if (prev.length >= MAX_TAGS) return prev; // cap
+      return [...prev, id]; // append at end (next rank)
+    });
+  };
+  const tagRank = (id) => {
+    const idx = tagOrder.indexOf(id);
+    return idx >= 0 ? idx + 1 : 0;
+  };
 
-  const canStep1 = tags.length >= 1;
+  const canStep1 = selectedTagCount >= 1;
   const canStep2 = true;
   const canSubmit = email && consentAge && consentRUO && consentEdu && consentGDPR;
 
   const submit = (e) => {
     if (e) e.preventDefault();
     if (!canSubmit) return;
-    const r = runMatch({tags, experience, format, budget});
+    // Convert rank order → priority. Rank 1 (most important) = weight 6. Rank 6 = weight 1.
+    const tagPriorities = {};
+    tagOrder.forEach((id, idx) => { tagPriorities[id] = MAX_TAGS - idx; });
+    const r = runMatch({tagPriorities, experience, budget});
     setResult(r);
     try {
-      const payload = {name, email, whatsapp, note, tags, experience, format, duration, budget, ts:new Date().toISOString(), consentVersion:"2026-04-24"};
+      const payload = {name, email, whatsapp, note, tagOrder, experience, budget, ts:new Date().toISOString(), consentVersion:"2026-04-24"};
       localStorage.setItem("aevivoExplorerLead", JSON.stringify(payload));
     } catch(err){}
     setStep('results');
@@ -346,7 +346,7 @@ function App(){
 
   const restart = () => {
     setStep('landing');
-    setTags([]);
+    setTagOrder([]);
     setResult(null);
     window.scrollTo({top:0, behavior:'smooth'});
   };
@@ -365,11 +365,12 @@ function App(){
 
   const whatsappUrl = useMemo(() => {
     if (!result) return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Aevivo, I just used the Peptide Explorer and would like to chat.")}`;
-    const tagLabels = result.selectedTags.map(primaryTagLabel).join(", ");
+    const sorted = result.selectedTags.slice().sort((a,b)=>b.priority-a.priority);
+    const tagLabels = sorted.map((t,i) => `#${i+1} ${primaryTagLabel(t.id)}`).join(", ");
     const pickedNames = result.picked.map(p=>p.n).join(", ");
     const msg = result.routeToCall
-      ? `Hi Aevivo, I just used the Peptide Explorer. My research interests: ${tagLabels}. The tool suggested a Concierge Call — can we talk?`
-      : `Hi Aevivo, I just used the Peptide Explorer. My research interests: ${tagLabels}. Match: ${pickedNames}. I'd like to chat before ordering.`;
+      ? `Hi Aevivo, I just used the Peptide Explorer. My ranked interests: ${tagLabels}. The tool suggested a Concierge Call — can we talk?`
+      : `Hi Aevivo, I just used the Peptide Explorer. My ranked interests: ${tagLabels}. Match: ${pickedNames}. I'd like to chat before ordering.`;
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
   }, [result]);
 
@@ -391,10 +392,10 @@ function App(){
         .bo:hover{border-color:${C.gold};color:${C.gold}}
         .bw{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 28px;background:#25D366;color:#FFFFFF;border:none;border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
         .bw:hover{background:#128C7E;transform:translateY(-1px)}
-        .tag-card{position:relative;display:flex;flex-direction:column;padding:18px 20px;border:1px solid ${C.border};border-radius:14px;background:${C.white};cursor:pointer;transition:all 0.2s;text-align:left}
-        .tag-card:hover{border-color:${C.gold};box-shadow:0 2px 12px rgba(196,162,101,0.08)}
+        .tag-card{font-family:'Libre Baskerville',Georgia,serif;position:relative;display:flex;flex-direction:column;padding:18px 20px;border:1px solid ${C.border};border-radius:14px;background:${C.white};transition:all 0.2s;text-align:left}
+        .tag-card:hover:not(.disabled){border-color:${C.gold};box-shadow:0 2px 12px rgba(196,162,101,0.08)}
         .tag-card.on{border-color:${C.gold};background:rgba(196,162,101,0.08);box-shadow:0 2px 14px rgba(196,162,101,0.12)}
-        .tag-card.disabled{opacity:0.45;cursor:not-allowed}
+        .tag-card.disabled{opacity:0.45}
         .chip{display:inline-flex;align-items:center;padding:8px 16px;border:1px solid ${C.border};border-radius:999px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;font-size:13px;color:${C.text};background:${C.white}}
         .chip:hover{border-color:${C.gold}}
         .chip.on{border-color:${C.gold};background:rgba(196,162,101,0.1);color:${C.gold};font-weight:500}
@@ -472,33 +473,35 @@ function App(){
           <>
             <h1 style={{fontSize:"clamp(28px,3.5vw,40px)",color:C.navy,fontWeight:400,lineHeight:1.15,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>What are you researching?</h1>
             <p className="s" style={{fontSize:15,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:28,maxWidth:640}}>
-              Pick up to 6 areas that match your research interests. The more focused your selection, the more focused your match - anything we can't cover in your stack will be flagged for a Peptide Concierge Call.
+              Pick up to 6 areas in order of importance. The first one you click is your #1 priority, the second is #2, and so on. To reorder, click a card to remove it and pick it again later. Your match will be weighted by this ranking.
             </p>
 
             <div className="tag-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:36}}>
               {TAGS.map(t => {
-                const on = tags.includes(t.id);
-                const disabled = !on && tags.length >= MAX_TAGS;
+                const rank = tagRank(t.id);
+                const on = rank > 0;
+                const atCap = selectedTagCount >= MAX_TAGS && !on;
                 return (
                   <button
                     key={t.id}
-                    className={`tag-card ${on?'on':''} ${disabled?'disabled':''}`}
-                    onClick={()=>!disabled && toggleTag(t.id)}
-                    title={t.sub}
-                    style={{background:on?"rgba(196,162,101,0.08)":C.white}}
+                    type="button"
+                    className={`tag-card ${on?'on':''} ${atCap?'disabled':''}`}
+                    onClick={()=>!atCap && toggleTag(t.id)}
+                    style={{background:on?"rgba(196,162,101,0.08)":C.white,cursor:atCap?"not-allowed":"pointer",width:"100%",textAlign:"left",border:on?`1px solid ${C.gold}`:`1px solid ${C.border}`,borderRadius:14,padding:"18px 20px"}}
                   >
-                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:10,marginBottom:8}}>
+                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:12}}>
                       <div style={{fontSize:17,color:C.navy,fontWeight:500,lineHeight:1.3,fontFamily:"'Libre Baskerville',serif"}}>{t.label}</div>
-                      {on && <div style={{flexShrink:0,color:C.gold,fontSize:18,fontWeight:700,lineHeight:1}}>✓</div>}
+                      {on && (
+                        <div style={{flexShrink:0,width:32,height:32,borderRadius:"50%",background:C.gold,color:C.bg,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Inter',sans-serif",fontSize:14,fontWeight:700}}>{rank}</div>
+                      )}
                     </div>
-                    <div className="s" style={{fontSize:11,color:C.muted,letterSpacing:0.5,fontStyle:"italic"}}>{t.sub}</div>
                   </button>
                 );
               })}
             </div>
 
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,flexWrap:"wrap"}}>
-              <div className="s" style={{fontSize:13,color:C.muted}}>{tags.length} of {MAX_TAGS} selected</div>
+              <div className="s" style={{fontSize:13,color:C.muted}}>{selectedTagCount} of {MAX_TAGS} selected</div>
               <div style={{display:"flex",gap:12}}>
                 <a href="#" onClick={e=>{e.preventDefault();setStep('landing')}} className="bo">← Back</a>
                 <button className="bp" disabled={!canStep1} onClick={()=>setStep(2)}>Continue →</button>
@@ -519,24 +522,6 @@ function App(){
               <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
                 {[["new","New to research peptides"],["some","Some experience (1-2 compounds)"],["experienced","Experienced (3+ compounds)"]].map(([v,l]) => (
                   <div key={v} className={`chip ${experience===v?'on':''}`} onClick={()=>setExperience(v)}>{l}</div>
-                ))}
-              </div>
-            </div>
-
-            <div style={{marginBottom:32}}>
-              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:12,fontWeight:600}}>Format preference</div>
-              <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-                {[["injectable","Injectable is fine"],["nasal","Nasal spray only"],["topical","Topical only"],["oral","Oral only"],["any","Open to any"]].map(([v,l]) => (
-                  <div key={v} className={`chip ${format===v?'on':''}`} onClick={()=>setFormat(v)}>{l}</div>
-                ))}
-              </div>
-            </div>
-
-            <div style={{marginBottom:32}}>
-              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:12,fontWeight:600}}>Research duration</div>
-              <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-                {[["single","Single cycle (4-8 weeks)"],["medium","Medium-term (2-6 months)"],["extended","Extended (6+ months)"]].map(([v,l]) => (
-                  <div key={v} className={`chip ${duration===v?'on':''}`} onClick={()=>setDuration(v)}>{l}</div>
                 ))}
               </div>
             </div>
@@ -608,9 +593,9 @@ function App(){
               {name ? `${name}, your Aevivo Peptide Match.` : "Your Aevivo Peptide Match."}
             </h1>
             <p className="s" style={{fontSize:15,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:32,maxWidth:680}}>
-              Curated for <span style={{color:C.navy,fontWeight:500}}>{result.selectedTags.map(primaryTagLabel).join(", ")}</span>. {result.routeToCall
+              Curated for your ranked interests: {result.selectedTags.slice().sort((a,b)=>b.priority-a.priority).map((t,i) => <span key={t.id} style={{color:C.navy,fontWeight:500}}>{i>0?", ":""}#{MAX_TAGS - t.priority + 1} {primaryTagLabel(t.id)}</span>)}. {result.routeToCall
                 ? "Your research interest best fits a compound outside our standard Phase I catalog. Let's talk."
-                : `${result.picked.length} peptide${result.picked.length>1?"s":""} matched within your preferences.`}
+                : ` ${result.picked.length} peptide${result.picked.length>1?"s":""} matched, weighted by the order you set.`}
             </p>
 
             {!result.routeToCall && (
@@ -663,7 +648,7 @@ function App(){
                     <ul style={{listStyle:"none",padding:0,margin:"0 0 12px"}}>
                       {result.uncoveredSuggestions.map((u,i) => (
                         <li key={i} className="s" style={{fontSize:13,color:C.text,lineHeight:1.7,padding:"6px 0",borderBottom: i < result.uncoveredSuggestions.length-1 ? `1px solid ${C.border}` : "none"}}>
-                          <strong style={{color:C.navy}}>{u.tag}</strong> {u.peptide ? <span style={{color:C.muted}}>→ {u.peptide}</span> : <span style={{color:C.muted}}>→ sits outside our Phase I catalog</span>}
+                          <strong style={{color:C.navy}}>{u.tag}</strong> <span style={{color:C.gold,fontSize:11,fontWeight:500}}>(your rank #{MAX_TAGS - u.priority + 1})</span> {u.peptide ? <span style={{color:C.muted}}>→ {u.peptide}</span> : <span style={{color:C.muted}}>→ sits outside our Phase I catalog</span>}
                         </li>
                       ))}
                     </ul>
