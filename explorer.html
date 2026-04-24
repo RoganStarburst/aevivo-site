@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aevivo Peptide Explorer — Find the peptides aligned with your research</title>
+<meta name="description" content="A 3-minute mechanism-based finder. Research use only.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background-attachment:fixed;overflow-x:hidden;font-family:'Libre Baskerville',Georgia,serif;position:relative;transition:background 0.4s ease}
+html[data-theme="dark"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225}
+html[data-theme="light"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%),#FBF7EF}
+#loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s ease}
+html[data-theme="dark"] #loading{background:#0C1225}
+html[data-theme="light"] #loading{background:#FBF7EF}
+#loading .mark{width:48px;height:48px;border:1px solid #C4A265;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Libre Baskerville',serif;font-size:22px;color:#C4A265;font-weight:700;margin-bottom:18px}
+#loading .lbl{font-family:system-ui,-apple-system,sans-serif;font-size:9px;letter-spacing:3.5px;text-transform:uppercase;font-weight:500}
+html[data-theme="dark"] #loading .lbl{color:rgba(251,247,239,0.5)}
+html[data-theme="light"] #loading .lbl{color:rgba(58,63,75,0.6)}
+</style>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="loading"><div class="mark">A</div><div class="lbl">Aevivo Longevity</div></div>
+<div id="root" style="position:relative;z-index:2"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useMemo } = React;
+
+// ====== CONFIG — drop in your links here ======
+const CALENDLY_URL = "https://calendly.com/thomasweidlich/aevivo-concierge"; // TODO: replace with your actual Calendly link
+const WA_NUMBER = "4915126628914";
+const INFO_EMAIL = "info@aevivolongevity.com";
+
+// ====== DESIGN TOKENS (match orderlist.html / index.html) ======
+const DARK_PALETTE = {
+  bg:"#0C1225", white:"#141B2E", navy:"#FBF7EF", char:"#141A2E", gold:"#C4A265",
+  copper:"#D4B67A", copperL:"#DEC18B", cream:"#0F1525", border:"rgba(196,162,101,0.14)",
+  text:"#FBF7EF", muted:"rgba(251,247,239,0.6)", light:"#121829",
+  navBg:"rgba(12,18,37,0.88)",
+};
+const LIGHT_PALETTE = {
+  bg:"#FBF7EF", white:"#FFFFFF", navy:"#060A14", char:"#1A2744", gold:"#C4A265",
+  copper:"#8A6A2A", copperL:"#A06A4A", cream:"#F0EDE6", border:"rgba(100,85,50,0.18)",
+  text:"#3A3F4B", muted:"#8B90A0", light:"#EEEEE9",
+  navBg:"rgba(251,247,239,0.88)",
+};
+
+// ====== MECHANISM TAGS (14) — consumer-outcome label + scientific subtitle ======
+// label = what users understand. sub = the scientific pathway (credibility layer, muted).
+const TAGS = [
+  {id:"cytoprotection", label:"Injury recovery & tissue repair", sub:"Cytoprotection & tissue regeneration pathway"},
+  {id:"actin", label:"Soft-tissue & wound healing", sub:"Actin dynamics & progenitor-cell research"},
+  {id:"collagen-ecm", label:"Skin, hair & wrinkle research", sub:"Collagen, elastin & ECM remodelling"},
+  {id:"somatotropic", label:"Recovery, sleep & body composition", sub:"Somatotropic (growth-hormone) axis"},
+  {id:"incretin", label:"Weight management & metabolic health", sub:"GLP-1 / GIP / glucagon receptor biology"},
+  {id:"ampk-mito", label:"Cellular energy & metabolic fitness", sub:"AMPK & mitochondrial bioenergetics"},
+  {id:"telomerase", label:"Healthy ageing & longevity", sub:"Telomerase activation & geroprotection"},
+  {id:"nad-sirtuin", label:"Daytime energy & vitality", sub:"NAD+ / sirtuin / PARP biology"},
+  {id:"bdnf-ngf", label:"Focus, memory & mental clarity", sub:"BDNF / NGF / neurotrophic signalling"},
+  {id:"gaba", label:"Stress, anxiety & calm focus", sub:"GABAergic anxiolytic pathway"},
+  {id:"tlr-th1", label:"Immune resilience", sub:"TLR9 / Th1 immune modulation"},
+  {id:"nf-kb", label:"Gut health & inflammation", sub:"NF-kB / cytokine anti-inflammatory pathway"},
+  {id:"melanocortin", label:"Skin pigmentation research", sub:"Melanocortin receptor signalling"},
+  {id:"sexual", label:"Libido & sexual health", sub:"Central (brain-based) arousal pathway"},
+];
+
+// ====== PHASE I PEPTIDES (21) — mirrors Aevivo Full Catalog ★ PICK items ======
+// desc = scientific (keeps credibility). plain = plain-English "commonly researched for" line shown below desc on result cards.
+const PEPTIDES = [
+  {n:"BPC-157", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["cytoprotection","nf-kb"], format:"injectable", cat:"Recovery & Repair", grade:"B", pf:195, pr:290,
+    desc:"Pentadecapeptide derived from a sequence of human gastric juice protein. Studied in rodent and in-vitro research for VEGFR2-mediated angiogenesis, eNOS signalling, and soft-tissue and gut-mucosal healing models.",
+    plain:"Commonly researched for: tendon and ligament repair, injury recovery, gut-lining healing.",
+    ref:"Sikiric P et al., Curr Pharm Des 2018-2021 (reviews)."},
+  {n:"TB-500", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["actin","cytoprotection"], format:"injectable", cat:"Recovery & Repair", grade:"C", pf:195, pr:290,
+    desc:"Synthetic 17-aa active fragment of thymosin beta-4. Studied for actin sequestration, endothelial cell migration, and cardiac-repair signalling in preclinical and equine research.",
+    plain:"Commonly researched for: soft-tissue recovery, chronic injuries, wound and scar healing.",
+    ref:"Crockford D et al., Ann NY Acad Sci 2010."},
+  {n:"BPC-157 + TB-500", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["cytoprotection","actin"], format:"injectable", cat:"Recovery & Repair", grade:"C", pf:230, pr:345, bundle:true,
+    desc:"Co-formulated bundle of the two regenerative peptides above. Studied in combined protocols for complementary vascular and progenitor-cell signalling.",
+    plain:"Commonly researched for: complex multi-structure injuries (tendon + ligament), post-surgical recovery.",
+    ref:"Anecdotal orthopedic research literature; no combined RCTs."},
+  {n:"GHK-Cu", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["collagen-ecm"], format:"injectable", cat:"Skin & Pigmentation", grade:"B", pf:170, pr:250,
+    desc:"Endogenous copper-binding tripeptide. Extensive genome-wide expression research (Pickart, Campbell) on collagen, elastin, glycosaminoglycan, and decorin programs. Strong topical dermatology literature.",
+    plain:"Commonly researched for: skin firmness, wrinkles, pigmentation, hair follicles, wound healing.",
+    ref:"Pickart L & Margolina A, Int J Mol Sci 2018."},
+  {n:"CJC-1295 + Ipamorelin", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["somatotropic","collagen-ecm"], format:"injectable", cat:"GH Secretagogues", grade:"B", pf:240, pr:360, bundle:true,
+    desc:"Combination of a GHRH analog (CJC-1295) and a selective ghrelin-receptor agonist (Ipamorelin). Studied for dual-axis pituitary GH pulse amplification without cortisol or prolactin crossover.",
+    plain:"Commonly researched for: recovery, sleep depth, body composition, age-related growth-hormone decline.",
+    ref:"Teichman SL et al., J Clin Endocrinol Metab 2006."},
+  {n:"Ipamorelin", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["somatotropic"], format:"injectable", cat:"GH Secretagogues", grade:"B", pf:145, pr:215,
+    desc:"Selective pentapeptide ghrelin-receptor (GHS-R1a) agonist. Research shows clean GH release without cortisol, prolactin, or ACTH crossover (the cleanest of the GHRPs in this respect).",
+    plain:"Commonly researched for: recovery, sleep, growth-hormone optimisation without hormonal side effects.",
+    ref:"Raun K et al., Eur J Endocrinol 1998."},
+  {n:"Sermorelin", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["somatotropic"], format:"injectable", cat:"GH Secretagogues", grade:"A", pf:160, pr:240,
+    desc:"Synthetic peptide corresponding to the first 29 amino acids of endogenous GHRH. Decades of published clinical research on pulsatile GH release with preserved somatostatin feedback.",
+    plain:"Commonly researched for: natural growth-hormone restoration with the body's own feedback loop intact.",
+    ref:"Thorner MO et al., NEJM 1988 (historical Geref)."},
+  {n:"Semaglutide", sp:"5 mg / 0.88 ml pen", tags:["incretin"], format:"injectable", cat:"Metabolic", grade:"A", pf:215, pr:325,
+    desc:"Long-acting acylated GLP-1 receptor agonist (Aib-substituted, C18 fatty-acid chain). Tier-1 published clinical research (STEP, SUSTAIN, SELECT programs) on GLP-1R biology.",
+    plain:"Commonly researched for: body weight, blood glucose, appetite control. Most-studied incretin with strong cardiovascular data.",
+    ref:"Wilding JPH et al., STEP-1, NEJM 2021."},
+  {n:"Tirzepatide", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["incretin"], format:"injectable", cat:"Metabolic", grade:"A", pf:340, pr:515,
+    desc:"Dual GIP / GLP-1 receptor co-agonist (39-aa with C20 fatty-di-acid chain). Tier-1 research on supra-additive GIP + GLP-1 biology (SURPASS, SURMOUNT).",
+    plain:"Commonly researched for: body weight and blood glucose, with stronger effects than single-target GLP-1s in head-to-head trials.",
+    ref:"Jastreboff AM et al., SURMOUNT-1, NEJM 2022."},
+  {n:"Retatrutide", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["incretin"], format:"injectable", cat:"Metabolic", grade:"B", pf:210, pr:310,
+    desc:"Investigational triple agonist (GLP-1 + GIP + glucagon receptor, Eli Lilly LY3437943). Phase 2 research shows glucagon-mediated energy-expenditure effects on top of incretin biology.",
+    plain:"Commonly researched for: the highest body-weight effects seen in any single-molecule incretin to date (still in late-stage trials).",
+    ref:"Jastreboff AM et al., NEJM 2023 (Phase 2)."},
+  {n:"Epithalon", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["telomerase"], format:"injectable", cat:"Longevity", grade:"C", pf:195, pr:290,
+    desc:"Synthetic tetrapeptide (Ala-Glu-Asp-Gly) derived from bovine pineal extract. Khavinson-group research on telomerase activation in peripheral blood lymphocytes and pineal melatonin restoration.",
+    plain:"Commonly researched for: cellular aging, sleep rhythm, immune function in older adults. Decades of Russian gerontology literature.",
+    ref:"Khavinson VKh et al., Neuro Endocrinol Lett 2003."},
+  {n:"MOTS-C", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["ampk-mito"], format:"injectable", cat:"Longevity", grade:"C", pf:195, pr:290,
+    desc:"16-aa mitochondrial-derived peptide encoded in mtDNA 12S rRNA. Research on AMPK activation, mitonuclear retrograde signalling, and exercise-mimetic metabolic effects.",
+    plain:"Commonly researched for: metabolic fitness, insulin sensitivity, cellular energy. Acts like a signal from the body's own mitochondria.",
+    ref:"Lee C et al., Cell Metab 2015."},
+  {n:"SS-31", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["ampk-mito"], format:"injectable", cat:"Longevity", grade:"B", pf:160, pr:240,
+    desc:"Aromatic-cationic tetrapeptide that selectively binds cardiolipin on the inner mitochondrial membrane. Phase 2/3 research on cristae stabilisation and mitochondrial bioenergetics (MMPOWER, TAZPOWER).",
+    plain:"Commonly researched for: mitochondrial diseases, heart-muscle energy, long-COVID fatigue models.",
+    ref:"Karaa A et al., MMPOWER, Neurology 2018."},
+  {n:"NAD+ 600mg", sp:"200 mg/ml · 3 ml · 600 mg total", tags:["nad-sirtuin"], format:"injectable", cat:"Longevity", grade:"C", pf:290, pr:430, bundle:true,
+    desc:"Higher-concentration NAD+ formulation for extended research protocols on the NAD+/NADH redox couple, sirtuin biology (SIRT1-7), and PARP-mediated DNA repair.",
+    plain:"Commonly researched for: energy, DNA repair, overall vitality. Higher-dose loading protocols.",
+    ref:"Rajman L et al., Cell Metab 2018."},
+  {n:"NAD+ 300mg", sp:"100 mg/ml · 3 ml · 300 mg total", tags:["nad-sirtuin"], format:"injectable", cat:"Longevity", grade:"C", pf:160, pr:240, bundle:true,
+    desc:"Lower-concentration NAD+ formulation for ongoing SC research protocols. Same pathway biology as NAD+ 600, with reduced injection-site acidity.",
+    plain:"Commonly researched for: the same pathways as NAD+ 600, at lower dose for longer-running maintenance protocols.",
+    ref:"Rajman L et al., Cell Metab 2018."},
+  {n:"AC-Semax-NH2", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["bdnf-ngf"], format:"nasal", cat:"Cognitive", grade:"B", pf:160, pr:240,
+    desc:"N-acetylated, C-amidated heptapeptide analog of ACTH 4-10 developed at the Institute of Molecular Genetics (Moscow). Russian clinical research on BDNF / NGF expression and cortical plasticity.",
+    plain:"Commonly researched for: memory, focus, mental clarity, stroke recovery. Intranasal format.",
+    ref:"Kolomin TA et al., Mol Biol (Mosk) 2013."},
+  {n:"AC-Selank-NH2", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["gaba"], format:"nasal", cat:"Cognitive", grade:"B", pf:160, pr:240,
+    desc:"N-acetylated, C-amidated heptapeptide analog of tuftsin. Russian clinical research on GABAergic anxiolytic mechanisms without sedation or dependence.",
+    plain:"Commonly researched for: anxiety, stress, calm focus without the sedation or dependence of benzodiazepines. Intranasal format.",
+    ref:"Zozulya AA et al., Exp Clin Pharmacol 2008."},
+  {n:"Thymosin Alpha-1", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["tlr-th1"], format:"injectable", cat:"Immune", grade:"A", pf:225, pr:335,
+    desc:"28-aa N-terminally acetylated peptide processed from prothymosin-alpha. Approved in 35+ countries (Zadaxin). Extensive research on TLR9 / TLR2 signalling, Th1 polarisation, and T-cell maturation.",
+    plain:"Commonly researched for: immune resilience, post-illness recovery, chronic viral infections. Approved in many countries as Zadaxin.",
+    ref:"King R & Tuthill C, Ann NY Acad Sci 2007."},
+  {n:"KPV", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["nf-kb"], format:"injectable", cat:"Immune", grade:"B", pf:160, pr:240,
+    desc:"C-terminal tripeptide of alpha-MSH (Lys-Pro-Val). Research on NF-kB inhibition, IL-1-beta / IL-6 / TNF-alpha suppression, and gut-mucosal anti-inflammatory activity without pigmentation.",
+    plain:"Commonly researched for: gut inflammation, skin inflammation, IBD models. Anti-inflammatory without immunosuppression.",
+    ref:"Dalmasso G et al., Gastroenterology 2008."},
+  {n:"PT-141", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["melanocortin","sexual"], format:"injectable", cat:"Sexual Health", grade:"A", pf:165, pr:245,
+    desc:"Cyclic heptapeptide melanocortin agonist (preferential MC4R, also MC3R). FDA-approved as Vyleesi (2019). Research on central hypothalamic melanocortin pathways for sexual arousal.",
+    plain:"Commonly researched for: libido and sexual response via central (brain) rather than vascular pathways. Works when PDE5 inhibitors (Viagra-class) do not.",
+    ref:"Kingsberg SA et al., RECONNECT, Obstet Gynecol 2019."},
+  {n:"Melanotan 2", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["melanocortin"], format:"injectable", cat:"Skin & Pigmentation", grade:"D", pf:160, pr:240,
+    desc:"Synthetic cyclic heptapeptide non-selective melanocortin receptor agonist (MC1R / MC3R / MC4R / MC5R). Research on eumelanin synthesis. Note: afamelanotide (Scenesse) is the only approved melanocortin analog and only for erythropoietic protoporphyria.",
+    plain:"Commonly researched for: UV-independent pigmentation. Significant post-marketing safety signals for melanocytic complications - proceed with dermatology monitoring.",
+    ref:"Wessells H et al., Int J Impot Res 2000."},
+];
+
+const PRIMARY_MAP = {
+  "cytoprotection": ["BPC-157"],
+  "actin": ["TB-500"],
+  "collagen-ecm": ["GHK-Cu"],
+  "somatotropic": ["CJC-1295 + Ipamorelin","Ipamorelin","Sermorelin"],
+  "incretin": ["Semaglutide","Tirzepatide","Retatrutide"],
+  "ampk-mito": ["MOTS-C","SS-31"],
+  "telomerase": ["Epithalon"],
+  "nad-sirtuin": ["NAD+ 300mg","NAD+ 600mg"],
+  "bdnf-ngf": ["AC-Semax-NH2"],
+  "gaba": ["AC-Selank-NH2"],
+  "tlr-th1": ["Thymosin Alpha-1"],
+  "nf-kb": ["KPV","BPC-157"],
+  "melanocortin": ["PT-141","Melanotan 2"],
+  "sexual": ["PT-141"],
+};
+
+// Never stack two peptides that share a mechanism class
+const COLLISION_SETS = [
+  ["Semaglutide","Tirzepatide","Retatrutide"], // incretins
+  ["Sermorelin","CJC-1295 + Ipamorelin"], // GHRH pairs
+  ["CJC-1295 + Ipamorelin","Ipamorelin"], // bundle vs component
+  ["NAD+ 600mg","NAD+ 300mg"], // same molecule
+  ["PT-141","Melanotan 2"], // melanocortin agonists
+  ["BPC-157","BPC-157 + TB-500"], // bundle vs component
+  ["TB-500","BPC-157 + TB-500"], // bundle vs component
+];
+
+const OFF_LIST_NOTES = {
+  "telomerase-deep":"Humanin, SLUPP-332, and the SS31+Cardiogen mix sit outside Phase I but can be sourced on request for deeper geroprotective research.",
+  "tlr-th1-deep":"Thymalin, Thymogen, and NK Peptide are outside Phase I but frequently surface in chronic-immune research.",
+  "oral":"No Phase I peptide is positioned as primarily oral. KPV has some oral bioavailability research but we don't lead with that.",
+  "topical":"GHK-Cu is the only Phase I peptide available topically; other matches require a different route.",
+};
+
+// ====== MATCHING ENGINE (greedy coverage) ======
+// For each peptide, count how many of the user's *uncovered* tags it hits.
+// Primary match = 2 points, secondary (tag listed on peptide but not primary) = 1 point.
+// Pick the highest-coverage peptide, mark those tags as covered, repeat.
+// Tiebreaker: higher evidence grade (A > B > C > D).
+
+const GRADE_RANK = {"A":4, "B":3, "C":2, "D":1};
+
+function coverageScore(peptide, uncoveredTags){
+  let s = 0;
+  const hit = [];
+  for (const t of uncoveredTags){
+    const primaries = PRIMARY_MAP[t] || [];
+    if (primaries.includes(peptide.n)) { s += 2; hit.push(t); }
+    else if (peptide.tags.includes(t)) { s += 1; hit.push(t); }
+  }
+  return {score: s, coveredTags: hit};
+}
+
+function hasCollision(picked, candidate){
+  for (const set of COLLISION_SETS){
+    if (set.includes(candidate.n)){
+      if (picked.some(p => set.includes(p.n))) return true;
+    }
+  }
+  return false;
+}
+
+function runMatch({tags, experience, format, budget}){
+  // Filter by format
+  let pool = PEPTIDES.slice();
+  if (format === "nasal") pool = pool.filter(p => p.format === "nasal");
+  if (format === "topical") pool = pool.filter(p => p.n === "GHK-Cu");
+  if (format === "oral") pool = [];
+
+  // Stack-size rules
+  let maxStack = 1;
+  if (experience === "some") maxStack = 2;
+  if (experience === "experienced") maxStack = 3;
+  if (budget === "<200") maxStack = 1;
+  if (budget === "200-400" && maxStack > 2) maxStack = 2;
+  if (budget === "400-600") maxStack = Math.min(maxStack, 3);
+
+  // Greedy coverage loop
+  const picked = [];
+  let uncovered = tags.slice();
+  while (picked.length < maxStack && uncovered.length > 0) {
+    let best = null;
+    for (const p of pool) {
+      if (picked.some(x => x.n === p.n)) continue;
+      if (hasCollision(picked, p)) continue;
+      // Budget check
+      const runningCost = picked.reduce((a,b)=>a+b.pf,0);
+      if (budget === "<200" && (runningCost + p.pf) > 200) continue;
+      if (budget === "200-400" && (runningCost + p.pf) > 400) continue;
+      if (budget === "400-600" && (runningCost + p.pf) > 600) continue;
+      const c = coverageScore(p, uncovered);
+      if (c.score === 0) continue;
+      if (!best || c.score > best.score ||
+          (c.score === best.score && GRADE_RANK[p.grade] > GRADE_RANK[best.peptide.grade])) {
+        best = {peptide: p, score: c.score, coveredTags: c.coveredTags};
+      }
+    }
+    if (!best) break;
+    picked.push(best.peptide);
+    uncovered = uncovered.filter(t => !best.coveredTags.includes(t));
+  }
+
+  // Map uncovered tags → suggested off-list peptide names (for Concierge Call block)
+  const uncoveredSuggestions = [];
+  for (const t of uncovered) {
+    const primaries = PRIMARY_MAP[t] || [];
+    // Find first primary peptide that wasn't picked
+    const suggested = primaries.find(name => !picked.some(p => p.n === name));
+    const tagLabel = (TAGS.find(x => x.id === t) || {}).label || t;
+    if (suggested) uncoveredSuggestions.push({tag: tagLabel, peptide: suggested});
+    else uncoveredSuggestions.push({tag: tagLabel, peptide: null});
+  }
+
+  // Additional off-list notes
+  const offList = [];
+  if (format === "oral") offList.push("oral");
+  if (format === "topical" && tags.length && !picked.length) offList.push("topical");
+  if (tags.includes("telomerase") && budget === "600+") offList.push("telomerase-deep");
+  if (tags.includes("tlr-th1") && experience === "experienced") offList.push("tlr-th1-deep");
+
+  const routeToCall = picked.length === 0;
+
+  return {picked, offList, routeToCall, selectedTags: tags, uncoveredSuggestions};
+}
+
+function primaryTagLabel(tagId){
+  const t = TAGS.find(x=>x.id===tagId);
+  return t ? t.label : tagId;
+}
+
+// ====== UI ======
+function App(){
+  const [theme, setTheme] = useState(()=>{try{return localStorage.getItem('aevivo-theme')||'light'}catch(e){return 'light'}});
+  useEffect(()=>{try{localStorage.setItem('aevivo-theme',theme)}catch(e){}document.documentElement.dataset.theme=theme;window.__aevivo_theme=theme;},[theme]);
+  useEffect(()=>{const el=document.getElementById('loading');if(el){el.style.opacity=0;setTimeout(()=>el.remove(),400);}},[]);
+  const C = theme==='dark' ? DARK_PALETTE : LIGHT_PALETTE;
+  const toggleTheme = ()=>setTheme(t=>t==='dark'?'light':'dark');
+
+  // Step state: 'landing' | 1 | 2 | 3 | 'results'
+  const [step, setStep] = useState('landing');
+
+  // Form state
+  const [tags, setTags] = useState([]);
+  const [experience, setExperience] = useState("new");
+  const [format, setFormat] = useState("injectable");
+  const [duration, setDuration] = useState("medium");
+  const [budget, setBudget] = useState("200-400");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [note, setNote] = useState("");
+  const [consentAge, setConsentAge] = useState(false);
+  const [consentRUO, setConsentRUO] = useState(false);
+  const [consentEdu, setConsentEdu] = useState(false);
+  const [consentGDPR, setConsentGDPR] = useState(false);
+  const [consentNewsletter, setConsentNewsletter] = useState(false);
+
+  const [result, setResult] = useState(null);
+
+  const MAX_TAGS = 6;
+  const toggleTag = (id) => setTags(prev => {
+    if (prev.includes(id)) return prev.filter(x=>x!==id);
+    if (prev.length >= MAX_TAGS) return prev;
+    return [...prev, id];
+  });
+
+  const canStep1 = tags.length >= 1;
+  const canStep2 = true;
+  const canSubmit = email && consentAge && consentRUO && consentEdu && consentGDPR;
+
+  const submit = (e) => {
+    if (e) e.preventDefault();
+    if (!canSubmit) return;
+    const r = runMatch({tags, experience, format, budget});
+    setResult(r);
+    try {
+      const payload = {name, email, whatsapp, note, tags, experience, format, duration, budget, ts:new Date().toISOString(), consentVersion:"2026-04-24"};
+      localStorage.setItem("aevivoExplorerLead", JSON.stringify(payload));
+    } catch(err){}
+    setStep('results');
+    window.scrollTo({top:0, behavior:'smooth'});
+  };
+
+  const restart = () => {
+    setStep('landing');
+    setTags([]);
+    setResult(null);
+    window.scrollTo({top:0, behavior:'smooth'});
+  };
+
+  const orderUrl = useMemo(() => {
+    if (!result || !result.picked.length) return null;
+    const names = result.picked.map(p=>p.n).join(",");
+    const qtys = result.picked.map(()=>1).join(",");
+    const params = new URLSearchParams();
+    params.set("peptide", names);
+    params.set("qty", qtys);
+    if (name) params.set("name", name);
+    if (email) params.set("email", email);
+    return `orderlist.html?${params.toString()}`;
+  }, [result, name, email]);
+
+  const whatsappUrl = useMemo(() => {
+    if (!result) return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Aevivo, I just used the Peptide Explorer and would like to chat.")}`;
+    const tagLabels = result.selectedTags.map(primaryTagLabel).join(", ");
+    const pickedNames = result.picked.map(p=>p.n).join(", ");
+    const msg = result.routeToCall
+      ? `Hi Aevivo, I just used the Peptide Explorer. My research interests: ${tagLabels}. The tool suggested a Concierge Call — can we talk?`
+      : `Hi Aevivo, I just used the Peptide Explorer. My research interests: ${tagLabels}. Match: ${pickedNames}. I'd like to chat before ordering.`;
+    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  }, [result]);
+
+  const totalFF = result ? result.picked.reduce((a,b)=>a+b.pf,0) : 0;
+  const totalRetail = result ? result.picked.reduce((a,b)=>a+b.pr,0) : 0;
+
+  return (
+    <div style={{fontFamily:"'Libre Baskerville',Georgia,serif",background:"transparent",color:C.text,minHeight:"100vh",position:"relative",zIndex:2}}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        .s{font-family:'Inter',-apple-system,sans-serif}
+        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
+        .nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:${C.navBg};border-bottom:1px solid ${C.border};padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+        .bp{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 32px;background:${C.gold};color:${C.bg};border:none;border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+        .bp:hover{background:${C.copperL};transform:translateY(-1px)}
+        .bp:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+        .bo{font-family:'Inter',-apple-system,sans-serif;font-weight:500;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:13px 28px;background:transparent;color:${C.navy};border:1px solid ${C.border};border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+        .bo:hover{border-color:${C.gold};color:${C.gold}}
+        .bw{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 28px;background:#25D366;color:#FFFFFF;border:none;border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+        .bw:hover{background:#128C7E;transform:translateY(-1px)}
+        .tag-card{position:relative;display:flex;flex-direction:column;padding:18px 20px;border:1px solid ${C.border};border-radius:14px;background:${C.white};cursor:pointer;transition:all 0.2s;text-align:left}
+        .tag-card:hover{border-color:${C.gold};box-shadow:0 2px 12px rgba(196,162,101,0.08)}
+        .tag-card.on{border-color:${C.gold};background:rgba(196,162,101,0.08);box-shadow:0 2px 14px rgba(196,162,101,0.12)}
+        .tag-card.disabled{opacity:0.45;cursor:not-allowed}
+        .chip{display:inline-flex;align-items:center;padding:8px 16px;border:1px solid ${C.border};border-radius:999px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;font-size:13px;color:${C.text};background:${C.white}}
+        .chip:hover{border-color:${C.gold}}
+        .chip.on{border-color:${C.gold};background:rgba(196,162,101,0.1);color:${C.gold};font-weight:500}
+        .email-input{font-family:'Inter',-apple-system,sans-serif;font-size:14px;padding:13px 16px;background:${C.white};border:1px solid ${C.border};border-radius:12px;color:${C.navy};outline:none;transition:all 0.25s;width:100%}
+        .email-input:focus{border-color:${C.gold}}
+        .consent-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;cursor:pointer}
+        .consent-row input{margin-top:3px;accent-color:${C.gold}}
+        .result-card{border:1px solid ${C.border};border-radius:16px;padding:28px;background:${C.white};margin-bottom:16px;position:relative}
+        .grade-badge{display:inline-block;padding:3px 10px;border:1px solid ${C.gold};border-radius:999px;font-size:10px;letter-spacing:1.5px;font-weight:600;color:${C.gold};font-family:'Inter',sans-serif}
+        .price-line{font-family:'Libre Baskerville',serif;font-size:22px;color:${C.gold};line-height:1.1}
+        .price-retail{font-size:15px;color:${C.muted};text-decoration:line-through;margin-left:8px}
+        .progress{display:flex;gap:4px;margin-bottom:32px}
+        .progress .seg{height:3px;flex:1;background:${C.border};border-radius:2px;transition:background 0.3s}
+        .progress .seg.on{background:${C.gold}}
+        .tt{position:relative;display:inline-block}
+        .tt .tiptext{visibility:hidden;opacity:0;transition:opacity 0.2s;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:${C.char};color:${C.navy==="#FBF7EF"?C.navy:"#FBF7EF"};padding:6px 10px;border-radius:6px;font-size:11px;white-space:normal;width:240px;z-index:10;font-family:'Inter',sans-serif;line-height:1.4}
+        .tt:hover .tiptext{visibility:visible;opacity:1}
+        @media(max-width:860px){.grid-2{grid-template-columns:1fr !important}.tag-grid{grid-template-columns:1fr !important}}
+      `}</style>
+
+      <div className="ruo-bar">
+        <span className="s" style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2}}>FOR RESEARCH USE ONLY</span>
+        <span style={{color:"rgba(196,162,101,0.3)"}}>|</span>
+        <span className="s" style={{fontSize:12,color:C.muted,letterSpacing:0.3}}>Not for human consumption.</span>
+      </div>
+
+      <nav className="nb">
+        <a href="index.html" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none"}}>
+          <div style={{width:28,height:28,border:`1px solid ${C.gold}`,borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,color:C.gold,fontFamily:"'Libre Baskerville',serif",fontWeight:700}}>A</div>
+          <span className="s" style={{fontSize:13,letterSpacing:"0.52em",textTransform:"uppercase",color:C.navy,fontWeight:300,fontFamily:"'Outfit',sans-serif"}}>Aevivo</span>
+        </a>
+        <div style={{display:"flex",alignItems:"center",gap:16}}>
+          <button onClick={toggleTheme} title={theme==='dark'?'Switch to light mode':'Switch to dark mode'} aria-label="Toggle theme" style={{width:34,height:34,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",cursor:"pointer",padding:0}} onMouseEnter={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.background="rgba(196,162,101,0.1)";e.currentTarget.style.borderColor=C.border}}>
+            {theme==='dark' ? (<svg width="15" height="15" viewBox="0 0 24 24" fill={C.gold}><path d="M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z"/></svg>) : (<svg width="16" height="16" viewBox="0 0 24 24" fill={C.gold}><circle cx="12" cy="12" r="5"/><path d="M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z"/></svg>)}
+          </button>
+          <a href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Aevivo, I have a question.")}`} target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:34,height:34,borderRadius:"50%",background:"#25D366",border:"1px solid #25D366",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background="#128C7E";e.currentTarget.style.borderColor="#128C7E"}} onMouseLeave={e=>{e.currentTarget.style.background="#25D366";e.currentTarget.style.borderColor="#25D366"}}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+          <a href="index.html" className="s" style={{fontSize:13,color:C.muted,textDecoration:"none",letterSpacing:0.3,transition:"color 0.2s"}} onMouseEnter={e=>e.target.style.color=C.gold} onMouseLeave={e=>e.target.style.color=C.muted}>← Back to home</a>
+        </div>
+      </nav>
+
+      <main style={{maxWidth:1020,margin:"0 auto",padding:"140px clamp(20px,5vw,60px) 140px"}}>
+
+        {step === 'landing' && (
+          <div style={{textAlign:"center",maxWidth:720,margin:"0 auto"}}>
+            <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Peptide Explorer</div>
+            <h1 style={{fontSize:"clamp(36px,5vw,56px)",color:C.navy,fontWeight:400,lineHeight:1.08,marginBottom:22,fontFamily:"'Libre Baskerville',serif"}}>Find the Aevivo peptides aligned with your research.</h1>
+            <p className="s" style={{fontSize:17,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:36,maxWidth:580,marginLeft:"auto",marginRight:"auto"}}>
+              A 3-minute mechanism-based finder. Select the pathways you want to study, refine by format and research budget, and see your match with published references.
+            </p>
+            <button className="bp" onClick={()=>setStep(1)}>Begin →</button>
+            <div className="s" style={{fontSize:12,color:C.muted,marginTop:20,letterSpacing:0.3}}>3 minutes · 3 steps · research use only</div>
+            <div style={{marginTop:60,padding:24,border:`1px solid ${C.border}`,borderRadius:14,background:C.white,textAlign:"left",maxWidth:600,margin:"60px auto 0"}}>
+              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.gold,marginBottom:10,fontWeight:600}}>Before you begin</div>
+              <p className="s" style={{fontSize:13,color:C.muted,lineHeight:1.65}}>
+                Aevivo products are sold for research purposes only. This tool is educational, not medical advice. We process your name and email to deliver your match. You can request deletion at any time by emailing <a href={`mailto:${INFO_EMAIL}`} style={{color:C.gold,textDecoration:"none"}}>{INFO_EMAIL}</a>.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {step !== 'landing' && step !== 'results' && (
+          <>
+            <div className="progress">
+              <div className={`seg ${step>=1?'on':''}`}/>
+              <div className={`seg ${step>=2?'on':''}`}/>
+              <div className={`seg ${step>=3?'on':''}`}/>
+            </div>
+            <div className="s" style={{fontSize:11,letterSpacing:2.5,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Step {step} of 3</div>
+          </>
+        )}
+
+        {step === 1 && (
+          <>
+            <h1 style={{fontSize:"clamp(28px,3.5vw,40px)",color:C.navy,fontWeight:400,lineHeight:1.15,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>What are you researching?</h1>
+            <p className="s" style={{fontSize:15,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:28,maxWidth:640}}>
+              Pick up to 6 areas that match your research interests. The more focused your selection, the more focused your match - anything we can't cover in your stack will be flagged for a Peptide Concierge Call.
+            </p>
+
+            <div className="tag-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:36}}>
+              {TAGS.map(t => {
+                const on = tags.includes(t.id);
+                const disabled = !on && tags.length >= MAX_TAGS;
+                return (
+                  <button
+                    key={t.id}
+                    className={`tag-card ${on?'on':''} ${disabled?'disabled':''}`}
+                    onClick={()=>!disabled && toggleTag(t.id)}
+                    title={t.sub}
+                    style={{background:on?"rgba(196,162,101,0.08)":C.white}}
+                  >
+                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:10,marginBottom:8}}>
+                      <div style={{fontSize:17,color:C.navy,fontWeight:500,lineHeight:1.3,fontFamily:"'Libre Baskerville',serif"}}>{t.label}</div>
+                      {on && <div style={{flexShrink:0,color:C.gold,fontSize:18,fontWeight:700,lineHeight:1}}>✓</div>}
+                    </div>
+                    <div className="s" style={{fontSize:11,color:C.muted,letterSpacing:0.5,fontStyle:"italic"}}>{t.sub}</div>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,flexWrap:"wrap"}}>
+              <div className="s" style={{fontSize:13,color:C.muted}}>{tags.length} of {MAX_TAGS} selected</div>
+              <div style={{display:"flex",gap:12}}>
+                <a href="#" onClick={e=>{e.preventDefault();setStep('landing')}} className="bo">← Back</a>
+                <button className="bp" disabled={!canStep1} onClick={()=>setStep(2)}>Continue →</button>
+              </div>
+            </div>
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <h1 style={{fontSize:"clamp(28px,3.5vw,40px)",color:C.navy,fontWeight:400,lineHeight:1.15,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>Refine your research context.</h1>
+            <p className="s" style={{fontSize:15,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:36,maxWidth:640}}>
+              Operational preferences only. Nothing health-related.
+            </p>
+
+            <div style={{marginBottom:32}}>
+              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:12,fontWeight:600}}>Experience with research peptides</div>
+              <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+                {[["new","New to research peptides"],["some","Some experience (1-2 compounds)"],["experienced","Experienced (3+ compounds)"]].map(([v,l]) => (
+                  <div key={v} className={`chip ${experience===v?'on':''}`} onClick={()=>setExperience(v)}>{l}</div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{marginBottom:32}}>
+              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:12,fontWeight:600}}>Format preference</div>
+              <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+                {[["injectable","Injectable is fine"],["nasal","Nasal spray only"],["topical","Topical only"],["oral","Oral only"],["any","Open to any"]].map(([v,l]) => (
+                  <div key={v} className={`chip ${format===v?'on':''}`} onClick={()=>setFormat(v)}>{l}</div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{marginBottom:32}}>
+              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:12,fontWeight:600}}>Research duration</div>
+              <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+                {[["single","Single cycle (4-8 weeks)"],["medium","Medium-term (2-6 months)"],["extended","Extended (6+ months)"]].map(([v,l]) => (
+                  <div key={v} className={`chip ${duration===v?'on':''}`} onClick={()=>setDuration(v)}>{l}</div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{marginBottom:40}}>
+              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:12,fontWeight:600}}>Monthly research budget</div>
+              <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+                {[["<200","Under €200"],["200-400","€200 to 400"],["400-600","€400 to 600"],["600+","€600+"],["any","Best match regardless"]].map(([v,l]) => (
+                  <div key={v} className={`chip ${budget===v?'on':''}`} onClick={()=>setBudget(v)}>{l}</div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,flexWrap:"wrap"}}>
+              <a href="#" onClick={e=>{e.preventDefault();setStep(1)}} className="bo">← Back</a>
+              <button className="bp" onClick={()=>setStep(3)}>Continue →</button>
+            </div>
+          </>
+        )}
+
+        {step === 3 && (
+          <form onSubmit={submit}>
+            <h1 style={{fontSize:"clamp(28px,3.5vw,40px)",color:C.navy,fontWeight:400,lineHeight:1.15,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>Where should we send your match?</h1>
+            <p className="s" style={{fontSize:15,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:36,maxWidth:640}}>
+              We process only what you submit below. No health data.
+            </p>
+
+            <div className="grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:14}}>
+              <input type="text" placeholder="First name (optional)" className="email-input" value={name} onChange={e=>setName(e.target.value)}/>
+              <input required type="email" placeholder="Email *" className="email-input" value={email} onChange={e=>setEmail(e.target.value)}/>
+            </div>
+            <input type="tel" placeholder="WhatsApp number (optional, primary F&F channel)" className="email-input" value={whatsapp} onChange={e=>setWhatsapp(e.target.value)} style={{marginBottom:14}}/>
+
+            <div style={{marginBottom:28}}>
+              <label className="s" style={{display:"block",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:C.muted,marginBottom:8,fontWeight:600}}>
+                Anything you'd like us to know before a Concierge Call? <span style={{color:C.muted,fontWeight:400,textTransform:"none",letterSpacing:0.3}}>(optional)</span>
+              </label>
+              <textarea
+                placeholder="e.g. what drew you to these research areas, specific questions you have, context that would help us prepare."
+                className="email-input"
+                value={note}
+                onChange={e=>setNote(e.target.value.slice(0,500))}
+                maxLength={500}
+                rows={3}
+                style={{resize:"vertical",minHeight:80,fontFamily:"'Inter',-apple-system,sans-serif"}}
+              />
+              <div className="s" style={{fontSize:11,color:C.muted,marginTop:4,textAlign:"right"}}>{note.length}/500</div>
+            </div>
+
+            <div style={{padding:"18px 20px",border:`1px solid ${C.border}`,borderRadius:12,background:C.white,marginBottom:28}}>
+              <label className="consent-row"><input type="checkbox" checked={consentAge} onChange={e=>setConsentAge(e.target.checked)}/><span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}>I am 18 years or older.</span></label>
+              <label className="consent-row"><input type="checkbox" checked={consentRUO} onChange={e=>setConsentRUO(e.target.checked)}/><span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}>I am acquiring Aevivo products for research purposes only, not for human consumption, and not for resale to consumers.</span></label>
+              <label className="consent-row"><input type="checkbox" checked={consentEdu} onChange={e=>setConsentEdu(e.target.checked)}/><span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}>I understand these products have not been evaluated by any medical regulatory authority for human use, and this tool is educational, not medical advice.</span></label>
+              <label className="consent-row"><input type="checkbox" checked={consentGDPR} onChange={e=>setConsentGDPR(e.target.checked)}/><span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}>I consent to Aevivo storing my name, email, and the research-interest selections I made here, to deliver my match. I can request deletion any time at <a href={`mailto:${INFO_EMAIL}`} style={{color:C.gold}}>{INFO_EMAIL}</a>. (GDPR Art. 6(1)(a) consent.)</span></label>
+              <label className="consent-row"><input type="checkbox" checked={consentNewsletter} onChange={e=>setConsentNewsletter(e.target.checked)}/><span className="s" style={{fontSize:13,color:C.muted,lineHeight:1.55}}>Optional: subscribe me to the Aevivo research-notes newsletter.</span></label>
+            </div>
+
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,flexWrap:"wrap"}}>
+              <a href="#" onClick={e=>{e.preventDefault();setStep(2)}} className="bo">← Back</a>
+              <button type="submit" className="bp" disabled={!canSubmit}>Reveal my match →</button>
+            </div>
+          </form>
+        )}
+
+        {step === 'results' && result && (
+          <>
+            <div className="s" style={{fontSize:11,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Your Match</div>
+            <h1 style={{fontSize:"clamp(32px,4vw,48px)",color:C.navy,fontWeight:400,lineHeight:1.1,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>
+              {name ? `${name}, your Aevivo Peptide Match.` : "Your Aevivo Peptide Match."}
+            </h1>
+            <p className="s" style={{fontSize:15,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:32,maxWidth:680}}>
+              Curated for <span style={{color:C.navy,fontWeight:500}}>{result.selectedTags.map(primaryTagLabel).join(", ")}</span>. {result.routeToCall
+                ? "Your research interest best fits a compound outside our standard Phase I catalog. Let's talk."
+                : `${result.picked.length} peptide${result.picked.length>1?"s":""} matched within your preferences.`}
+            </p>
+
+            {!result.routeToCall && (
+              <>
+                <div style={{display:"flex",gap:24,flexWrap:"wrap",marginBottom:32,padding:"14px 22px",border:`1px solid ${C.border}`,borderRadius:12,background:C.white}}>
+                  <div><div className="s" style={{fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:C.muted,marginBottom:4}}>Peptides</div><div style={{fontSize:20,color:C.gold,fontFamily:"'Libre Baskerville',serif"}}>{result.picked.length}</div></div>
+                  <div><div className="s" style={{fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:C.muted,marginBottom:4}}>Founder's Price</div><div style={{fontSize:20,color:C.gold,fontFamily:"'Libre Baskerville',serif"}}>€{totalFF}<span className="s" style={{fontSize:12,color:C.muted,marginLeft:6}}>/ cycle</span></div></div>
+                  <div><div className="s" style={{fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:C.muted,marginBottom:4}}>Retail equivalent</div><div style={{fontSize:16,color:C.muted,fontFamily:"'Libre Baskerville',serif",textDecoration:"line-through"}}>€{totalRetail}</div></div>
+                </div>
+
+                {result.picked.map((p, i) => (
+                  <div key={i} className="result-card">
+                    <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:16,flexWrap:"wrap",marginBottom:14}}>
+                      <div style={{flex:"1 1 auto",minWidth:0}}>
+                        <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",marginBottom:6}}>
+                          <h2 style={{fontSize:"clamp(20px,2.2vw,26px)",color:C.navy,fontWeight:500,fontFamily:"'Libre Baskerville',serif"}}>{p.n}</h2>
+                          <span className="grade-badge">Evidence {p.grade}</span>
+                          <span className="s" style={{fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:C.muted,fontWeight:500}}>{p.cat}</span>
+                        </div>
+                        <div className="s" style={{fontSize:12,color:C.muted,letterSpacing:0.3,marginBottom:14}}>{p.sp}</div>
+                      </div>
+                      <div style={{textAlign:"right"}}>
+                        <div className="price-line">€{p.pf}<span className="price-retail">€{p.pr}</span></div>
+                        <div className="s" style={{fontSize:10,color:C.muted,letterSpacing:1,textTransform:"uppercase",marginTop:4}}>Founder's price</div>
+                      </div>
+                    </div>
+                    <p className="s" style={{fontSize:14,color:C.text,lineHeight:1.65,fontWeight:300,marginBottom:12}}>{p.desc}</p>
+                    {p.plain && (
+                      <div style={{padding:"12px 14px",background:"rgba(196,162,101,0.06)",borderLeft:`2px solid ${C.gold}`,borderRadius:6,marginBottom:14}}>
+                        <span className="s" style={{fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:C.gold,fontWeight:600,marginRight:8}}>What this means</span>
+                        <span className="s" style={{fontSize:13,color:C.text,lineHeight:1.6}}>{p.plain}</span>
+                      </div>
+                    )}
+                    <div className="s" style={{fontSize:12,color:C.muted,lineHeight:1.6,fontStyle:"italic",paddingTop:12,borderTop:`1px solid ${C.border}`}}>
+                      <span style={{color:C.gold,fontStyle:"normal",fontWeight:500}}>Landmark reference:</span> {p.ref}
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+
+            {(result.uncoveredSuggestions.length > 0 || result.offList.length > 0) && (
+              <div style={{padding:"24px",border:`1px dashed ${C.gold}`,borderRadius:14,background:"rgba(196,162,101,0.05)",marginBottom:24}}>
+                <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Also worth exploring</div>
+                {result.uncoveredSuggestions.length > 0 && (
+                  <>
+                    <p className="s" style={{fontSize:13,color:C.text,lineHeight:1.65,marginBottom:12}}>
+                      You picked more research areas than one stack can cover well. For these, the best-aligned peptide in our range is noted below. Book a Peptide Concierge Call to explore them properly.
+                    </p>
+                    <ul style={{listStyle:"none",padding:0,margin:"0 0 12px"}}>
+                      {result.uncoveredSuggestions.map((u,i) => (
+                        <li key={i} className="s" style={{fontSize:13,color:C.text,lineHeight:1.7,padding:"6px 0",borderBottom: i < result.uncoveredSuggestions.length-1 ? `1px solid ${C.border}` : "none"}}>
+                          <strong style={{color:C.navy}}>{u.tag}</strong> {u.peptide ? <span style={{color:C.muted}}>→ {u.peptide}</span> : <span style={{color:C.muted}}>→ sits outside our Phase I catalog</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                {result.offList.map(k => (<p key={k} className="s" style={{fontSize:13,color:C.muted,lineHeight:1.65,marginBottom:8}}>{OFF_LIST_NOTES[k]}</p>))}
+              </div>
+            )}
+
+            <div style={{padding:"24px",border:`1px solid ${C.border}`,borderRadius:14,background:C.white,marginBottom:32}}>
+              <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:14,fontWeight:600}}>How to read the evidence grades</div>
+              <div style={{display:"grid",gridTemplateColumns:"auto 1fr",gap:"8px 16px",marginBottom:16}}>
+                <span className="grade-badge" style={{justifySelf:"start",alignSelf:"start"}}>A</span>
+                <span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}><strong>Strong human evidence.</strong> Approved by medical regulators or backed by large Phase 3 clinical trials.</span>
+                <span className="grade-badge" style={{justifySelf:"start",alignSelf:"start"}}>B</span>
+                <span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}><strong>Good human evidence.</strong> Phase 2 trials, or approved in multiple countries outside the US.</span>
+                <span className="grade-badge" style={{justifySelf:"start",alignSelf:"start"}}>C</span>
+                <span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}><strong>Emerging evidence.</strong> Small human studies, strong animal data, decades of international use.</span>
+                <span className="grade-badge" style={{justifySelf:"start",alignSelf:"start"}}>D</span>
+                <span className="s" style={{fontSize:13,color:C.text,lineHeight:1.55}}><strong>Early or limited evidence.</strong> Mostly animal data, case reports, or anecdotal use. Proceed with extra care.</span>
+              </div>
+              <p className="s" style={{fontSize:12,color:C.muted,lineHeight:1.65,paddingTop:14,borderTop:`1px solid ${C.border}`}}>
+                Research evolves as new data emerges. Discuss any peptide-related research plans with a qualified scientific advisor. Nothing here is medical advice.
+              </p>
+            </div>
+
+            <div style={{display:"flex",flexWrap:"wrap",gap:12,marginBottom:40}}>
+              {!result.routeToCall && orderUrl && (
+                <a href={orderUrl} className="bp">Order at aevivo.com →</a>
+              )}
+              <a href={CALENDLY_URL} target="_blank" rel="noopener" className={result.routeToCall ? "bp" : "bo"}>
+                {result.routeToCall ? "Book a Peptide Concierge Call →" : "Book a Peptide Concierge Call"}
+              </a>
+              <a href={whatsappUrl} target="_blank" rel="noopener" className="bw">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Chat on WhatsApp
+              </a>
+              <button className="bo" onClick={restart}>↺ Start over</button>
+            </div>
+
+            <div style={{padding:"18px 22px",borderTop:`1px solid ${C.border}`,fontSize:12,color:C.muted,lineHeight:1.6,fontFamily:"'Inter',sans-serif"}}>
+              Aevivo products are sold for research purposes only. These products have not been evaluated by any medical regulatory authority for human use. Nothing on this page is medical advice. Contact <a href={`mailto:${INFO_EMAIL}`} style={{color:C.gold,textDecoration:"none"}}>{INFO_EMAIL}</a> for data-deletion requests or questions.
+            </div>
+          </>
+        )}
+
+      </main>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
