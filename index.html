@@ -220,13 +220,13 @@ const totalItems=catalog.reduce((a,c)=>a+c.items.length,0);
 
 const displayNames={"AC Semax NH2":"Semax","AC Selank NH2":"Selank","AC KPV NH2":"KPV","TB 500 + BPC 157":"BPC 157 + TB 500","Ipamorelin + CJC 1295":"CJC 1295 + Ipamorelin","SS 31 (Elamipretide)":"SS 31","MOTS c":"MOTS C","NAD+ 600":"NAD+ 600mg","NAD+ 300":"NAD+ 300mg","PT 141 (Bremelanotide)":"PT 141"};
 const featuredByCategory=[
-  {cat:"Recovery & Repair",items:["BPC 157","TB 500","TB 500 + BPC 157","GHK Cu"]},
-  {cat:"Growth Hormone Secretagogues",items:["Ipamorelin + CJC 1295","Ipamorelin","Sermorelin"]},
-  {cat:"Metabolic Health & Weight Management",items:["Semaglutide","Tirzepatide","Retatrutide"]},
+  {cat:"Recovery & Repair",items:["BPC 157","TB 500","TB 500 + BPC 157"]},
+  {cat:"Skin & Pigmentation",items:["GHK Cu","Melanotan II"]},
+  {cat:"Growth Hormone Secretagogues",items:["Ipamorelin + CJC 1295","Ipamorelin"]},
+  {cat:"Metabolic Health & Weight Management",items:["Tirzepatide","Retatrutide"]},
   {cat:"Longevity & Cellular Health",items:["Epitalon","MOTS c","SS 31 (Elamipretide)","NAD+ 600","NAD+ 300"]},
   {cat:"Cognitive & Neuroprotection",items:["AC Semax NH2","AC Selank NH2"]},
   {cat:"Immune & Anti-Inflammatory",items:["Thymosin Alpha 1","AC KPV NH2"]},
-  {cat:"Performance & Muscle Preservation",items:["IGF 1 LR3"]},
   {cat:"Sexual Health",items:["PT 141 (Bremelanotide)"]},
 ];
 const catalogByName=new Map();catalog.forEach(s=>s.items.forEach(i=>catalogByName.set(i.n,i)));
@@ -327,7 +327,7 @@ function PeptideDetail({data, close, navy, bg, white, gold, copperL, muted, bord
             <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:20,color:muted,textDecoration:"line-through",textDecorationColor:"rgba(251,247,239,0.35)",lineHeight:1}}>€{data.pr}</span>
             <span style={{fontFamily:"'Inter',sans-serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",color:muted,fontWeight:500,opacity:0.8}}>VAT incl.</span>
           </div>
-          <div style={{fontFamily:"'Inter',sans-serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:gold,fontWeight:600,opacity:0.8,marginBottom:22}}>Until Beginning of June</div>
+          <div style={{fontFamily:"'Inter',sans-serif",fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:gold,fontWeight:600,opacity:0.8,marginBottom:22}}>Until May 31st</div>
           <div style={{display:"flex",gap:14,alignItems:"center",marginBottom:20,flexWrap:"wrap"}}>
             <div style={{display:"flex",alignItems:"center",gap:10,background:"rgba(12,18,37,0.4)",border:`1px solid ${border}`,borderRadius:999,padding:4}}>
               <button type="button" onClick={()=>setQty(Math.max(1,qty-1))} disabled={qty<=1} style={{width:32,height:32,borderRadius:"50%",border:"none",background:"transparent",color:text,cursor:qty<=1?"not-allowed":"pointer",fontSize:18,fontFamily:"'Inter',sans-serif",opacity:qty<=1?0.3:1}}>−</button>
@@ -497,7 +497,7 @@ function Aevivo(){
               <svg width="17" height="17" viewBox="0 0 24 24" style={{fill:C.gold,transition:"fill 0.2s"}}><path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0-5a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM3 11a1 1 0 011 1v0a1 1 0 110 0 1 1 0 01-1-1zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM3 12a1 1 0 011-1h2a1 1 0 110 2H4a1 1 0 01-1-1zm3.22-7.78a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z"/></svg>
             )}
           </button>
-          <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:36,height:36,borderRadius:"50%",background:"#25D366",border:"1px solid #25D366",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background="#128C7E";e.currentTarget.style.borderColor="#128C7E"}} onMouseLeave={e=>{e.currentTarget.style.background="#25D366";e.currentTarget.style.borderColor="#25D366"}}>
+          <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:36,height:36,borderRadius:"50%",background:"#25D366",border:"1px solid #25D366",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background="#128C7E";e.currentTarget.style.borderColor="#128C7E"}} onMouseLeave={e=>{e.currentTarget.style.background="#25D366";e.currentTarget.style.borderColor="#25D366"}}>
             <svg width="17" height="17" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>
           <span className="s nav-lk" style={{fontSize:14,color:C.navy,fontWeight:500,cursor:"pointer",letterSpacing:0.3}} onClick={openGuide}>Decision Guide</span>
@@ -522,10 +522,10 @@ function Aevivo(){
             </p></F>
             <F d={0.18}><div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:48}}>
               <button className="bp" onClick={openGuide} style={{padding:"15px 36px",fontSize:15}}>Get the Buyer's Decision Guide</button>
-              <button className="bo" onClick={()=>openReserve()} style={{padding:"15px 36px",fontSize:15}}>Order your peptides</button>
+              <a href="explorer.html" className="bo" style={{padding:"15px 36px",fontSize:15,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8}}>Find your match <span style={{fontSize:14}}>→</span></a>
             </div></F>
             <F d={0.24}><div className="s" style={{display:"flex",gap:36,flexWrap:"wrap"}}>
-              {[[`${totalItems}`,"Peptides"],[">98%","HPLC Verified"],["CoA","Per Compound"],["EU","GMP Certified"]].map(([v,l],i)=>(
+              {[[">98%","HPLC Verified"],["CoA","Per Compound"],["EU","GMP Certified"]].map(([v,l],i)=>(
                 <div key={i}><span style={{fontSize:22,fontWeight:700,color:C.navy,fontFamily:"'Libre Baskerville',serif"}}>{v}</span><br/><span style={{fontSize:12,color:C.muted,letterSpacing:0.8,textTransform:"uppercase"}}>{l}</span></div>
               ))}
             </div></F>
@@ -689,8 +689,8 @@ function Aevivo(){
             const ruleCats=[
               {cat:"Recovery & Repair",icon:"recovery",items:["BPC 157","TB 500","BPC 157 + TB 500"]},
               {cat:"Skin & Pigmentation",icon:"skin",items:["GHK Cu","Melanotan 2"]},
-              {cat:"Growth Hormone Secretagogues",icon:"gh",items:["CJC 1295 + Ipamorelin","Ipamorelin","Sermorelin"]},
-              {cat:"Metabolic Health & Weight Management",icon:"metabolic",items:["Semaglutide","Tirzepatide","Retatrutide"]},
+              {cat:"Growth Hormone Secretagogues",icon:"gh",items:["CJC 1295 + Ipamorelin","Ipamorelin"]},
+              {cat:"Metabolic Health & Weight Management",icon:"metabolic",items:["Tirzepatide","Retatrutide"]},
               {cat:"Longevity & Cellular Health",icon:"longevity",items:["Epitalon","MOTS C","SS 31","NAD+ 600mg","NAD+ 300mg"]},
               {cat:"Cognitive & Neuroprotection",icon:"cognitive",items:["Semax","Selank"]},
               {cat:"Immune & Anti-Inflammatory",icon:"immune",items:["Thymosin Alpha 1","KPV"]},
@@ -699,9 +699,12 @@ function Aevivo(){
             return(<>
               <F>
                 <div className="s" style={{fontSize:13,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:16,fontWeight:600}}>Our Shortlist</div>
-                <h2 style={{fontSize:"clamp(34px,5vw,58px)",color:C.navy,fontWeight:400,lineHeight:1.05,marginBottom:32,fontFamily:"'Libre Baskerville',serif",letterSpacing:-0.5}}>
+                <h2 style={{fontSize:"clamp(34px,5vw,58px)",color:C.navy,fontWeight:400,lineHeight:1.05,marginBottom:20,fontFamily:"'Libre Baskerville',serif",letterSpacing:-0.5}}>
                   Premium peptides. <em style={{color:C.gold,fontStyle:"italic"}}>One Rule.</em>
                 </h2>
+                <a href="explorer.html" className="s" style={{display:"inline-flex",alignItems:"center",gap:8,fontSize:14,color:C.gold,textDecoration:"none",letterSpacing:0.3,marginBottom:32,borderBottom:`1px solid ${C.gold}`,paddingBottom:2,transition:"opacity 0.2s"}} onMouseEnter={e=>e.target.style.opacity=0.7} onMouseLeave={e=>e.target.style.opacity=1}>
+                  Not sure where to start? Find your match in 3 minutes →
+                </a>
               </F>
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:16}}>
                 {ruleCats.map((g,gi)=>(
@@ -732,7 +735,7 @@ function Aevivo(){
 
           <F d={0.3}>
             <div style={{textAlign:"center",marginTop:44,paddingTop:32,borderTop:`1px solid ${C.border}`}}>
-              <div className="s" style={{fontSize:14,color:C.muted,fontWeight:300,maxWidth:520,margin:"0 auto",lineHeight:1.7}}>Looking for a compound that isn't shown here? We carry a wider catalog for qualified research buyers. <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%27m%20looking%20for%20a%20specific%20peptide.%20Can%20you%20help%3F" target="_blank" rel="noopener" style={{color:C.gold,borderBottom:`1px solid ${C.gold}`}}>Message us on WhatsApp</a> and we'll tell you what's available.</div>
+              <div className="s" style={{fontSize:18,color:C.muted,fontWeight:300,maxWidth:640,margin:"0 auto",lineHeight:1.7}}>Looking for a compound that isn't shown here? We carry a wider catalog for qualified research buyers. <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%27m%20looking%20for%20a%20specific%20peptide.%20Can%20you%20help%3F" target="_blank" rel="noopener" style={{color:C.gold,borderBottom:`1px solid ${C.gold}`}}>Message us on WhatsApp</a> and we'll tell you what's available.</div>
             </div>
           </F>
         </div>
@@ -815,6 +818,7 @@ function Aevivo(){
           </F>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:16}}>
             {[
+              {cat:"Supply Chain",t:"What ends up in the bottle.",d:"Most US and EU peptide labels are resellers buying cheap research material from unregulated Chinese facilities. Here is what independent testing keeps finding.",href:"blog/what-ends-up-in-the-bottle.html",read:"6 min read"},
               {cat:"Policy",t:"The FDA's July peptide meeting: what actually changed.",d:"What the new FDA stance means for researchers, clinicians, and anyone sourcing peptides internationally.",href:"blog/fda-peptide-meeting.html",read:"5 min read"},
               {cat:"How to Buy",t:"Reading a Certificate of Analysis in under a minute.",d:"The three things to check on every CoA, and the four red flags most buyers miss.",href:"blog/reading-a-coa.html",read:"4 min read"},
               {cat:"Provenance",t:"Inside a European peptide supply chain.",d:"How a single compound moves from SPPS synthesis to a sealed pen cartridge, step by step.",href:"blog/inside-european-peptide-supply.html",read:"6 min read"},
@@ -998,12 +1002,16 @@ function Aevivo(){
                 </p>
               </div>
             ):modal==="guide"?(
-              <form onSubmit={async e=>{e.preventDefault();const el=e.target;await submitToMailerLite(el,"185461941596062883");setSubmitted(true)}}>
+              <form onSubmit={async e=>{e.preventDefault();const el=e.target;const marketing=new FormData(el).get("marketing_consent")==="on";await submitToMailerLite(el,"185461941596062883",{marketing_consent:marketing});setSubmitted(true)}}>
                 <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.copper,marginBottom:10,fontWeight:500}}>Free Download</div>
                 <h3 style={{fontSize:26,color:C.navy,fontWeight:400,lineHeight:1.2,marginBottom:10}}>The Buyer's Decision Guide.</h3>
                 <p className="s" style={{fontSize:16,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:22}}>What to look for before buying peptides from anyone. Purity, provenance, documentation, delivery format, and the red flags most suppliers hope you'll miss.</p>
                 <input required name="name" type="text" placeholder="First name" className="email-input" style={{width:"100%",marginBottom:10}}/>
-                <input required name="email" type="email" placeholder="Your email" className="email-input" style={{width:"100%",marginBottom:18}}/>
+                <input required name="email" type="email" placeholder="Your email" className="email-input" style={{width:"100%",marginBottom:14}}/>
+                <label className="s" style={{display:"flex",alignItems:"flex-start",gap:10,padding:"10px 12px",background:C.cream,border:`1px solid ${C.border}`,borderRadius:10,marginBottom:14,cursor:"pointer",fontSize:13,lineHeight:1.55,color:C.text,fontWeight:300}}>
+                  <input type="checkbox" name="marketing_consent" defaultChecked style={{marginTop:3,accentColor:C.gold,flexShrink:0,width:16,height:16,cursor:"pointer"}}/>
+                  <span>Send me research updates, new batch announcements, and content. You can unsubscribe anytime.</span>
+                </label>
                 <button type="submit" className="bp" style={{width:"100%",padding:"14px",fontSize:14}}>Send Me the Guide</button>
                 <div className="s" style={{fontSize:11,color:C.muted,marginTop:10,textAlign:"center"}}>No spam. Unsubscribe anytime.</div>
               </form>
