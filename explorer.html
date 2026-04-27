@@ -52,7 +52,7 @@ const LIGHT_PALETTE = {
   navBg:"rgba(251,247,239,0.88)",
 };
 
-// ====== MECHANISM TAGS (14) — consumer-outcome label + scientific subtitle ======
+// ====== MECHANISM TAGS (13) — consumer-outcome label + scientific subtitle ======
 // label = what users understand. sub = the scientific pathway (credibility layer, muted).
 const TAGS = [
   {id:"cytoprotection", label:"Injury recovery & tissue repair", sub:"Cytoprotection & tissue regeneration pathway"},
@@ -67,11 +67,10 @@ const TAGS = [
   {id:"gaba", label:"Stress, anxiety & calm focus", sub:"GABAergic anxiolytic pathway"},
   {id:"tlr-th1", label:"Immune resilience", sub:"TLR9 / Th1 immune modulation"},
   {id:"nf-kb", label:"Gut health & inflammation", sub:"NF-kB / cytokine anti-inflammatory pathway"},
-  {id:"melanocortin", label:"Skin pigmentation research", sub:"Melanocortin receptor signalling"},
   {id:"sexual", label:"Libido", sub:"Central (brain-based) arousal pathway"},
 ];
 
-// ====== PHASE I PEPTIDES (21) — mirrors Aevivo Full Catalog ★ PICK items ======
+// ====== PHASE I PEPTIDES (17) — mirrors Aevivo Full Catalog ★ PICK items ======
 // desc = scientific (keeps credibility). plain = plain-English "commonly researched for" line shown below desc on result cards.
 const PEPTIDES = [
   {n:"BPC-157", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["cytoprotection","nf-kb"], format:"injectable", cat:"Recovery & Repair", grade:"B", pf:195, pr:290,
@@ -98,10 +97,6 @@ const PEPTIDES = [
     desc:"Selective pentapeptide ghrelin-receptor (GHS-R1a) agonist. Research shows clean GH release without cortisol, prolactin, or ACTH crossover (the cleanest of the GHRPs in this respect).",
     plain:"Commonly researched for: recovery, sleep, growth-hormone optimisation without hormonal side effects.",
     ref:"Raun K et al., Eur J Endocrinol 1998."},
-  {n:"Tirzepatide", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["incretin"], format:"injectable", cat:"Metabolic", grade:"A", pf:340, pr:515,
-    desc:"Dual GIP / GLP-1 receptor co-agonist (39-aa with C20 fatty-di-acid chain). Tier-1 research on supra-additive GIP + GLP-1 biology (SURPASS, SURMOUNT).",
-    plain:"Commonly researched for: body weight and blood glucose, with stronger effects than single-target GLP-1s in head-to-head trials.",
-    ref:"Jastreboff AM et al., SURMOUNT-1, NEJM 2022."},
   {n:"Retatrutide", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["incretin"], format:"injectable", cat:"Metabolic", grade:"B", pf:210, pr:310,
     desc:"Investigational triple agonist (GLP-1 + GIP + glucagon receptor, Eli Lilly LY3437943). Phase 2 research shows glucagon-mediated energy-expenditure effects on top of incretin biology.",
     plain:"Commonly researched for: the highest body-weight effects seen in any single-molecule incretin to date (still in late-stage trials).",
@@ -142,14 +137,10 @@ const PEPTIDES = [
     desc:"C-terminal tripeptide of alpha-MSH (Lys-Pro-Val). Research on NF-kB inhibition, IL-1-beta / IL-6 / TNF-alpha suppression, and gut-mucosal anti-inflammatory activity without pigmentation.",
     plain:"Commonly researched for: gut inflammation, skin inflammation, IBD models. Anti-inflammatory without immunosuppression.",
     ref:"Dalmasso G et al., Gastroenterology 2008."},
-  {n:"PT-141", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["melanocortin","sexual"], format:"injectable", cat:"Sexual Health", grade:"A", pf:165, pr:245,
+  {n:"PT-141", sp:"5 mg/ml · 3 ml · 15 mg total", tags:["sexual"], format:"injectable", cat:"Sexual Health", grade:"A", pf:165, pr:245,
     desc:"Cyclic heptapeptide melanocortin agonist (preferential MC4R, also MC3R). FDA-approved as Vyleesi (2019). Research on central hypothalamic melanocortin pathways for sexual arousal.",
     plain:"Commonly researched for: libido and sexual response via central (brain) rather than vascular pathways. Works when PDE5 inhibitors (Viagra-class) do not.",
     ref:"Kingsberg SA et al., RECONNECT, Obstet Gynecol 2019."},
-  {n:"Melanotan 2", sp:"10 mg/ml · 3 ml · 30 mg total", tags:["melanocortin"], format:"injectable", cat:"Skin & Pigmentation", grade:"D", pf:160, pr:240,
-    desc:"Synthetic cyclic heptapeptide non-selective melanocortin receptor agonist (MC1R / MC3R / MC4R / MC5R). Research on eumelanin synthesis. Note: afamelanotide (Scenesse) is the only approved melanocortin analog and only for erythropoietic protoporphyria.",
-    plain:"Commonly researched for: UV-independent pigmentation. Significant post-marketing safety signals for melanocytic complications - proceed with dermatology monitoring.",
-    ref:"Wessells H et al., Int J Impot Res 2000."},
 ];
 
 const PRIMARY_MAP = {
@@ -157,7 +148,7 @@ const PRIMARY_MAP = {
   "actin": ["TB-500"],
   "collagen-ecm": ["GHK-Cu"],
   "somatotropic": ["CJC-1295 + Ipamorelin","Ipamorelin"],
-  "incretin": ["Tirzepatide","Retatrutide"],
+  "incretin": ["Retatrutide"],
   "ampk-mito": ["MOTS-C","SS-31"],
   "telomerase": ["Epithalon"],
   "nad-sirtuin": ["NAD+ 300mg","NAD+ 600mg"],
@@ -165,16 +156,13 @@ const PRIMARY_MAP = {
   "gaba": ["AC-Selank-NH2"],
   "tlr-th1": ["Thymosin Alpha-1"],
   "nf-kb": ["KPV","BPC-157"],
-  "melanocortin": ["PT-141","Melanotan 2"],
   "sexual": ["PT-141"],
 };
 
 // Never stack two peptides that share a mechanism class
 const COLLISION_SETS = [
-  ["Tirzepatide","Retatrutide"], // incretins
   ["CJC-1295 + Ipamorelin","Ipamorelin"], // bundle vs component
   ["NAD+ 600mg","NAD+ 300mg"], // same molecule
-  ["PT-141","Melanotan 2"], // melanocortin agonists
   ["BPC-157","BPC-157 + TB-500"], // bundle vs component
   ["TB-500","BPC-157 + TB-500"], // bundle vs component
 ];
