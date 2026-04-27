@@ -6,8 +6,8 @@
 <script>
 (function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
 </script>
-<title>Journal · Aevivo Longevity</title>
-<meta name="description" content="Aevivo Longevity Journal. Research, policy, and pricing signals in the European peptide market.">
+<title>What ends up in the bottle · Aevivo Longevity</title>
+<meta name="description" content="Most US and EU peptide labels are resellers. Here is what independent testing keeps finding inside the vials they ship.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,28 +86,17 @@ li{margin-bottom:6px;max-width:700px}
 
 .pullquote{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,30px);line-height:1.3;color:var(--gold);font-weight:400;font-style:italic;margin:40px 0;padding:0 0 0 28px;border-left:3px solid var(--gold);max-width:720px}
 
+.hero-image{margin:0 0 36px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--card-bg);aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;position:relative}
+.hero-image svg{width:100%;height:100%;display:block}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-caption{font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);margin:-28px 0 32px;max-width:720px;font-style:italic}
+
 .cta-box{margin:60px 0 0;padding:40px 38px;background:rgba(196,162,101,0.08);border:1px solid rgba(196,162,101,0.3);border-radius:16px;text-align:center}
 .cta-box h4{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,28px);font-weight:400;color:var(--navy);margin-bottom:10px;line-height:1.2}
 .cta-box h4 em{color:var(--gold);font-style:italic}
 .cta-box p{font-size:15px;color:var(--muted);margin:0 auto 24px;max-width:520px}
 .bp{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--bg);border:none;border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block}
 .bp:hover{background:var(--copper);transform:translateY(-1px)}
-
-.tag-pill{display:inline-block;padding:5px 12px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);border-radius:999px}
-
-/* Blog listing */
-.article-card{display:grid;grid-template-columns:220px 1fr;gap:28px;padding:28px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;margin-bottom:18px;text-decoration:none;transition:all 0.3s;align-items:center}
-.article-card:hover{border-color:var(--gold);transform:translateY(-2px);background:var(--card-bg-hover)}
-.article-card .thumb{width:220px;height:140px;border-radius:10px;overflow:hidden;background:rgba(196,162,101,0.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
-.article-card .thumb svg{width:100%;height:100%;display:block}
-.article-card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.article-card .body{min-width:0}
-.article-card .cat{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
-.article-card h3{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.4vw,28px);font-weight:400;color:var(--navy);margin:0 0 12px;line-height:1.2;text-transform:none;letter-spacing:0}
-.article-card .excerpt{font-family:'Inter',sans-serif;font-size:15px;line-height:1.65;color:var(--muted);font-weight:300;margin-bottom:14px;max-width:720px}
-.article-card .meta-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);font-weight:400}
-.article-card .meta-row .read{color:var(--gold);font-weight:600;letter-spacing:0.3px}
-@media(max-width:640px){.article-card{grid-template-columns:1fr}.article-card .thumb{width:100%;height:180px}}
 
 footer{padding:30px clamp(20px,5vw,60px);border-top:1px solid var(--border);background:#060A14;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);line-height:1.7;font-weight:300;text-align:center;position:relative;z-index:2}
 
@@ -143,95 +132,123 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
 </nav>
 
 <main>
-  <div class="breadcrumb"><a href="../index.html">Home</a><span class="sep">·</span>Journal</div>
-  <div class="eyebrow">The Aevivo Journal</div>
-  <h1>The newest breakthroughs. The wildest buzz. <em>Our take.</em></h1>
-  <p class="lede">The latest research from the field, the hype we're watching, and our five cents on what actually matters.</p>
+  <div class="breadcrumb"><a href="../index.html">Home</a><span class="sep">·</span><a href="index.html">Journal</a><span class="sep">·</span>What Ends Up in the Bottle</div>
+  <div class="eyebrow">Supply Chain · 7 min read</div>
+  <h1>What ends up <em>in the bottle.</em></h1>
+  <p class="lede">In October 2025, a Channel 4 News investigation showed the world what happens when an unregulated reseller dresses up cheap research material as a miracle drug. Here is what the Synedica case tells every peptide buyer about what is actually in the pen.</p>
 
-  <div style="margin-top:40px">
-    <a href="what-ends-up-in-the-bottle.html" class="article-card">
-      <div class="thumb">
-        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="220" height="140" fill="rgba(196,162,101,0.08)"/>
-          <g transform="translate(60 70) rotate(-22)">
-            <rect x="0" y="-7" width="90" height="14" rx="7" fill="#C4A265" opacity="0.8"/>
-            <rect x="90" y="-5" width="10" height="10" rx="2" fill="#8A6A2A"/>
-            <line x1="100" y1="0" x2="112" y2="0" stroke="#C4A265" stroke-width="1.2"/>
-          </g>
-          <g transform="translate(160 50)"><circle r="22" fill="none" stroke="#D14343" stroke-width="2.4"/><line x1="-16" y1="-16" x2="16" y2="16" stroke="#D14343" stroke-width="2.4"/></g>
-        </svg>
-      </div>
-      <div class="body">
-        <div class="cat">Supply Chain · 7 min read</div>
-        <h3>What ends up in the bottle.</h3>
-        <p class="excerpt">Channel 4 News exposed Synedica selling fake retatrutide pens as an Eli Lilly investigational product. Here is what the case, and independent testing, keeps revealing about the grey-market peptide trade.</p>
-        <div class="meta-row"><span>24 April 2026</span><span class="read">Read →</span></div>
-      </div>
-    </a>
-    <a href="reading-a-coa.html" class="article-card">
-      <div class="thumb">
-        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="220" height="140" fill="rgba(196,162,101,0.08)"/>
-          <g transform="translate(20 110)" stroke="#C4A265" stroke-width="1.4" fill="none">
-            <path d="M0 0 L15 -4 L30 -12 L45 -8 L60 -42 L75 -6 L90 -22 L105 -14 L120 -48 L135 -10 L150 -18 L165 -6 L180 -2 L195 -8"/>
-          </g>
-          <line x1="20" y1="110" x2="220" y2="110" stroke="#C4A265" stroke-width="1" opacity="0.4"/>
-          <line x1="20" y1="20" x2="20" y2="110" stroke="#C4A265" stroke-width="1" opacity="0.4"/>
-        </svg>
-      </div>
-      <div class="body">
-        <div class="cat">How to Buy · 4 min read</div>
-        <h3>How to read a Certificate of Analysis in under a minute.</h3>
-        <p class="excerpt">The three things to check on every CoA, the four red flags most buyers miss, and a worked example using a real Epitalon release document.</p>
-        <div class="meta-row"><span>23 April 2026</span><span class="read">Read →</span></div>
-      </div>
-    </a>
-    <a href="inside-european-peptide-supply.html" class="article-card">
-      <div class="thumb">
-        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="220" height="140" fill="rgba(196,162,101,0.08)"/>
-          <g stroke="#C4A265" stroke-width="1.4" fill="none">
-            <path d="M50 40 L50 70 L40 95 Q55 105 70 95 L60 70 L60 40 Z"/>
-            <path d="M140 30 L140 70 L126 100 Q148 112 170 100 L156 70 L156 30 Z"/>
-            <line x1="80" y1="75" x2="126" y2="85" stroke-dasharray="2 4"/>
-          </g>
-          <circle cx="110" cy="80" r="2.5" fill="#C4A265"/>
-        </svg>
-      </div>
-      <div class="body">
-        <div class="cat">Provenance · 6 min read</div>
-        <h3>Inside a European peptide supply chain.</h3>
-        <p class="excerpt">What actually happens when a peptide is made inside an EU GMP-certified facility, step by step. We describe our own supply chain because buyers should know.</p>
-        <div class="meta-row"><span>23 April 2026</span><span class="read">Read →</span></div>
-      </div>
-    </a>
-    <a href="fda-peptide-meeting.html" class="article-card">
-      <div class="thumb">
-        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="220" height="140" fill="rgba(196,162,101,0.08)"/>
-          <g transform="translate(110 80)" stroke="#C4A265" stroke-width="1.4" fill="none">
-            <rect x="-40" y="-8" width="80" height="50"/>
-            <rect x="-32" y="-8" width="64" height="6" fill="#C4A265" opacity="0.8"/>
-            <g transform="translate(0 -40)">
-              <line x1="0" y1="0" x2="0" y2="32" stroke-width="1.6"/>
-              <ellipse cx="0" cy="-4" rx="8" ry="10" stroke-width="1.6"/>
-            </g>
-          </g>
-        </svg>
-      </div>
-      <div class="body">
-        <div class="cat">Policy · 5 min read</div>
-        <h3>What the FDA's peptide meeting actually changed.</h3>
-        <p class="excerpt">The regulatory shift in plain language, who it actually affects, and three things buyers should do differently now. Most of the headlines got it wrong.</p>
-        <div class="meta-row"><span>23 April 2026</span><span class="read">Read →</span></div>
-      </div>
-    </a>
+  <div class="hero-image">
+    <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--char)" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="var(--bg)" stop-opacity="0.05"/>
+        </linearGradient>
+        <linearGradient id="pen1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#C4A265" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#8A6A2A" stop-opacity="0.9"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="350" fill="url(#bg1)"/>
+      <g opacity="0.15" stroke="#C4A265" stroke-width="0.5" fill="none">
+        <circle cx="640" cy="90" r="40"/><circle cx="640" cy="90" r="60"/><circle cx="640" cy="90" r="80"/>
+        <line x1="120" y1="80" x2="240" y2="140"/><line x1="240" y1="140" x2="180" y2="260"/><line x1="180" y1="260" x2="320" y2="300"/>
+        <circle cx="120" cy="80" r="2.5" fill="#C4A265"/><circle cx="240" cy="140" r="2.5" fill="#C4A265"/><circle cx="180" cy="260" r="2.5" fill="#C4A265"/><circle cx="320" cy="300" r="2.5" fill="#C4A265"/>
+      </g>
+      <g transform="translate(280 140) rotate(-22)">
+        <rect x="0" y="-14" width="220" height="28" rx="14" fill="url(#pen1)" stroke="#C4A265" stroke-width="1"/>
+        <rect x="36" y="-8" width="6" height="16" fill="#FBF7EF" opacity="0.5"/>
+        <rect x="52" y="-8" width="6" height="16" fill="#FBF7EF" opacity="0.5"/>
+        <rect x="68" y="-8" width="6" height="16" fill="#FBF7EF" opacity="0.5"/>
+        <rect x="220" y="-10" width="18" height="20" rx="3" fill="#8A6A2A"/>
+        <line x1="238" y1="0" x2="260" y2="0" stroke="#C4A265" stroke-width="1.5"/>
+      </g>
+      <g transform="translate(520 80)">
+        <circle cx="0" cy="0" r="54" fill="none" stroke="#D14343" stroke-width="3"/>
+        <line x1="-38" y1="-38" x2="38" y2="38" stroke="#D14343" stroke-width="3"/>
+      </g>
+      <text x="40" y="320" font-family="'Libre Baskerville',serif" font-size="14" fill="#C4A265" opacity="0.6" font-style="italic">Illustration · the unregulated pen</text>
+    </svg>
+  </div>
+  <p class="hero-caption">An unregulated injection pen sold as an investigational peptide. Swap with a real editorial photo by dropping one into <code>/images/blog/bottle-hero.jpg</code>.</p>
+
+  <h2>The Synedica case, <em>in short</em></h2>
+
+  <p>On 22 October 2025, a Channel 4 News investigation in the United Kingdom exposed a company called <strong>Synedica</strong> selling injection pens marketed as retatrutide, a triple-agonist GLP-1 peptide that is still in Phase 3 clinical trials and has not been approved for human use in any country in the world.</p>
+
+  <p>The pens were sold online and on social media. The packaging and positioning implied the product came from the manufacturer running the trials, Eli Lilly. A second company, <strong>Alluvi</strong>, was named alongside Synedica in the same supply chain. When the Channel 4 reporter sent Eli Lilly a sample of the product, the company confirmed the pens were not theirs. They were counterfeit.</p>
+
+  <p>Following the broadcast, Eli Lilly publicly announced it would take legal action against both companies. Synedica's own website carries a disclaimer saying the product is "for research use only," which is the same four words almost every grey-market peptide reseller uses. In practice the pens were being marketed to the general public as a weight-loss drug, and distributing an investigational peptide outside of a clinical trial is illegal on both sides of the Atlantic.</p>
+
+  <div class="pullquote">
+    "For research use only" is the sentence that makes the reseller model legal on paper and indefensible in practice.
   </div>
 
+  <p>The Synedica story is not unusual. It is this year's version of a pattern that has repeated inside the peptide industry for at least a decade. A company puts a logo on a website, orders drums of crude research material from an unregulated manufacturer in Hebei, Shandong or Sichuan, and relabels it. The markup is six to ten times. The quality control is a generic PDF. The product is sold under a "research use only" disclaimer that nobody believes.</p>
+
+  <p>The problem is not that the peptide was synthesised in China. Credible peptide chemistry happens in China every day, inside GMP-certified facilities audited by the FDA, EMA or MHRA. The problem is <strong>who synthesised a particular lot, under what conditions, and whether anyone ever tested it after it crossed the border</strong>.</p>
+
+  <h2>What independent testing <em>keeps finding</em></h2>
+
+  <p>When academic labs, regulators, or sceptical buyers send anonymously-purchased peptides to a credible analytical laboratory, the results cluster into a short list of problems. These are the ones that show up over and over.</p>
+
+  <h3>1. Wrong identity</h3>
+  <p>The label says BPC-157. The mass spectrometer says something close, but not that. A single amino acid substituted, a residue missing, a different acetylation pattern. The buyer thinks they bought a well-studied peptide. They bought an unknown one with no literature.</p>
+
+  <h3>2. Low actual purity</h3>
+  <p>The CoA claims greater than ninety-eight percent by HPLC. Independent testing finds a main peak at eighty-four percent, surrounded by synthesis byproducts and deletion sequences no one bothered to remove. The target peptide is diluted with impurities the buyer never paid for.</p>
+
+  <h3>3. Bacterial endotoxins</h3>
+  <p>This is the one that can actually hurt someone. Endotoxins are fragments of bacterial cell walls. Unregulated synthesis facilities do not control for them, because they do not have to. Endotoxin-contaminated peptide reconstituted in bacteriostatic water and injected produces a classic pyrogenic response: fever, chills, hypotension. In research use, it confounds the data. Outside research, the consequences are worse.</p>
+
+  <h3>4. Residual solvents</h3>
+  <p>Peptide synthesis uses dichloromethane, DMF, acetonitrile, and trifluoroacetic acid. Every legitimate facility runs gas chromatography to confirm those solvents have been removed. Many Chinese research-chemical facilities do not. Buyers end up with measurable DCM or TFA in their pens. The peptide still "works." The pen is still toxic.</p>
+
+  <h3>5. Heavy metals</h3>
+  <p>Peptide synthesis resins and scavengers contain trace palladium, copper, and iron. Legitimate release testing includes ICP-MS to confirm the metals have been removed within pharmacopoeial limits. Cheap manufacturers skip this test because the test itself costs more than the peptide.</p>
+
+  <div class="pullquote">
+    The peptide still "works." The pen is still toxic. That is the whole scandal, in two sentences.
+  </div>
+
+  <h2>Why the reseller model <em>rewards this</em></h2>
+
+  <p>A US or EU peptide website has one job. Buy low, mark up, ship. The economics make anything else unaffordable.</p>
+
+  <p>A credible lot release package in Europe costs between eight hundred and two thousand euros per batch, depending on the panel. Third-party endotoxin testing alone is three to five hundred euros. A proper ICP-MS heavy metals panel is another few hundred. Residual solvents by GC. Microbial limits. Water content by Karl Fischer.</p>
+
+  <p>If you are reselling ten-euro-a-gram research chemicals at eighty euros a gram, you cannot afford to run that testing. So you do not. You copy the supplier's CoA, put your own logo on it, and ship.</p>
+
+  <p>The buyer never finds out, because the buyer never tests. Research-use-only labelling means nobody has to. Until someone does, and the headline comes.</p>
+
+  <h2>The three questions <em>that catch a reseller</em></h2>
+
+  <p>If you are buying peptides from anyone, ask these three questions before you pay. If the answer to any of them is evasive, the supplier is a reseller, and what is in the bottle is a guess.</p>
+
+  <div class="callout">
+    <p><strong>1. Can you name the facility that synthesised this lot?</strong> A real supplier has a real answer: a facility, a country, a GMP status. "Hybrid synthesis, EU-certified" is not an answer. It is a dodge.</p>
+  </div>
+
+  <div class="callout">
+    <p><strong>2. Can you send me the full release package for this lot, not just the HPLC chromatogram?</strong> The full package should include MS confirmation, residual solvents, water content, appearance, and either endotoxin results or a statement of why that test was not run. A one-page "CoA" is marketing.</p>
+  </div>
+
+  <div class="callout">
+    <p><strong>3. Who is listed as the legal manufacturer on the package, and what is their regulatory status?</strong> If the brand on the website and the entity in the release package are different, the website is a reseller. That is fine, as long as the reseller names their upstream and the upstream is credible.</p>
+  </div>
+
+  <h2>What we do <em>differently</em></h2>
+
+  <p>Aevivo does not manufacture peptides. We do not pretend to. What we do is source from a single, named European GMP-certified facility, test every lot, and publish the release package tied to the batch you receive.</p>
+
+  <p>The facility is disclosed to buyers who ask. The release panel includes HPLC, MS, residual solvents, water content, and appearance as standard. Endotoxin testing is performed on every lot of parenteral-format peptides. Heavy metals are tested on every lot where synthesis chemistry introduces them.</p>
+
+  <p>None of that is heroic. It is what the reseller model cannot afford to do, and it is why the reseller model ships what it ships. We chose a different model so we could ship something different.</p>
+
   <div class="cta-box">
-    <h4>Want these in your inbox?</h4>
-    <p>We send new pieces as they land. No filler, no unsubscribes needed - one article at a time.</p>
-    <a href="../index.html#journal" class="bp">Back to Aevivo</a>
+    <h4>Not sure what is in your current vial? Ask us.</h4>
+    <p>We will tell you exactly what an Aevivo release package looks like, and what to ask your current supplier if you suspect what is actually in the bottle.</p>
+    <a href="../orderlist.html" class="bp">Order your peptides →</a>
   </div>
 </main>
 

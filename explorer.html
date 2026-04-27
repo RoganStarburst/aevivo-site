@@ -520,7 +520,7 @@ function App(){
             <div style={{marginBottom:32}}>
               <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.navy,marginBottom:12,fontWeight:600}}>Experience with research peptides</div>
               <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-                {[["new","New to research peptides"],["some","Some experience (1-2 compounds)"],["experienced","Experienced (3+ compounds)"]].map(([v,l]) => (
+                {[["new","New to research peptides"],["some","Some experience (1-2 peptides)"],["experienced","Experienced (3+ peptides)"]].map(([v,l]) => (
                   <div key={v} className={`chip ${experience===v?'on':''}`} onClick={()=>setExperience(v)}>{l}</div>
                 ))}
               </div>
@@ -594,7 +594,7 @@ function App(){
             </h1>
             <p className="s" style={{fontSize:15,color:C.muted,lineHeight:1.65,fontWeight:300,marginBottom:32,maxWidth:680}}>
               Curated for your ranked interests: {result.selectedTags.slice().sort((a,b)=>b.priority-a.priority).map((t,i) => <span key={t.id} style={{color:C.navy,fontWeight:500}}>{i>0?", ":""}#{MAX_TAGS - t.priority + 1} {primaryTagLabel(t.id)}</span>)}. {result.routeToCall
-                ? "Your research interest best fits a compound outside our standard Phase I catalog. Let's talk."
+                ? "Your research interest best fits a peptide outside our standard Phase I catalog. Let's talk."
                 : ` ${result.picked.length} peptide${result.picked.length>1?"s":""} matched, weighted by the order you set.`}
             </p>
 

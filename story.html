@@ -47,7 +47,7 @@ body{background:var(--page-bg-grad);background-attachment:fixed;background-size:
 nav.nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
 nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 nav .brand .mark{width:28px;height:28px;border:1px solid var(--gold);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);font-family:'Libre Baskerville',Georgia,serif;font-weight:700}
-nav .brand .name{font-family:'Inter',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--navy);font-weight:600}
+nav .brand .name{font-family:'Inter',sans-serif;font-size:15px;letter-spacing:1.8px;text-transform:uppercase;color:var(--navy);font-weight:600}
 nav .back{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;transition:color 0.2s}
 nav .back:hover{color:var(--gold)}
 
@@ -78,6 +78,9 @@ p.lede em{color:var(--gold);font-style:italic}
 .founder-meta h2{margin-bottom:16px}
 .founder-meta .tagline{font-family:'Libre Baskerville',serif;font-size:22px;font-style:italic;color:var(--muted);line-height:1.4;font-weight:400}
 
+@media(max-width:900px){
+  .nav-links{display:none !important}
+}
 @media(max-width:768px){
   .founder-hero{grid-template-columns:1fr;gap:24px;text-align:left}
   .founder-hero img{width:180px;height:180px;margin:0 0 10px}
@@ -103,11 +106,18 @@ footer .copyright{max-width:720px;margin:0 auto}
 <nav class="nb">
   <a href="index.html" class="brand">
     <div class="mark">A</div>
-    <span class="name">Aevivo</span>
+    <span class="name">Aevivo Longevity</span>
   </a>
+  <div class="nav-links" style="display:flex;gap:24px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;font-weight:500">
+    <a href="story.html" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px">Story</a>
+    <a href="index.html#catalog" style="color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Peptides</a>
+    <a href="index.html#science" style="color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Science</a>
+    <a href="index.html#journal" style="color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Journal</a>
+    <a href="index.html#faq" style="color:var(--muted);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">FAQ</a>
+  </div>
   <div style="display:flex;align-items:center;gap:16px">
     <button onclick="(function(){var h=document.documentElement;var next=h.dataset.theme==='dark'?'light':'dark';h.dataset.theme=next;window.__aevivo_theme=next;try{localStorage.setItem('aevivo-theme',next)}catch(e){}var b=document.getElementById('tgl-icon');if(b){b.innerHTML=next==='dark'?AEVIVO_MOON:AEVIVO_SUN}})()" title="Toggle theme" aria-label="Toggle theme" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;cursor:pointer;padding:0" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'"><span id="tgl-icon"></span></button>
-    <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
+    <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
     <a href="index.html" class="back">← Back to home</a>
@@ -120,17 +130,18 @@ footer .copyright{max-width:720px;margin:0 auto}
 <section class="section" id="story">
   <div class="eyebrow">The Aevivo Story</div>
   <h1>Built for what we <em>couldn't find.</em></h1>
-  <p class="lede">Peptides are everywhere. Rigor is rare. We started Aevivo to close that gap, one compound at a time.</p>
+  <p class="lede">Peptides are everywhere. Rigor is rare. We started Aevivo to close that gap, one peptide at a time.</p>
 
-  <p>Peptides had become one of the most talked-about categories in longevity. The supply chain behind them had become one of the least trustworthy. Origins were vague. Documentation was inconsistent. Buyers were asked to trust labels that no one could verify, paying premium prices for material that in many cases was sourced from wholesale suppliers in China, Pakistan, or India, repackaged, and marketed as European research-grade.</p>
+  <p>Peptides had become one of the most talked-about categories in longevity. The supply chain behind them had become one of the least trustworthy. Origins are vague. Documentation is inconsistent. Buyers are asked to trust labels that no one can verify, paying premium prices for material that in many cases is sourced from wholesale suppliers in China, Pakistan, or India, repackaged, and marketed as European research-grade.</p>
 
-  <p>Aevivo was founded to build the supply we wanted to buy from. European synthesis. Verified purity. A Certificate of Analysis on record for every compound. Delivered in a sealed pen cartridge that protects the peptide from production to use. Named human beings behind the supply, available to answer questions and stand behind every batch.</p>
+  <p>Aevivo was founded to build the supply we wanted to buy from. European synthesis. Verified purity. A Certificate of Analysis on record for every peptide. Delivered in a sealed pen cartridge that protects the peptide from production to use. Named human beings behind the supply, available to answer questions and stand behind every batch.</p>
 
   <h3>How we met</h3>
-  <p>Aevivo came out of a single evening. Suzanna and Tiago met at a friend's art exhibition, brought together by Caroline in a room of interesting people. They discovered they shared an almost identical obsession with longevity science. The conversation never really stopped, and somewhere in it the logical conclusion became that they should build something together rather than keep talking about it.</p>
+  <p>Tiago and Suzanna have spent their lives fascinated by longevity: the science, the possibilities, and what rigorous research might one day mean for the people around them. When they found each other, they had independently reached the same conclusion: that the peptide research market wasn't meeting the standards the science deserved.</p>
+  <p>This is how AEVIVO Longevity was born.</p>
 
   <h3>Where we're going</h3>
-  <p>We are starting with a peptide catalog because it is the clearest entry point. The bigger work we are building toward is a full health journey: diagnostics, protocol design, and ongoing support from doctors, nurses, and coaches. Peptides will be one tool among many. The goal is to put the person at the centre of their own health, with a team behind them that actually shows up.</p>
+  <p>We are starting with a peptide catalog because it is the clearest entry point. The bigger picture we are building toward is a full health journey: diagnostics, protocol design, and ongoing support from doctors, nurses, and coaches. Peptides will be one tool among many. The goal is to put the person at the centre of their own health, with a team behind them that actually shows up.</p>
 
   <div class="quote">
     Together we're way more powerful than on our own. That is how this started.
@@ -187,18 +198,18 @@ footer .copyright{max-width:720px;margin:0 auto}
     <div class="founder-meta">
       <div class="role">Co-Founder</div>
       <h2>Tiago Areias.</h2>
-      <p class="tagline">Found peptides on TikTok, fell down the research rabbit hole, stayed.</p>
+      <p class="tagline">Could not find a supplier worth trusting. So he became one. Because in this market, quality is not a differentiator. It is the only thing that matters.</p>
     </div>
   </div>
 
   <h3>Thirty-second bio</h3>
-  <p>Tiago spent eleven years in a career that paid well and taught him a lot, then walked away to build something he actually believed in. He is co-founding Aevivo Longevity, a European research peptide company bringing GMP-certified compounds to a market that has been desperately waiting for a supplier it can actually trust. Right now he spends most of his time making sure that when Aevivo launches, the quality of what it puts out is impossible to argue with.</p>
+  <p>Tiago spent eleven years in a career that paid well and taught him a lot, then walked away to build something he actually believed in. He is co-founding Aevivo Longevity, a European research peptide company bringing GMP-certified peptides to a market that has been desperately waiting for a supplier it can actually trust. Right now he spends most of his time making sure that when Aevivo launches, the quality of what it puts out is impossible to argue with.</p>
 
   <h3>Why peptides, why now</h3>
   <p>The honest answer is that he spent a year after leaving his job searching for something that genuinely excited him, and the longevity space was the first thing he found where the more he learned, the more he wanted to know. The supply chain serving this science in Europe is broken in ways that are almost embarrassing, and he kept thinking someone should fix it. At some point he stopped waiting for that someone to appear.</p>
 
   <div class="quote">
-    I made the harder choice before Aevivo existed. I am not building this to escape something. I am building it because it is the only thing that makes sense right now.
+    A market full of unverifiable claims, recycled certificates, and prices too low to make sense. Not a gap to observe. A problem to solve.
     <span class="who">Tiago Areias</span>
   </div>
 
@@ -206,7 +217,7 @@ footer .copyright{max-width:720px;margin:0 auto}
   <p>What Tiago brings that the others do not is the willingness to have started. Leaving years of stability to build something uncertain is not a skill you can list on a CV, but it is the quality that makes everything else possible. He made the harder choice before Aevivo existed, which means he is not building this to escape something. He is building it because it is the only thing that makes sense right now.</p>
 
   <h3>The frustration</h3>
-  <p>The peptide supply market in Europe is full of companies that expect buyers to simply trust them, with no documentation, no traceability, no real accountability for what is inside the vial. People are injecting compounds sourced from unverified manufacturers with no transparency on purity, origin, or production standards. The science behind these compounds is serious. The supply chain serving that science is not. That gap makes Tiago genuinely impatient.</p>
+  <p>The peptide supply market in Europe is full of companies that expect buyers to simply trust them, with no documentation, no traceability, no real accountability for what is inside the vial. People are injecting peptides sourced from unverified manufacturers with no transparency on purity, origin, or production standards. The science behind these peptides is serious. The supply chain serving that science is not. That gap makes Tiago genuinely impatient.</p>
 
   <h3>Aevivo in 2029</h3>
   <p>"Aevivo is the brand anyone in Europe reaches for when they want to take their longevity seriously, whether they are a physician, a biohacker, or simply someone who has decided that how they age is worth paying attention to."</p>

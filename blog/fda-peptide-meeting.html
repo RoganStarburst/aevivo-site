@@ -47,7 +47,7 @@ body{background:var(--page-bg-grad);background-attachment:fixed;color:var(--text
 nav.nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
 nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 nav .brand .mark{width:28px;height:28px;border:1px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);font-family:'Libre Baskerville',serif;font-weight:700}
-nav .brand .name{font-family:'Outfit',sans-serif;font-size:13px;letter-spacing:0.52em;text-transform:uppercase;color:var(--navy);font-weight:300}
+nav .brand .name{font-family:'Outfit',sans-serif;font-size:15px;letter-spacing:0.32em;text-transform:uppercase;color:var(--navy);font-weight:300}
 nav .back{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;transition:color 0.2s}
 nav .back:hover{color:var(--gold)}
 
@@ -85,6 +85,11 @@ li{margin-bottom:6px;max-width:700px}
 .redflag strong{color:var(--gold)}
 
 .pullquote{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,30px);line-height:1.3;color:var(--gold);font-weight:400;font-style:italic;margin:40px 0;padding:0 0 0 28px;border-left:3px solid var(--gold);max-width:720px}
+
+.hero-image{margin:0 0 36px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--card-bg);aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;position:relative}
+.hero-image svg{width:100%;height:100%;display:block}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-caption{font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);margin:-28px 0 32px;max-width:720px;font-style:italic}
 
 .cta-box{margin:60px 0 0;padding:40px 38px;background:rgba(196,162,101,0.08);border:1px solid rgba(196,162,101,0.3);border-radius:16px;text-align:center}
 .cta-box h4{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,28px);font-weight:400;color:var(--navy);margin-bottom:10px;line-height:1.2}
@@ -126,11 +131,11 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
 <nav class="nb">
   <a href="../index.html" class="brand">
     <div class="mark">A</div>
-    <span class="name">Aevivo</span>
+    <span class="name">Aevivo Longevity</span>
   </a>
   <div style="display:flex;align-items:center;gap:16px">
     <button onclick="(function(){var h=document.documentElement;var next=h.dataset.theme==='dark'?'light':'dark';h.dataset.theme=next;window.__aevivo_theme=next;try{localStorage.setItem('aevivo-theme',next)}catch(e){}var b=document.getElementById('tgl-icon');if(b){b.innerHTML=next==='dark'?AEVIVO_MOON:AEVIVO_SUN}})()" title="Toggle theme" aria-label="Toggle theme" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;cursor:pointer;padding:0" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'"><span id="tgl-icon"></span></button>
-    <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
+    <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
     <a href="../index.html" class="back">← Back to home</a>
@@ -143,10 +148,45 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
   <h1>What the FDA's peptide meeting <em>actually changed.</em></h1>
   <p class="lede">You probably saw the headlines. A lot of them were loud and wrong.</p>
 
+  <div class="hero-image">
+    <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="fdabg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--char)" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="var(--bg)" stop-opacity="0.05"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="350" fill="url(#fdabg)"/>
+      <g opacity="0.12" stroke="#C4A265" stroke-width="0.5" fill="none">
+        <circle cx="120" cy="80" r="30"/><circle cx="120" cy="80" r="50"/>
+        <line x1="680" y1="80" x2="740" y2="160"/><line x1="740" y1="160" x2="660" y2="260"/>
+        <circle cx="680" cy="80" r="2.5" fill="#C4A265"/><circle cx="740" cy="160" r="2.5" fill="#C4A265"/><circle cx="660" cy="260" r="2.5" fill="#C4A265"/>
+      </g>
+      <g transform="translate(400 200)">
+        <rect x="-70" y="-10" width="140" height="90" fill="none" stroke="#C4A265" stroke-width="1.5" opacity="0.85"/>
+        <rect x="-56" y="-10" width="112" height="8" fill="#C4A265" opacity="0.85"/>
+        <rect x="-50" y="2" width="100" height="2" fill="#C4A265" opacity="0.4"/>
+        <rect x="-50" y="10" width="80" height="2" fill="#C4A265" opacity="0.4"/>
+        <rect x="-50" y="18" width="90" height="2" fill="#C4A265" opacity="0.4"/>
+        <rect x="-50" y="26" width="60" height="2" fill="#C4A265" opacity="0.4"/>
+        <g transform="translate(0 -70)">
+          <line x1="0" y1="0" x2="0" y2="60" stroke="#C4A265" stroke-width="2"/>
+          <ellipse cx="0" cy="-6" rx="14" ry="18" fill="none" stroke="#C4A265" stroke-width="2"/>
+          <line x1="-8" y1="8" x2="8" y2="8" stroke="#C4A265" stroke-width="1.2"/>
+          <line x1="-6" y1="14" x2="6" y2="14" stroke="#C4A265" stroke-width="1"/>
+        </g>
+        <line x1="-100" y1="80" x2="100" y2="80" stroke="#C4A265" stroke-width="1.5"/>
+        <text x="0" y="108" text-anchor="middle" font-family="'Libre Baskerville',serif" font-size="11" fill="#C4A265" letter-spacing="3">FDA HEARING</text>
+      </g>
+      <text x="40" y="320" font-family="'Libre Baskerville',serif" font-size="14" fill="#C4A265" opacity="0.6" font-style="italic">Illustration · the podium, the microphone, the testimony</text>
+    </svg>
+  </div>
+  <p class="hero-caption">Swap with a real press-pool image of the FDA meeting (or RFK Jr. at the podium) by saving one as <code>/images/blog/fda-hero.jpg</code>.</p>
+
   <p>If you buy peptides for research, you probably saw the headlines. A lot of them were loud and wrong. Here is what the FDA's peptide meeting actually changed, why it matters for your sourcing decisions, and what people are still getting wrong about it.</p>
 
   <h2>What the meeting was <em>actually about</em></h2>
-  <p>The meeting was convened to examine the status of a specific set of peptides on the FDA's compounding lists. The agency wanted to review the safety and clinical evidence for compounds that had been available through compounding pharmacies for years.</p>
+  <p>The meeting was convened to examine the status of a specific set of peptides on the FDA's compounding lists. The agency wanted to review the safety and clinical evidence for peptides that had been available through compounding pharmacies for years.</p>
   <p><strong>What this is not.</strong> It is not a blanket ban on peptides. It is not a new rule that applies to research supply. It is a review of a narrow part of the regulatory map: the 503A and 503B compounding pathways that govern what US pharmacies are allowed to formulate for a named patient.</p>
   <p>If you are a researcher, a laboratory, or a peptide supplier operating under research-use frameworks, the compounding review does not apply to your supply. It applies to the clinical-administration pathway on US soil.</p>
 
@@ -155,7 +195,7 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
   <p>Three things are now different in practice.</p>
 
   <h3>1. Compounding pharmacies in the US are operating under tighter scrutiny</h3>
-  <p>Some compounds that were freely compounded for patients are now either restricted or under active review. This has created a supply gap in the US clinical market.</p>
+  <p>Some peptides that were freely compounded for patients are now either restricted or under active review. This has created a supply gap in the US clinical market.</p>
 
   <h3>2. That gap has pushed demand toward non-US research supply channels</h3>
   <p>Some of that demand has gone to legitimate research suppliers. A lot of it has gone to grey-market sources with no documentation and no accountability. Buyers who previously had access through a compounding pharmacy are now ordering from suppliers whose name they cannot pronounce.</p>
@@ -180,14 +220,14 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
   <p>A few things we see repeated in peptide communities that are worth correcting:</p>
 
   <ul>
-    <li><strong>"The FDA banned peptides."</strong> No. The FDA reviewed specific compounds in a specific regulatory pathway.</li>
+    <li><strong>"The FDA banned peptides."</strong> No. The FDA reviewed specific peptides in a specific regulatory pathway.</li>
     <li><strong>"You cannot buy BPC-157 anymore."</strong> You can, through research channels, with documentation, for non-clinical use. The compounding pathway is narrower.</li>
     <li><strong>"This is going to shut down the whole space."</strong> The space is not the compounding pathway. Research-use peptide supply through EU GMP facilities is a different regulatory animal.</li>
   </ul>
 
   <h2>What we are doing about it <em>at Aevivo</em></h2>
 
-  <p>Our sourcing is through an EU GMP-certified facility. Every compound in our catalog has a Certificate of Analysis available on request. Every order is handled by a named human who can walk you through the documentation.</p>
+  <p>Our sourcing is through an EU GMP-certified facility. Every peptide in our catalog has a Certificate of Analysis available on request. Every order is handled by a named human who can walk you through the documentation.</p>
 
   <p>The regulatory environment is going to keep moving. Our job is to stay on the right side of it and make it easy for serious buyers to stay there with us.</p>
 

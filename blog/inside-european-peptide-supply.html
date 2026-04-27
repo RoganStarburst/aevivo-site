@@ -47,7 +47,7 @@ body{background:var(--page-bg-grad);background-attachment:fixed;color:var(--text
 nav.nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
 nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 nav .brand .mark{width:28px;height:28px;border:1px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);font-family:'Libre Baskerville',serif;font-weight:700}
-nav .brand .name{font-family:'Outfit',sans-serif;font-size:13px;letter-spacing:0.52em;text-transform:uppercase;color:var(--navy);font-weight:300}
+nav .brand .name{font-family:'Outfit',sans-serif;font-size:15px;letter-spacing:0.32em;text-transform:uppercase;color:var(--navy);font-weight:300}
 nav .back{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;transition:color 0.2s}
 nav .back:hover{color:var(--gold)}
 
@@ -126,11 +126,11 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
 <nav class="nb">
   <a href="../index.html" class="brand">
     <div class="mark">A</div>
-    <span class="name">Aevivo</span>
+    <span class="name">Aevivo Longevity</span>
   </a>
   <div style="display:flex;align-items:center;gap:16px">
     <button onclick="(function(){var h=document.documentElement;var next=h.dataset.theme==='dark'?'light':'dark';h.dataset.theme=next;window.__aevivo_theme=next;try{localStorage.setItem('aevivo-theme',next)}catch(e){}var b=document.getElementById('tgl-icon');if(b){b.innerHTML=next==='dark'?AEVIVO_MOON:AEVIVO_SUN}})()" title="Toggle theme" aria-label="Toggle theme" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;cursor:pointer;padding:0" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'"><span id="tgl-icon"></span></button>
-    <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
+    <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
     <a href="../index.html" class="back">← Back to home</a>
@@ -143,30 +143,30 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
   <h1>Inside a European <em>peptide supply chain.</em></h1>
   <p class="lede">Most peptides sold online travel a route the buyer never sees. We describe our own because we think buyers should know.</p>
 
-  <p>The label says "research grade." The compound might have been synthesised in a Chinese warehouse, a lab in a Baltic industrial park, or a GMP facility outside Vilnius. Those three origins produce three very different products.</p>
+  <p>The label says "research grade." The peptide might have been synthesised in a Chinese warehouse, a lab in a Baltic industrial park, or a GMP facility outside Vilnius. Those three origins produce three very different products.</p>
 
   <p>Here is what actually happens when a peptide is made inside a European GMP-certified facility, step by step. We describe our own supply chain because we think buyers should know.</p>
 
   <h2>Step 1. Solid-phase synthesis</h2>
   <p>A peptide is a chain of amino acids linked in a specific order. To make one, you start with a solid resin bead, attach the first amino acid, and add the rest one at a time using chemistry developed by Bruce Merrifield in the 1960s. Every addition needs a deprotection step, a coupling step, and a wash. A short peptide takes hours. A long one takes days.</p>
-  <p>In a GMP facility, the amino acids are certified, the reagents are tracked, and every synthesis run is logged. This sounds obvious. It is not. Most grey-market peptides are made in facilities where none of that is documented, and that lack of documentation is the compound's first missing signature.</p>
+  <p>In a GMP facility, the amino acids are certified, the reagents are tracked, and every synthesis run is logged. This sounds obvious. It is not. Most grey-market peptides are made in facilities where none of that is documented, and that lack of documentation is the peptide's first missing signature.</p>
 
   <h2>Step 2. Cleavage and crude peptide</h2>
-  <p>Once the full chain is built, the peptide is cleaved from the resin bead with a strong acid (typically trifluoroacetic acid), which also removes the protecting groups on the amino acid side chains. What comes out of cleavage is called crude peptide. It contains the target compound, incomplete chains, deletion sequences, and a few by-products.</p>
+  <p>Once the full chain is built, the peptide is cleaved from the resin bead with a strong acid (typically trifluoroacetic acid), which also removes the protecting groups on the amino acid side chains. What comes out of cleavage is called crude peptide. It contains the target peptide, incomplete chains, deletion sequences, and a few by-products.</p>
   <p>Crude peptide is the dirtiest form of the product. Nobody sells it directly. Anyone who does is selling you something that has not been purified. Do not buy from them.</p>
 
   <h2>Step 3. HPLC purification</h2>
-  <p>This is the step that separates serious suppliers from surface ones. The crude peptide is dissolved, loaded onto a high-performance liquid chromatography column, and run through a gradient that separates the target compound from every other species based on polarity.</p>
+  <p>This is the step that separates serious suppliers from surface ones. The crude peptide is dissolved, loaded onto a high-performance liquid chromatography column, and run through a gradient that separates the target peptide from every other species based on polarity.</p>
   <p>A trained operator watches the output and collects the fractions that come off the column at the target retention time. Those fractions are pooled, re-analysed, and re-purified if needed. The goal is a main peak that makes up the vast majority of the sample. ≥97% as a release specification. Typical lot results above 98%.</p>
   <p>This step is where cost comes from. HPLC runs are slow, the solvents are expensive, and the column is consumed over time. It is also where cheap suppliers cut corners. If a competitor's price looks too good, their HPLC step probably looks too short.</p>
 
   <h2>Step 4. Analytical verification</h2>
-  <p>After purification, the compound goes to analytical QC. Two tests matter most.</p>
-  <p><strong>Mass spectrometry</strong> confirms the molecular weight. The theoretical mass of the target compound is known before synthesis starts. The observed mass from MS should match within a small tolerance. If it does not, the compound is not what the label says.</p>
+  <p>After purification, the peptide goes to analytical QC. Two tests matter most.</p>
+  <p><strong>Mass spectrometry</strong> confirms the molecular weight. The theoretical mass of the target peptide is known before synthesis starts. The observed mass from MS should match within a small tolerance. If it does not, the peptide is not what the label says.</p>
   <p><strong>A second HPLC run</strong> verifies the purity of the purified material, now in its final form. The chromatogram from this run is what ends up on the Certificate of Analysis.</p>
 
   <h2>Step 5. Formulation and filling</h2>
-  <p>The purified peptide is dissolved into a formulation buffer. For our pen format, that is a sterile, 0.2 μm-filtered solution with glycine, mannitol, sodium phosphate, and stabilisers like m-cresol and glycerol. The formulation is designed to keep the compound stable at refrigerated temperatures for the product's shelf life.</p>
+  <p>The purified peptide is dissolved into a formulation buffer. For our pen format, that is a sterile, 0.2 μm-filtered solution with glycine, mannitol, sodium phosphate, and stabilisers like m-cresol and glycerol. The formulation is designed to keep the peptide stable at refrigerated temperatures for the product's shelf life.</p>
   <p>The formulated solution is then filled into sealed pen cartridges under inert atmosphere. Sealing under inert atmosphere matters because oxygen is one of the slow ways peptides degrade. Every time a vial is punctured, air gets in. Every time a pen cartridge is used, the seal stays intact.</p>
 
   <h2>Step 6. Release testing and documentation</h2>
@@ -181,7 +181,7 @@ canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointe
 
   <div class="cta-box">
     <h4>Precision peptide pens, fully documented.</h4>
-    <p>EU-sourced, GMP-certified. See the list of compounds we currently stock.</p>
+    <p>EU-sourced, GMP-certified. See the list of peptides we currently stock.</p>
     <a href="../orderlist.html" class="bp">Order your peptides →</a>
   </div>
 </main>

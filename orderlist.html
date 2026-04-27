@@ -6,8 +6,8 @@
 <script>
 (function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
 </script>
-<title>Select Your Compounds · Aevivo Longevity</title>
-<meta name="description" content="Select the compounds and quantities you want for your Aevivo Longevity order.">
+<title>Select Your Peptides · Aevivo Longevity</title>
+<meta name="description" content="Select the peptides and quantities you want for your Aevivo Longevity order.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -94,10 +94,8 @@ const catalog = [
   {cat:"Growth Hormone Secretagogues",items:[
     {n:"CJC-1295 + Ipamorelin",sp:"5 mg/ml · 3 ml · 15 mg total",ds:"Combined GH secretagogue blend researched for synergistic growth hormone pulse amplification.",pf:240,pr:360},
     {n:"Ipamorelin",sp:"5 mg/ml · 3 ml · 15 mg total",ds:"Selective GH secretagogue with minimal impact on cortisol and prolactin in preclinical models.",pf:145,pr:215},
-    {n:"Sermorelin",sp:"10 mg/ml · 3 ml · 30 mg total",ds:"GHRH(1-29) analog investigated for endogenous pulsatile growth hormone release.",pf:160,pr:240},
   ]},
   {cat:"Metabolic Health & Weight Management",items:[
-    {n:"Semaglutide",sp:"5 mg / 0.88 ml pen",ds:"GLP-1 receptor agonist with extensive published literature on glycemic and metabolic signaling.",pf:215,pr:325},
     {n:"Tirzepatide",sp:"10 mg/ml · 3 ml · 30 mg total",ds:"Dual GIP/GLP-1 receptor agonist researched for incretin pathway modulation.",pf:340,pr:515},
     {n:"Retatrutide",sp:"10 mg/ml · 3 ml · 30 mg total",ds:"Triple agonist (GLP-1/GIP/Glucagon). Third generation incretin under clinical investigation.",pf:210,pr:310},
   ]},
@@ -138,7 +136,7 @@ function App() {
   const setQ = (n, v) => setQty(q => { const next = {...q}; if (v <= 0) delete next[n]; else next[n] = Math.min(v, 10000); return next; });
   const overLimit = Object.entries(qty).filter(([,q])=>q>500);
   const hasOverLimit = overLimit.length > 0;
-  const WA_NUMBER = "4915126628914";
+  const WA_NUMBER = "351934126762";
   const whatsappUrl = () => {
     const items = overLimit.map(([n,q])=>`${n} (${q} units)`).join(", ");
     const msg = `Hi Aevivo, I need more than 500 of the following: ${items}. Do you have it available?`;
@@ -164,7 +162,7 @@ function App() {
       name, email,
       phone: (prev && prev.phone) || "",
       tax: (prev && prev.tax) || "",
-      qty, compounds: selectedLines,
+      qty, peptides: selectedLines,
       totalPens, totalFF, totalRetail,
     };
     sessionStorage.setItem("aevivoLead", JSON.stringify(order));
@@ -199,8 +197,8 @@ function App() {
         .email-input{font-family:'Inter',-apple-system,sans-serif;font-size:14px;padding:13px 16px;background:${C.white};border:1px solid ${C.border};border-radius:12px;color:${C.navy};outline:none;transition:all 0.25s;width:100%}
         .email-input:focus{border-color:${C.gold}}
         .price-cell{font-family:'Libre Baskerville',serif;line-height:1.1;text-align:center}
-        .price-ff{font-size:22px;color:${C.gold};font-weight:400}
-        .price-retail{font-size:17px;color:${C.muted};text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:rgba(251,247,239,0.35)}
+        .price-ff{font-size:30px;color:${C.gold};font-weight:600;letter-spacing:-0.5px}
+        .price-retail{font-size:19px;color:${C.muted};text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:${C.copperL};opacity:0.85}
         .ff-badge{display:inline-block;transform:rotate(-4deg);background:${C.gold};color:${C.bg};padding:10px 22px;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 8px 24px rgba(196,162,101,0.35);white-space:nowrap}
         .ff-col-badge{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%) rotate(-4deg);background:${C.gold};color:${C.bg};padding:5px 12px;border-radius:999px;font-family:'Inter',sans-serif;font-weight:700;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;box-shadow:0 4px 14px rgba(196,162,101,0.3);white-space:nowrap;pointer-events:none}
         .cat-prices-header{display:grid;grid-template-columns:1fr 120px 120px 160px;gap:20px;padding:12px 22px 6px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${C.muted};font-weight:600;margin-bottom:6px}
@@ -234,7 +232,7 @@ function App() {
             )}
           </button>
 
-          <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:34,height:34,borderRadius:"50%",background:"#25D366",border:"1px solid #25D366",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background="#128C7E";e.currentTarget.style.borderColor="#128C7E"}} onMouseLeave={e=>{e.currentTarget.style.background="#25D366";e.currentTarget.style.borderColor="#25D366"}}>
+          <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:34,height:34,borderRadius:"50%",background:"#25D366",border:"1px solid #25D366",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background="#128C7E";e.currentTarget.style.borderColor="#128C7E"}} onMouseLeave={e=>{e.currentTarget.style.background="#25D366";e.currentTarget.style.borderColor="#25D366"}}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>
           <a href="index.html" className="s" style={{fontSize:13,color:C.muted,textDecoration:"none",letterSpacing:0.3,transition:"color 0.2s"}} onMouseEnter={e=>e.target.style.color=C.gold} onMouseLeave={e=>e.target.style.color=C.muted}>← Back to home</a>
@@ -243,14 +241,18 @@ function App() {
 
       <main style={{maxWidth:1020,margin:"0 auto",padding:"140px clamp(20px,5vw,60px) 140px"}}>
         <form onSubmit={complete}>
-          <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Order · Compound Selection</div>
-          <h1 style={{fontSize:"clamp(32px,4vw,48px)",color:C.navy,fontWeight:400,lineHeight:1.1,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>Select your compounds.</h1>
+          <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Order · Peptide Selection</div>
+          <h1 style={{fontSize:"clamp(32px,4vw,48px)",color:C.navy,fontWeight:400,lineHeight:1.1,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>Select your peptides.</h1>
           <p className="s" style={{fontSize:16,color:C.muted,lineHeight:1.7,fontWeight:300,marginBottom:20,maxWidth:760}}>
-            Set the quantity for each compound you want. Founder's Price applies until the beginning of June. After that, retail begins.
+            Set the quantity for each peptide you want. Founder's Price applies until May 31st. After that, retail begins.
           </p>
 
-          <div style={{marginBottom:32,display:"flex",alignItems:"center",gap:14,flexWrap:"wrap"}}>
-            <span style={{display:"inline-block",padding:"6px 14px",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:C.gold,border:`1px solid ${C.border}`,borderRadius:999,background:"rgba(196,162,101,0.06)"}}>VAT included</span>
+          <div style={{marginBottom:32,padding:"18px 24px",background:`linear-gradient(135deg, rgba(196,162,101,0.18), rgba(196,162,101,0.06))`,border:`1px solid ${C.gold}`,borderRadius:14,display:"flex",alignItems:"center",gap:18,flexWrap:"wrap",justifyContent:"space-between"}}>
+            <div style={{display:"flex",alignItems:"center",gap:14,flexWrap:"wrap"}}>
+              <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:20,fontWeight:600,color:C.gold,letterSpacing:-0.3}}>Founder's Price</span>
+              <span style={{fontFamily:"'Inter',sans-serif",fontSize:13,color:C.text,fontWeight:400}}>Active until <strong style={{color:C.gold}}>May 31st</strong> · After that, retail begins.</span>
+            </div>
+            <span style={{display:"inline-block",padding:"6px 14px",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:C.gold,border:`1px solid ${C.gold}`,borderRadius:999,background:"rgba(196,162,101,0.1)"}}>VAT included</span>
           </div>
 
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:36}}>
@@ -260,9 +262,9 @@ function App() {
 
           {catalog.map((sec, ci) => (
             <div key={ci} style={{marginBottom:34}}>
-              <h2 style={{fontSize:"clamp(20px,2vw,26px)",color:C.navy,fontWeight:400,marginBottom:6,fontFamily:"'Libre Baskerville',serif"}}>{sec.cat}<span className="s" style={{color:C.muted,fontSize:"0.55em",marginLeft:12,fontWeight:400,letterSpacing:0.5}}>{sec.items.length} compound{sec.items.length>1?"s":""}</span></h2>
+              <h2 style={{fontSize:"clamp(20px,2vw,26px)",color:C.navy,fontWeight:400,marginBottom:6,fontFamily:"'Libre Baskerville',serif"}}>{sec.cat}<span className="s" style={{color:C.muted,fontSize:"0.55em",marginLeft:12,fontWeight:400,letterSpacing:0.5}}>{sec.items.length} peptide{sec.items.length>1?"s":""}</span></h2>
               <div className="cat-prices-header">
-                <span>Compound</span>
+                <span>Peptide</span>
                 <span style={{position:"relative"}}><span className="ff-col-badge">Until June</span>Founder's Price</span>
                 <span>Retail Price</span>
                 <span>Quantity</span>
@@ -301,7 +303,7 @@ function App() {
             <div className="s" style={{fontSize:11,letterSpacing:2.5,textTransform:"uppercase",color:C.gold,fontWeight:600,marginBottom:10}}>Can't find what you need?</div>
             <h3 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(22px,2.5vw,28px)",color:C.navy,fontWeight:400,marginBottom:10,lineHeight:1.2}}>Looking for other peptides? <em style={{color:C.gold,fontStyle:"italic"}}>We probably have them.</em></h3>
             <p className="s" style={{fontSize:15,color:C.muted,fontWeight:300,marginBottom:22,maxWidth:560,marginLeft:"auto",marginRight:"auto",lineHeight:1.65}}>Tell us what you\'re looking for. If it exists in European GMP supply, we can source it for you.</p>
-            <a href="https://wa.me/4915126628914?text=Hi%20Aevivo%2C%20I%27m%20looking%20for%20a%20specific%20peptide.%20Can%20you%20help%3F" target="_blank" rel="noopener" className="bp" style={{display:"inline-flex",alignItems:"center",gap:10,padding:"14px 32px",textDecoration:"none"}}>
+            <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%27m%20looking%20for%20a%20specific%20peptide.%20Can%20you%20help%3F" target="_blank" rel="noopener" className="bp" style={{display:"inline-flex",alignItems:"center",gap:10,padding:"14px 32px",textDecoration:"none"}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.6 2.5 4 3.5.5.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.4-.6 1.7-1.1.2-.6.2-1 .1-1.1-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
               Send a request
             </a>
@@ -312,9 +314,9 @@ function App() {
               <div className="s" style={{fontSize:10,letterSpacing:2,textTransform:"uppercase",color:C.gold,fontWeight:600}}>Your selection</div>
               <div className="s" style={{fontSize:14,color:C.navy,fontWeight:500,marginTop:3}}>
                 {selectedCount === 0 ? "Nothing selected yet" : hasOverLimit ? (
-                  <span style={{color:C.gold}}>Over 500 units on {overLimit.length} compound{overLimit.length>1?"s":""}. Contact us for volume pricing.</span>
+                  <span style={{color:C.gold}}>Over 500 units on {overLimit.length} peptide{overLimit.length>1?"s":""}. Contact us for volume pricing.</span>
                 ) : (
-                  <>{selectedCount} compound{selectedCount>1?"s":""} · {totalPens} pen{totalPens>1?"s":""} · <strong style={{color:C.gold,fontFamily:"'Libre Baskerville',serif",fontSize:17,fontWeight:400}}>€{totalFF}</strong> <span style={{fontSize:12,color:C.muted,textDecoration:"line-through",marginLeft:6}}>€{totalRetail}</span> <span style={{fontSize:11,color:C.muted,marginLeft:10,opacity:0.75}}>VAT incl.</span></>
+                  <>{selectedCount} peptide{selectedCount>1?"s":""} · {totalPens} pen{totalPens>1?"s":""} · <strong style={{color:C.gold,fontFamily:"'Libre Baskerville',serif",fontSize:17,fontWeight:400}}>€{totalFF}</strong> <span style={{fontSize:12,color:C.muted,textDecoration:"line-through",marginLeft:6}}>€{totalRetail}</span> <span style={{fontSize:11,color:C.muted,marginLeft:10,opacity:0.75}}>VAT incl.</span></>
                 )}
               </div>
             </div>
