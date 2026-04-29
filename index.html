@@ -425,6 +425,8 @@ function Aevivo(){
   const[submitted,setSubmitted]=useState(false);
   const[peptideDetail,setPeptideDetail]=useState(null);
   const[activePaper,setActivePaper]=useState(null);
+  const[showOrderCta,setShowOrderCta]=useState(false);
+  useEffect(()=>{var onScroll=function(){setShowOrderCta(window.scrollY>500)};window.addEventListener('scroll',onScroll,{passive:true});onScroll();return function(){window.removeEventListener('scroll',onScroll)}},[]);
 
   const papers = [
     {j:"Int. J. Molecular Sciences",y:"2018",t:"Regenerative and Protective Actions of the GHK-Cu Peptide in the Light of the New Gene Data",a:"Pickart L., Margolina A.",summary:"A comprehensive review showing GHK-Cu resets expression of more than 4,000 human genes toward a healthier pattern, with documented effects on skin remodelling, wound healing, anti-inflammatory signalling, and cancer-suppressor gene upregulation.",findings:["GHK-Cu modulates 31.2% of all 21,000+ human genes tested, with 59% upregulated and 41% downregulated toward a youthful expression pattern","Activates TGF-β receptor signalling for collagen synthesis while suppressing TGF-β1 overexpression that drives fibrosis","Documented activity in corneal wound healing, hair follicle stimulation, and copper-dependent antioxidant enzyme upregulation","Reverses gene expression patterns associated with aggressive metastatic cancer in cell-line studies","Copper delivery supports angiogenesis, lysyl oxidase activity, and superoxide dismutase function"],doi:"10.3390/ijms19071987",link:"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6073405/"},
@@ -501,6 +503,9 @@ function Aevivo(){
         a{color:${C.copper};text-decoration:none}
 
         .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
+        @media(max-width:640px){.ruo-bar{padding:7px 10px;gap:6px}.ruo-bar .ruo-sep,.ruo-bar .ruo-sub{display:none}.ruo-bar .ruo-main{font-size:10px;letter-spacing:1.5px}}
+        .pen-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+        @media(max-width:768px){.pen-grid{grid-template-columns:1fr;gap:28px}.pen-grid > *:last-child{order:-1}}
 
         .nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:${C.navBg};border-bottom:1px solid ${C.border};transition:background 0.3s ease}
 
@@ -539,9 +544,9 @@ function Aevivo(){
 
       {/* ── RUO BAR ── */}
       <div className="ruo-bar">
-        <span className="s" style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2}}>FOR RESEARCH USE ONLY</span>
-        <span style={{color:"rgba(196,162,101,0.3)"}}>|</span>
-        <span className="s" style={{fontSize:12,color:C.muted,letterSpacing:0.3}}>Not for human consumption. Not evaluated by any regulatory body.</span>
+        <span className="s ruo-main" style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2}}>FOR RESEARCH USE ONLY</span>
+        <span className="ruo-sep" style={{color:"rgba(196,162,101,0.3)"}}>|</span>
+        <span className="s ruo-sub" style={{fontSize:12,color:C.muted,letterSpacing:0.3}}>Not for human consumption. Not evaluated by any regulatory body.</span>
       </div>
 
       {/* ── NAV ── */}
@@ -788,36 +793,42 @@ function Aevivo(){
       </section>
       {/* ── PEN DIFFERENTIATOR ── */}
       <section style={{padding:"80px clamp(20px,5vw,60px)",background:C.white}}>
-        <div style={{maxWidth:1200,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr",gap:64,alignItems:"center"}}>
+        <div style={{maxWidth:1200,margin:"0 auto"}}>
           <F>
-            <div>
+            <div style={{marginBottom:32,maxWidth:760}}>
               <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.copper,marginBottom:12,fontWeight:500}}>Delivery Innovation</div>
-              <h2 style={{fontSize:"clamp(28px,3.5vw,42px)",color:C.navy,fontWeight:400,marginBottom:16,lineHeight:1.15}}>
+              <h2 style={{fontSize:"clamp(28px,3.5vw,42px)",color:C.navy,fontWeight:400,lineHeight:1.15,margin:0}}>
                 Pre-filled pen format for <em style={{color:C.copper}}>reproducible</em> protocols.
               </h2>
-              <p className="s" style={{fontSize:17,lineHeight:1.75,color:C.muted,fontWeight:300,marginBottom:28}}>
-                Sealed cartridge systems eliminate reconstitution variables, reduce atmospheric exposure, and enable dial-based precision across experimental series.
-              </p>
-              {[
-                ["Dosing Precision","Calibrated dial mechanism enables quantified, repeatable dispensing for protocols requiring tight concentration control."],
-                ["Peptide Integrity","Sealed cartridges reduce atmospheric exposure compared to multi-puncture vial formats, preserving molecular stability."],
-                ["Contamination Control","Closed-system design eliminates repeated septum puncture, reducing particulate and microbial risk in sensitive assays."],
-              ].map(([t,d],i)=>(
-                <div key={i} style={{marginBottom:16}}>
-                  <div className="s" style={{fontSize:15,color:C.navy,fontWeight:600,marginBottom:3}}>{t}</div>
-                  <div className="s" style={{fontSize:15,color:C.muted,fontWeight:300,lineHeight:1.6}}>{d}</div>
-                </div>
-              ))}
             </div>
           </F>
-          <F d={0.15}>
-                        <div style={{background:C.cream,padding:"32px 28px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:400,borderRadius:16,border:`1px solid ${C.border}`,overflow:"hidden"}}>
-              <img src="images/pen-closeup.png" alt="Aevivo sealed pen cartridge close-up" style={{width:"100%",maxWidth:360,height:"auto",marginBottom:20,filter:"drop-shadow(0 12px 36px rgba(0,0,0,0.35))"}}/>
-              <div className="s" style={{fontSize:13,color:C.gold,letterSpacing:3,textTransform:"uppercase",fontWeight:600}}>Precision Format</div>
-              <div style={{marginTop:14,width:1,height:28,background:C.border}}/>
-              <div className="s" style={{fontSize:13,color:C.muted,marginTop:12,textAlign:"center",lineHeight:1.7}}>3 ml sealed cartridge<br/>Dial-based dosing<br/>Inert atmosphere</div>
-            </div>
-          </F>
+          <div className="pen-grid">
+            <F>
+              <div>
+                <p className="s" style={{fontSize:17,lineHeight:1.75,color:C.muted,fontWeight:300,marginBottom:28}}>
+                  Sealed cartridge systems eliminate reconstitution variables, reduce atmospheric exposure, and enable dial-based precision across experimental series.
+                </p>
+                {[
+                  ["Dosing Precision","Calibrated dial mechanism enables quantified, repeatable dispensing for protocols requiring tight concentration control."],
+                  ["Peptide Integrity","Sealed cartridges reduce atmospheric exposure compared to multi-puncture vial formats, preserving molecular stability."],
+                  ["Contamination Control","Closed-system design eliminates repeated septum puncture, reducing particulate and microbial risk in sensitive assays."],
+                ].map(([t,d],i)=>(
+                  <div key={i} style={{marginBottom:16}}>
+                    <div className="s" style={{fontSize:15,color:C.navy,fontWeight:600,marginBottom:3}}>{t}</div>
+                    <div className="s" style={{fontSize:15,color:C.muted,fontWeight:300,lineHeight:1.6}}>{d}</div>
+                  </div>
+                ))}
+              </div>
+            </F>
+            <F d={0.15}>
+              <div style={{background:C.cream,padding:"32px 28px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:400,borderRadius:16,border:`1px solid ${C.border}`,overflow:"hidden"}}>
+                <img src="images/pen-closeup.png" alt="Aevivo sealed pen cartridge close-up" style={{width:"100%",maxWidth:360,height:"auto",marginBottom:20,filter:"drop-shadow(0 12px 36px rgba(0,0,0,0.35))"}}/>
+                <div className="s" style={{fontSize:13,color:C.gold,letterSpacing:3,textTransform:"uppercase",fontWeight:600}}>Precision Format</div>
+                <div style={{marginTop:14,width:1,height:28,background:C.border}}/>
+                <div className="s" style={{fontSize:13,color:C.muted,marginTop:12,textAlign:"center",lineHeight:1.7}}>3 ml sealed cartridge<br/>Dial-based dosing<br/>Inert atmosphere</div>
+              </div>
+            </F>
+          </div>
         </div>
       </section>
 
@@ -1080,7 +1091,7 @@ function Aevivo(){
 
       {/* ── MODALS ── */}
       {/* Floating order CTA */}
-      <a href="orderlist.html" style={{position:"fixed",bottom:24,right:24,zIndex:90,display:"inline-flex",alignItems:"center",gap:10,padding:"14px 22px",background:C.gold,color:C.bg,fontFamily:"'Inter',sans-serif",fontSize:13,fontWeight:600,letterSpacing:0.6,textDecoration:"none",borderRadius:999,boxShadow:"0 12px 32px rgba(196,162,101,0.45)",transition:"all 0.25s"}} onMouseEnter={e=>{e.currentTarget.style.background=C.copper;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.transform="translateY(0)"}}>
+      <a href="orderlist.html" style={{position:"fixed",bottom:24,right:24,zIndex:90,display:showOrderCta?"inline-flex":"none",alignItems:"center",gap:10,padding:"14px 22px",background:C.gold,color:C.bg,fontFamily:"'Inter',sans-serif",fontSize:13,fontWeight:600,letterSpacing:0.6,textDecoration:"none",borderRadius:999,boxShadow:"0 12px 32px rgba(196,162,101,0.45)",transition:"all 0.25s",animation:"fadeUp 0.3s ease",opacity:showOrderCta?1:0,pointerEvents:showOrderCta?"auto":"none"}} onMouseEnter={e=>{e.currentTarget.style.background=C.copper;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.transform="translateY(0)"}}>
         <span style={{fontSize:11,opacity:0.85,fontWeight:500,letterSpacing:0.4}}>Know what you want?</span>
         <span style={{fontWeight:700}}>Place your order →</span>
       </a>
