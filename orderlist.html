@@ -298,12 +298,9 @@ function App() {
             Set the quantity for each peptide you want. Founder's Price applies until May 31st. After that, retail begins.
           </p>
 
-          <div style={{marginBottom:32,padding:"18px 24px",background:`linear-gradient(135deg, rgba(196,162,101,0.18), rgba(196,162,101,0.06))`,border:`1px solid ${C.gold}`,borderRadius:14,display:"flex",alignItems:"center",gap:18,flexWrap:"wrap",justifyContent:"space-between"}}>
-            <div style={{display:"flex",alignItems:"center",gap:14,flexWrap:"wrap"}}>
-              <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:20,fontWeight:600,color:C.gold,letterSpacing:-0.3}}>Founder's Price</span>
-              <span style={{fontFamily:"'Inter',sans-serif",fontSize:13,color:C.text,fontWeight:400}}>Active until <strong style={{color:C.gold}}>May 31st</strong> · After that, retail begins.</span>
-            </div>
-            <span style={{display:"inline-block",padding:"6px 14px",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:600,letterSpacing:2,textTransform:"uppercase",color:C.gold,border:`1px solid ${C.gold}`,borderRadius:999,background:"rgba(196,162,101,0.1)"}}>VAT included</span>
+          <div style={{marginBottom:32,padding:"18px 24px",background:`linear-gradient(135deg, rgba(196,162,101,0.18), rgba(196,162,101,0.06))`,border:`1px solid ${C.gold}`,borderRadius:14,display:"flex",alignItems:"center",gap:18,flexWrap:"wrap"}}>
+            <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:20,fontWeight:600,color:C.gold,letterSpacing:-0.3}}>Founder's Price</span>
+            <span style={{fontFamily:"'Inter',sans-serif",fontSize:13,color:C.text,fontWeight:400}}>Active until <strong style={{color:C.gold}}>May 31st</strong> · After that, retail begins.</span>
           </div>
 
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:36}}>
@@ -367,7 +364,7 @@ function App() {
                 {selectedCount === 0 ? "Nothing selected yet" : hasOverLimit ? (
                   <span style={{color:C.gold}}>Over 500 units on {overLimit.length} peptide{overLimit.length>1?"s":""}. Contact us for volume pricing.</span>
                 ) : (
-                  <>{selectedCount} peptide{selectedCount>1?"s":""} · {totalPens} pen{totalPens>1?"s":""} · <strong style={{color:C.gold,fontFamily:"'Libre Baskerville',serif",fontSize:17,fontWeight:400}}>€{totalFF}</strong> <span style={{fontSize:12,color:C.muted,textDecoration:"line-through",marginLeft:6}}>€{totalRetail}</span> <span style={{fontSize:11,color:C.muted,marginLeft:10,opacity:0.75}}>VAT incl.</span></>
+                  <>{selectedCount} peptide{selectedCount>1?"s":""} · {totalPens} pen{totalPens>1?"s":""} · <strong style={{color:C.gold,fontFamily:"'Libre Baskerville',serif",fontSize:17,fontWeight:400}}>€{totalFF}</strong> <span style={{fontSize:12,color:C.muted,textDecoration:"line-through",marginLeft:6}}>€{totalRetail}</span></>
                 )}
               </div>
             </div>

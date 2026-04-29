@@ -337,7 +337,7 @@ Tax/VAT: ${bill.tax || "—"}
               </div>
               <div className="s" style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",paddingTop:6}}>
                 <span style={{fontSize:12,letterSpacing:2,textTransform:"uppercase",color:C.gold,fontWeight:600}}>Total ({order.totalPens} pen{order.totalPens>1?"s":""})</span>
-                <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:32,color:C.gold,fontWeight:400}}>€{order.totalFF} <span style={{fontSize:11,fontFamily:"'Inter',sans-serif",color:C.muted,opacity:0.7,letterSpacing:1.5,textTransform:"uppercase",fontWeight:500,marginLeft:8}}>VAT incl.</span></span>
+                <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:32,color:C.gold,fontWeight:400}}>€{order.totalFF}</span>
               </div>
               <div className="s" style={{fontSize:11,color:C.muted,marginTop:4,textAlign:"right"}}>
                 <span style={{textDecoration:"line-through",opacity:0.6}}>€{order.totalRetail} retail</span>
@@ -420,7 +420,7 @@ Tax/VAT: ${bill.tax || "—"}
                 {submitting ? "Submitting..." : "Place my order →"}
               </button>
               <div className="s" style={{fontSize:12,color:C.muted,marginTop:14,fontWeight:300}}>
-                No payment now. Within 24 hours we'll send you an invoice by email with bank transfer details to finalise the order. All prices include VAT.
+                No payment now. Within 24 hours we'll send you an invoice by email with bank transfer details to finalise the order.
               </div>
             </div>
           </form>
