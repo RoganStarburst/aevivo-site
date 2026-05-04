@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AEVIVO ACCESS GATE -->
+<script>
+(function(){
+  var KEY='aevivo-clinical-gate-v1',PW='CLINICAL2026';
+  try{if(localStorage.getItem(KEY)===PW)return}catch(e){}
+  document.documentElement.setAttribute('data-aevivo-locked','1');
+  var css='html[data-aevivo-locked] body > *:not(#aevivo-gate){display:none !important}'
+    +'#aevivo-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0C1225;font-family:Inter,\'Helvetica Neue\',Arial,sans-serif;color:#FBF7EF;padding:24px}'
+    +'#aevivo-gate::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%);pointer-events:none}'
+    +'#aevivo-gate .gate-card{position:relative;max-width:440px;width:100%;text-align:center;padding:48px 36px;background:rgba(20,27,46,0.7);border:1px solid rgba(196,162,101,0.22);border-radius:18px;backdrop-filter:blur(18px)}'
+    +'#aevivo-gate .gate-mark{width:56px;height:56px;border:1.5px solid #C4A265;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:24px;color:#C4A265;font-weight:700;margin-bottom:22px}'
+    +'#aevivo-gate .gate-brand{font-size:11px;letter-spacing:4px;color:#C4A265;font-weight:600;text-transform:uppercase;margin-bottom:14px}'
+    +'#aevivo-gate .gate-heading{font-family:Georgia,\'Libre Baskerville\',serif;font-size:28px;font-weight:400;line-height:1.2;margin:0 0 10px;color:#FBF7EF}'
+    +'#aevivo-gate .gate-heading em{color:#C4A265;font-style:italic}'
+    +'#aevivo-gate .gate-sub{font-size:14px;color:rgba(251,247,239,0.65);font-weight:300;line-height:1.6;margin:0 0 28px}'
+    +'#aevivo-gate form{margin:0}'
+    +'#aevivo-gate input{width:100%;box-sizing:border-box;padding:14px 18px;background:rgba(251,247,239,0.05);border:1px solid rgba(196,162,101,0.22);border-radius:10px;color:#FBF7EF;font-size:14px;font-family:inherit;outline:none;letter-spacing:2px;text-align:center;margin-bottom:14px;transition:border-color 0.2s}'
+    +'#aevivo-gate input::placeholder{color:rgba(251,247,239,0.35);letter-spacing:1px}'
+    +'#aevivo-gate input:focus{border-color:#C4A265}'
+    +'#aevivo-gate button{width:100%;padding:14px 24px;background:#C4A265;color:#060A14;border:none;border-radius:999px;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}'
+    +'#aevivo-gate button:hover{background:#D4B67A}'
+    +'#aevivo-gate .gate-error{font-size:12px;color:#D14343;margin-top:12px;min-height:16px;letter-spacing:0.3px}'
+    +'#aevivo-gate .gate-foot{font-size:11px;color:rgba(251,247,239,0.4);margin-top:28px;letter-spacing:0.3px;line-height:1.5}'
+    +'@keyframes aevivo-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}'
+    +'#aevivo-gate.shake .gate-card{animation:aevivo-shake 0.4s ease}';
+  var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+  function render(){
+    var el=document.createElement('div');el.id='aevivo-gate';
+    el.innerHTML='<div class="gate-card"><div class="gate-mark">A</div><div class="gate-brand">Aevivo Longevity</div><h1 class="gate-heading">Private <em>preview.</em></h1><p class="gate-sub">Aevivo Longevity is in early access until launch. Enter your access code to continue.</p><form id="aevivo-gate-form"><input id="aevivo-gate-input" type="password" placeholder="Access code" autocomplete="off" autofocus/><button type="submit">Enter</button><div class="gate-error" id="aevivo-gate-err"></div></form><div class="gate-foot">For research use only. Not for human consumption.</div></div>';
+    document.body.appendChild(el);
+    var form=document.getElementById('aevivo-gate-form'),input=document.getElementById('aevivo-gate-input'),err=document.getElementById('aevivo-gate-err');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(input.value.trim().toUpperCase()===PW){
+        try{localStorage.setItem(KEY,PW)}catch(_){}
+        document.documentElement.removeAttribute('data-aevivo-locked');
+        el.remove();
+      }else{
+        err.textContent='Incorrect access code.';
+        el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
+        input.value='';input.focus();
+      }
+    });
+    setTimeout(function(){input.focus()},50);
+  }
+  if(document.readyState!=='loading')render();
+  else document.addEventListener('DOMContentLoaded',render);
+})();
+</script>
+<!-- /AEVIVO ACCESS GATE -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
+<title>Privacy Policy · Aevivo Longevity</title>
+<meta name="description" content="Privacy Policy for Aevivo Longevity research peptides.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+<style>
+html[data-theme="dark"] {
+  --bg: #0C1225; --white: #141B2E; --navy: #FBF7EF; --char: #141A2E;
+  --gold: #C4A265; --copper: #D4B67A; --cream: #0F1525;
+  --border: rgba(196,162,101,0.14); --text: #FBF7EF; --muted: rgba(251,247,239,0.6);
+  --nav-bg: rgba(12,18,37,0.88);
+  --card-bg: rgba(20,27,46,0.5); --card-bg-hover: rgba(20,27,46,0.85);
+  --callout-bg: rgba(196,162,101,0.06);
+  --redflag-bg: rgba(251,247,239,0.03);
+  --page-bg-grad: radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225;
+  --footer-bg: #060A14;
+}
+html[data-theme="light"] {
+  --bg: #FBF7EF; --white: #FFFFFF; --navy: #060A14; --char: #1A2744;
+  --gold: #C4A265; --copper: #8A6A2A; --cream: #F0EDE6;
+  --border: rgba(100,85,50,0.18); --text: #3A3F4B; --muted: #8B90A0;
+  --nav-bg: rgba(251,247,239,0.88);
+  --card-bg: rgba(255,255,255,0.75); --card-bg-hover: rgba(255,255,255,1);
+  --callout-bg: rgba(196,162,101,0.1);
+  --redflag-bg: rgba(138,106,42,0.04);
+  --page-bg-grad: radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%),#FBF7EF;
+  --footer-bg: #060A14;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden}
+
+.ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'DM Sans',sans-serif}
+.ruo-bar .lbl{font-size:10px;color:var(--gold);font-weight:600;letter-spacing:2px}
+.ruo-bar .sep{color:rgba(196,162,101,0.3)}
+.ruo-bar .note{font-size:10px;color:var(--muted);letter-spacing:0.3px}
+
+nav.nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+nav .brand .mark{width:28px;height:28px;border:1px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--navy);font-weight:700;font-family:Georgia,serif}
+nav .brand .name{font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--navy);font-weight:600}
+nav .back{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;transition:color 0.2s}
+nav .back:hover{color:var(--copper)}
+
+main{max-width:760px;margin:0 auto;padding:140px clamp(20px,5vw,60px) 80px}
+
+.eyebrow{font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--copper);margin-bottom:14px;font-weight:500}
+
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:400;line-height:1.1;color:var(--navy);margin-bottom:36px}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,26px);font-weight:400;color:var(--navy);margin:40px 0 14px;line-height:1.3}
+h3{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--navy);margin:22px 0 10px;letter-spacing:0.3px}
+
+p,li{font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.75;color:var(--text);font-weight:300;margin-bottom:14px}
+ul,ol{padding-left:22px;margin-bottom:14px}
+li{margin-bottom:6px}
+
+strong{font-weight:600;color:var(--navy)}
+em{font-style:italic;color:var(--muted)}
+code{font-family:'SF Mono',Consolas,monospace;background:var(--cream);padding:1px 6px;font-size:12px;color:var(--copper)}
+
+table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-family:'DM Sans',sans-serif;font-size:12px}
+th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--cream);color:var(--copper);font-weight:600;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+td{color:var(--text);font-weight:300;line-height:1.6}
+
+.divider{height:1px;background:var(--border);margin:40px 0}
+
+footer{padding:32px clamp(20px,5vw,60px);border-top:1px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:10px;color:var(--muted);line-height:1.7;font-weight:300}
+footer .disclaimer{max-width:720px;margin:0 auto 14px;text-align:center}
+footer .copyright{text-align:center}
+footer strong{color:var(--copper);font-weight:600}
+footer a{color:var(--copper);text-decoration:none}
+
+@media(max-width:768px){
+  nav.nb{padding:0 16px}
+  nav .back{font-size:10px}
+  main{padding-top:120px}
+}
+</style>
+<script>window.AEVIVO_MOON='<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"#C4A265\"><path d=\"M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z\"/></svg>';window.AEVIVO_SUN='<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"#C4A265\"><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z\"/></svg>';document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('tgl-icon');if(b){var t=document.documentElement.dataset.theme||'light';b.innerHTML=t==='dark'?window.AEVIVO_MOON:window.AEVIVO_SUN}});</script>
+</head>
+<body>
+<div class="ruo-bar">
+  <span class="lbl">FOR RESEARCH USE ONLY</span>
+  <span class="sep">|</span>
+  <span class="note">Not for human consumption. Not evaluated by any regulatory body.</span>
+</div>
+<nav class="nb">
+  <a href="index.html" class="brand">
+    <div class="mark">A</div>
+    <span class="name">Aevivo Longevity</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:16px">
+    <button onclick="(function(){var h=document.documentElement;var next=h.dataset.theme==='dark'?'light':'dark';h.dataset.theme=next;window.__aevivo_theme=next;try{localStorage.setItem('aevivo-theme',next)}catch(e){}var b=document.getElementById('tgl-icon');if(b){b.innerHTML=next==='dark'?AEVIVO_MOON:AEVIVO_SUN}})()" title="Toggle theme" aria-label="Toggle theme" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;cursor:pointer;padding:0" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'"><span id="tgl-icon"></span></button>
+    <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a href="index.html" class="back">← Back to site</a>
+  </div>
+</nav>
+<main>
+<div class="eyebrow">Legal</div>
+<h1>Privacy Policy</h1>
+<h3>Aevivo Longevity</h3>
+<p><strong>Effective date:</strong> May 2025 <strong>·</strong> <strong>Version 1.0</strong> <strong>·</strong> <strong>Governing regulation:</strong> EU GDPR (Regulation 2016/679)</p>
+<p><em>This Privacy Policy explains how AEVIVO Longevity collects, uses, stores, and protects your personal data. We are committed to handling your information responsibly and in full compliance with the EU General Data Protection Regulation (GDPR) and Portuguese data protection law.</em></p>
+<div class="divider"></div>
+
+<h2>1. Who We Are & Data Controller</h2>
+<p>The data controller responsible for your personal data is:</p>
+<p><strong>GENESE SOBRANCEIRA, LDA</strong><br>Trading as: AEVIVO Longevity<br>Registered in: Portugal<br>Contact: info@aevivolongevity.com</p>
+<p>For any data protection queries, please contact us using the details in Section 13 of this policy.</p>
+
+<h2>2. Personal Data We Collect</h2>
+<p>We collect personal data in the following categories:</p>
+
+<h3>2.1 Contact & Identity Data</h3>
+<ul>
+<li>Full name</li>
+<li>Email address</li>
+<li>Phone number (if provided via WhatsApp or call booking)</li>
+<li>Country of residence or business address</li>
+</ul>
+
+<h3>2.2 Order & Transaction Data</h3>
+<ul>
+<li>Peptides requested and quantities</li>
+<li>Order reference numbers and correspondence</li>
+<li>Billing and delivery address</li>
+<li>Payment confirmation details (we do not store full card numbers)</li>
+</ul>
+
+<h3>2.3 Research Protocol Form Data</h3>
+<ul>
+<li>Professional credentials or institutional affiliation (where provided)</li>
+<li>Research context and intended use of peptides</li>
+<li>Buyer qualification information submitted via our protocol form</li>
+</ul>
+<p>This category of data is collected to verify that purchases comply with our For Research Use Only (RUO) terms. It is treated with a higher level of care and is not used for marketing purposes.</p>
+
+<h3>2.4 Communication Data</h3>
+<ul>
+<li>Messages sent via our contact form, WhatsApp, or email</li>
+<li>Records of call bookings and notes from consultations (where applicable)</li>
+<li>Enquiry history</li>
+</ul>
+
+<h3>2.5 Website Usage Data</h3>
+<ul>
+<li>IP address, browser type, and device information</li>
+<li>Pages visited and time spent on site (via analytics, where enabled)</li>
+<li>Cookie data (see Section 10)</li>
+</ul>
+
+<h2>3. How We Collect Your Data</h2>
+<p>We collect personal data through the following channels:</p>
+<ul>
+<li>Order forms submitted via our website (aevivolongevity.com)</li>
+<li>Research protocol forms completed as part of the buyer qualification process</li>
+<li>Call bookings made via our website scheduler</li>
+<li>WhatsApp messages sent to our business line</li>
+<li>Email correspondence</li>
+<li>Website analytics tools (if and where enabled)</li>
+</ul>
+
+<h2>4. Legal Basis for Processing</h2>
+<p>We process your personal data on the following legal bases under Article 6 of the GDPR:</p>
+<ul>
+<li><strong>Contract performance (Art. 6(1)(b)):</strong> to process and fulfil your orders, manage returns, and communicate about your purchases.</li>
+<li><strong>Legitimate interests (Art. 6(1)(f)):</strong> to verify buyer qualification, maintain records for regulatory compliance, prevent fraud, and protect the integrity of our RUO supply chain.</li>
+<li><strong>Legal obligation (Art. 6(1)(c)):</strong> to comply with applicable Portuguese and EU law, including record-keeping requirements.</li>
+<li><strong>Consent (Art. 6(1)(a)):</strong> where you have opted in to receive communications from us beyond what is necessary for order fulfilment. You may withdraw consent at any time.</li>
+</ul>
+
+<h2>5. How We Use Your Data</h2>
+<p>We use your personal data for the following purposes:</p>
+<ul>
+<li>Processing and fulfilling your orders, including cold-chain logistics coordination</li>
+<li>Verifying buyer qualification via the protocol form and maintaining compliance records</li>
+<li>Communicating with you about your orders, enquiries, and any relevant product updates</li>
+<li>Scheduling and conducting consultation calls</li>
+<li>Responding to WhatsApp and email enquiries</li>
+<li>Maintaining transaction records for accounting and legal compliance</li>
+<li>Detecting and preventing fraud or misuse of our platform</li>
+<li>Improving our website and service offering (using anonymised analytics where applicable)</li>
+</ul>
+<p>We do not use your data for automated decision-making or profiling.</p>
+
+<h2>6. Data Retention</h2>
+<p>We retain your personal data for as long as necessary to fulfil the purposes for which it was collected, subject to the following:</p>
+<ul>
+<li><strong>Order and transaction data:</strong> retained for seven (7) years to meet Portuguese accounting and tax law requirements.</li>
+<li><strong>Protocol form and buyer qualification data:</strong> retained for the duration of the business relationship plus five (5) years, to demonstrate compliance with our RUO obligations.</li>
+<li><strong>Communication data (email, WhatsApp):</strong> retained for three (3) years from last contact.</li>
+<li><strong>Website usage data:</strong> retained in accordance with our analytics provider's retention settings, typically 14 to 26 months.</li>
+</ul>
+<p>When data is no longer required, it is securely deleted or anonymised.</p>
+
+<h2>7. Who We Share Your Data With</h2>
+<p>We do not sell, rent, or trade your personal data. We may share data with the following categories of third parties, strictly on a need-to-know basis:</p>
+<ul>
+<li><strong>Logistics and courier partners:</strong> name, delivery address, and order details necessary to fulfil cold-chain shipments.</li>
+<li><strong>Payment processors:</strong> transaction data required to process payments securely. Payment processors operate under their own GDPR-compliant privacy policies.</li>
+<li><strong>IT and communications providers:</strong> hosting, email, and scheduling tools used to operate our business (e.g., website hosting, WhatsApp Business).</li>
+<li><strong>Legal and regulatory authorities:</strong> where required by law or to respond to a lawful request from a competent authority.</li>
+</ul>
+<p>All third parties with whom we share data are required to process it lawfully and in accordance with applicable data protection law.</p>
+
+<h2>8. International Data Transfers</h2>
+<p>Where any of our service providers are based outside the European Economic Area (EEA), we ensure that appropriate safeguards are in place for the transfer of your data, including:</p>
+<ul>
+<li>Standard Contractual Clauses (SCCs) approved by the European Commission;</li>
+<li>Transfers to countries with an EU adequacy decision; or</li>
+<li>Other lawful transfer mechanisms as permitted by the GDPR.</li>
+</ul>
+<p>You may request further information about the safeguards in place for any specific transfer by contacting us at sh@aevivolongevity.com.</p>
+
+<h2>9. Your Rights Under GDPR</h2>
+<p>As a data subject under the GDPR, you have the following rights:</p>
+<ul>
+<li><strong>Right of access (Art. 15):</strong> to request a copy of the personal data we hold about you.</li>
+<li><strong>Right to rectification (Art. 16):</strong> to request correction of inaccurate or incomplete data.</li>
+<li><strong>Right to erasure (Art. 17):</strong> to request deletion of your data, subject to our legal retention obligations.</li>
+<li><strong>Right to restriction of processing (Art. 18):</strong> to request that we limit how we use your data in certain circumstances.</li>
+<li><strong>Right to data portability (Art. 20):</strong> to receive your data in a structured, machine-readable format.</li>
+<li><strong>Right to object (Art. 21):</strong> to object to processing based on legitimate interests.</li>
+<li><strong>Right to withdraw consent:</strong> where processing is based on consent, you may withdraw it at any time without affecting the lawfulness of prior processing.</li>
+</ul>
+<p>To exercise any of these rights, please contact us at sh@aevivolongevity.com. We will respond within one calendar month. If you are not satisfied with our response, you have the right to lodge a complaint with the Portuguese data protection authority:</p>
+<p><strong>Comissão Nacional de Proteção de Dados (CNPD)</strong><br>Website: www.cnpd.pt <strong>·</strong> Phone: +351 213 928 400</p>
+
+<h2>10. Cookies</h2>
+<p>Our website may use cookies and similar tracking technologies for the following purposes:</p>
+<ul>
+<li><strong>Essential cookies:</strong> required for the website to function correctly (e.g., session management). These cannot be disabled.</li>
+<li><strong>Analytics cookies:</strong> used to understand how visitors interact with our site (e.g., pages visited, time on site). These are only placed with your consent.</li>
+</ul>
+<p>You can manage cookie preferences through your browser settings or via any cookie consent tool displayed on our website. Disabling analytics cookies will not affect your ability to place orders or use our services.</p>
+
+<h2>11. Data Security</h2>
+<p>We take reasonable technical and organisational measures to protect your personal data against unauthorised access, disclosure, alteration, or destruction. These include:</p>
+<ul>
+<li>Secure encrypted transmission of data via HTTPS</li>
+<li>Access controls limiting who within our team can access personal data</li>
+<li>Use of reputable, GDPR-compliant service providers for hosting and communications</li>
+</ul>
+<p>In the event of a personal data breach that is likely to result in a risk to your rights and freedoms, we will notify you and the CNPD in accordance with our obligations under Articles 33 and 34 of the GDPR.</p>
+
+<h2>12. Changes to This Policy</h2>
+<p>We may update this Privacy Policy from time to time to reflect changes in our data practices or applicable law. The current version will always be published at aevivolongevity.com with its effective date. We encourage you to review this policy periodically. Where changes are material, we will notify active customers by email.</p>
+
+<h2>13. Contact Us</h2>
+<p>For any questions, requests, or concerns relating to this Privacy Policy or your personal data, please contact:</p>
+<p>Suzanna Howse <strong>·</strong> sh@aevivolongevity.com <strong>·</strong> +351 934 126 762<br>Tiago Areias <strong>·</strong> ta@aevivolongevity.com <strong>·</strong> +351 917 964 293</p>
+<p>GENESE SOBRANCEIRA, LDA <strong>·</strong> trading as AEVIVO Longevity</p>
+
+<div class="divider"></div>
+<p><em>© MMXXV AEVIVO Longevity, a trademark of GENESE SOBRANCEIRA, LDA. Registered in Portugal. This document does not constitute legal advice. If you have specific compliance concerns, please consult a qualified data protection professional.</em></p>
+</main>
+<footer>
+  <div class="disclaimer">
+    <strong>Legal Disclaimer:</strong> All products sold by Aevivo are intended exclusively for laboratory research use only (RUO). Not drugs, dietary supplements, food additives, cosmetics, or medical devices. Not for human or animal consumption. No statements on this website constitute medical claims or imply suitability for any non-research purpose.
+  </div>
+  <div class="copyright">© 2026 Aevivo Longevity, a trademark of GENESE SOBRANCEIRA, LDA. Registered in Portugal.</div>
+</footer>
+</body>
+</html>

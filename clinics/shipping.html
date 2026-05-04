@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AEVIVO ACCESS GATE -->
+<script>
+(function(){
+  var KEY='aevivo-clinical-gate-v1',PW='CLINICAL2026';
+  try{if(localStorage.getItem(KEY)===PW)return}catch(e){}
+  document.documentElement.setAttribute('data-aevivo-locked','1');
+  var css='html[data-aevivo-locked] body > *:not(#aevivo-gate){display:none !important}'
+    +'#aevivo-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0C1225;font-family:Inter,\'Helvetica Neue\',Arial,sans-serif;color:#FBF7EF;padding:24px}'
+    +'#aevivo-gate::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%);pointer-events:none}'
+    +'#aevivo-gate .gate-card{position:relative;max-width:440px;width:100%;text-align:center;padding:48px 36px;background:rgba(20,27,46,0.7);border:1px solid rgba(196,162,101,0.22);border-radius:18px;backdrop-filter:blur(18px)}'
+    +'#aevivo-gate .gate-mark{width:56px;height:56px;border:1.5px solid #C4A265;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:24px;color:#C4A265;font-weight:700;margin-bottom:22px}'
+    +'#aevivo-gate .gate-brand{font-size:11px;letter-spacing:4px;color:#C4A265;font-weight:600;text-transform:uppercase;margin-bottom:14px}'
+    +'#aevivo-gate .gate-heading{font-family:Georgia,\'Libre Baskerville\',serif;font-size:28px;font-weight:400;line-height:1.2;margin:0 0 10px;color:#FBF7EF}'
+    +'#aevivo-gate .gate-heading em{color:#C4A265;font-style:italic}'
+    +'#aevivo-gate .gate-sub{font-size:14px;color:rgba(251,247,239,0.65);font-weight:300;line-height:1.6;margin:0 0 28px}'
+    +'#aevivo-gate form{margin:0}'
+    +'#aevivo-gate input{width:100%;box-sizing:border-box;padding:14px 18px;background:rgba(251,247,239,0.05);border:1px solid rgba(196,162,101,0.22);border-radius:10px;color:#FBF7EF;font-size:14px;font-family:inherit;outline:none;letter-spacing:2px;text-align:center;margin-bottom:14px;transition:border-color 0.2s}'
+    +'#aevivo-gate input::placeholder{color:rgba(251,247,239,0.35);letter-spacing:1px}'
+    +'#aevivo-gate input:focus{border-color:#C4A265}'
+    +'#aevivo-gate button{width:100%;padding:14px 24px;background:#C4A265;color:#060A14;border:none;border-radius:999px;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}'
+    +'#aevivo-gate button:hover{background:#D4B67A}'
+    +'#aevivo-gate .gate-error{font-size:12px;color:#D14343;margin-top:12px;min-height:16px;letter-spacing:0.3px}'
+    +'#aevivo-gate .gate-foot{font-size:11px;color:rgba(251,247,239,0.4);margin-top:28px;letter-spacing:0.3px;line-height:1.5}'
+    +'@keyframes aevivo-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}'
+    +'#aevivo-gate.shake .gate-card{animation:aevivo-shake 0.4s ease}';
+  var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+  function render(){
+    var el=document.createElement('div');el.id='aevivo-gate';
+    el.innerHTML='<div class="gate-card"><div class="gate-mark">A</div><div class="gate-brand">Aevivo Clinical</div><h1 class="gate-heading">Practitioner <em>preview.</em></h1><p class="gate-sub">Aevivo Clinical is the EU-GMP supply channel for longevity, health and wellness clinics. Enter your access code to continue.</p><form id="aevivo-gate-form"><input id="aevivo-gate-input" type="password" placeholder="Access code" autocomplete="off" autofocus/><button type="submit">Enter</button><div class="gate-error" id="aevivo-gate-err"></div></form><div class="gate-foot">For research use only. Not for human consumption.</div></div>';
+    document.body.appendChild(el);
+    var form=document.getElementById('aevivo-gate-form'),input=document.getElementById('aevivo-gate-input'),err=document.getElementById('aevivo-gate-err');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(input.value.trim().toUpperCase()===PW){
+        try{localStorage.setItem(KEY,PW)}catch(_){}
+        document.documentElement.removeAttribute('data-aevivo-locked');
+        el.remove();
+      }else{
+        err.textContent='Incorrect access code.';
+        el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
+        input.value='';input.focus();
+      }
+    });
+    setTimeout(function(){input.focus()},50);
+  }
+  if(document.readyState!=='loading')render();
+  else document.addEventListener('DOMContentLoaded',render);
+})();
+</script>
+<!-- /AEVIVO ACCESS GATE -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
+<title>Send Quote Request · Aevivo Clinical</title>
+<meta name="description" content="Confirm your clinic details and send your peptide quote request to the Aevivo Clinical team.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background-attachment:fixed;overflow-x:hidden;font-family:'Libre Baskerville',Georgia,serif;position:relative;transition:background 0.4s ease}
+html[data-theme="dark"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225}
+html[data-theme="light"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%),#FBF7EF}
+#loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s ease}
+html[data-theme="dark"] #loading{background:#0C1225}
+html[data-theme="light"] #loading{background:#FBF7EF}
+#loading .mark{width:48px;height:48px;border:1px solid #C4A265;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Libre Baskerville',serif;font-size:22px;color:#C4A265;font-weight:700;margin-bottom:18px}
+#loading .lbl{font-family:system-ui,-apple-system,sans-serif;font-size:9px;letter-spacing:3.5px;text-transform:uppercase;font-weight:500}
+html[data-theme="dark"] #loading .lbl{color:rgba(251,247,239,0.5)}
+html[data-theme="light"] #loading .lbl{color:rgba(58,63,75,0.6)}
+</style>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<canvas id="bgnet" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:1"></canvas>
+<script>
+(function(){
+  const canvas = document.getElementById('bgnet'); if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(window.devicePixelRatio || 1, 2); let W, H;
+  function resize(){W=window.innerWidth;H=window.innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.scale(DPR,DPR);}
+  resize(); window.addEventListener('resize', resize);
+  const N = Math.max(40, Math.min(140, Math.floor(W * H * 0.00008))); const particles = [];
+  for (let i=0;i<N;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.18,vy:(Math.random()-0.5)*0.18,r:Math.random()*1.3+0.4});
+  const maxDist=150,maxDist2=maxDist*maxDist; let mx=-9999,my=-9999;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  window.addEventListener('mouseleave',()=>{mx=-9999;my=-9999});
+  function frame(){
+    var isDark = (window.__aevivo_theme || document.documentElement.dataset.theme || 'light') === 'dark';
+    var lineRGB = isDark ? '196,162,101' : '12,18,37';
+    var dotRGB = isDark ? '214,194,148' : '12,18,37';
+    var dotAlpha = isDark ? 0.85 : 0.7;
+    var lineMul = isDark ? 1 : 0.9;
+    ctx.clearRect(0,0,W,H);
+    for(const p of particles){p.x+=p.vx;p.y+=p.vy;if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;}
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d2=dx*dx+dy*dy;
+        if(d2<maxDist2){const d=Math.sqrt(d2),a=0.28*(1-d/maxDist)*lineMul;ctx.strokeStyle='rgba('+lineRGB+','+a+')';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}
+      }
+      const mdx=particles[i].x-mx,mdy=particles[i].y-my,md2=mdx*mdx+mdy*mdy;
+      if(md2<32400){const md=Math.sqrt(md2),a=0.25*(1-md/180)*lineMul;ctx.strokeStyle='rgba('+lineRGB+','+a+')';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mx,my);ctx.stroke();}
+    }
+    for(const p of particles){ctx.fillStyle='rgba('+dotRGB+','+dotAlpha+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+<div id="loading"><div class="mark">A</div><div class="lbl">Aevivo Clinical</div></div>
+<div id="root" style="position:relative;z-index:2"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useMemo } = React;
+
+const DARK_PALETTE = {
+  bg:"#0C1225", white:"#141B2E", navy:"#FBF7EF", char:"#141A2E", gold:"#C4A265",
+  copper:"#D4B67A", copperL:"#DEC18B", cream:"#0F1525", border:"rgba(196,162,101,0.14)",
+  text:"#FBF7EF", muted:"rgba(251,247,239,0.6)", light:"#121829",
+  navBg:"rgba(12,18,37,0.88)",
+};
+const LIGHT_PALETTE = {
+  bg:"#FBF7EF", white:"#FFFFFF", navy:"#060A14", char:"#1A2744", gold:"#C4A265",
+  copper:"#8A6A2A", copperL:"#A06A4A", cream:"#F0EDE6", border:"rgba(100,85,50,0.18)",
+  text:"#3A3F4B", muted:"#8B90A0", light:"#EEEEE9",
+  navBg:"rgba(251,247,239,0.88)",
+};
+
+const RESERVE_FORM_ID = "185461944980866798";
+const ACCOUNT_ID = "2284207";
+
+function Field({label, required, children, gold}) {
+  return (
+    <label style={{display:"block",marginBottom:14}}>
+      <div className="s" style={{fontSize:11,letterSpacing:1.5,textTransform:"uppercase",color:gold,fontWeight:600,marginBottom:6,fontFamily:"'Inter',sans-serif"}}>{label}{required && <span style={{opacity:0.5}}> *</span>}</div>
+      {children}
+    </label>
+  );
+}
+
+function App() {
+  const [theme, setTheme] = useState(()=>{try{return localStorage.getItem('aevivo-theme')||'light'}catch(e){return 'light'}});
+  useEffect(()=>{try{localStorage.setItem('aevivo-theme',theme)}catch(e){}document.documentElement.dataset.theme=theme;window.__aevivo_theme=theme;},[theme]);
+  const C = theme==='dark' ? DARK_PALETTE : LIGHT_PALETTE;
+  const toggleTheme = ()=>setTheme(t=>t==='dark'?'light':'dark');
+  const [order, setOrder] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [sameAsShip, setSameAsShip] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // Shipping fields
+  const [shipName, setShipName] = useState("");
+  const [shipStreet, setShipStreet] = useState("");
+  const [shipApt, setShipApt] = useState("");
+  const [shipPostal, setShipPostal] = useState("");
+  const [shipCity, setShipCity] = useState("");
+  const [shipCountry, setShipCountry] = useState("");
+  const [shipPhone, setShipPhone] = useState("");
+
+  // Billing fields
+  const [billName, setBillName] = useState("");
+  const [billStreet, setBillStreet] = useState("");
+  const [billApt, setBillApt] = useState("");
+  const [billPostal, setBillPostal] = useState("");
+  const [billCity, setBillCity] = useState("");
+  const [billCountry, setBillCountry] = useState("");
+  const [billTax, setBillTax] = useState("");
+
+  useEffect(() => {
+    try {
+      const d = JSON.parse(sessionStorage.getItem("aevivoLead") || "null");
+      if (d) {
+        setOrder(d);
+        setShipName(d.name || "");
+        setShipPhone(d.phone || "");
+        setBillName(d.name || "");
+        setBillTax(d.tax || "");
+      }
+    } catch(e) {}
+    setLoaded(true);
+  }, []);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!order) return;
+    setSubmitting(true);
+    const bill = sameAsShip
+      ? { name:shipName, street:shipStreet, apt:shipApt, postal:shipPostal, city:shipCity, country:shipCountry, tax:billTax }
+      : { name:billName, street:billStreet, apt:billApt, postal:billPostal, city:billCity, country:billCountry, tax:billTax };
+
+    const orderSummary = `
+QUOTE REQUEST
+${Object.entries(order.qty || {}).map(([n,q])=>`  ${n} x${q}`).join("\n")}
+Indicative total: €${order.totalFF} · ${order.totalPens} pens (final pricing on confirmation)
+
+SHIP TO
+${shipName}
+${shipStreet}${shipApt ? " " + shipApt : ""}
+${shipPostal} ${shipCity}
+${shipCountry}
+${shipPhone}
+
+BILL TO${sameAsShip ? " (same as shipping)" : ""}
+${bill.name}
+${bill.street}${bill.apt ? " " + bill.apt : ""}
+${bill.postal} ${bill.city}
+${bill.country}
+Tax/VAT: ${bill.tax || "—"}
+`.trim();
+
+    const body = new URLSearchParams();
+    body.append("fields[email]", order.email);
+    body.append("fields[name]", order.name || shipName);
+    if (order.phone || shipPhone) body.append("fields[phone]", order.phone || shipPhone);
+    if (bill.tax) body.append("fields[role]", "Order · Tax: " + bill.tax);
+    body.append("fields[compounds]", orderSummary);
+    body.append("ml-submit", "1");
+    body.append("anticsrf", "true");
+    try {
+      await fetch(`https://assets.mailerlite.com/jsonp/${ACCOUNT_ID}/forms/${RESERVE_FORM_ID}/subscribe`, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type":"application/x-www-form-urlencoded"},
+        body: body.toString(),
+      });
+    } catch(err) {}
+
+    // Save locally as final state
+    try {
+      sessionStorage.setItem("aevivoOrderConfirmed", JSON.stringify({...order, shipping:{shipName,shipStreet,shipApt,shipPostal,shipCity,shipCountry,shipPhone}, billing:bill, submittedAt:Date.now()}));
+      sessionStorage.removeItem("aevivoLead");
+    } catch(e) {}
+    setSubmitted(true);
+  };
+
+  if (!loaded) return null;
+  if (!order) {
+    return (
+      <div style={{padding:"180px 20px",textAlign:"center",color:C.text,fontFamily:"'Inter',sans-serif"}}>
+        <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:16,fontWeight:600}}>No order in progress</div>
+        <h1 style={{fontSize:"clamp(28px,4vw,42px)",color:C.navy,fontFamily:"'Libre Baskerville',serif",fontWeight:400,marginBottom:24}}>Build a quote request first</h1>
+        <a href="orderlist.html" className="bo">→ Build a quote request</a>
+      </div>
+    );
+  }
+
+  const entries = Object.entries(order.qty || {});
+
+  return (
+    <div style={{fontFamily:"'Libre Baskerville',Georgia,serif",background:"transparent",color:C.text,minHeight:"100vh",position:"relative",zIndex:2}}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        .s{font-family:'Inter',-apple-system,sans-serif}
+        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
+        .nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:${C.navBg};border-bottom:1px solid ${C.border};padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+        .bp{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 32px;background:${C.gold};color:${C.bg};border:none;border-radius:999px;cursor:pointer;transition:all 0.25s}
+        .bp:hover{background:${C.copperL};transform:translateY(-1px)}
+        .bp:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+        .bo{font-family:'Inter',-apple-system,sans-serif;font-weight:500;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:12px 28px;background:transparent;color:${C.navy};border:1px solid ${C.border};border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block}
+        .bo:hover{border-color:${C.gold};color:${C.gold}}
+        .inp{font-family:'Inter',-apple-system,sans-serif;font-size:14px;padding:13px 16px;background:${C.white};border:1px solid ${C.border};border-radius:12px;color:${C.navy};outline:none;transition:all 0.25s;width:100%}
+        .inp:focus{border-color:${C.gold}}
+        .section-card{background:${C.white};border:1px solid ${C.border};border-radius:16px;padding:28px;margin-bottom:20px}
+        .h3{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.5vw,28px);font-weight:400;color:${C.navy};margin-bottom:18px;line-height:1.2}
+      `}</style>
+
+      <div className="ruo-bar">
+        <span className="s" style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2}}>FOR RESEARCH USE ONLY</span>
+        <span style={{color:"rgba(196,162,101,0.3)"}}>|</span>
+        <span className="s" style={{fontSize:12,color:C.muted,letterSpacing:0.3}}>Not for human consumption.</span>
+      </div>
+
+      <nav className="nb">
+        <a href="index.html" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none"}}>
+          <div style={{width:28,height:28,border:`1px solid ${C.gold}`,borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,color:C.gold,fontFamily:"'Libre Baskerville',serif",fontWeight:700}}>A</div>
+          <span className="s" style={{fontSize:13,letterSpacing:"0.32em",textTransform:"uppercase",color:C.navy,fontWeight:300,fontFamily:"'Outfit',sans-serif"}}>Aevivo <span style={{color:C.gold}}>Clinical</span></span>
+        </a>
+        <div style={{display:"flex",alignItems:"center",gap:16}}>
+
+          <button onClick={toggleTheme} title={theme==='dark'?'Switch to light mode':'Switch to dark mode'} aria-label="Toggle theme" style={{width:34,height:34,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",cursor:"pointer",padding:0}} onMouseEnter={e=>{e.currentTarget.style.background=C.gold;e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.background="rgba(196,162,101,0.1)";e.currentTarget.style.borderColor=C.border}}>
+            {theme==='dark' ? (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill={C.gold}><path d="M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z"/></svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill={C.gold}><circle cx="12" cy="12" r="5"/><path d="M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z"/></svg>
+            )}
+          </button>
+
+          <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style={{width:34,height:34,borderRadius:"50%",background:"#25D366",border:"1px solid #25D366",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",textDecoration:"none"}} onMouseEnter={e=>{e.currentTarget.style.background="#128C7E";e.currentTarget.style.borderColor="#128C7E"}} onMouseLeave={e=>{e.currentTarget.style.background="#25D366";e.currentTarget.style.borderColor="#25D366"}}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+          <a href="orderlist.html" className="s" style={{fontSize:13,color:C.muted,textDecoration:"none",letterSpacing:0.3,transition:"color 0.2s"}} onMouseEnter={e=>e.target.style.color=C.gold} onMouseLeave={e=>e.target.style.color=C.muted}>← Edit selection</a>
+        </div>
+      </nav>
+
+      <main style={{maxWidth:920,margin:"0 auto",padding:"140px clamp(20px,5vw,60px) 120px"}}>
+        {submitted ? (
+          <div style={{textAlign:"center",padding:"40px 0"}}>
+            <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:16,fontWeight:600}}>Quote request received</div>
+            <h1 style={{fontSize:"clamp(36px,5vw,54px)",color:C.navy,fontWeight:400,lineHeight:1.1,marginBottom:22,fontFamily:"'Libre Baskerville',serif"}}>Thank you, {shipName.split(" ")[0] || "there"}.</h1>
+            <p className="s" style={{fontSize:16,color:C.muted,lineHeight:1.7,fontWeight:300,maxWidth:560,margin:"0 auto 30px"}}>
+              Your quote request is with our clinical team. We respond within 2 business days with verified pricing, batch documentation, shipping terms, and payment details. Nothing is binding until you confirm.
+            </p>
+            <p className="s" style={{fontSize:14,color:C.muted,lineHeight:1.7,fontWeight:300,maxWidth:500,margin:"0 auto 30px"}}>
+              A confirmation email is on its way to <strong style={{color:C.gold,fontWeight:500}}>{order.email}</strong>.
+            </p>
+            <a href="index.html" className="bo">Back to Aevivo Clinical</a>
+          </div>
+        ) : (
+          <form onSubmit={submit}>
+            <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Step 2 of 2 · Send Quote Request</div>
+            <h1 style={{fontSize:"clamp(32px,4vw,48px)",color:C.navy,fontWeight:400,lineHeight:1.1,marginBottom:16,fontFamily:"'Libre Baskerville',serif"}}>Where will the supply ship?</h1>
+            <p className="s" style={{fontSize:16,color:C.muted,lineHeight:1.7,fontWeight:300,marginBottom:36,maxWidth:720}}>
+              Your quote summary is below. Confirm your clinic ship-to address. Pricing is indicative until we reply with verified clinic pricing and batch documentation; nothing is binding yet.
+            </p>
+
+            {/* Order summary */}
+            <div className="section-card" style={{background:"rgba(196,162,101,0.06)",borderColor:"rgba(196,162,101,0.3)"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:14,flexWrap:"wrap",gap:8}}>
+                <div className="h3" style={{margin:0}}>Your quote request</div>
+                <div className="s" style={{fontSize:13,color:C.gold,fontWeight:600,letterSpacing:1.5}}>INDICATIVE PRICING</div>
+              </div>
+              <div style={{marginBottom:14}}>
+                {entries.map(([n,q])=>(
+                  <div key={n} className="s" style={{display:"flex",justifyContent:"space-between",padding:"8px 0",borderBottom:`1px dashed ${C.border}`,fontSize:14,color:C.text,fontWeight:300}}>
+                    <span>{n}</span>
+                    <span style={{color:C.gold,fontFamily:"'Libre Baskerville',serif"}}>× {q}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="s" style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",paddingTop:6}}>
+                <span style={{fontSize:12,letterSpacing:2,textTransform:"uppercase",color:C.gold,fontWeight:600}}>Total ({order.totalPens} pen{order.totalPens>1?"s":""})</span>
+                <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:32,color:C.gold,fontWeight:400}}>€{order.totalFF}</span>
+              </div>
+              <div className="s" style={{fontSize:11,color:C.muted,marginTop:4,textAlign:"right"}}>
+                <span style={{textDecoration:"line-through",opacity:0.6}}>€{order.totalRetail} retail</span>
+                <span style={{marginLeft:8,color:C.gold,opacity:0.8}}>You save €{order.totalRetail - order.totalFF}</span>
+              </div>
+            </div>
+
+            {/* Shipping */}
+            <div className="section-card">
+              <div className="h3">Shipping address</div>
+              <Field label="Full name" required gold={C.gold}>
+                <input required className="inp" value={shipName} onChange={e=>setShipName(e.target.value)}/>
+              </Field>
+              <Field label="Street + number" required gold={C.gold}>
+                <input required className="inp" value={shipStreet} onChange={e=>setShipStreet(e.target.value)} placeholder="e.g. Rua da Liberdade 12"/>
+              </Field>
+              <Field label="Apartment / floor / unit (optional)" gold={C.gold}>
+                <input className="inp" value={shipApt} onChange={e=>setShipApt(e.target.value)} placeholder="Apt 3B"/>
+              </Field>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 2fr",gap:12}}>
+                <Field label="Postal code" required gold={C.gold}>
+                  <input required className="inp" value={shipPostal} onChange={e=>setShipPostal(e.target.value)}/>
+                </Field>
+                <Field label="City" required gold={C.gold}>
+                  <input required className="inp" value={shipCity} onChange={e=>setShipCity(e.target.value)}/>
+                </Field>
+              </div>
+              <Field label="Country" required gold={C.gold}>
+                <input required className="inp" value={shipCountry} onChange={e=>setShipCountry(e.target.value)} placeholder="Portugal"/>
+              </Field>
+              <Field label="Phone (for delivery)" required gold={C.gold}>
+                <input required type="tel" className="inp" value={shipPhone} onChange={e=>setShipPhone(e.target.value)}/>
+              </Field>
+            </div>
+
+            {/* Same as shipping toggle */}
+            <label style={{display:"flex",alignItems:"center",gap:12,padding:"18px 22px",background:C.white,border:`1px solid ${C.border}`,borderRadius:12,marginBottom:20,cursor:"pointer"}}>
+              <input type="checkbox" checked={sameAsShip} onChange={e=>setSameAsShip(e.target.checked)} style={{width:18,height:18,accentColor:C.gold,cursor:"pointer"}}/>
+              <div className="s" style={{fontSize:14,color:C.navy,fontWeight:500}}>Billing address is the same as shipping</div>
+            </label>
+
+            {/* Billing (conditional) */}
+            {!sameAsShip && (
+              <div className="section-card">
+                <div className="h3">Billing address</div>
+                <Field label="Full name (or company)" required gold={C.gold}>
+                  <input required className="inp" value={billName} onChange={e=>setBillName(e.target.value)}/>
+                </Field>
+                <Field label="Street + number" required gold={C.gold}>
+                  <input required className="inp" value={billStreet} onChange={e=>setBillStreet(e.target.value)}/>
+                </Field>
+                <Field label="Apartment / floor / unit (optional)" gold={C.gold}>
+                  <input className="inp" value={billApt} onChange={e=>setBillApt(e.target.value)}/>
+                </Field>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 2fr",gap:12}}>
+                  <Field label="Postal code" required gold={C.gold}>
+                    <input required className="inp" value={billPostal} onChange={e=>setBillPostal(e.target.value)}/>
+                  </Field>
+                  <Field label="City" required gold={C.gold}>
+                    <input required className="inp" value={billCity} onChange={e=>setBillCity(e.target.value)}/>
+                  </Field>
+                </div>
+                <Field label="Country" required gold={C.gold}>
+                  <input required className="inp" value={billCountry} onChange={e=>setBillCountry(e.target.value)}/>
+                </Field>
+              </div>
+            )}
+
+            {/* Tax / VAT */}
+            <div className="section-card">
+              <div className="h3">Tax / VAT (optional)</div>
+              
+              <Field label="Tax / VAT number" gold={C.gold}>
+                <input className="inp" value={billTax} onChange={e=>setBillTax(e.target.value)} placeholder="e.g. PT123456789"/>
+              </Field>
+            </div>
+
+            <div style={{textAlign:"center",marginTop:36}}>
+              <button type="submit" className="bp" disabled={submitting}>
+                {submitting ? "Submitting..." : "Place my order →"}
+              </button>
+              <div className="s" style={{fontSize:12,color:C.muted,marginTop:14,fontWeight:300}}>
+                No payment now. Within 24 hours we'll send you an invoice by email with bank transfer details to finalise the order.
+              </div>
+            </div>
+          </form>
+        )}
+      </main>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+var l=document.getElementById('loading');if(l){l.style.opacity='0';setTimeout(function(){l.remove()},400)}
+</script>
+</body>
+</html>
