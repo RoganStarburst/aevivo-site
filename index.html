@@ -653,47 +653,45 @@ function Aevivo(){
                   Not sure where to start? Find the right peptides in 3 minutes →
                 </a>
               </F>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:16}}>
-                {ruleCats.map((g,gi)=>(
-                  <F key={gi} d={gi*0.05}>
-                    <div style={{background:C.white,borderLeft:`4px solid ${C.gold}`,borderRadius:6,height:"100%",transition:"all 0.25s ease",overflow:"hidden",display:"flex",flexDirection:"column"}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-3px)";e.currentTarget.style.boxShadow="0 10px 28px rgba(0,0,0,0.3)"}} onMouseLeave={e=>{e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="none"}}>
-                      <div style={{position:"relative",height:160,overflow:"hidden",borderBottom:`1px solid ${C.border}`,background:"#0C1225"}}>
-                        <img src={g.img} alt={g.cat} loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block",filter:"contrast(1.05) saturate(0.95)"}}/>
-                        <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg, rgba(12,18,37,0.05) 0%, rgba(12,18,37,0) 35%, rgba(12,18,37,0.5) 100%)",pointerEvents:"none"}}/>
-                        <div style={{position:"absolute",top:14,left:18,width:36,height:36,borderRadius:8,background:"rgba(12,18,37,0.55)",backdropFilter:"blur(6px)",display:"flex",alignItems:"center",justifyContent:"center",color:C.gold}} dangerouslySetInnerHTML={{__html:`<div style="width:22px;height:22px;opacity:0.92">${ICONS[g.icon]}</div>`}}/>
-                      </div>
-                      <div style={{padding:"22px 26px 26px 28px",flex:1}}>
-                        <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:12}}>
-                          <span className="s" style={{fontSize:13,color:C.gold,fontWeight:600,letterSpacing:1.5,fontFamily:"'Inter',-apple-system,sans-serif"}}>{String(gi+1).padStart(2,"0")}</span>
-                          <span className="s" style={{fontSize:13,color:C.gold,opacity:0.7,fontWeight:500,letterSpacing:0.3}}>{g.items.length} product{g.items.length>1?"s":""}</span>
-                        </div>
-                        <h3 style={{fontSize:"clamp(19px,2vw,22px)",color:C.navy,fontWeight:500,lineHeight:1.2,marginBottom:14,fontFamily:"'Libre Baskerville',serif"}}>{g.cat}</h3>
-                        <p className="s" style={{fontSize:15,lineHeight:1.8,color:C.paragraphMuted,fontWeight:300}}>
-                          {g.items.map((it,ii)=>(
-                            <React.Fragment key={ii}>
-                              {ii>0 && <span style={{color:C.gold,opacity:0.5,margin:"0 7px"}}>·</span>}
-                              <span onClick={()=>openPeptideDetail(it)} style={{cursor:"pointer",borderBottom:"1px dashed rgba(196,162,101,0.25)",transition:"all 0.2s"}} onMouseEnter={e=>{e.target.style.color=C.gold;e.target.style.borderBottomColor=C.gold}} onMouseLeave={e=>{e.target.style.color="";e.target.style.borderBottomColor="rgba(196,162,101,0.25)"}}>{it}</span>
-                            </React.Fragment>
-                          ))}
-                        </p>
-                      </div>
+              {ruleCats.map((g,gi)=>(
+                <div key={gi} style={{marginTop:gi===0?40:64}}>
+                  <F>
+                    <div style={{display:"flex",alignItems:"baseline",gap:18,marginBottom:22,paddingBottom:14,borderBottom:`1px solid ${C.border}`,flexWrap:"wrap"}}>
+                      <span className="s" style={{fontSize:13,color:C.gold,fontWeight:700,letterSpacing:1.8,fontFamily:"'Inter',-apple-system,sans-serif"}}>{String(gi+1).padStart(2,"0")}</span>
+                      <h3 style={{fontSize:"clamp(22px,2.4vw,30px)",color:C.navy,fontWeight:400,fontFamily:"'Libre Baskerville',serif",margin:0,flex:1,lineHeight:1.2,letterSpacing:-0.3}}>{g.cat}</h3>
+                      <span className="s" style={{fontSize:12,color:C.muted,fontWeight:500,letterSpacing:1.5,textTransform:"uppercase"}}>{g.items.length} product{g.items.length>1?"s":""}</span>
                     </div>
                   </F>
-                ))}
-                <F d={ruleCats.length*0.05}>
-                  <a href="orderlist.html" style={{textDecoration:"none",display:"block",height:"100%"}}>
-                    <div style={{background:`linear-gradient(160deg, rgba(196,162,101,0.18), rgba(196,162,101,0.04))`,border:`1px solid ${C.gold}`,borderLeft:`4px solid ${C.gold}`,borderRadius:6,height:"100%",transition:"all 0.25s ease",overflow:"hidden",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"36px 28px",textAlign:"center",cursor:"pointer"}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-3px)";e.currentTarget.style.boxShadow="0 12px 32px rgba(196,162,101,0.35)";e.currentTarget.style.background="linear-gradient(160deg, rgba(196,162,101,0.28), rgba(196,162,101,0.08))"}} onMouseLeave={e=>{e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="none";e.currentTarget.style.background="linear-gradient(160deg, rgba(196,162,101,0.18), rgba(196,162,101,0.04))"}}>
-                      <div style={{width:48,height:48,borderRadius:"50%",border:`1px solid ${C.gold}`,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:18,color:C.gold}}>
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
-                      </div>
-                      <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.gold,fontWeight:600,marginBottom:10,fontFamily:"'Inter',sans-serif"}}>Know what you want?</div>
-                      <h3 style={{fontSize:"clamp(20px,2.1vw,24px)",color:C.navy,fontWeight:500,lineHeight:1.2,marginBottom:10,fontFamily:"'Libre Baskerville',serif"}}>Place your <em style={{color:C.gold,fontStyle:"italic"}}>order.</em></h3>
-                      <p className="s" style={{fontSize:13,lineHeight:1.6,color:C.muted,fontWeight:300,marginBottom:14,maxWidth:240}}>Skip ahead to selecting peptides and quantities.</p>
-                      <span className="s" style={{fontSize:12,letterSpacing:1.5,textTransform:"uppercase",color:C.gold,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Start your order →</span>
-                    </div>
-                  </a>
-                </F>
-              </div>
+                  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:16}}>
+                    {g.items.map((peptideName,pi)=>{
+                      const data=peptideContent[peptideName];
+                      if(!data)return null;
+                      return (
+                        <F key={pi} d={pi*0.04}>
+                          <div onClick={()=>openPeptideDetail(peptideName)} style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:8,height:"100%",overflow:"hidden",display:"flex",flexDirection:"column",cursor:"pointer",transition:"all 0.25s"}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-3px)";e.currentTarget.style.boxShadow="0 14px 36px rgba(12,18,37,0.10)";e.currentTarget.style.borderColor=C.gold}} onMouseLeave={e=>{e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="none";e.currentTarget.style.borderColor=C.border}}>
+                            <div style={{position:"relative",aspectRatio:"4 / 3",overflow:"hidden",background:"#0C1225"}}>
+                              <img src={g.img} alt={g.cat} loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block",filter:"contrast(1.05) saturate(0.95)"}}/>
+                            </div>
+                            <div style={{padding:"22px 26px 24px",flex:1,display:"flex",flexDirection:"column"}}>
+                              <div className="s" style={{fontSize:10,letterSpacing:2,textTransform:"uppercase",color:C.copper,fontWeight:600,marginBottom:10}}>{g.cat}</div>
+                              <h4 style={{fontSize:"clamp(20px,2.1vw,24px)",color:C.navy,fontWeight:400,lineHeight:1.2,marginBottom:8,fontFamily:"'Libre Baskerville',serif",letterSpacing:-0.2}}>{peptideName}</h4>
+                              <div className="s" style={{fontSize:12.5,color:C.muted,fontWeight:400,letterSpacing:0.2,marginBottom:14,lineHeight:1.5}}>{data.sp} · {">98% purity"}</div>
+                              <p className="s" style={{fontSize:13.5,lineHeight:1.65,color:C.paragraphMuted||C.text,fontWeight:300,marginBottom:18,flex:1}}>{data.desc}</p>
+                              <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",gap:12,paddingTop:14,borderTop:`1px solid ${C.border}`}}>
+                                <div style={{display:"flex",alignItems:"baseline",gap:8}}>
+                                  <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:24,color:C.navy,fontWeight:500,letterSpacing:-0.3}}>€{data.pf}</span>
+                                  <span style={{fontFamily:"'Libre Baskerville',serif",fontSize:14,color:C.muted,textDecoration:"line-through",opacity:0.55}}>€{data.pr}</span>
+                                </div>
+                                <span className="s" style={{fontSize:11,letterSpacing:1.8,textTransform:"uppercase",color:C.gold,fontWeight:700}}>Order →</span>
+                              </div>
+                            </div>
+                          </div>
+                        </F>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </>);
           })()}
 
