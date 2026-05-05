@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AEVIVO ACCESS GATE -->
+<script>
+(function(){
+  var KEY='aevivo-clinical-gate-v1',PW='CLINICAL2026';
+  try{if(localStorage.getItem(KEY)===PW)return}catch(e){}
+  document.documentElement.setAttribute('data-aevivo-locked','1');
+  var css='html[data-aevivo-locked] body > *:not(#aevivo-gate){display:none !important}'
+    +'#aevivo-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0C1225;font-family:Inter,\'Helvetica Neue\',Arial,sans-serif;color:#FBF7EF;padding:24px}'
+    +'#aevivo-gate::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%);pointer-events:none}'
+    +'#aevivo-gate .gate-card{position:relative;max-width:440px;width:100%;text-align:center;padding:48px 36px;background:rgba(20,27,46,0.7);border:1px solid rgba(196,162,101,0.22);border-radius:18px;backdrop-filter:blur(18px)}'
+    +'#aevivo-gate .gate-mark{width:56px;height:56px;border:1.5px solid #C4A265;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:24px;color:#C4A265;font-weight:700;margin-bottom:22px}'
+    +'#aevivo-gate .gate-brand{font-size:11px;letter-spacing:4px;color:#C4A265;font-weight:600;text-transform:uppercase;margin-bottom:14px}'
+    +'#aevivo-gate .gate-heading{font-family:Georgia,\'Libre Baskerville\',serif;font-size:28px;font-weight:400;line-height:1.2;margin:0 0 10px;color:#FBF7EF}'
+    +'#aevivo-gate .gate-heading em{color:#C4A265;font-style:italic}'
+    +'#aevivo-gate .gate-sub{font-size:14px;color:rgba(251,247,239,0.65);font-weight:300;line-height:1.6;margin:0 0 28px}'
+    +'#aevivo-gate form{margin:0}'
+    +'#aevivo-gate input{width:100%;box-sizing:border-box;padding:14px 18px;background:rgba(251,247,239,0.05);border:1px solid rgba(196,162,101,0.22);border-radius:10px;color:#FBF7EF;font-size:14px;font-family:inherit;outline:none;letter-spacing:2px;text-align:center;margin-bottom:14px;transition:border-color 0.2s}'
+    +'#aevivo-gate input::placeholder{color:rgba(251,247,239,0.35);letter-spacing:1px}'
+    +'#aevivo-gate input:focus{border-color:#C4A265}'
+    +'#aevivo-gate button{width:100%;padding:14px 24px;background:#C4A265;color:#060A14;border:none;border-radius:999px;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}'
+    +'#aevivo-gate button:hover{background:#D4B67A}'
+    +'#aevivo-gate .gate-error{font-size:12px;color:#D14343;margin-top:12px;min-height:16px;letter-spacing:0.3px}'
+    +'#aevivo-gate .gate-foot{font-size:11px;color:rgba(251,247,239,0.4);margin-top:28px;letter-spacing:0.3px;line-height:1.5}'
+    +'@keyframes aevivo-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}'
+    +'#aevivo-gate.shake .gate-card{animation:aevivo-shake 0.4s ease}';
+  var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+  function render(){
+    var el=document.createElement('div');el.id='aevivo-gate';
+    el.innerHTML='<div class="gate-card"><div class="gate-mark">A</div><div class="gate-brand">Aevivo Clinical</div><h1 class="gate-heading">Practitioner <em>preview.</em></h1><p class="gate-sub">Aevivo Clinical is the EU-GMP supply channel for longevity, health and wellness clinics. Enter your access code to continue.</p><form id="aevivo-gate-form"><input id="aevivo-gate-input" type="password" placeholder="Access code" autocomplete="off" autofocus/><button type="submit">Enter</button><div class="gate-error" id="aevivo-gate-err"></div></form><div class="gate-foot">For research use only. Not for human consumption.</div></div>';
+    document.body.appendChild(el);
+    var form=document.getElementById('aevivo-gate-form'),input=document.getElementById('aevivo-gate-input'),err=document.getElementById('aevivo-gate-err');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(input.value.trim().toUpperCase()===PW){
+        try{localStorage.setItem(KEY,PW)}catch(_){}
+        document.documentElement.removeAttribute('data-aevivo-locked');
+        el.remove();
+      }else{
+        err.textContent='Incorrect access code.';
+        el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
+        input.value='';input.focus();
+      }
+    });
+    setTimeout(function(){input.focus()},50);
+  }
+  if(document.readyState!=='loading')render();
+  else document.addEventListener('DOMContentLoaded',render);
+})();
+</script>
+<!-- /AEVIVO ACCESS GATE -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
+<title>Regulatory authorisation · Aevivo Clinical</title>
+<meta name="description" content="GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity. INFARMED-authorised medical device distributor (Cert. N.º 3800/DM/2026). EUDAMED registered economic operator.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background-attachment:fixed;overflow-x:hidden;font-family:'Libre Baskerville',Georgia,serif;position:relative;transition:background 0.4s ease}
+html[data-theme="dark"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225}
+html[data-theme="light"] body{background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%),#FBF7EF}
+#loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s ease}
+html[data-theme="dark"] #loading{background:#0C1225}
+html[data-theme="light"] #loading{background:#FBF7EF}
+#loading .mark{width:48px;height:48px;border:1px solid #C4A265;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Libre Baskerville',serif;font-size:22px;color:#C4A265;font-weight:700;margin-bottom:18px}
+#loading .lbl{font-family:system-ui,-apple-system,sans-serif;font-size:9px;letter-spacing:3.5px;text-transform:uppercase;font-weight:500}
+html[data-theme="dark"] #loading .lbl{color:rgba(251,247,239,0.5)}
+html[data-theme="light"] #loading .lbl{color:rgba(58,63,75,0.6)}
+</style>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="loading"><div class="mark">A</div><div class="lbl">Aevivo Clinical</div></div>
+<div id="root" style="position:relative;z-index:2"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+const DARK_PALETTE = {
+  bg:"#0C1225", white:"#141B2E", navy:"#FBF7EF", char:"#141A2E", gold:"#C4A265",
+  copper:"#D4B67A", copperL:"#DEC18B", cream:"#0F1525", border:"rgba(196,162,101,0.14)",
+  text:"#FBF7EF", muted:"rgba(251,247,239,0.6)", light:"#121829",
+  navBg:"rgba(12,18,37,0.88)",
+};
+const LIGHT_PALETTE = {
+  bg:"#FBF7EF", white:"#FFFFFF", navy:"#060A14", char:"#1A2744", gold:"#C4A265",
+  copper:"#8A6A2A", copperL:"#A06A4A", cream:"#F0EDE6", border:"rgba(100,85,50,0.18)",
+  text:"#3A3F4B", muted:"#8B90A0", light:"#EEEEE9",
+  navBg:"rgba(251,247,239,0.88)",
+};
+
+function App() {
+  const [theme, setTheme] = useState(()=>{try{return localStorage.getItem('aevivo-theme')||'light'}catch(e){return 'light'}});
+  useEffect(()=>{try{localStorage.setItem('aevivo-theme',theme)}catch(e){}document.documentElement.dataset.theme=theme;window.__aevivo_theme=theme;},[theme]);
+  const C = theme==='dark' ? DARK_PALETTE : LIGHT_PALETTE;
+  const toggleTheme = ()=>setTheme(t=>t==='dark'?'light':'dark');
+
+  return (
+    <div style={{fontFamily:"'Libre Baskerville',Georgia,serif",background:"transparent",color:C.text,minHeight:"100vh",position:"relative",zIndex:2}}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Outfit:wght@300;400;500&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        .s{font-family:'Inter',-apple-system,sans-serif}
+        .ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12)}
+        .nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:${C.navBg};border-bottom:1px solid ${C.border};padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+        .bp{font-family:'Inter',-apple-system,sans-serif;font-weight:600;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;padding:13px 24px;background:${C.gold};color:${C.bg};border:none;border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+        .bp:hover{background:${C.copperL};transform:translateY(-1px)}
+        .bo{font-family:'Inter',-apple-system,sans-serif;font-weight:500;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;padding:13px 22px;background:transparent;color:${C.navy};border:1px solid ${C.border};border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+        .bo:hover{border-color:${C.gold};color:${C.gold}}
+        .card{background:${C.white};border:1px solid ${C.border};border-radius:18px;padding:34px 32px;height:100%;position:relative}
+        .label{display:block;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:${C.copper};font-weight:600;margin-bottom:8px}
+        .field-row{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid ${C.border};font-family:'Inter',sans-serif}
+        .field-row:last-child{border-bottom:none}
+        .field-key{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:${C.muted};font-weight:600}
+        .field-val{font-size:14.5px;color:${C.text};font-weight:400;line-height:1.55}
+        @media(max-width:780px){.auth-grid{grid-template-columns:1fr!important;gap:18px!important}.field-row{grid-template-columns:1fr!important;gap:4px;padding:12px 0}}
+      `}</style>
+
+      <div className="ruo-bar">
+        <span className="s" style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2}}>FOR RESEARCH USE ONLY</span>
+        <span style={{color:"rgba(196,162,101,0.3)"}}>|</span>
+        <span className="s" style={{fontSize:12,color:"rgba(251,247,239,0.6)",letterSpacing:0.3}}>Licensed practitioners only. Not for human consumption.</span>
+      </div>
+
+      <nav className="nb">
+        <a href="index.html" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none"}}>
+          <div style={{width:28,height:28,border:`1px solid ${C.gold}`,borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,color:C.gold,fontFamily:"'Libre Baskerville',serif",fontWeight:700}}>A</div>
+          <span className="s" style={{fontSize:13,letterSpacing:"0.32em",textTransform:"uppercase",color:C.navy,fontWeight:400,fontFamily:"'Outfit',sans-serif"}}>Aevivo <span style={{color:C.gold}}>Clinical</span></span>
+        </a>
+        <div style={{display:"flex",alignItems:"center",gap:14}}>
+          <button onClick={toggleTheme} title={theme==='dark'?'Switch to light':'Switch to dark'} aria-label="Toggle theme" style={{width:34,height:34,borderRadius:"50%",background:"rgba(196,162,101,0.1)",border:`1px solid ${C.border}`,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",padding:0}}>
+            {theme==='dark' ? (
+              <svg width="15" height="15" viewBox="0 0 24 24" fill={C.gold}><path d="M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z"/></svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill={C.gold}><circle cx="12" cy="12" r="5"/><path d="M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z"/></svg>
+            )}
+          </button>
+          <a href="application.html" className="bp" style={{padding:"10px 20px",fontSize:10,letterSpacing:1.5}}>Apply for clinic access</a>
+        </div>
+      </nav>
+
+      <main style={{maxWidth:1100,margin:"0 auto",padding:"140px clamp(20px,5vw,60px) 100px"}}>
+        <div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.gold,marginBottom:14,fontWeight:600}}>Regulatory authorisation</div>
+        <h1 style={{fontSize:"clamp(38px,5vw,58px)",color:C.navy,fontWeight:400,lineHeight:1.18,marginBottom:18,fontFamily:"'Libre Baskerville',serif",maxWidth:880}}>
+          Verifiable, <em style={{color:C.gold,fontStyle:"italic"}}>by name.</em>
+        </h1>
+        <p className="s" style={{fontSize:17,color:C.muted,lineHeight:1.7,fontWeight:300,marginBottom:48,maxWidth:780}}>
+          Aevivo Clinical operates under GÉNESE SOBRANCEIRA, LDA, an INFARMED-authorised medical device distributor in Portugal and a registered economic operator on the EU's EUDAMED database. Both registrations are public; both can be verified directly with the issuing authority.
+        </p>
+
+        {/* Entity card */}
+        <div className="card" style={{marginBottom:32}}>
+          <div className="label">Legal entity</div>
+          <h2 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(24px,3vw,32px)",fontWeight:400,color:C.navy,lineHeight:1.2,marginBottom:6}}>GÉNESE SOBRANCEIRA, LDA</h2>
+          <div className="s" style={{fontSize:14,color:C.muted,fontWeight:400,marginBottom:18,letterSpacing:0.3}}>doing business as <span style={{color:C.gold,fontWeight:500}}>Aevivo Longevity</span></div>
+
+          <div className="field-row">
+            <span className="field-key">NIF / NIPC</span>
+            <span className="field-val">519331800</span>
+          </div>
+          <div className="field-row">
+            <span className="field-key">Registered office</span>
+            <span className="field-val">Calçada da Ajuda 35, Bloco 5, r/c esq.<br/>1300-006 Lisboa, Portugal</span>
+          </div>
+          <div className="field-row">
+            <span className="field-key">Technical responsible</span>
+            <span className="field-val">Carla Paula Canhoto Lopes</span>
+          </div>
+          <div className="field-row">
+            <span className="field-key">Brand sub-mark</span>
+            <span className="field-val">Aevivo Clinical (B2B supply channel)</span>
+          </div>
+        </div>
+
+        <div className="auth-grid" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24,marginBottom:32}}>
+          {/* INFARMED */}
+          <div className="card">
+            <div className="label">National authority · Portugal</div>
+            <h2 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(22px,2.6vw,30px)",fontWeight:400,color:C.navy,lineHeight:1.2,marginBottom:8}}>INFARMED, I.P.</h2>
+            <div className="s" style={{fontSize:13.5,color:C.muted,fontWeight:300,lineHeight:1.65,marginBottom:20}}>
+              Autoridade Nacional do Medicamento e Produtos de Saúde. Authorises and inspects medical device distributors in Portugal under EU Reg. 2017/745 (MDR) and 2017/746 (IVDR).
+            </div>
+
+            <div className="field-row">
+              <span className="field-key">Certificate</span>
+              <span className="field-val" style={{color:C.gold,fontWeight:500,letterSpacing:0.4}}>N.º 3800/DM/2026</span>
+            </div>
+            <div className="field-row">
+              <span className="field-key">Activity</span>
+              <span className="field-val">Distribution of Medical Devices</span>
+            </div>
+            <div className="field-row">
+              <span className="field-key">Legal basis</span>
+              <span className="field-val">EU Reg. 2017/745 + 2017/746; PT DL 29/2024 + 189/2000</span>
+            </div>
+            <div className="field-row">
+              <span className="field-key">Issued</span>
+              <span className="field-val">04 May 2026</span>
+            </div>
+
+            <div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:22}}>
+              <a href="INFARMED-Cert-3800-DM-2026.pdf" target="_blank" rel="noopener" className="bp">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                View certificate (PDF)
+              </a>
+              <a href="https://www.infarmed.pt/" target="_blank" rel="noopener" className="bo">
+                Verify on INFARMED →
+              </a>
+            </div>
+          </div>
+
+          {/* EUDAMED */}
+          <div className="card">
+            <div className="label">European database</div>
+            <h2 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(22px,2.6vw,30px)",fontWeight:400,color:C.navy,lineHeight:1.2,marginBottom:8}}>EUDAMED</h2>
+            <div className="s" style={{fontSize:13.5,color:C.muted,fontWeight:300,lineHeight:1.65,marginBottom:20}}>
+              The European Database on Medical Devices, the EU's central registry of economic operators (manufacturers, importers, distributors, and authorised representatives) under MDR/IVDR.
+            </div>
+
+            <div className="field-row">
+              <span className="field-key">Status</span>
+              <span className="field-val" style={{color:C.gold,fontWeight:500,letterSpacing:0.4}}>Registered economic operator</span>
+            </div>
+            <div className="field-row">
+              <span className="field-key">Single Registration Number (SRN)</span>
+              <span className="field-val s" style={{fontSize:13,color:C.muted}}>Available on request as part of clinic onboarding</span>
+            </div>
+            <div className="field-row">
+              <span className="field-key">Role</span>
+              <span className="field-val">Distributor</span>
+            </div>
+            <div className="field-row">
+              <span className="field-key">Lookup name</span>
+              <span className="field-val">GÉNESE SOBRANCEIRA, LDA</span>
+            </div>
+
+            <div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:22}}>
+              <a href="https://ec.europa.eu/tools/eudamed/" target="_blank" rel="noopener" className="bo">
+                Open EUDAMED →
+              </a>
+              <a href="https://ec.europa.eu/tools/eudamed/#/screen/search-eo" target="_blank" rel="noopener" className="bo">
+                Search economic operators →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* PDF preview */}
+        <div className="card" style={{padding:0,overflow:"hidden"}}>
+          <div style={{padding:"22px 28px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:10,borderBottom:`1px solid ${C.border}`}}>
+            <div>
+              <div className="label">Certificate preview</div>
+              <h3 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(18px,2vw,22px)",fontWeight:400,color:C.navy,lineHeight:1.2,margin:0}}>INFARMED N.º 3800/DM/2026</h3>
+            </div>
+            <a href="INFARMED-Cert-3800-DM-2026.pdf" target="_blank" rel="noopener" className="bo">Open in new tab →</a>
+          </div>
+          <object data="INFARMED-Cert-3800-DM-2026.pdf" type="application/pdf" style={{width:"100%",height:680,border:"none",display:"block",background:C.cream}}>
+            <div style={{padding:"40px 28px",textAlign:"center",fontFamily:"'Inter',sans-serif",color:C.muted,fontSize:14}}>
+              Your browser cannot display the PDF inline. <a href="INFARMED-Cert-3800-DM-2026.pdf" target="_blank" rel="noopener" style={{color:C.gold}}>Open the certificate</a> in a new tab.
+            </div>
+          </object>
+        </div>
+
+        <div className="s" style={{fontSize:12,color:C.muted,fontWeight:400,lineHeight:1.65,letterSpacing:0.2,marginTop:30,padding:"18px 22px",background:"rgba(196,162,101,0.06)",border:`1px solid ${C.border}`,borderRadius:12}}>
+          <strong style={{color:C.copper,fontWeight:600,letterSpacing:1.5,textTransform:"uppercase",fontSize:11,display:"block",marginBottom:6}}>What this means · what it does not</strong>
+          The INFARMED certificate authorises GÉNESE SOBRANCEIRA, LDA to operate as a distributor of medical devices in Portugal under MDR/IVDR. It does not constitute approval of any specific peptide or product, nor does it imply that materials supplied by Aevivo are medicinal products. All materials remain For Research Use Only and are supplied to licensed practitioners and qualified researchers responsible for compounding, prescription, and compliance with local regulation.
+        </div>
+
+        <div style={{marginTop:48,paddingTop:28,borderTop:`1px solid ${C.border}`,display:"flex",gap:12,flexWrap:"wrap",justifyContent:"space-between",alignItems:"center"}}>
+          <a href="index.html" className="s" style={{fontSize:13,color:C.muted,textDecoration:"none",letterSpacing:0.3}}>← Back to home</a>
+          <a href="application.html" className="bp">Apply for clinic access</a>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+var l=document.getElementById('loading');if(l){l.style.opacity='0';setTimeout(function(){l.remove()},400)}
+</script>
+</body>
+</html>

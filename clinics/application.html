@@ -301,8 +301,13 @@ function App() {
             <textarea className="field" rows="4" value={form.notes} onChange={e=>set("notes",e.target.value)} placeholder="Optional"/>
           </div>
 
-          <div style={{padding:"16px 20px",background:"rgba(196,162,101,0.08)",border:`1px solid ${C.border}`,borderRadius:12,fontFamily:"'Inter',sans-serif",fontSize:12,color:C.muted,fontWeight:400,marginBottom:24,lineHeight:1.6}}>
+          <div style={{padding:"16px 20px",background:"rgba(196,162,101,0.08)",border:`1px solid ${C.border}`,borderRadius:12,fontFamily:"'Inter',sans-serif",fontSize:12,color:C.muted,fontWeight:400,marginBottom:18,lineHeight:1.6}}>
             All Aevivo materials are For Research Use Only and supplied to licensed practitioners and qualified researchers. Aevivo does not provide medical advice, dosing, or clinical protocols. The receiving practitioner is solely responsible for compounding, prescription, and compliance with local regulation.
+          </div>
+
+          <div className="s" style={{fontSize:12,color:C.muted,fontWeight:400,lineHeight:1.6,letterSpacing:0.2,marginBottom:24,padding:"14px 18px",background:C.cream,border:`1px solid ${C.border}`,borderRadius:10}}>
+            <span style={{color:C.copper,fontWeight:600,letterSpacing:1.4,textTransform:"uppercase",fontSize:10,marginRight:6}}>Who you're applying to</span>
+            GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity. NIF 519331800. INFARMED-authorised medical device distributor (Cert. N.º 3800/DM/2026). <a href="compliance.html" style={{color:C.gold,textDecoration:"underline",textDecorationColor:"rgba(196,162,101,0.4)"}}>Verify →</a>
           </div>
 
           <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>

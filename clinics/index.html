@@ -590,9 +590,19 @@ function Aevivo(){
               <a href="#catalog" className="bo" style={{padding:"15px 28px",fontSize:14,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8,whiteSpace:"nowrap"}}>See what we supply <span style={{fontSize:14}}>→</span></a>
             </div></F>
             <F d={0.24}><div className="s" style={{display:"flex",gap:36,flexWrap:"wrap"}}>
-              {[[">98%","HPLC Verified"],["CoA","Per Peptide"],["EU","GMP Certified"]].map(([v,l],i)=>(
-                <div key={i}><span style={{fontSize:22,fontWeight:700,color:C.navy,fontFamily:"'Libre Baskerville',serif"}}>{v}</span><br/><span style={{fontSize:12,color:C.muted,letterSpacing:0.8,textTransform:"uppercase"}}>{l}</span></div>
-              ))}
+              {[
+                ["INFARMED","Cert. N.º 3800/DM/2026","compliance.html"],
+                ["EUDAMED","Registered economic operator","compliance.html"],
+                ["EU-GMP","Synthesis & analysis",null],
+                ["CoA","Per batch",null],
+              ].map(([v,l,href],i)=>{
+                const Inner = (
+                  <><span style={{fontSize:22,fontWeight:700,color:C.navy,fontFamily:"'Libre Baskerville',serif",letterSpacing:0.4}}>{v}</span><br/><span style={{fontSize:11,color:C.muted,letterSpacing:0.8,textTransform:"uppercase",lineHeight:1.5,display:"inline-block",marginTop:2}}>{l}</span></>
+                );
+                return href
+                  ? <a key={i} href={href} style={{textDecoration:"none",borderBottom:`1px dashed ${C.border}`,paddingBottom:2,transition:"border-color 0.2s"}} onMouseEnter={e=>e.currentTarget.style.borderBottomColor=C.gold} onMouseLeave={e=>e.currentTarget.style.borderBottomColor=C.border}>{Inner}</a>
+                  : <div key={i}>{Inner}</div>;
+              })}
             </div></F>
           </div>
         </div>
@@ -1069,15 +1079,15 @@ function Aevivo(){
 
           <div className="s" style={{fontSize:11,color:C.muted,lineHeight:1.8,fontWeight:300,marginBottom:14,maxWidth:960}}>
             <div style={{color:C.gold,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontSize:11,marginBottom:8}}>For Professional and Research Use Only</div>
-            <p style={{margin:0,marginBottom:8}}>The peptide materials supplied by Aevivo Lda ("Aevivo") are intended exclusively for use by licensed medical professionals, qualified researchers, and authorised healthcare institutions operating in compliance with applicable national and European Union regulations.</p>
+            <p style={{margin:0,marginBottom:8}}>The peptide materials supplied by GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity ("Aevivo"), are intended exclusively for use by licensed medical professionals, qualified researchers, and authorised healthcare institutions operating in compliance with applicable national and European Union regulations.</p>
             <p style={{margin:0,marginBottom:8}}>These materials are not intended for self-administration, retail sale, or use by the general public. Aevivo does not provide medical advice, clinical protocols, or dosing recommendations. All decisions regarding the administration, compounding, or prescription of these materials remain the sole responsibility of the qualified professional receiving them.</p>
             <p style={{margin:0}}>Aevivo supplies analytically verified materials only. The purchaser assumes full responsibility for compliance with all applicable laws and regulations in their jurisdiction, including but not limited to those governed by INFARMED I.P. and the European Medicines Agency (EMA).</p>
           </div>
 
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:10}}>
             <div className="s" style={{fontSize:12,color:C.muted,fontWeight:300,lineHeight:1.7}}>
-              © 2026 Aevivo Longevity, a trademark of GENESE SOBRANCEIRA, LDA.<br/>
-              Registered office: Calçada da Ajuda 35, 1300-006 Lisboa. All rights reserved.
+              © 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity. NIF 519331800. INFARMED Cert. N.º 3800/DM/2026.<br/>
+              Registered office: Calçada da Ajuda 35, Bloco 5, r/c esq., 1300-006 Lisboa, Portugal. All rights reserved.
             </div>
             <span className="s" style={{fontSize:12,color:C.muted,fontWeight:300}}>For research use only. Not for human consumption.</span>
           </div>
