@@ -540,6 +540,7 @@ function Aevivo(){
           .hero-t{font-size:36px!important}
           .nav-lk{display:none!important}
           .format-grid{grid-template-columns:1fr!important;gap:18px!important}
+          .audit-points{grid-template-columns:1fr!important}
         }
       `}</style>
 
@@ -613,12 +614,12 @@ function Aevivo(){
             </div></F>
           </div>
           <F d={0.1}>
-            <div className="hero-img" style={{position:"relative",borderRadius:18,overflow:"hidden",border:`1px solid ${C.border}`,aspectRatio:"3 / 4",maxHeight:560,background:"#0C1225"}}>
-              <img src="images/people/person-03.jpg" alt="" loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block",filter:"contrast(1.05) saturate(0.92) brightness(0.95)"}}/>
-              <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg, rgba(12,18,37,0.0) 40%, rgba(12,18,37,0.55) 100%)",pointerEvents:"none"}}/>
-              <div style={{position:"absolute",bottom:18,left:18,right:18,color:"#FBF7EF"}}>
+            <div className="hero-img" style={{position:"relative",borderRadius:18,overflow:"hidden",border:`1px solid ${C.border}`,aspectRatio:"4 / 5",maxHeight:600,background:"#F0EDE6"}}>
+              <img src="images/products/lab-hand-03.jpg" alt="Aevivo peptide vial held by a gloved hand under laboratory lighting" loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
+              <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg, rgba(6,10,20,0.0) 55%, rgba(6,10,20,0.42) 100%)",pointerEvents:"none"}}/>
+              <div style={{position:"absolute",bottom:20,left:22,right:22,color:"#FBF7EF"}}>
                 <div className="s" style={{fontSize:10,letterSpacing:2.4,textTransform:"uppercase",color:"#C4A265",fontWeight:600,marginBottom:6}}>Clinical-grade supply</div>
-                <div className="s" style={{fontSize:13,fontWeight:300,lineHeight:1.5,opacity:0.85}}>For practitioners running peptide protocols at scale.</div>
+                <div className="s" style={{fontSize:13,fontWeight:300,lineHeight:1.5,opacity:0.92}}>EU-GMP synthesis. Per-batch CoA. Verified for clinic distribution.</div>
               </div>
             </div>
           </F>
@@ -646,19 +647,11 @@ function Aevivo(){
 
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:24}} className="format-grid">
             <F d={0.18}>
-              <div style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:18,padding:"34px 32px",height:"100%",position:"relative"}}>
-                <svg width="60" height="60" viewBox="0 0 60 60" style={{marginBottom:18}}>
-                  <defs>
-                    <linearGradient id="penIcon" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stopColor={C.gold}/>
-                      <stop offset="1" stopColor={C.copperL}/>
-                    </linearGradient>
-                  </defs>
-                  <rect x="6" y="24" width="48" height="12" rx="6" fill={C.navy} opacity="0.92"/>
-                  <rect x="6" y="24" width="14" height="12" rx="6" fill="url(#penIcon)"/>
-                  <rect x="48" y="27" width="6" height="6" rx="1" fill={C.gold} opacity="0.7"/>
-                  <line x1="22" y1="22" x2="22" y2="38" stroke={C.gold} strokeWidth="0.6" opacity="0.4"/>
-                </svg>
+              <div style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:18,padding:0,height:"100%",position:"relative",overflow:"hidden"}}>
+                <div style={{position:"relative",aspectRatio:"3 / 2",overflow:"hidden",borderBottom:`1px solid ${C.border}`,background:"#F0EDE6"}}>
+                  <img src="images/products/pen-clean-03.jpg" alt="Aevivo pre-filled peptide pen with dose counter" loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
+                </div>
+                <div style={{padding:"30px 32px"}}>
                 <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.copper,fontWeight:600,marginBottom:10}}>Pre-filled pen</div>
                 <h3 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(22px,2.4vw,28px)",fontWeight:400,color:C.navy,lineHeight:1.25,marginBottom:14}}>Ready at the bedside.</h3>
                 <ul className="s" style={{listStyle:"none",padding:0,margin:"0 0 18px",fontSize:14.5,color:C.text,lineHeight:1.7,fontWeight:300}}>
@@ -671,24 +664,16 @@ function Aevivo(){
                   <span style={{textTransform:"uppercase",fontSize:10,letterSpacing:1.8,color:C.copper,fontWeight:600,marginRight:8}}>Best for</span>
                   Clinics dispensing direct to patient, retail dispensary, single-molecule protocols, simpler workflows.
                 </div>
+                </div>
               </div>
             </F>
 
             <F d={0.24}>
-              <div style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:18,padding:"34px 32px",height:"100%",position:"relative"}}>
-                <svg width="60" height="60" viewBox="0 0 60 60" style={{marginBottom:18}}>
-                  <defs>
-                    <linearGradient id="vialIcon" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stopColor={C.gold}/>
-                      <stop offset="1" stopColor={C.copperL}/>
-                    </linearGradient>
-                  </defs>
-                  <rect x="22" y="8" width="16" height="6" rx="1.5" fill="url(#vialIcon)"/>
-                  <rect x="20" y="14" width="20" height="3" rx="1" fill={C.navy} opacity="0.6"/>
-                  <path d="M22 17 L22 48 Q22 52 26 52 L34 52 Q38 52 38 48 L38 17 Z" fill="none" stroke={C.navy} strokeWidth="1.4" opacity="0.85"/>
-                  <rect x="24" y="32" width="12" height="18" rx="2" fill={C.gold} opacity="0.16"/>
-                  <line x1="24" y1="32" x2="36" y2="32" stroke={C.gold} strokeWidth="0.7" opacity="0.5"/>
-                </svg>
+              <div style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:18,padding:0,height:"100%",position:"relative",overflow:"hidden"}}>
+                <div style={{position:"relative",aspectRatio:"3 / 2",overflow:"hidden",borderBottom:`1px solid ${C.border}`,background:"#F0EDE6"}}>
+                  <img src="images/products/vial-droplet.jpg" alt="Aevivo Precision Peptides vial close-up" loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
+                </div>
+                <div style={{padding:"30px 32px"}}>
                 <div className="s" style={{fontSize:11,letterSpacing:2,textTransform:"uppercase",color:C.copper,fontWeight:600,marginBottom:10}}>Lyophilized vial</div>
                 <h3 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(22px,2.4vw,28px)",fontWeight:400,color:C.navy,lineHeight:1.25,marginBottom:14}}>Built for compounding.</h3>
                 <ul className="s" style={{listStyle:"none",padding:0,margin:"0 0 18px",fontSize:14.5,color:C.text,lineHeight:1.7,fontWeight:300}}>
@@ -700,6 +685,7 @@ function Aevivo(){
                 <div className="s" style={{fontSize:12,color:C.muted,fontWeight:400,letterSpacing:0.3,lineHeight:1.6,paddingTop:14,borderTop:`1px solid ${C.border}`}}>
                   <span style={{textTransform:"uppercase",fontSize:10,letterSpacing:1.8,color:C.copper,fontWeight:600,marginRight:8}}>Best for</span>
                   Clinics with in-house pharmacy or compounding partner, custom protocols, research-grade work, multi-molecule blends.
+                </div>
                 </div>
               </div>
             </F>
@@ -792,6 +778,70 @@ function Aevivo(){
           <F d={0.3}>
             <div style={{textAlign:"center",marginTop:44,paddingTop:32,borderTop:`1px solid ${C.border}`}}>
               <div className="s" style={{fontSize:18,color:C.muted,fontWeight:300,maxWidth:640,margin:"0 auto",lineHeight:1.7}}>Looking for a peptide that isn't shown here? We carry a wider catalog for qualified research buyers. <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%27m%20looking%20for%20a%20specific%20peptide.%20Can%20you%20help%3F" target="_blank" rel="noopener" style={{color:C.gold,borderBottom:`1px solid ${C.gold}`}}>Message us on WhatsApp</a> and we'll tell you what's available.</div>
+            </div>
+          </F>
+        </div>
+      </section>
+
+      <div className="dv"/>
+
+      {/* ── SUPPLIER AUDIT OFFER (held local; reintroduce when ready) ──
+      <section id="audit" style={{padding:"96px clamp(20px,5vw,60px)"}}>
+        <div style={{maxWidth:1100,margin:"0 auto"}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr",gap:36,alignItems:"center"}} className="audit-grid">
+            <div>
+              <F><div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.copper,marginBottom:14,fontWeight:500}}>Independent supplier audit · For verified clinics</div></F>
+              <F d={0.06}><h2 style={{fontSize:"clamp(30px,4vw,46px)",fontWeight:400,lineHeight:1.18,color:C.navy,marginBottom:16,fontFamily:"'Libre Baskerville',serif",maxWidth:760}}>
+                Know what your current supplier is <em style={{color:C.gold,fontStyle:"italic"}}>really shipping.</em>
+              </h2></F>
+              <F d={0.12}><p className="s" style={{fontSize:17,lineHeight:1.7,color:C.muted,fontWeight:300,marginBottom:26,maxWidth:680}}>
+                Already buying peptides? Tell us who from. Within 5 business days we send back a written audit covering sourcing, batch documentation, public scrutiny, and any red flags we've encountered. Free, confidential, no sales follow-up.
+              </p></F>
+
+              <F d={0.18}>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:14,marginBottom:30}} className="audit-points">
+                  {[
+                    ["Sourcing & GMP","Where they actually synthesize and what's verifiable."],
+                    ["Quality documentation","CoA quality, HPLC purity, third-party testing."],
+                    ["Public scrutiny","Regulatory actions, recalls, news, court cases."],
+                    ["Red & green flags","Concrete concerns plus where they hold up."],
+                  ].map(([t,d],i)=>(
+                    <div key={i} style={{padding:"14px 18px",background:C.white,border:`1px solid ${C.border}`,borderRadius:12}}>
+                      <div className="s" style={{fontSize:12.5,color:C.navy,fontWeight:600,letterSpacing:0.3,marginBottom:4,lineHeight:1.3}}>{t}</div>
+                      <div className="s" style={{fontSize:12.5,color:C.muted,fontWeight:300,lineHeight:1.5}}>{d}</div>
+                    </div>
+                  ))}
+                </div>
+              </F>
+
+              <F d={0.24}>
+                <div style={{display:"flex",gap:12,alignItems:"center",flexWrap:"wrap"}}>
+                  <a href="quality-check.html" className="bp" style={{padding:"15px 28px",fontSize:14,whiteSpace:"nowrap",textDecoration:"none",display:"inline-block"}}>Check your current peptide quality →</a>
+                  <span className="s" style={{fontSize:12,color:C.muted,fontWeight:400,letterSpacing:0.2}}>5 business days · Free · No obligation</span>
+                </div>
+              </F>
+            </div>
+          </div>
+        </div>
+      </section>
+      ── /SUPPLIER AUDIT OFFER (held local) ── */}
+
+      {/* ── EDITORIAL BREAK ── */}
+      <section style={{padding:"40px clamp(0px,3vw,40px) 80px",overflow:"hidden"}}>
+        <div style={{maxWidth:1400,margin:"0 auto"}}>
+          <F>
+            <div style={{position:"relative",aspectRatio:"21 / 9",borderRadius:8,overflow:"hidden",background:"#F0EDE6"}}>
+              <img src="images/products/lifestyle-01.jpg" alt="Aevivo peptide pen and vial in a still-life composition" loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}/>
+              <div style={{position:"absolute",inset:0,background:"linear-gradient(90deg, rgba(6,10,20,0.55) 0%, rgba(6,10,20,0.18) 45%, rgba(6,10,20,0.0) 70%)",pointerEvents:"none"}}/>
+              <div style={{position:"absolute",left:"clamp(24px,5vw,64px)",top:"50%",transform:"translateY(-50%)",maxWidth:520,color:"#FBF7EF"}}>
+                <div className="s" style={{fontSize:11,letterSpacing:3,textTransform:"uppercase",color:"#C4A265",fontWeight:600,marginBottom:14}}>Both formats. Same standard.</div>
+                <h2 style={{fontFamily:"'Libre Baskerville',serif",fontSize:"clamp(28px,4vw,46px)",fontWeight:400,lineHeight:1.18,marginBottom:16}}>
+                  Pens for the bedside. Vials for the pharmacy. <em style={{color:"#C4A265",fontStyle:"italic"}}>One supply chain.</em>
+                </h2>
+                <div className="s" style={{fontSize:14.5,fontWeight:300,lineHeight:1.65,opacity:0.88}}>
+                  EU-GMP synthesis. HPLC-verified purity. Certificate of Analysis on every batch — pen or vial.
+                </div>
+              </div>
             </div>
           </F>
         </div>
