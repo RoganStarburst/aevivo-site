@@ -44,8 +44,7 @@ AEVIVO positions itself as a "private longevity laboratory" — think private cl
 ## Key People
 
 - **Suzanna Howse** — Co-Founder ([sh@aevivolongevity.com](mailto:sh@aevivolongevity.com), \+351 934 126 762\)  
-- **Tiago Areias** — Co-Founder ([ta@aevivolongevity.com](mailto:ta@aevivolongevity.com), \+351 917 964 293\)  
-- **Thomas Weidlich** — Partner, Reverse Body Time / RBT Medical
+- **Tiago Areias** — Co-Founder ([ta@aevivolongevity.com](mailto:ta@aevivolongevity.com), \+351 917 964 293\)
 
 ## Google Drive
 

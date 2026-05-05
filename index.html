@@ -623,14 +623,14 @@ function Aevivo(){
               sexual: '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 52 C22 42 14 34 14 26 C14 20 18 16 24 16 C28 16 30 18 32 22 C34 18 36 16 40 16 C46 16 50 20 50 26 C50 34 42 42 32 52 Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>',
             };
             const ruleCats=[
-              {cat:"Recovery & Repair",icon:"recovery",items:["BPC 157","TB 500","BPC 157 + TB 500"]},
-              {cat:"Dermal & Pigmentation",icon:"skin",items:["GHK Cu","Melanotan 2"]},
-              {cat:"Growth Hormone Secretagogues",icon:"gh",items:["CJC 1295 + Ipamorelin","Ipamorelin"]},
-              {cat:"Metabolic Health & Weight Management",icon:"metabolic",items:["Tirzepatide","Retatrutide"]},
-              {cat:"Longevity & Cellular Health",icon:"longevity",items:["Epitalon","MOTS C","SS 31","NAD+ 600mg","NAD+ 300mg"]},
-              {cat:"Cognitive & Neuroprotection",icon:"cognitive",items:["Semax","Selank"]},
-              {cat:"Immune & Anti-Inflammatory",icon:"immune",items:["Thymosin Alpha 1","KPV"]},
-              {cat:"Sexual Function",icon:"sexual",items:["PT 141"]},
+              {cat:"Recovery & Repair",icon:"recovery",img:"images/people/person-01.jpg",items:["BPC 157","TB 500","BPC 157 + TB 500"]},
+              {cat:"Dermal & Pigmentation",icon:"skin",img:"images/people/person-05.jpg",items:["GHK Cu","Melanotan 2"]},
+              {cat:"Growth Hormone Secretagogues",icon:"gh",img:"images/people/person-04.jpg",items:["CJC 1295 + Ipamorelin","Ipamorelin"]},
+              {cat:"Metabolic Health & Weight Management",icon:"metabolic",img:"images/people/person-02.jpg",items:["Tirzepatide","Retatrutide"]},
+              {cat:"Longevity & Cellular Health",icon:"longevity",img:"images/people/person-03.jpg",items:["Epitalon","MOTS C","SS 31","NAD+ 600mg","NAD+ 300mg"]},
+              {cat:"Cognitive & Neuroprotection",icon:"cognitive",img:"images/people/person-08.jpg",items:["Semax","Selank"]},
+              {cat:"Immune & Anti-Inflammatory",icon:"immune",img:"images/people/person-06.jpg",items:["Thymosin Alpha 1","KPV"]},
+              {cat:"Sexual Function",icon:"sexual",img:"images/people/person-07.jpg",items:["PT 141"]},
             ];
             return(<>
               <F>
@@ -646,7 +646,11 @@ function Aevivo(){
                 {ruleCats.map((g,gi)=>(
                   <F key={gi} d={gi*0.05}>
                     <div style={{background:C.white,borderLeft:`4px solid ${C.gold}`,borderRadius:6,height:"100%",transition:"all 0.25s ease",overflow:"hidden",display:"flex",flexDirection:"column"}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-3px)";e.currentTarget.style.boxShadow="0 10px 28px rgba(0,0,0,0.3)"}} onMouseLeave={e=>{e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="none"}}>
-                      <div style={{background:"rgba(196,162,101,0.04)",borderBottom:`1px solid ${C.border}`,padding:"22px 0",display:"flex",alignItems:"center",justifyContent:"center",color:C.gold}} dangerouslySetInnerHTML={{__html:`<div style="width:56px;height:56px;opacity:0.82">${ICONS[g.icon]}</div>`}}/>
+                      <div style={{position:"relative",height:160,overflow:"hidden",borderBottom:`1px solid ${C.border}`,background:"#0C1225"}}>
+                        <img src={g.img} alt={g.cat} loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block",filter:"contrast(1.05) saturate(0.95)"}}/>
+                        <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg, rgba(12,18,37,0.05) 0%, rgba(12,18,37,0) 35%, rgba(12,18,37,0.5) 100%)",pointerEvents:"none"}}/>
+                        <div style={{position:"absolute",top:14,left:18,width:36,height:36,borderRadius:8,background:"rgba(12,18,37,0.55)",backdropFilter:"blur(6px)",display:"flex",alignItems:"center",justifyContent:"center",color:C.gold}} dangerouslySetInnerHTML={{__html:`<div style="width:22px;height:22px;opacity:0.92">${ICONS[g.icon]}</div>`}}/>
+                      </div>
                       <div style={{padding:"22px 26px 26px 28px",flex:1}}>
                         <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:12}}>
                           <span className="s" style={{fontSize:13,color:C.gold,fontWeight:600,letterSpacing:1.5,fontFamily:"'Inter',-apple-system,sans-serif"}}>{String(gi+1).padStart(2,"0")}</span>
