@@ -170,7 +170,7 @@ function App() {
 
   const summary = buildSummary();
   const waUrl = `https://wa.me/351934126762?text=${encodeURIComponent(summary)}`;
-  const mailtoUrl = `mailto:clinical@aevivolongevity.com?subject=${encodeURIComponent("Aevivo Clinical · Practitioner application · " + (form.clinic||""))}&body=${encodeURIComponent(summary)}`;
+  const mailtoUrl = `mailto:info@aevivolongevity.com?subject=${encodeURIComponent("Aevivo Clinical · Practitioner application · " + (form.clinic||""))}&body=${encodeURIComponent(summary)}`;
 
   return (
     <div style={{fontFamily:"'Libre Baskerville',Georgia,serif",background:"transparent",color:C.text,minHeight:"100vh",position:"relative",zIndex:2}}>
