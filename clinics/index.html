@@ -540,6 +540,7 @@ function Aevivo(){
           .hero-t{font-size:36px!important}
           .nav-lk{display:none!important}
           .format-grid{grid-template-columns:1fr!important;gap:18px!important}
+          .audit-points{grid-template-columns:1fr!important}
         }
       `}</style>
 
@@ -794,6 +795,48 @@ function Aevivo(){
               <div className="s" style={{fontSize:18,color:C.muted,fontWeight:300,maxWidth:640,margin:"0 auto",lineHeight:1.7}}>Looking for a peptide that isn't shown here? We carry a wider catalog for qualified research buyers. <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%27m%20looking%20for%20a%20specific%20peptide.%20Can%20you%20help%3F" target="_blank" rel="noopener" style={{color:C.gold,borderBottom:`1px solid ${C.gold}`}}>Message us on WhatsApp</a> and we'll tell you what's available.</div>
             </div>
           </F>
+        </div>
+      </section>
+
+      <div className="dv"/>
+
+      {/* ── SUPPLIER AUDIT OFFER ── */}
+      <section id="audit" style={{padding:"96px clamp(20px,5vw,60px)"}}>
+        <div style={{maxWidth:1100,margin:"0 auto"}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr",gap:36,alignItems:"center"}} className="audit-grid">
+            <div>
+              <F><div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.copper,marginBottom:14,fontWeight:500}}>Independent supplier audit · For verified clinics</div></F>
+              <F d={0.06}><h2 style={{fontSize:"clamp(30px,4vw,46px)",fontWeight:400,lineHeight:1.18,color:C.navy,marginBottom:16,fontFamily:"'Libre Baskerville',serif",maxWidth:760}}>
+                Know what your current supplier is <em style={{color:C.gold,fontStyle:"italic"}}>really shipping.</em>
+              </h2></F>
+              <F d={0.12}><p className="s" style={{fontSize:17,lineHeight:1.7,color:C.muted,fontWeight:300,marginBottom:26,maxWidth:680}}>
+                Already buying peptides? Tell us who from. Within 5 business days we send back a written audit covering sourcing, batch documentation, public scrutiny, and any red flags we've encountered. Free, confidential, no sales follow-up.
+              </p></F>
+
+              <F d={0.18}>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:14,marginBottom:30}} className="audit-points">
+                  {[
+                    ["Sourcing & GMP","Where they actually synthesize and what's verifiable."],
+                    ["Quality documentation","CoA quality, HPLC purity, third-party testing."],
+                    ["Public scrutiny","Regulatory actions, recalls, news, court cases."],
+                    ["Red & green flags","Concrete concerns plus where they hold up."],
+                  ].map(([t,d],i)=>(
+                    <div key={i} style={{padding:"14px 18px",background:C.white,border:`1px solid ${C.border}`,borderRadius:12}}>
+                      <div className="s" style={{fontSize:12.5,color:C.navy,fontWeight:600,letterSpacing:0.3,marginBottom:4,lineHeight:1.3}}>{t}</div>
+                      <div className="s" style={{fontSize:12.5,color:C.muted,fontWeight:300,lineHeight:1.5}}>{d}</div>
+                    </div>
+                  ))}
+                </div>
+              </F>
+
+              <F d={0.24}>
+                <div style={{display:"flex",gap:12,alignItems:"center",flexWrap:"wrap"}}>
+                  <a href="quality-check.html" className="bp" style={{padding:"15px 28px",fontSize:14,whiteSpace:"nowrap",textDecoration:"none",display:"inline-block"}}>Check your current peptide quality →</a>
+                  <span className="s" style={{fontSize:12,color:C.muted,fontWeight:400,letterSpacing:0.2}}>5 business days · Free · No obligation</span>
+                </div>
+              </F>
+            </div>
+          </div>
         </div>
       </section>
 
