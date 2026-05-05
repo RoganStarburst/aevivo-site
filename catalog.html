@@ -95,85 +95,44 @@ function useV(t=0.08){const r=useRef(null);const[v,s]=useState(false);useEffect(
 function F({children,d=0,s={}}){const[r,v]=useV();return<div ref={r} style={{opacity:v?1:0,transform:v?"translateY(0)":"translateY(20px)",transition:`all 0.6s ease ${d}s`,...s}}>{children}</div>}
 
 const catalog=[
-  {cat:"Recovery & Tissue Research",id:"recovery",items:[
-    {n:"BPC 157",sp:"5 mg/ml · 3 ml pen",pr:290,pu:">98%",ds:"Pentadecapeptide investigated for cytoprotective signaling and angiogenic mechanisms in tissue models.",tg:["Cytoprotective","Angiogenic"]},
-    {n:"BPC Spray",sp:"5 mg/ml · 10 ml spray",pr:288,pu:">98%",ds:"Oral delivery formulation of BPC 157 investigated for mucosal absorption and localized tissue signaling.",tg:["Oral Delivery","Mucosal"]},
-    {n:"TB4 (Thymosin Beta 4)",sp:"10 mg/ml · 3 ml pen",pr:312,pu:">98%",ds:"43 amino acid peptide researched for actin sequestration, cell migration, and angiogenesis pathways.",tg:["Actin Binding","Migration"]},
-    {n:"TB 500",sp:"5 mg/ml · 3 ml pen",pr:290,pu:">98%",ds:"Active fragment of thymosin beta 4 studied for tissue remodeling and inflammatory modulation in vitro.",tg:["Remodeling","In Vitro"]},
+  {cat:"Recovery & Repair",id:"recovery",items:[
+    {n:"BPC-157",sp:"5 mg/ml · 3 ml · 15 mg",pr:290,pf:194,pu:">98%",ds:"Pentadecapeptide investigated for cytoprotective signaling and angiogenic mechanisms in tissue models.",tg:["Cytoprotective","Angiogenic"]},
+    {n:"TB-500",sp:"5 mg/ml · 3 ml · 15 mg",pr:290,pf:194,pu:">98%",ds:"Active fragment of thymosin beta 4 studied for tissue remodeling and inflammatory modulation in vitro.",tg:["Remodeling","In Vitro"]},
+    {n:"BPC-157 + TB-500",sp:"5 mg/ml · 3 ml · 15 mg",pr:347,pf:231,pu:">98%",ds:"Combined thymosin and body protection peptide blend studied for synergistic tissue repair signaling.",tg:["Synergistic","Dual Peptide"]},
   ]},
-  {cat:"Longevity & Cellular Research",id:"longevity",items:[
-    {n:"Epitalon",sp:"10 mg/ml · 3 ml pen",pr:290,pu:">98%",ds:"Synthetic tetrapeptide (Ala-Glu-Asp-Gly) studied for telomerase activation and pineal gland regulation.",tg:["Telomerase","Tetrapeptide"]},
-    {n:"Humanin",sp:"2.5 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Mitochondria derived microprotein investigated for cytoprotection and cellular stress response pathways.",tg:["Mitochondrial","Microprotein"]},
-    {n:"MOTS c",sp:"5 mg/ml · 3 ml pen",pr:290,pu:">98%",ds:"Mitochondrial open reading frame peptide researched for AMPK activation and metabolic homeostasis.",tg:["AMPK","Metabolic"]},
-    {n:"NAD+ Spray",sp:"300 mg/ml · 10 ml spray",pr:288,pu:">98%",ds:"Nicotinamide adenine dinucleotide spray formulation studied for sirtuin pathway activation.",tg:["NAD+","Spray"]},
-    {n:"NAD+ 300",sp:"100 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Essential coenzyme investigated for cellular energy metabolism and DNA repair mechanisms.",tg:["Coenzyme","NAD+"]},
-    {n:"NAD+ 600",sp:"200 mg/ml · 3 ml pen",pr:432,pu:">98%",ds:"Higher concentration NAD+ formulation for extended research protocols requiring elevated dosing.",tg:["High Concentration","NAD+"]},
-    {n:"SS 31 (Elamipretide)",sp:"10 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Mitochondria targeted tetrapeptide studied for cardiolipin stabilization and bioenergetic optimization.",tg:["Cardiolipin","Bioenergetics"]},
+  {cat:"Longevity & Skin Health",id:"skin",items:[
+    {n:"GHK-Cu",sp:"10 mg/ml · 3 ml · 30 mg",pr:252,pf:168,pu:">98%",ds:"Copper binding tripeptide researched for collagen III synthesis, MMP modulation, and ECM remodeling.",tg:["Copper Peptide","Collagen III"]},
   ]},
-  {cat:"GH Secretagogues",id:"gh",items:[
-    {n:"CJC 1295 (No DAC)",sp:"10 mg/ml · 3 ml pen",pr:288,pu:">98%",ds:"Modified GHRH(1-29) analog without drug affinity complex. Studied for pulsatile GH release patterns.",tg:["GHRH Analog","Pulsatile"]},
-    {n:"Follistatin 344",sp:"1 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Activin binding glycoprotein isoform investigated for myostatin modulation in skeletal muscle models.",tg:["Myostatin","Glycoprotein"]},
-    {n:"IGF 1 LR3",sp:"1 mg/ml · 1 ml pen",pr:288,pu:">98%",ds:"Long arginine IGF 1 variant with extended half life. Researched for receptor binding affinity.",tg:["IGF Pathway","Extended T½"]},
-    {n:"Ipamorelin",sp:"5 mg/ml · 3 ml pen",pr:216,pu:">98%",ds:"Selective GH secretagogue with minimal impact on cortisol and prolactin in preclinical models.",tg:["Selective","Secretagogue"]},
-    {n:"GHRP 6",sp:"5 mg/ml · 3 ml pen",pr:290,pu:">98%",ds:"Hexapeptide growth hormone releasing peptide studied for GH axis stimulation and ghrelin receptor activity.",tg:["Hexapeptide","Ghrelin"]},
-    {n:"SLU PP 332",sp:"0.5 mg/ml · 3 ml pen",pr:290,pu:">98%",ds:"ERRα/γ agonist peptide investigated for exercise mimetic metabolic signaling in preclinical research.",tg:["ERR Agonist","Preclinical"]},
-    {n:"Sermorelin",sp:"5 mg/ml · 3 ml pen",pr:264,pu:">98%",ds:"GHRH(1-29) analog investigated for endogenous pulsatile growth hormone release in preclinical research.",tg:["GHRH","Pulsatile"]},
+  {cat:"Growth Hormone Secretagogues",id:"gh",items:[
+    {n:"CJC-1295 + Ipamorelin",sp:"5 mg/ml · 3 ml · 15 mg",pr:362,pf:242,pu:">98%",ds:"Combined GH secretagogue blend researched for synergistic growth hormone pulse amplification.",tg:["Synergistic","GH Axis"]},
+    {n:"Ipamorelin",sp:"5 mg/ml · 3 ml · 15 mg",pr:216,pf:144,pu:">98%",ds:"Selective GH secretagogue with minimal impact on cortisol and prolactin in preclinical models.",tg:["Selective","Secretagogue"]},
   ]},
-  {cat:"Cognitive & Neuroendocrine Research",id:"cognitive",items:[
-    {n:"AC Selank NH2",sp:"5 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Acetylated tuftsin analog peptide studied for GABAergic modulation and anxiolytic pathway research.",tg:["Tuftsin Analog","GABAergic"]},
-    {n:"AC Semax NH2",sp:"5 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Acetylated ACTH(4-10) analog researched for BDNF expression and neurotrophic signaling.",tg:["ACTH Analog","BDNF"]},
-    {n:"Delta Sleep (DSIP)",sp:"10 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Delta sleep inducing nonapeptide investigated for neuroendocrine regulation and corticotropic modulation.",tg:["Nonapeptide","Neuroendocrine"]},
-    {n:"PHDP5 Spray",sp:"10 mg/ml · 10 ml spray",pr:360,pu:">98%",ds:"Phosphodiesterase modulating peptide in intranasal formulation for neuroprotective pathway research.",tg:["Intranasal","PDE"]},
+  {cat:"Metabolic Health & Weight Management",id:"metabolic",items:[
+    {n:"Retatrutide",sp:"10 mg/ml · 3 ml · 30 mg",pr:312,pf:208,pu:">98%",ds:"Triple agonist (GLP 1/GIP/Glucagon). Third generation incretin under active clinical investigation.",tg:["Triple Agonist","Phase III"]},
   ]},
-  {cat:"Immune & Bioregulator Research",id:"immune",items:[
-    {n:"Bronchogen",sp:"10 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Synthetic tripeptide bioregulator studied for respiratory epithelial signaling and bronchial tissue models.",tg:["Bioregulator","Epithelial"]},
-    {n:"GcMAF",sp:"1800 mcg / 3 ml pen",pr:631,pu:">98%",ds:"Gc protein derived macrophage activating factor investigated for macrophage activation pathway research.",tg:["Macrophage","Gc Protein"]},
-    {n:"NK Peptide",sp:"5 mg/ml · 3 ml pen",pr:288,pu:">98%",ds:"Natural killer cell modulating peptide studied for innate immune surveillance signaling pathways.",tg:["NK Cell","Innate"]},
-    {n:"Thymalin",sp:"10 mg/ml · 3 ml pen",pr:314,pu:">98%",ds:"Thymic peptide extract studied for immune reconstitution and T lymphocyte maturation in aging models.",tg:["Thymic","T Cell"]},
-    {n:"Thymogen",sp:"10 mg/ml · 3 ml pen",pr:288,pu:">98%",ds:"Synthetic dipeptide (Glu-Trp) bioregulator investigated for thymic function and immune signaling.",tg:["Dipeptide","Thymic"]},
-    {n:"Thymosin Alpha 1",sp:"10 mg/ml · 3 ml pen",pr:336,pu:">98%",ds:"28 amino acid thymic peptide with extensive literature on immune modulation and T cell maturation.",tg:["28 AA","Immune"]},
+  {cat:"Cellular Health",id:"cellular",items:[
+    {n:"Epithalon",sp:"10 mg/ml · 3 ml · 30 mg",pr:290,pf:194,pu:">98%",ds:"Synthetic tetrapeptide (Ala-Glu-Asp-Gly) studied for telomerase activation and pineal gland regulation.",tg:["Telomerase","Tetrapeptide"]},
+    {n:"MOTS-C",sp:"5 mg/ml · 3 ml · 15 mg",pr:290,pf:194,pu:">98%",ds:"Mitochondrial open reading frame peptide researched for AMPK activation and metabolic homeostasis.",tg:["AMPK","Metabolic"]},
+    {n:"SS-31",sp:"10 mg/ml · 3 ml · 30 mg",pr:240,pf:160,pu:">98%",ds:"Mitochondria targeted tetrapeptide studied for cardiolipin stabilization and bioenergetic optimization.",tg:["Cardiolipin","Bioenergetics"]},
+    {n:"NAD+ 600",sp:"200 mg/ml · 3 ml · 600 mg",pr:432,pf:288,pu:">98%",ds:"Higher concentration NAD+ formulation for extended research protocols requiring elevated dosing.",tg:["High Concentration","NAD+"]},
+    {n:"NAD+ 300",sp:"100 mg/ml · 3 ml · 300 mg",pr:240,pf:160,pu:">98%",ds:"Essential coenzyme investigated for cellular energy metabolism and DNA repair mechanisms.",tg:["Coenzyme","NAD+"]},
   ]},
-  {cat:"Metabolic & Incretin Research",id:"metabolic",items:[
-    {n:"Adipotide",sp:"10 mg/ml · 3 ml pen",pr:300,pu:">98%",ds:"Prohibitin targeting peptidomimetic studied for adipose vasculature signaling in preclinical models.",tg:["Peptidomimetic","Preclinical"]},
-    {n:"AOD 9604",sp:"10 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Modified C terminal fragment of hGH (176-191) investigated for lipolytic signaling without somatotropic effects.",tg:["hGH Fragment","Lipolytic"]},
-    {n:"5 Amino 1MQ",sp:"33 mg/ml · 3 ml pen",pr:458,pu:">98%",ds:"NNMT inhibitor peptide researched for nicotinamide metabolism and adipocyte energy expenditure.",tg:["NNMT","Metabolic"]},
-    {n:"Retatrutide",sp:"10 mg/ml · 3 ml pen",pr:312,pu:">98%",ds:"Triple agonist (GLP 1/GIP/Glucagon). Third generation incretin under active clinical investigation.",tg:["Triple Agonist","Phase II"]},
-    {n:"Semaglutide",sp:"5 mg / 0.88 ml pen",pr:326,pu:">98%",ds:"GLP 1 receptor agonist with extensive published literature on glycemic regulation and metabolic signaling.",tg:["GLP 1","Published"]},
-    {n:"Tesamorelin",sp:"10 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Synthetic GHRH analog. FDA studied peptide for growth hormone axis stimulation.",tg:["GHRH Analog","FDA Studied"]},
-    {n:"Tirzepatide",sp:"10 mg/ml · 3 ml pen",pr:514,pu:">98%",ds:"Dual GIP/GLP 1 receptor agonist researched for incretin pathway modulation and metabolic outcomes.",tg:["Dual Agonist","GIP/GLP 1"]},
+  {cat:"Cognitive & Neuroprotection",id:"cognitive",items:[
+    {n:"AC-Semax-NH₂",sp:"5 mg/ml · 3 ml · 15 mg",pr:240,pf:160,pu:">98%",ds:"Acetylated ACTH(4-10) analog researched for BDNF expression and neurotrophic signaling.",tg:["ACTH Analog","BDNF"]},
+    {n:"AC-Selank-NH₂",sp:"5 mg/ml · 3 ml · 15 mg",pr:240,pf:160,pu:">98%",ds:"Acetylated tuftsin analog peptide studied for GABAergic modulation and anxiolytic pathway research.",tg:["Tuftsin Analog","GABAergic"]},
   ]},
-  {cat:"Reproductive & Melanocortin Research",id:"repro",items:[
-    {n:"Kisspeptin 10",sp:"5 mg/ml · 3 ml pen",pr:216,pu:">98%",ds:"Decapeptide studied for GnRH neuron activation and hypothalamic pituitary gonadal axis signaling.",tg:["GnRH","HPG Axis"]},
-    {n:"Melanotan II",sp:"10 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Synthetic melanocortin receptor agonist studied for MC1R/MC4R binding and melanogenesis pathways.",tg:["MC1R/MC4R","Melanocortin"]},
-    {n:"Oxytocin Spray",sp:"100 IU / 10 ml spray",pr:192,pu:">98%",ds:"Nonapeptide neurohormone in intranasal formulation researched for central oxytocin receptor signaling.",tg:["Nonapeptide","Intranasal"]},
-    {n:"PT 141 (Bremelanotide)",sp:"5 mg/ml · 3 ml pen",pr:247,pu:">98%",ds:"Melanocortin receptor agonist studied for MC3R/MC4R activation and central nervous system signaling.",tg:["MC3R/MC4R","CNS"]},
+  {cat:"Immune & Anti-Inflammatory",id:"immune",items:[
+    {n:"Thymosin Alpha-1",sp:"10 mg/ml · 3 ml · 30 mg",pr:336,pf:224,pu:">98%",ds:"28 amino acid thymic peptide with extensive literature on immune modulation and T cell maturation.",tg:["28 AA","Immune"]},
+    {n:"KPV",sp:"5 mg/ml · 3 ml · 15 mg",pr:240,pf:160,pu:">98%",ds:"Alpha MSH derived tripeptide studied for NF-κB modulation and anti inflammatory signaling cascades.",tg:["α-MSH","NF-κB"]},
   ]},
-  {cat:"Cardiovascular Research",id:"cardio",items:[
-    {n:"Cardiogen",sp:"10 mg/ml · 3 ml pen",pr:290,pu:">98%",ds:"Synthetic tripeptide bioregulator investigated for cardiomyocyte signaling and myocardial tissue models.",tg:["Bioregulator","Cardiomyocyte"]},
-    {n:"VIP",sp:"5 mg/ml · 2 ml pen",pr:290,pu:">98%",ds:"28 amino acid neuropeptide studied for vasodilation, smooth muscle relaxation, and VPAC receptor binding.",tg:["Neuropeptide","VPAC"]},
-  ]},
-  {cat:"Specialized Peptides",id:"special",items:[
-    {n:"AC KPV NH2",sp:"5 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Alpha MSH derived tripeptide studied for NF-κB modulation and anti inflammatory signaling cascades.",tg:["α-MSH","NF-κB"]},
-    {n:"Melittin",sp:"5 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"26 amino acid bee venom peptide investigated for phospholipase activity and membrane disruption.",tg:["Bee Venom","Phospholipase"]},
-    {n:"Prostamax",sp:"10 mg/ml · 3 ml pen",pr:240,pu:">98%",ds:"Synthetic bioregulator peptide studied for prostatic tissue signaling and genitourinary pathway research.",tg:["Bioregulator","Genitourinary"]},
-    {n:"GHK Cu",sp:"10 mg/ml · 3 ml pen",pr:252,pu:">98%",ds:"Copper binding tripeptide researched for collagen III synthesis, MMP modulation, and ECM remodeling.",tg:["Copper Peptide","Collagen III"]},
-    {n:"Teriparatide",sp:"0.2 mg/ml · 3 ml pen",pr:192,pu:">98%",ds:"Recombinant PTH(1-34) fragment studied for osteoblast differentiation and bone mineral density pathways.",tg:["PTH Fragment","Osteoblast"]},
-  ]},
-  {cat:"Research Combinations",id:"combos",items:[
-    {n:"SS 31 + Cardiogen",sp:"3 ml pen",pr:410,pu:">98%",ds:"Mitochondrial + cardiac bioregulator peptides for synergistic cardiovascular signaling research.",tg:["Mitochondrial","Cardiovascular"]},
-    {n:"VIP + MOTS c",sp:"3 ml pen",pr:362,pu:">98%",ds:"Neuropeptide and mitochondrial peptide combination for metabolic and autonomic signaling research.",tg:["Dual Pathway","Metabolic"]},
-    {n:"Ipamorelin + CJC 1295",sp:"5 mg/ml · 3 ml pen",pr:362,pu:">98%",ds:"Combined GH secretagogue blend researched for synergistic growth hormone pulse amplification.",tg:["Synergistic","GH Axis"]},
-    {n:"AC Selank + Delta Sleep",sp:"5 mg/ml · 3 ml pen",pr:338,pu:">98%",ds:"GABAergic and neuroendocrine peptide combination investigated for peptide anxiolytic signaling.",tg:["GABAergic","Neuroendocrine"]},
-    {n:"Retatrutide + Follistatin",sp:"3 ml pen",pr:458,pu:">98%",ds:"Triple incretin agonist with activin binding protein for combined metabolic and myostatin pathways.",tg:["Triple Agonist","Myostatin"]},
-    {n:"AC Selank + AC Semax Spray",sp:"10 ml dual spray",pr:362,pu:">98%",ds:"Dual nootropic peptide spray combining tuftsin and ACTH analog peptides for neurotrophic research.",tg:["Dual Nootropic","Spray"]},
-    {n:"Oxytocin + PT 141 Spray",sp:"10 ml dual spray",pr:362,pu:">98%",ds:"Dual melanocortin and oxytocin receptor agonist spray for combined neuropeptide signaling research.",tg:["Dual Receptor","Neuropeptide"]},
-    {n:"TB 500 + BPC 157",sp:"5 mg/ml · 3 ml pen",pr:347,pu:">98%",ds:"Combined thymosin and body protection peptide blend studied for synergistic tissue repair signaling.",tg:["Synergistic","Dual Peptide"]},
+  {cat:"Sexual Function",id:"sexual",items:[
+    {n:"PT-141",sp:"5 mg/ml · 3 ml · 15 mg",pr:247,pf:165,pu:">98%",ds:"Melanocortin receptor agonist studied for MC3R/MC4R activation and central nervous system signaling.",tg:["MC3R/MC4R","CNS"]},
   ]},
 ];
 
 const totalItems=catalog.reduce((a,c)=>a+c.items.length,0);
 
-const featuredNames=new Set(["BPC 157","TB 500","Epitalon","GHK Cu","CJC 1295 (No DAC)","Ipamorelin","Ipamorelin + CJC 1295","Tirzepatide","Semaglutide","Retatrutide","NAD+ 300","MOTS c","SS 31 (Elamipretide)","Thymosin Alpha 1","PT 141 (Bremelanotide)"]);
+const featuredNames=new Set(["BPC-157","TB-500","BPC-157 + TB-500","GHK-Cu","CJC-1295 + Ipamorelin","Ipamorelin","Retatrutide","Epithalon","MOTS-C","SS-31","NAD+ 600","NAD+ 300","AC-Semax-NH₂","AC-Selank-NH₂","Thymosin Alpha-1","KPV","PT-141"]);
 const featuredItems=catalog.flatMap(c=>c.items.filter(i=>featuredNames.has(i.n)));
 
 function Aevivo(){
