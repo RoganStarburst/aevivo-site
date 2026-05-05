@@ -534,12 +534,6 @@ function Aevivo(){
 
         @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-        @media(min-width:900px){
-          .hero-grid{grid-template-columns:1.3fr 1fr!important;gap:48px!important;align-items:center!important}
-        }
-        @media(max-width:899px){
-          .hero-img{max-height:340px!important;aspect-ratio:16/9!important}
-        }
         @media(max-width:768px){
           .prow{grid-template-columns:1fr 1fr;gap:6px;padding:14px 16px}
           .hide-m{display:none!important}
@@ -588,8 +582,8 @@ function Aevivo(){
         <div style={{position:"absolute",top:100,right:24,width:48,height:48,borderTop:`1px solid ${C.gold}`,borderRight:`1px solid ${C.gold}`,opacity:0.4,pointerEvents:"none"}}/>
         <div style={{position:"absolute",bottom:40,left:24,width:48,height:48,borderBottom:`1px solid ${C.gold}`,borderLeft:`1px solid ${C.gold}`,opacity:0.4,pointerEvents:"none"}}/>
         <div style={{position:"absolute",bottom:40,right:24,width:48,height:48,borderBottom:`1px solid ${C.gold}`,borderRight:`1px solid ${C.gold}`,opacity:0.4,pointerEvents:"none"}}/>
-        <div style={{maxWidth:1200,margin:"0 auto",width:"100%",display:"grid",gridTemplateColumns:"1fr",gap:32}} className="hero-grid">
-          <div style={{maxWidth:640}}>
+        <div style={{maxWidth:1200,margin:"0 auto",width:"100%",display:"grid",gridTemplateColumns:"1fr",gap:32}}>
+          <div style={{maxWidth:700}}>
             <F><div className="s" style={{fontSize:12,letterSpacing:3,textTransform:"uppercase",color:C.copper,marginBottom:20,fontWeight:500}}>Precision Biology · No Guesswork</div></F>
             <F d={0.06}><h1 className="hero-t" style={{fontSize:"clamp(40px,6vw,68px)",fontWeight:400,lineHeight:1.08,color:C.navy,marginBottom:24}}>
               Your body deserves to know{" "}<em style={{color:C.gold,fontStyle:"italic"}}>what goes into it.</em>
@@ -607,12 +601,6 @@ function Aevivo(){
               ))}
             </div></F>
           </div>
-          <F d={0.1}>
-            <div className="hero-img" style={{position:"relative",borderRadius:18,overflow:"hidden",border:`1px solid ${C.border}`,aspectRatio:"3 / 4",maxHeight:580,background:"#0C1225"}}>
-              <img src="images/people/person-08.jpg" alt="" loading="lazy" style={{width:"100%",height:"100%",objectFit:"cover",display:"block",filter:"contrast(1.05) saturate(0.92)"}}/>
-              <div style={{position:"absolute",inset:0,background:"linear-gradient(180deg, rgba(12,18,37,0.0) 50%, rgba(12,18,37,0.55) 100%)",pointerEvents:"none"}}/>
-            </div>
-          </F>
         </div>
         </section>
 
