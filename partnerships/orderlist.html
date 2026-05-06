@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build a quote request · Aevivo Clinical</title>
+<meta name="description" content="Tell us which peptides and quantities you'd like a quote for. We come back with verified clinic pricing and batch documentation within 2 business days.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .quote-row {
+    display: grid; grid-template-columns: 2fr 100px 36px;
+    gap: 12px; align-items: center;
+    padding: 14px 16px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .quote-row select, .quote-row input {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 8px; padding: 10px 12px;
+    font-family: var(--sans); font-size: 13px;
+    color: var(--ink); outline: none;
+  }
+  .quote-row .rm-btn {
+    background: transparent; border: 1px solid var(--line);
+    border-radius: 50%; width: 32px; height: 32px;
+    color: var(--ink-mute); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .quote-row .rm-btn:hover { color: var(--olive); border-color: var(--olive); }
+  @media (max-width: 600px) { .quote-row { grid-template-columns: 1fr 80px 36px; } }
+</style>
+</head>
+<body>
+
+<div class="ruo-bar"><span class="ruo-main">For Research Use Only</span><span class="ruo-sep">|</span><span class="ruo-sub">Licensed practitioners only.</span></div>
+
+<nav class="nav solid" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="brand-mark">A</span><span class="brand-text"><span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">CLINICAL</span></span></a>
+    <div></div>
+    <div class="nav-right"><a href="index.html" class="text-link">&larr; Back to home</a></div>
+  </div>
+</nav>
+
+<main style="max-width:880px; margin:0 auto; padding: 150px clamp(20px,5vw,60px) 100px;">
+  <span class="eyebrow" style="display:block; margin-bottom:16px;">Quote Request &middot; Step 1 of 2</span>
+  <h1 style="font-size:clamp(34px,4.5vw,52px); line-height:1.08; margin-bottom:20px;">Build your <em>quote request.</em></h1>
+  <p class="lede" style="margin-bottom:36px; max-width:680px;">Add the peptides your clinic needs and rough quantities. We come back with verified clinic pricing, batch documentation, and shipping terms within 2 business days. No obligation.</p>
+
+  <div class="form-card">
+    <span class="eyebrow" style="display:block; margin-bottom:18px;">Peptides &amp; quantities</span>
+    <div id="quote-rows"></div>
+    <button type="button" id="add-row" class="btn btn-ghost btn-sm" style="margin-top:8px;">+ Add another peptide</button>
+
+    <div style="height:24px;"></div>
+    <span class="eyebrow" style="display:block; margin-bottom:18px;">Where to send the quote</span>
+    <form id="contact-form">
+      <div class="form-row two">
+        <div><label class="form-label" for="name">Full name</label><input class="form-input" type="text" name="name" id="name" required></div>
+        <div><label class="form-label" for="clinic">Clinic / business</label><input class="form-input" type="text" name="clinic" id="clinic" required></div>
+      </div>
+      <div class="form-row two">
+        <div><label class="form-label" for="email">Email</label><input class="form-input" type="email" name="email" id="email" required></div>
+        <div><label class="form-label" for="phone">WhatsApp / phone</label><input class="form-input" type="tel" name="phone" id="phone"></div>
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="notes">Anything else we should know?</label>
+        <textarea class="form-textarea" name="notes" id="notes" rows="3" placeholder="Timeline, recurring vs one-off, format preferences, etc."></textarea>
+      </div>
+      <button type="submit" class="btn btn-fill btn-block">Continue to send &rarr;</button>
+    </form>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-row"><div class="footer-brand-mark">A</div><div class="footer-brand-name">AEVIVO <span class="clinical">CLINICAL</span></div></div><p class="footer-mission">European-synthesized research peptides.</p></div>
+      <div class="footer-col"><h5>Browse</h5><a href="catalog.html">Peptides</a><a href="story.html">Story</a><a href="index.html#faq">FAQ</a></div>
+      <div class="footer-col"><h5>Act</h5><a href="application.html">Apply for clinic access</a><a href="quality-check.html">Audit your supplier</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="compliance.html">Compliance</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="footer-bottom"><div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity.</div><div>For research use only.</div></div>
+  </div>
+</footer>
+
+<script>
+var peptideOptions = ["BPC-157","TB-500","BPC-157 + TB-500","GHK-Cu","CJC-1295 + Ipamorelin","Ipamorelin","Retatrutide","Epithalon","MOTS-C","SS-31","NAD+ 600","NAD+ 300","AC-Semax-NH₂","AC-Selank-NH₂","Thymosin Alpha-1","KPV","PT-141","Other (specify in notes)"];
+
+function addRow(preselect){
+  var rows = document.getElementById('quote-rows');
+  var div = document.createElement('div');
+  div.className = 'quote-row';
+  var sel = document.createElement('select');
+  sel.name = 'peptide';
+  var def = document.createElement('option'); def.value=''; def.textContent='Select peptide...'; sel.appendChild(def);
+  peptideOptions.forEach(function(p){ var o=document.createElement('option'); o.textContent=p; if(preselect && p===preselect) o.selected=true; sel.appendChild(o); });
+  var qty = document.createElement('input'); qty.type='number'; qty.min='1'; qty.value='1'; qty.name='qty'; qty.placeholder='Qty';
+  var rm = document.createElement('button'); rm.type='button'; rm.className='rm-btn'; rm.textContent='×';
+  rm.addEventListener('click', function(){ if(rows.children.length>1) div.remove(); });
+  div.appendChild(sel); div.appendChild(qty); div.appendChild(rm);
+  rows.appendChild(div);
+}
+
+// preselect from URL
+var params = new URLSearchParams(window.location.search);
+var pre = params.get('peptide');
+addRow(pre || null);
+if (params.get('email')) document.getElementById('email').value = params.get('email');
+if (params.get('name')) document.getElementById('name').value = params.get('name');
+
+document.getElementById('add-row').addEventListener('click', function(){ addRow(null); });
+
+document.getElementById('contact-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var rowEls = document.querySelectorAll('#quote-rows .quote-row');
+  var picks = [];
+  rowEls.forEach(function(r){
+    var p = r.querySelector('select').value;
+    var q = r.querySelector('input').value;
+    if (p) picks.push({peptide: p, qty: q});
+  });
+  if (!picks.length) { alert('Add at least one peptide.'); return; }
+  var data = {
+    name: document.getElementById('name').value,
+    clinic: document.getElementById('clinic').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    notes: document.getElementById('notes').value,
+    picks: picks,
+  };
+  try { sessionStorage.setItem('aevivoQuoteRequest', JSON.stringify(data)); } catch(err) {}
+  window.location.href = 'shipping.html';
+});
+</script>
+<script src="assets/theme.js"></script>
+</body>
+</html>

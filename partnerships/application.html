@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apply for clinic access · Aevivo Clinical</title>
+<meta name="description" content="Apply for verified clinic pricing on EU-GMP peptide pens and vials. For longevity, health and wellness clinics and licensed practitioners.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .next-card {
+    padding: 24px 28px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    margin-bottom: 36px;
+  }
+  .next-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 700px) { .next-grid { grid-template-columns: 1fr; gap: 18px; } }
+  .next-num {
+    font-family: var(--serif); font-size: 28px; color: var(--olive);
+    font-weight: 400; line-height: 1; margin-bottom: 10px; font-style: italic;
+  }
+  .next-t { font-size: 13px; color: var(--ink); font-weight: 600; letter-spacing: 0.3px; margin-bottom: 6px; line-height: 1.3; }
+  .next-d { font-size: 12.5px; color: var(--ink-soft); font-weight: 350; line-height: 1.6; }
+  .summary-pre {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    font-family: var(--sans);
+    font-size: 13px; color: var(--ink-soft); line-height: 1.7; font-weight: 350;
+    white-space: pre-wrap; margin-bottom: 24px; overflow-x: auto;
+  }
+  .label-req::after { content: " *"; color: var(--olive); }
+  .compliance-block {
+    padding: 16px 20px;
+    background: var(--olive-tint);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 12.5px; color: var(--ink-soft); font-weight: 400; line-height: 1.65;
+    margin-bottom: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- RUO BAR -->
+<div class="ruo-bar">
+  <span class="ruo-main">For Research Use Only</span><span class="ruo-sep">|</span><span class="ruo-sub">Licensed practitioners only. Not for human consumption.</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav solid" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="Aevivo Clinical home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span class="brand-text">
+        <span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">CLINICAL</span>
+      </span>
+    </a>
+    <div></div>
+    <div class="nav-right">
+      <a href="index.html" class="text-link">&larr; Back to home</a>
+    </div>
+  </div>
+</nav>
+
+<main style="max-width:880px; margin:0 auto; padding: 150px clamp(20px,5vw,60px) 100px;">
+  <div id="step-form">
+    <span class="eyebrow" style="display:block; margin-bottom:16px;">Apply · Clinic Access</span>
+    <h1 style="font-size:clamp(34px,4.5vw,52px); line-height:1.08; margin-bottom:20px;">Apply for verified <em>clinic pricing.</em></h1>
+    <p class="lede" style="margin-bottom:36px; max-width:680px;">Aevivo Clinical supplies EU-GMP peptide pens and vials to longevity, health and wellness clinics, and licensed practitioners. Tell us about your practice and what you need below; we'll take it from there.</p>
+
+    <div class="next-card">
+      <span class="eyebrow" style="display:block; margin-bottom:16px;">What happens next</span>
+      <div class="next-grid">
+        <div>
+          <div class="next-num">i.</div>
+          <div class="next-t">Review &middot; 2 business days</div>
+          <div class="next-d">We confirm your license or registration and check supply fit. No automated rejection; a human reads every application.</div>
+        </div>
+        <div>
+          <div class="next-num">ii.</div>
+          <div class="next-t">Intro call &middot; 15 minutes</div>
+          <div class="next-d">A short call with a co-founder to understand your protocols, volume, and timeline. This is where we share verified pricing and sample CoAs.</div>
+        </div>
+        <div>
+          <div class="next-num">iii.</div>
+          <div class="next-t">First order &middot; within 7 days</div>
+          <div class="next-d">Once you confirm the quote, we ship from EU stock. No formal MOQ; pilot orders welcome. Recurring supply terms agreed from there.</div>
+        </div>
+      </div>
+    </div>
+
+    <form id="application-form" autocomplete="on">
+      <div class="form-row two">
+        <div>
+          <label class="form-label label-req" for="clinic">Clinic / business name</label>
+          <input class="form-input" type="text" id="clinic" name="clinic" placeholder="e.g. Longevity Lab Lisbon" required>
+        </div>
+        <div>
+          <label class="form-label label-req" for="practitioner">Practitioner name</label>
+          <input class="form-input" type="text" id="practitioner" name="practitioner" placeholder="Dr. / first and last name" required>
+        </div>
+      </div>
+
+      <div class="form-row two">
+        <div>
+          <label class="form-label" for="license">License or registration number</label>
+          <input class="form-input" type="text" id="license" name="license" placeholder="Medical board / pharmacy / GMC etc.">
+        </div>
+        <div>
+          <label class="form-label label-req" for="country">Country of practice</label>
+          <select class="form-select" id="country" name="country" required>
+            <option value="">Select country</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row two">
+        <div>
+          <label class="form-label label-req" for="specialty">Specialty</label>
+          <select class="form-select" id="specialty" name="specialty" required>
+            <option value="">Select specialty</option>
+            <option>Longevity / anti-aging</option>
+            <option>Aesthetics</option>
+            <option>Sports / regenerative</option>
+            <option>Functional / integrative</option>
+            <option>Endocrinology</option>
+            <option>Wellness / IV</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label label-req" for="volume">Estimated monthly volume</label>
+          <select class="form-select" id="volume" name="volume" required>
+            <option value="">Select volume</option>
+            <option>Pilot order (1-10 pens / month)</option>
+            <option>Small (10-30 / month)</option>
+            <option>Mid (30-80 / month)</option>
+            <option>High (80+ / month)</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Peptides of interest (select any)</label>
+        <div class="form-tag-grid" id="peptide-grid"></div>
+      </div>
+
+      <div class="form-row two">
+        <div>
+          <label class="form-label label-req" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="you@clinic.com" required>
+        </div>
+        <div>
+          <label class="form-label" for="phone">Phone / WhatsApp</label>
+          <input class="form-input" type="tel" id="phone" name="phone" placeholder="+351 ...">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="notes">Notes (protocols, sourcing constraints, anything we should know)</label>
+        <textarea class="form-textarea" id="notes" name="notes" rows="4" placeholder="Optional"></textarea>
+      </div>
+
+      <div class="compliance-block">
+        All Aevivo materials are For Research Use Only and supplied to licensed practitioners and qualified researchers. Aevivo does not provide medical advice, dosing, or clinical protocols. The receiving practitioner is solely responsible for compounding, prescription, and compliance with local regulation.
+      </div>
+
+      <div class="compliance-block" style="background: var(--paper);">
+        <span style="color:var(--olive); font-weight:600; letter-spacing:1.4px; text-transform:uppercase; font-size:10px; margin-right:6px;">Who you're applying to</span>
+        GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity. NIF 519331800. INFARMED-authorised medical device distributor (Cert. N.&ordm; 3800/DM/2026). <a href="compliance.html" style="color:var(--olive); border-bottom:1px solid var(--olive);">Verify &rarr;</a>
+      </div>
+
+      <button type="submit" class="btn btn-fill btn-block">Submit application</button>
+    </form>
+  </div>
+
+  <div id="step-summary" style="display:none;">
+    <span class="eyebrow" style="display:block; margin-bottom:16px;">Step 2 &middot; Send</span>
+    <h1 style="font-size:clamp(28px,3.6vw,42px); line-height:1.12; margin-bottom:20px;">Send us your <em>application.</em></h1>
+    <p class="lede" style="margin-bottom:24px; max-width:680px;">Pick the channel that fits your practice. Your details below; either button forwards them to our clinical team. We reply within 2 business days.</p>
+    <pre class="summary-pre" id="summary-pre"></pre>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px;">
+      <a id="wa-btn" target="_blank" rel="noopener" href="#" class="btn btn-fill" style="flex:1; min-width:240px; background:#25D366; border-color:#128C7E;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:8px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+        Send via WhatsApp
+      </a>
+      <a id="email-btn" href="#" class="btn btn-ghost" style="flex:1; min-width:240px;">Send by email</a>
+    </div>
+    <button type="button" id="back-btn" style="background:transparent; border:none; color:var(--ink-soft); font-size:13px; cursor:pointer; padding:0; letter-spacing:0.3px;">&larr; Edit application</button>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-row">
+          <div class="footer-brand-mark">A</div>
+          <div class="footer-brand-name">AEVIVO <span class="clinical">CLINICAL</span></div>
+        </div>
+        <p class="footer-mission">European-synthesized research peptides. Analytical documentation on record for every peptide.</p>
+      </div>
+      <div class="footer-col"><h5>Browse</h5><a href="index.html#catalog">Peptides</a><a href="story.html">Story</a><a href="index.html#science">Science</a><a href="index.html#faq">FAQ</a></div>
+      <div class="footer-col"><h5>Act</h5><a href="application.html">Apply for clinic access</a><a href="quality-check.html">Audit your supplier</a><a href="https://wa.me/351934126762" target="_blank" rel="noopener">Talk on WhatsApp</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="compliance.html">Compliance</a><a href="terms.html">Terms &amp; Conditions</a><a href="privacy.html">Privacy Policy</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity. NIF 519331800. INFARMED Cert. N.&ordm; 3800/DM/2026.</div>
+      <div>For research use only. Not for human consumption.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Country options
+  var countries = ["Portugal","Spain","Germany","France","Italy","Switzerland","Austria","Netherlands","Belgium","Luxembourg","UK","Ireland","Denmark","Sweden","Norway","Finland","Poland","Czechia","Greece","Cyprus","Malta","UAE","Saudi Arabia","USA","Canada","Other"];
+  var sel = document.getElementById('country');
+  countries.forEach(function(c){ var o=document.createElement('option'); o.textContent=c; sel.appendChild(o); });
+
+  // Peptide chips
+  var peptideOptions = ["BPC-157","TB-500","BPC-157 + TB-500","GHK-Cu","CJC-1295 + Ipamorelin","Ipamorelin","Retatrutide","Epithalon","MOTS-C","SS-31","NAD+ 600","NAD+ 300","AC-Semax-NH₂","AC-Selank-NH₂","Thymosin Alpha-1","KPV","PT-141","Other (specify in notes)"];
+  var grid = document.getElementById('peptide-grid');
+  peptideOptions.forEach(function(p){
+    var lbl = document.createElement('label'); lbl.className = 'form-tag';
+    var cb = document.createElement('input'); cb.type='checkbox'; cb.value=p; cb.name='peptides';
+    var span = document.createElement('span'); span.textContent = p;
+    lbl.appendChild(cb); lbl.appendChild(span); grid.appendChild(lbl);
+  });
+
+  // Form submit
+  var form = document.getElementById('application-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    var f = {
+      clinic: data.get('clinic'),
+      practitioner: data.get('practitioner'),
+      license: data.get('license'),
+      country: data.get('country'),
+      specialty: data.get('specialty'),
+      volume: data.get('volume'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      notes: data.get('notes'),
+      peptides: data.getAll('peptides'),
+    };
+    var lines = [
+      'Aevivo Clinical · Practitioner application',
+      '',
+      'Clinic: ' + f.clinic,
+      'Practitioner: ' + f.practitioner,
+    ];
+    if (f.license) lines.push('License / registration: ' + f.license);
+    lines.push('Country: ' + f.country);
+    lines.push('Specialty: ' + f.specialty);
+    lines.push('Estimated monthly volume: ' + f.volume);
+    lines.push('Peptides of interest: ' + (f.peptides.length ? f.peptides.join(', ') : '(not specified)'));
+    if (f.notes) lines.push('Notes: ' + f.notes);
+    lines.push('');
+    lines.push('Email: ' + f.email);
+    if (f.phone) lines.push('Phone / WhatsApp: ' + f.phone);
+    var summary = lines.join('\n');
+
+    document.getElementById('summary-pre').textContent = summary;
+    document.getElementById('wa-btn').href = 'https://wa.me/351934126762?text=' + encodeURIComponent(summary);
+    document.getElementById('email-btn').href = 'mailto:info@aevivolongevity.com?subject=' + encodeURIComponent('Aevivo Clinical · Practitioner application · ' + (f.clinic||'')) + '&body=' + encodeURIComponent(summary);
+
+    try { localStorage.setItem('aevivoClinicalApplication', JSON.stringify({...f, ts: new Date().toISOString()})); } catch(err) {}
+
+    document.getElementById('step-form').style.display = 'none';
+    document.getElementById('step-summary').style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  document.getElementById('back-btn').addEventListener('click', function(){
+    document.getElementById('step-summary').style.display = 'none';
+    document.getElementById('step-form').style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+<script src="assets/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full Peptide Catalog · Aevivo Clinical</title>
+<meta name="description" content="Full Aevivo Clinical peptide catalog. EU-GMP synthesis, &gt;98% HPLC purity, Certificate of Analysis on every batch. Verified clinic pricing on application.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .pep-category { margin-bottom: 64px; }
+  .pep-category:last-child { margin-bottom: 0; }
+  .search-row { max-width: 480px; margin: 0 auto 56px; }
+  .search-row .form-input { font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="ruo-bar"><span class="ruo-main">For Research Use Only</span><span class="ruo-sep">|</span><span class="ruo-sub">Not for human consumption. Not evaluated by any regulatory body.</span></div>
+
+<nav class="nav solid" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="brand-mark">A</span><span class="brand-text"><span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">CLINICAL</span></span></a>
+    <div class="nav-links">
+      <a href="story.html">Story</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="index.html#science">Science</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="application.html" class="btn btn-fill btn-sm">Apply for clinic access</a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero" style="padding-top: 150px;">
+  <div class="container">
+    <span class="eyebrow">Phase I Catalog &middot; 17 Peptides</span>
+    <h1>Every <em>peptide.</em></h1>
+    <p class="lede">Each entry below is synthesised in an EU-GMP facility and ships with a Certificate of Analysis. Verified clinic pricing is shared after a short application. Looking for something not listed? <a href="https://wa.me/351934126762" style="color:var(--olive); border-bottom: 1px solid var(--olive);" target="_blank" rel="noopener">Message us on WhatsApp</a>.</p>
+  </div>
+</section>
+
+<section style="background: var(--bg-warm);">
+  <div class="container">
+    <div class="search-row">
+      <input class="form-input" id="search" type="search" placeholder="Search peptides ..." autocomplete="off">
+    </div>
+
+    <div id="catalog-root"></div>
+
+    <div style="text-align:center; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line-soft);">
+      <p style="font-size:16px; color:var(--ink-soft); font-weight:350; max-width:640px; margin:0 auto 18px; line-height:1.7;">Ready to apply for verified clinic pricing?</p>
+      <a href="application.html" class="btn btn-fill">Apply for clinic access</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-row"><div class="footer-brand-mark">A</div><div class="footer-brand-name">AEVIVO <span class="clinical">CLINICAL</span></div></div><p class="footer-mission">European-synthesized research peptides. Analytical documentation on record for every peptide.</p></div>
+      <div class="footer-col"><h5>Browse</h5><a href="catalog.html">Peptides</a><a href="story.html">Story</a><a href="index.html#science">Science</a><a href="index.html#faq">FAQ</a></div>
+      <div class="footer-col"><h5>Act</h5><a href="application.html">Apply for clinic access</a><a href="quality-check.html">Audit your supplier</a><a href="https://wa.me/351934126762" target="_blank" rel="noopener">Talk on WhatsApp</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="compliance.html">Compliance</a><a href="terms.html">Terms &amp; Conditions</a><a href="privacy.html">Privacy Policy</a></div>
+    </div>
+    <div class="footer-bottom"><div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity.</div><div>For research use only.</div></div>
+  </div>
+</footer>
+
+<script>
+var catalog = [
+  {cat:"Recovery & Repair", items:[
+    {n:"BPC-157",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Synthetic pentadecapeptide. The most-studied tissue-repair peptide in the literature, with over a hundred preclinical publications on cytoprotection and angiogenic signalling."},
+    {n:"TB-500",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-side",ds:"Active fragment of Thymosin Beta-4. Mobilises stem cells, reduces scar formation, accelerates remodelling in tissue-repair models."},
+    {n:"BPC-157 + TB-500",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-dial",ds:"Co-formulated tissue-repair stack. Complementary mechanisms: vascular and epithelial repair plus stem-cell migration."},
+  ]},
+  {cat:"Growth Hormone Secretagogues", items:[
+    {n:"CJC-1295 + Ipamorelin",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-hand",ds:"Paired pituitary stack. Larger, cleaner endogenous GH pulses than either peptide alone, without raising cortisol or prolactin."},
+    {n:"Ipamorelin",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Selective ghrelin-receptor agonist. The cleanest of the GHRPs: pulsatile GH release without cortisol or prolactin crossover."},
+  ]},
+  {cat:"Cellular Health", items:[
+    {n:"Epithalon",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"pen-dial",ds:"Pineal tetrapeptide developed by the Khavinson group. Telomerase activation and twelve-year mortality data from Russian gerontology cohorts."},
+    {n:"MOTS-C",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Mitochondrial-encoded peptide. AMPK activation, exercise-mimetic metabolic effects, ~10-15% lifespan extension in mouse models."},
+    {n:"SS-31",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-hands",ds:"Cardiolipin-binding mitochondrial peptide. Stabilises cristae, reduces ROS at the source. In Phase 2/3 clinical trials (Stealth BioTherapeutics)."},
+    {n:"NAD+ 600",sp:"200 mg/ml · 3 ml pen · 600 mg",img:"vial-marble",ds:"High-concentration NAD+. Substrate for sirtuins, PARPs, and cellular bioenergetics. Plasma levels fall ~50% by sixty."},
+    {n:"NAD+ 300",sp:"100 mg/ml · 3 ml pen · 300 mg",img:"vial-closeup",ds:"Standard NAD+ formulation for maintenance protocols. Same biochemistry as the 600, smaller per-dose volume."},
+  ]},
+  {cat:"Cognitive & Neuroprotection", items:[
+    {n:"AC-Semax-NH₂",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-side",ds:"Acetylated, amidated heptapeptide ACTH(4-10) analogue. Upregulates BDNF and NGF, the neurotrophic factors for memory and cortical plasticity."},
+    {n:"AC-Selank-NH₂",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-dial",ds:"Acetylated, amidated heptapeptide tuftsin analogue. Anxiolytic effect without sedation, tolerance, or dependence. GABAergic modulation."},
+  ]},
+  {cat:"Longevity & Skin Health", items:[
+    {n:"GHK-Cu",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-closeup",ds:"Copper-binding tripeptide your body produces naturally. Genome-wide effects on collagen, elastin, and DNA-repair gene expression."},
+  ]},
+  {cat:"Metabolic Health & Weight Management", items:[
+    {n:"Retatrutide",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-marble",ds:"Triple GLP-1/GIP/glucagon agonist. Around 24% mean weight loss at 48 weeks in Phase 2. Lilly's investigational obesity molecule."},
+  ]},
+  {cat:"Immune, Anti-Inflammatory & Sexual Function", items:[
+    {n:"Thymosin Alpha-1",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-hands-2",ds:"28-amino-acid thymic peptide. Approved as Zadaxin in 35+ countries for hepatitis and cancer adjunct. Th1 immune polarisation."},
+    {n:"KPV",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Tripeptide tail of α-MSH. Strongly anti-inflammatory via NF-κB suppression. Orally bioavailable, gut-active."},
+    {n:"PT-141",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-hand",ds:"Cyclic heptapeptide MC4R agonist. FDA-approved as Vyleesi for HSDD. Central arousal pathway, independent of vascular mechanism."},
+  ]},
+];
+
+function renderCatalog(filter) {
+  var root = document.getElementById('catalog-root');
+  root.innerHTML = '';
+  var f = (filter||'').trim().toLowerCase();
+  var totalShown = 0;
+  catalog.forEach(function(group, gi) {
+    var items = f ? group.items.filter(function(i){ return i.n.toLowerCase().indexOf(f)!==-1; }) : group.items;
+    if (!items.length) return;
+    totalShown += items.length;
+    var sec = document.createElement('div');
+    sec.className = 'pep-category reveal';
+    var head = '<div class="pep-cat-head"><h3>' + group.cat + '</h3><span class="pep-cat-num">' + String(gi+1).padStart(2,'0') + ' &middot; ' + items.length + ' Peptides</span></div>';
+    var grid = '<div class="pep-grid">';
+    items.forEach(function(it){
+      grid += '<div class="pep-card">'
+        + '<img class="pep-card-img" src="images/productphotos/clean/' + it.img + '.png" alt="' + it.n + '" loading="lazy">'
+        + '<div class="pep-card-body">'
+        + '<h4 class="pep-card-name">' + it.n + '</h4>'
+        + '<div class="pep-card-spec">' + it.sp + ' &middot; &gt;98% purity</div>'
+        + '<p class="pep-card-desc">' + it.ds + '</p>'
+        + '<div class="pep-card-foot"><span class="pep-card-price">Verified pricing on application</span><a href="application.html" class="pep-card-link">Apply</a></div>'
+        + '</div></div>';
+    });
+    grid += '</div>';
+    sec.innerHTML = head + grid;
+    root.appendChild(sec);
+  });
+  if (!totalShown) {
+    root.innerHTML = '<p style="text-align:center;color:var(--ink-mute);font-size:15px;padding:48px 0;">No peptides match "' + f + '". <a href="https://wa.me/351934126762" target="_blank" rel="noopener" style="color:var(--olive);border-bottom:1px solid var(--olive);">Ask us on WhatsApp</a> – we may carry it.</p>';
+  }
+  // Trigger reveal observer for new elements
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(function(el){ if (!el.classList.contains('in')) io.observe(el); });
+  }
+}
+
+renderCatalog('');
+document.getElementById('search').addEventListener('input', function(e){ renderCatalog(e.target.value); });
+</script>
+<script src="assets/theme.js"></script>
+</body>
+</html>

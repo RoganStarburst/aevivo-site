@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AEVIVO ACCESS GATE -->
+<script>
+(function(){
+  var KEY='aevivo-clinical-gate-v1',PW='CLINICS26';
+  try{if(localStorage.getItem(KEY)===PW)return}catch(e){}
+  document.documentElement.setAttribute('data-aevivo-locked','1');
+  var css='html[data-aevivo-locked] body > *:not(#aevivo-gate){display:none !important}'
+    +'#aevivo-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#EFE8DA;font-family:Inter,system-ui,sans-serif;color:#2C2D27;padding:24px}'
+    +'#aevivo-gate .gate-card{position:relative;max-width:440px;width:100%;text-align:center;padding:48px 36px;background:#F5EFE3;border:1px solid #C9BFA8;border-radius:14px}'
+    +'#aevivo-gate .gate-mark{width:54px;height:54px;border:1.2px solid #2C2D27;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;color:#2C2D27;font-weight:500;margin-bottom:22px}'
+    +'#aevivo-gate .gate-brand{font-size:11px;letter-spacing:4px;color:#565A45;font-weight:600;text-transform:uppercase;margin-bottom:14px}'
+    +'#aevivo-gate .gate-heading{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;font-weight:400;line-height:1.15;margin:0 0 12px;color:#2C2D27}'
+    +'#aevivo-gate .gate-heading em{color:#565A45;font-style:italic}'
+    +'#aevivo-gate .gate-sub{font-size:14px;color:#54564E;font-weight:300;line-height:1.65;margin:0 0 28px}'
+    +'#aevivo-gate form{margin:0}'
+    +'#aevivo-gate input{width:100%;box-sizing:border-box;padding:14px 18px;background:#EFE8DA;border:1px solid #C9BFA8;border-radius:10px;color:#2C2D27;font-size:14px;font-family:inherit;outline:none;letter-spacing:2px;text-align:center;margin-bottom:14px;transition:border-color .2s}'
+    +'#aevivo-gate input::placeholder{color:#8A887D;letter-spacing:1px}'
+    +'#aevivo-gate input:focus{border-color:#565A45}'
+    +'#aevivo-gate button{width:100%;padding:14px 24px;background:linear-gradient(180deg,#797D62,#5A5E45,#3F4231);color:#F2EEE2;border:none;border-radius:999px;font-family:inherit;font-weight:600;font-size:11px;letter-spacing:2.4px;text-transform:uppercase;cursor:pointer;transition:opacity .2s}'
+    +'#aevivo-gate button:hover{opacity:.92}'
+    +'#aevivo-gate .gate-error{font-size:12px;color:#B14A3A;margin-top:12px;min-height:16px;letter-spacing:.3px}'
+    +'#aevivo-gate .gate-foot{font-size:11px;color:#8A887D;margin-top:28px;letter-spacing:.3px;line-height:1.5}'
+    +'@keyframes aevivo-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}'
+    +'#aevivo-gate.shake .gate-card{animation:aevivo-shake .4s ease}';
+  var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+  function render(){
+    var el=document.createElement('div');el.id='aevivo-gate';
+    el.innerHTML='<div class="gate-card"><div class="gate-mark">A</div><div class="gate-brand">Aevivo Clinical</div><h1 class="gate-heading">Practitioner <em>preview.</em></h1><p class="gate-sub">Aevivo Clinical is the EU-GMP supply channel for longevity, health and wellness clinics. Enter your access code to continue.</p><form id="aevivo-gate-form"><input id="aevivo-gate-input" type="password" placeholder="Access code" autocomplete="off" autofocus/><button type="submit">Enter</button><div class="gate-error" id="aevivo-gate-err"></div></form><div class="gate-foot">For research use only. Not for human consumption.</div></div>';
+    document.body.appendChild(el);
+    var form=document.getElementById('aevivo-gate-form'),input=document.getElementById('aevivo-gate-input'),err=document.getElementById('aevivo-gate-err');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(input.value.trim().toUpperCase()===PW){
+        try{localStorage.setItem(KEY,PW)}catch(_){}
+        document.documentElement.removeAttribute('data-aevivo-locked');
+        el.remove();
+      }else{
+        err.textContent='Incorrect access code.';
+        el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
+        input.value='';input.focus();
+      }
+    });
+    setTimeout(function(){input.focus()},50);
+  }
+  if(document.readyState!=='loading')render();
+  else document.addEventListener('DOMContentLoaded',render);
+})();
+</script>
+<!-- /AEVIVO ACCESS GATE -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aevivo Clinical · EU-GMP Peptide Supply for Clinics and Practitioners</title>
+<meta name="description" content="European-sourced, GMP-certified peptide pens and vials for longevity, health and wellness clinics. CoA per batch. Verified pricing on application.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EFE8DA;
+    --bg-warm: #E9E0CE;
+    --paper: #F5EFE3;
+    --ink: #2C2D27;
+    --ink-soft: #54564E;
+    --ink-mute: #8A887D;
+    --line: #C9BFA8;
+    --line-soft: #DDD4BE;
+    --olive: #565A45;
+    --olive-deep: #44483A;
+    --olive-tint: rgba(86,90,69,0.08);
+    --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.65;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  h1 { font-size: clamp(46px, 6.4vw, 88px); line-height: 1.1; }
+  h2 { font-size: clamp(34px, 4.4vw, 58px); line-height: 1.08; }
+  h3 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; }
+  h4 { font-size: 19px; line-height: 1.3; }
+  em { font-style: italic; color: var(--ink-soft); font-weight: 400; }
+
+  p { font-weight: 350; color: var(--ink-soft); }
+  .lede { font-size: 19px; line-height: 1.7; color: var(--ink-soft); font-weight: 350; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 15px 32px;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 1px solid var(--olive);
+    cursor: pointer;
+    transition: all .25s ease;
+    background: transparent;
+    color: var(--olive);
+    border-radius: 999px;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .btn-fill {
+    background: linear-gradient(180deg, #797D62 0%, #5A5E45 48%, #3F4231 100%);
+    color: #F2EEE2;
+    border-color: #3F4231;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 1px 2px rgba(44,45,39,0.18);
+  }
+  .btn-fill:hover {
+    background: linear-gradient(180deg, #5A5E45 0%, #424632 50%, #2F3225 100%);
+    border-color: #2F3225;
+  }
+  .btn-ghost:hover { background: var(--olive-tint); }
+  .btn-sm { padding: 10px 22px; font-size: 9.5px; letter-spacing: 2.2px; }
+
+  /* RUO bar */
+  .ruo-bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 110;
+    background: var(--ink);
+    color: #F2EEE2;
+    padding: 9px 20px;
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .ruo-bar .ruo-main { color: #D6CCB0; }
+  .ruo-bar .ruo-sep { color: rgba(214,204,176,0.35); margin: 0 12px; }
+  .ruo-bar .ruo-sub { color: rgba(245,239,227,0.65); letter-spacing: .5px; text-transform: none; font-weight: 400; }
+  @media (max-width: 700px) { .ruo-bar .ruo-sep, .ruo-bar .ruo-sub { display: none; } }
+
+  /* Nav */
+  .nav {
+    position: fixed; top: 36px; left: 0; right: 0;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background .3s, border-color .3s, backdrop-filter .3s;
+  }
+  .nav.scrolled {
+    background: rgba(239,232,218,0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--line-soft);
+  }
+  .nav-inner {
+    max-width: none;
+    margin: 0;
+    padding: 18px clamp(28px, 5vw, 80px);
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
+  }
+  .nav-brand {
+    display: inline-flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 38px; height: 38px;
+    border: 1.2px solid var(--ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .brand-text { display: flex; flex-direction: column; line-height: 1; }
+  .brand-name {
+    font-family: var(--sans);
+    font-size: 15px;
+    letter-spacing: 4.5px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .brand-tagline {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 3.5px;
+    color: var(--olive);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .nav-links { display: flex; gap: 32px; justify-content: center; }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase;
+    font-weight: 500; color: var(--ink-soft);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-right { display: flex; gap: 16px; justify-content: flex-end; align-items: center; }
+  .wa-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+    flex-shrink: 0;
+  }
+  .wa-btn:hover { background: #128C7E; }
+  .wa-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+  @media (max-width: 1100px) {
+    .nav-links { display: none; }
+    .nav-inner { grid-template-columns: auto 1fr; }
+    .nav-right { grid-column: 2; }
+  }
+  @media (max-width: 600px) {
+    .nav-inner { padding: 14px 18px; gap: 10px; }
+    .brand-tagline { display: none; }
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    width: 100%;
+    min-height: 760px;
+    height: 100vh;
+    max-height: 1020px;
+    background-image: url('images/products/lab-hand-03.jpg');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-color: var(--bg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-left: clamp(56px, 8vw, 120px);
+    padding-right: 32px;
+    padding-top: 200px;
+    padding-bottom: 60px;
+  }
+  .hero .container { max-width: none; padding: 0; margin: 0; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right,
+      rgba(239,232,218,0.94) 0%,
+      rgba(239,232,218,0.82) 24%,
+      rgba(239,232,218,0.50) 48%,
+      rgba(239,232,218,0.15) 70%,
+      rgba(239,232,218,0) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 90px;
+    background: linear-gradient(to bottom, rgba(239,232,218,0) 0%, var(--bg) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 720px;
+    padding-right: 20px;
+  }
+  .hero h1 { margin: 26px 0 30px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.12; }
+  .hero h1 em { display: block; font-style: italic; color: var(--olive); opacity: 1; font-weight: 400; margin-top: 18px; line-height: 1.12; }
+  .hero-sub { max-width: 540px; margin-bottom: 32px; font-size: 19px; line-height: 1.7; color: var(--ink-soft); font-weight: 350; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+  .hero-audit-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 16px; color: var(--olive); font-weight: 500;
+    border-bottom: 1.5px solid var(--olive);
+    padding-bottom: 4px;
+    transition: opacity .2s;
+  }
+  .hero-audit-link:hover { opacity: 0.75; }
+  @media (max-width: 980px) {
+    .hero { min-height: 640px; max-height: 880px; background-position: 78% center; padding-top: 110px; }
+    .hero::before {
+      background: linear-gradient(to bottom,
+        rgba(239,232,218,0.96) 0%,
+        rgba(239,232,218,0.85) 30%,
+        rgba(239,232,218,0.55) 55%,
+        rgba(239,232,218,0.15) 78%,
+        rgba(239,232,218,0) 100%);
+    }
+    .hero-content { max-width: 100%; }
+  }
+  @media (max-width: 700px) {
+    .hero { min-height: 580px; }
+    .hero h1 { font-size: clamp(38px, 9vw, 56px); }
+  }
+
+  /* Trust strip */
+  .trust-strip {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 36px 0;
+    background: var(--bg);
+    position: relative;
+    z-index: 3;
+  }
+  .trust-strip-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 48px);
+    align-items: center;
+  }
+  .trust-cert {
+    display: flex; flex-direction: column; gap: 6px;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    padding: 0 6px;
+    border-left: 1px solid var(--line);
+    padding-left: clamp(16px, 2vw, 28px);
+    transition: opacity .2s;
+  }
+  .trust-cert:first-child { border-left: none; padding-left: 0; }
+  a.trust-cert:hover { opacity: 0.75; }
+  .trust-cert-v {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.4px;
+    line-height: 1.1;
+  }
+  .trust-cert-l {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  @media (max-width: 800px) {
+    .trust-strip-inner { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+    .trust-cert:nth-child(3) { border-left: none; padding-left: 0; }
+  }
+  @media (max-width: 480px) {
+    .trust-strip-inner { grid-template-columns: 1fr; row-gap: 22px; }
+    .trust-cert { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 18px; }
+    .trust-cert:first-child { border-top: none; padding-top: 0; }
+  }
+
+  /* Sections */
+  section { padding: 100px 0; position: relative; }
+  @media (max-width: 700px) { section { padding: 72px 0; } }
+  .section-head { max-width: 760px; margin-bottom: 56px; }
+  .section-head .eyebrow { display: block; margin-bottom: 22px; }
+  .section-head h2 { margin-bottom: 22px; }
+
+  /* Two-format cards */
+  .formats { background: var(--paper); }
+  .format-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 800px) { .format-grid { grid-template-columns: 1fr; } }
+  .format-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .format-card:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(44,45,39,0.10); }
+  .format-img { aspect-ratio: 3/2; object-fit: cover; width: 100%; border-bottom: 1px solid var(--line); }
+  .format-body { padding: 32px 36px 34px; flex: 1; display: flex; flex-direction: column; }
+  .format-body .eyebrow { color: var(--olive); margin-bottom: 14px; font-size: 11.5px; }
+  .format-body h3 { margin-bottom: 18px; font-size: clamp(26px, 2.6vw, 32px); }
+  .format-body h3 em { color: var(--olive); }
+  .format-body ul { list-style: none; margin: 0 0 22px; padding: 0; }
+  .format-body li {
+    padding-left: 22px; position: relative;
+    font-size: 17px; line-height: 1.7; color: var(--ink-soft);
+    font-weight: 350; margin-bottom: 10px;
+  }
+  .format-body li::before {
+    content: ""; position: absolute; left: 0; top: 11px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--olive); opacity: 0.7;
+  }
+  .format-best {
+    padding-top: 16px; border-top: 1px solid var(--line-soft);
+    font-size: 14.5px; line-height: 1.7; color: var(--ink-soft);
+  }
+  .format-best b {
+    text-transform: uppercase; font-size: 11px; letter-spacing: 2px;
+    color: var(--olive); font-weight: 600; margin-right: 10px;
+  }
+
+  /* Catalog */
+  .catalog-section { background: var(--bg-warm); }
+  .pep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 980px) { .pep-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .pep-grid { grid-template-columns: 1fr; } }
+  .pep-card {
+    background: var(--paper);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .pep-card:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(44,45,39,0.12); }
+  .pep-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .pep-card-body { padding: 24px 26px 26px; flex: 1; display: flex; flex-direction: column; }
+  .pep-card-cat {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--olive);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .pep-card-name {
+    font-family: var(--serif); font-size: 24px; font-weight: 400;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .pep-card-name em { color: var(--olive); font-style: italic; }
+  .pep-card-spec {
+    font-size: 12px; color: var(--ink-mute);
+    font-family: var(--sans); font-weight: 400;
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+  }
+  .pep-card-desc {
+    font-size: 14px; line-height: 1.6;
+    color: var(--ink-soft); font-weight: 350;
+    margin-bottom: 20px; flex: 1;
+  }
+  .pep-card-foot {
+    display: flex; justify-content: space-between; align-items: end;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .pep-card-price {
+    font-family: var(--serif); font-size: 26px;
+    color: var(--ink); line-height: 1;
+  }
+  .pep-card-price-old {
+    font-size: 13px; color: var(--ink-mute);
+    text-decoration: line-through;
+    margin-left: 8px;
+    font-family: var(--sans);
+  }
+  .pep-card-link {
+    font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase;
+    color: var(--olive); font-weight: 600;
+    border-bottom: 1px solid var(--olive);
+    padding-bottom: 3px;
+  }
+  /* Place-your-order CTA card (last cell of the grid) */
+  .pep-cta-card {
+    background: linear-gradient(160deg, rgba(86,90,69,0.18), rgba(86,90,69,0.04));
+    border: 1px solid var(--olive);
+    border-left: 4px solid var(--olive);
+    border-radius: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 36px 28px;
+    text-align: center;
+    transition: all .25s ease;
+    text-decoration: none;
+  }
+  .pep-cta-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(86,90,69,0.25);
+    background: linear-gradient(160deg, rgba(86,90,69,0.28), rgba(86,90,69,0.08));
+  }
+  .pep-cta-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--olive);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    color: var(--olive);
+  }
+  .pep-cta-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase;
+    color: var(--olive); font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .pep-cta-h {
+    font-family: var(--serif);
+    font-size: 26px; font-weight: 400;
+    color: var(--ink); line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .pep-cta-h em { color: var(--olive); font-style: italic; }
+  .pep-cta-card p {
+    font-size: 13.5px; line-height: 1.6;
+    color: var(--ink-mute); font-weight: 350;
+    margin-bottom: 14px; max-width: 240px;
+  }
+  .pep-cta-link {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--olive); font-weight: 700;
+  }
+  /* Deep-catalogue strip below the grid */
+  .catalog-deep {
+    margin-top: 56px;
+    padding: 36px 40px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+  }
+  @media (max-width: 800px) {
+    .catalog-deep { grid-template-columns: 1fr; text-align: center; gap: 18px; padding: 32px 28px; }
+    .catalog-deep .btn { justify-self: center; }
+  }
+  .catalog-deep-num {
+    font-family: var(--serif); font-size: clamp(56px, 7vw, 88px);
+    font-weight: 400; color: var(--olive);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .catalog-deep-text h3 {
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.25;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .catalog-deep-text h3 em { color: var(--olive); }
+  .catalog-deep-text p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    font-weight: 350;
+    max-width: 640px;
+  }
+  .order-cta-card {
+    background: linear-gradient(160deg, rgba(86,90,69,0.18), rgba(86,90,69,0.04));
+    border: 1px solid var(--olive);
+    border-left: 4px solid var(--olive);
+    border-radius: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 36px 28px;
+    text-align: center;
+    transition: all .25s ease;
+    text-decoration: none;
+  }
+  .order-cta-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(86,90,69,0.25);
+    background: linear-gradient(160deg, rgba(86,90,69,0.28), rgba(86,90,69,0.08));
+  }
+  .order-cta-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--olive);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    color: var(--olive);
+  }
+
+  /* Audit */
+  .audit { background: var(--paper); }
+  .audit-points {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 30px;
+  }
+  @media (max-width: 600px) { .audit-points { grid-template-columns: 1fr; } }
+  .audit-point {
+    padding: 16px 18px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .audit-point .t { font-size: 13px; color: var(--ink); font-weight: 600; letter-spacing: 0.3px; margin-bottom: 4px; line-height: 1.3; }
+  .audit-point .d { font-size: 13px; color: var(--ink-soft); font-weight: 350; line-height: 1.55; }
+  .audit-cta-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .audit-cta-row .meta { font-size: 11.5px; color: var(--ink-mute); letter-spacing: 0.4px; }
+
+  /* Photo break */
+  .photo-break {
+    width: 100%;
+    height: 60vh;
+    min-height: 380px;
+    max-height: 680px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: end;
+  }
+  .photo-break::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(44,45,39,0.55) 0%, rgba(44,45,39,0.05) 50%, rgba(44,45,39,0) 100%);
+    pointer-events: none;
+  }
+  .photo-break-caption {
+    position: relative; z-index: 2;
+    color: #F5EFE3;
+    padding: 60px 0;
+  }
+  .photo-break-caption .eyebrow { color: rgba(245,239,227,0.75); }
+  .photo-break-caption h3 {
+    color: #F5EFE3;
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height: 1.15;
+    max-width: 720px;
+    margin-top: 18px;
+  }
+  .photo-break-caption h3 em { color: #D6CCB0; font-style: italic; }
+
+  /* Story */
+  .story-intro p { font-size: 17px; line-height: 1.8; margin-bottom: 16px; color: var(--ink); font-weight: 350; }
+  .story-intro p:last-child { margin-bottom: 0; }
+  .story-people { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 56px; }
+  @media (max-width: 800px) { .story-people { grid-template-columns: 1fr; } }
+  .person-card {
+    padding: 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition: border-color .2s, transform .2s;
+    display: block;
+  }
+  .person-card:hover { border-color: var(--olive); transform: translateY(-2px); }
+  .person-head { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+  .person-head img {
+    width: 84px; height: 84px;
+    border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--olive);
+    flex-shrink: 0;
+    filter: grayscale(0.1);
+  }
+  .person-head .name { font-family: var(--serif); font-size: 22px; color: var(--ink); font-weight: 500; line-height: 1.2; }
+  .person-head .role { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--olive); margin-top: 4px; font-weight: 600; }
+  .person-card p { font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); font-weight: 350; margin-bottom: 14px; }
+  .person-card .read-more { font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--olive); font-weight: 600; }
+  .long-arc { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line); }
+  .long-arc h3 { font-size: clamp(22px, 2.4vw, 30px); margin-bottom: 14px; }
+  .long-arc p { font-size: 16.5px; line-height: 1.75; color: var(--ink-soft); font-weight: 350; max-width: 920px; }
+
+  /* Commitments */
+  .commitments { background: var(--paper); }
+  .commit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .commit-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .commit-grid { grid-template-columns: 1fr; } }
+  .commit-card {
+    padding: 26px 24px 28px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition: border-color .2s, transform .2s;
+  }
+  .commit-card:hover { border-color: var(--olive); transform: translateY(-2px); }
+  .commit-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .commit-mark {
+    width: 32px; height: 32px;
+    border: 1px solid var(--olive);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 16px; color: var(--olive); font-weight: 500;
+  }
+  .commit-num { font-size: 11px; color: var(--olive); opacity: 0.7; font-weight: 500; letter-spacing: 1px; }
+  .commit-card h3 { font-size: 22px; line-height: 1.2; margin-bottom: 14px; }
+  .commit-card h3 em { color: var(--olive); }
+  .commit-card p { font-size: 13px; line-height: 1.7; color: var(--ink-soft); }
+  .audience-row {
+    display: flex; justify-content: center; gap: clamp(32px,6vw,80px);
+    margin-top: 44px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap; text-align: center;
+  }
+  .audience-row .tier {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--olive); font-weight: 600; margin-bottom: 6px;
+  }
+  .audience-row .aud { font-size: 18px; font-family: var(--serif); font-style: italic; color: var(--ink); font-weight: 400; }
+
+  /* Science papers */
+  .papers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .paper-card {
+    padding: 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    transition: border-color .2s, transform .2s;
+    display: flex; flex-direction: column;
+  }
+  .paper-card:hover { border-color: var(--olive); transform: translateY(-2px); }
+  .paper-head {
+    display: flex; justify-content: space-between; margin-bottom: 14px;
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--olive);
+    font-weight: 600;
+  }
+  .paper-head .yr { color: var(--ink-mute); letter-spacing: 0; text-transform: none; font-weight: 400; }
+  .paper-card h3 { font-size: 19px; line-height: 1.45; margin-bottom: 10px; }
+  .paper-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 14px; flex: 1; }
+  .paper-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 10px; border-top: 1px solid var(--line-soft);
+    font-size: 12.5px; color: var(--ink-mute);
+  }
+  .paper-foot .read { font-size: 10.5px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--olive); font-weight: 600; }
+
+  /* QC */
+  .qc { background: var(--paper); }
+  .qc-head { text-align: center; margin-bottom: 48px; }
+  .qc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .qc-card {
+    padding: 28px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .qc-num {
+    font-family: var(--serif); font-size: 48px; font-weight: 300;
+    color: var(--line-soft); position: absolute; top: 6px; right: 16px; line-height: 1;
+  }
+  .qc-card .t { font-size: 14px; color: var(--olive); font-weight: 600; margin-bottom: 8px; position: relative; }
+  .qc-card p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); position: relative; }
+
+  /* Journal */
+  .journal-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 40px; }
+  .journal-head > div { max-width: 620px; }
+  .journal-head .eyebrow { display: block; margin-bottom: 14px; }
+  .journal-head h2 { margin-bottom: 14px; }
+  .journal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .journal-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color .2s, transform .2s;
+    display: flex; flex-direction: column;
+  }
+  .journal-card:hover { border-color: var(--olive); transform: translateY(-2px); }
+  .journal-thumb {
+    aspect-ratio: 16/7;
+    background: var(--olive-tint);
+    border-bottom: 1px solid var(--line);
+  }
+  .journal-thumb svg { width: 100%; height: 100%; display: block; }
+  .journal-body { padding: 24px 26px 26px; flex: 1; display: flex; flex-direction: column; }
+  .journal-meta {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--olive); font-weight: 600;
+  }
+  .journal-meta .read { color: var(--ink-mute); letter-spacing: 0; text-transform: none; font-weight: 400; }
+  .journal-card h3 { font-size: 19px; line-height: 1.3; margin-bottom: 10px; }
+  .journal-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 16px; flex: 1; }
+  .journal-card .read-link { font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--olive); font-weight: 600; }
+  .journal-all { text-align: center; margin-top: 32px; }
+  .journal-all a {
+    font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--olive);
+    font-weight: 600; border-bottom: 1px solid var(--olive); padding-bottom: 2px;
+  }
+
+  /* FAQ */
+  .faq-list { max-width: 820px; margin: 0 auto; }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: transparent; border: none; cursor: pointer;
+    padding: 26px 0; font-family: var(--serif); font-size: 23px; color: var(--ink);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    line-height: 1.3; font-weight: 400;
+  }
+  .faq-q .plus { font-family: var(--sans); font-size: 22px; font-weight: 300; color: var(--olive); transition: transform .25s; flex-shrink: 0; }
+  .faq-item.open .faq-q .plus { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  .faq-item.open .faq-a { max-height: 480px; }
+  .faq-a-inner { padding: 0 0 26px; max-width: 720px; font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); font-weight: 350; }
+
+  /* Email signup */
+  .signup { background: var(--paper); padding: 80px 0; text-align: center; }
+  .signup h2 { font-size: clamp(26px, 3vw, 36px); margin: 12px 0 10px; }
+  .signup p { max-width: 440px; margin: 0 auto 26px; font-size: 15px; color: var(--ink-soft); font-weight: 350; }
+  .signup-form { display: flex; gap: 8px; max-width: 460px; margin: 0 auto; }
+  .signup-form input {
+    flex: 1; font-family: var(--sans); font-size: 13px; padding: 13px 16px;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ink); outline: none;
+  }
+  .signup-form input:focus { border-color: var(--olive); }
+  .signup-form button { white-space: nowrap; }
+  .signup .small { font-size: 11.5px; color: var(--ink-mute); margin-top: 12px; }
+
+  /* Footer */
+  footer {
+    background: var(--ink); color: rgba(245,239,227,0.7);
+    padding: 64px 0 36px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .footer-brand-mark {
+    width: 28px; height: 28px;
+    border: 1px solid #F5EFE3;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 16px; color: #F5EFE3; font-weight: 500;
+  }
+  .footer-brand-name { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #F5EFE3; font-weight: 500; }
+  .footer-brand-name .clinical { color: #D6CCB0; margin-left: 4px; }
+  .footer-mission { font-size: 13.5px; line-height: 1.7; max-width: 320px; }
+  .footer-col h5 { font-family: var(--sans); font-size: 10.5px; letter-spacing: 2.4px; text-transform: uppercase; color: #D6CCB0; margin-bottom: 16px; font-weight: 600; }
+  .footer-col a { display: block; font-size: 13px; padding: 4px 0; }
+  .footer-col a:hover { color: #F5EFE3; }
+  .footer-disclaimer {
+    border-top: 1px solid rgba(245,239,227,0.14);
+    padding-top: 22px; margin-bottom: 18px;
+    font-size: 11.5px; line-height: 1.75; color: rgba(245,239,227,0.55); max-width: 980px;
+  }
+  .footer-disclaimer .h {
+    color: #D6CCB0; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    font-size: 10.5px; margin-bottom: 8px; display: block;
+  }
+  .footer-disclaimer p { margin-bottom: 8px; color: rgba(245,239,227,0.55); font-weight: 350; }
+  .footer-disclaimer p:last-child { margin-bottom: 0; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+    font-size: 11.5px; color: rgba(245,239,227,0.45);
+  }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- RUO BAR -->
+<div class="ruo-bar">
+  <span class="ruo-main">For Research Use Only</span><span class="ruo-sep">|</span><span class="ruo-sub">Not for human consumption. Not evaluated by any regulatory body.</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand" aria-label="Aevivo Clinical">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span class="brand-text">
+        <span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">CLINICAL</span>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="story.html">Story</a>
+      <a href="#catalog">Peptides</a>
+      <a href="#science">Science</a>
+      <a href="#journal">Journal</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://wa.me/351934126762?text=Hi%20Aevivo%20Clinical%2C%20I%20have%20a%20question." target="_blank" rel="noopener" class="wa-btn" title="Chat on WhatsApp" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </a>
+      <a href="application.html" class="btn btn-fill btn-sm">Apply for clinic access</a>
+    </div>
+  </div>
+</nav>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content reveal">
+      <span class="eyebrow">EU-GMP Supply · For Clinics and Practitioners</span>
+      <h1>The peptide supply <em>your clinic can stand behind.</em></h1>
+      <p class="hero-sub">European-sourced, GMP-certified peptide pens and vials, with a Certificate of Analysis on every batch. Built for longevity, health and wellness clinics, and practitioners prescribing peptides.</p>
+      <div class="hero-ctas">
+        <a href="application.html" class="btn btn-fill">Apply for clinic access</a>
+        <a href="#catalog" class="btn btn-ghost">See what we supply</a>
+      </div>
+      <a href="quality-check.html" class="hero-audit-link">Already buying peptides? Audit your supplier &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-strip-inner">
+      <a href="compliance.html" class="trust-cert">
+        <span class="trust-cert-v">INFARMED</span>
+        <span class="trust-cert-l">Cert. N.&ordm; 3800/DM/2026</span>
+      </a>
+      <a href="compliance.html" class="trust-cert">
+        <span class="trust-cert-v">EUDAMED</span>
+        <span class="trust-cert-l">Registered economic operator</span>
+      </a>
+      <div class="trust-cert">
+        <span class="trust-cert-v">EU-GMP</span>
+        <span class="trust-cert-l">Synthesis &amp; analysis</span>
+      </div>
+      <div class="trust-cert">
+        <span class="trust-cert-v">CoA</span>
+        <span class="trust-cert-l">Per batch</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FORMATS -->
+<section class="formats">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Two Formats. One Supply Chain.</span>
+      <h2>Pens or vials. <em>Choose what fits the protocol.</em></h2>
+      <p class="lede">Same molecule. Same purity. Same Certificate of Analysis. The format you choose depends on how your clinic dispenses, compounds, and titrates dose.</p>
+    </div>
+    <div class="format-grid">
+      <div class="format-card reveal">
+        <img class="format-img" src="images/products/pen-clean-03.jpg" alt="Aevivo pre-filled peptide pen with dose counter" loading="lazy">
+        <div class="format-body">
+          <span class="eyebrow">Pre-filled Pen</span>
+          <h3>Ready at the <em>bedside.</em></h3>
+          <ul>
+            <li>Click-counted dosing for accuracy across patients</li>
+            <li>No compounding step; hand it to the patient prepared</li>
+            <li>Sterile per cartridge; fewer transfer points</li>
+            <li>Predictable shelf life; travel-friendly for patients</li>
+          </ul>
+          <div class="format-best"><b>Best for</b>Clinics dispensing direct to patient, retail dispensary, single-molecule protocols, simpler workflows.</div>
+        </div>
+      </div>
+      <div class="format-card reveal">
+        <img class="format-img" src="images/products/vial-droplet.jpg" alt="Aevivo Precision Peptides vial close-up" loading="lazy">
+        <div class="format-body">
+          <span class="eyebrow">Lyophilized Vial</span>
+          <h3>Built for <em>compounding.</em></h3>
+          <ul>
+            <li>Pharmacy compounds to your protocol concentration</li>
+            <li>Custom blends, dilutions, multi-dose preparations</li>
+            <li>Lower per-mg cost at clinic volume</li>
+            <li>Long shelf-life lyophilized for supply planning</li>
+          </ul>
+          <div class="format-best"><b>Best for</b>Clinics with in-house pharmacy or compounding partner, custom protocols, research-grade work, multi-molecule blends.</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top: 30px; font-size: 13px; color: var(--ink-mute);">Most peptides in the catalog are available in both formats. Tell us your preference on the application and we'll confirm availability per molecule.</p>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section class="catalog-section" id="catalog">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Shortlist</span>
+      <h2>Premium peptides.</h2>
+      <a href="explorer.html" style="display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--olive);border-bottom:1px solid var(--olive);padding-bottom:3px;font-weight:500;">Not sure where to start? Find the right peptides in 3 minutes &rarr;</a>
+    </div>
+
+    <div class="pep-grid reveal">
+      <div class="pep-card"><img src="images/productphotos/clean/pen-marble.png" class="pep-card-img" alt="BPC 157" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Recovery &amp; Repair</div><h4 class="pep-card-name">BPC <em>157</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">The most-studied tissue-repair peptide in the literature. Over a hundred preclinical publications on cytoprotection and angiogenic signalling.</p><div class="pep-card-foot"><div class="pep-card-price">€194<span class="pep-card-price-old">€290</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/pen-side.png" class="pep-card-img" alt="TB 500" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Recovery &amp; Repair</div><h4 class="pep-card-name">TB <em>500</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Active fragment of Thymosin Beta-4. Mobilises stem cells, reduces scar formation, accelerates remodelling in tissue-repair models.</p><div class="pep-card-foot"><div class="pep-card-price">€194<span class="pep-card-price-old">€290</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/pen-dial.png" class="pep-card-img" alt="BPC-157 + TB-500" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Recovery &amp; Repair</div><h4 class="pep-card-name">BPC-157 + <em>TB-500</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Co-formulated tissue-repair stack. Complementary mechanisms: vascular and epithelial repair plus stem-cell migration.</p><div class="pep-card-foot"><div class="pep-card-price">€231<span class="pep-card-price-old">€347</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+
+      <div class="pep-card"><img src="images/productphotos/clean/vial-closeup.png" class="pep-card-img" alt="GHK Cu" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Longevity &amp; Skin Health</div><h4 class="pep-card-name">GHK <em>Cu</em></h4><div class="pep-card-spec">10 mg/ml · 3 ml pen · 30 mg total</div><p class="pep-card-desc">Copper-binding tripeptide your body produces naturally. Genome-wide effects on collagen, elastin, and DNA-repair gene expression.</p><div class="pep-card-foot"><div class="pep-card-price">€168<span class="pep-card-price-old">€252</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/vial-marble.png" class="pep-card-img" alt="Retatrutide" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Metabolic Health</div><h4 class="pep-card-name">Retatrutide</h4><div class="pep-card-spec">10 mg/ml · 3 ml pen · 30 mg total</div><p class="pep-card-desc">Triple GLP-1/GIP/glucagon agonist. Around 24% mean weight loss at 48 weeks in Phase 2. Lilly's investigational obesity molecule.</p><div class="pep-card-foot"><div class="pep-card-price">€208<span class="pep-card-price-old">€312</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/pen-hand.png" class="pep-card-img" alt="CJC-1295 + Ipamorelin" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">GH Secretagogues</div><h4 class="pep-card-name">CJC-1295 + <em>Ipamorelin</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Paired pituitary stack. Larger, cleaner endogenous GH pulses than either peptide alone, without raising cortisol or prolactin.</p><div class="pep-card-foot"><div class="pep-card-price">€242<span class="pep-card-price-old">€362</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+
+      <div class="pep-card"><img src="images/productphotos/clean/pen-marble.png" class="pep-card-img" alt="Ipamorelin" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">GH Secretagogues</div><h4 class="pep-card-name">Ipamorelin</h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Selective ghrelin-receptor agonist. The cleanest of the GHRPs: pulsatile GH release without cortisol or prolactin crossover.</p><div class="pep-card-foot"><div class="pep-card-price">€144<span class="pep-card-price-old">€216</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/pen-dial.png" class="pep-card-img" alt="Epithalon" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Cellular Health</div><h4 class="pep-card-name">Epithalon</h4><div class="pep-card-spec">10 mg/ml · 3 ml pen · 30 mg total</div><p class="pep-card-desc">Pineal tetrapeptide developed by the Khavinson group. Telomerase activation and twelve-year mortality data from Russian gerontology cohorts.</p><div class="pep-card-foot"><div class="pep-card-price">€194<span class="pep-card-price-old">€290</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/pen-marble.png" class="pep-card-img" alt="MOTS-C" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Cellular Health</div><h4 class="pep-card-name">MOTS <em>C</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Mitochondrial-encoded peptide. AMPK activation, exercise-mimetic metabolic effects, ~10-15% lifespan extension in mouse models.</p><div class="pep-card-foot"><div class="pep-card-price">€194<span class="pep-card-price-old">€290</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+
+      <div class="pep-card"><img src="images/productphotos/clean/vial-hands.png" class="pep-card-img" alt="SS-31" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Cellular Health</div><h4 class="pep-card-name">SS <em>31</em></h4><div class="pep-card-spec">10 mg/ml · 3 ml pen · 30 mg total</div><p class="pep-card-desc">Cardiolipin-binding mitochondrial peptide. Stabilises cristae, reduces ROS at the source. In Phase 2/3 clinical trials (Stealth BioTherapeutics).</p><div class="pep-card-foot"><div class="pep-card-price">€160<span class="pep-card-price-old">€240</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/vial-marble.png" class="pep-card-img" alt="NAD+ 600" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Cellular Health</div><h4 class="pep-card-name">NAD+ <em>600</em></h4><div class="pep-card-spec">200 mg/ml · 3 ml pen · 600 mg total</div><p class="pep-card-desc">High-concentration NAD+. Substrate for sirtuins, PARPs, and cellular bioenergetics. Plasma levels fall ~50% by sixty.</p><div class="pep-card-foot"><div class="pep-card-price">€288<span class="pep-card-price-old">€432</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/vial-closeup.png" class="pep-card-img" alt="NAD+ 300" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Cellular Health</div><h4 class="pep-card-name">NAD+ <em>300</em></h4><div class="pep-card-spec">100 mg/ml · 3 ml pen · 300 mg total</div><p class="pep-card-desc">Standard NAD+ formulation for maintenance protocols. Same biochemistry as the 600, smaller per-dose volume.</p><div class="pep-card-foot"><div class="pep-card-price">€160<span class="pep-card-price-old">€240</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+
+      <div class="pep-card"><img src="images/productphotos/clean/pen-side.png" class="pep-card-img" alt="AC-Semax-NH2" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Cognitive &amp; Neuroprotection</div><h4 class="pep-card-name">AC-Semax<em>-NH&#8322;</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Acetylated, amidated ACTH(4-10) analogue. Upregulates BDNF and NGF, the neurotrophic factors for memory and cortical plasticity.</p><div class="pep-card-foot"><div class="pep-card-price">€160<span class="pep-card-price-old">€240</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/pen-dial.png" class="pep-card-img" alt="AC-Selank-NH2" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Cognitive &amp; Neuroprotection</div><h4 class="pep-card-name">AC-Selank<em>-NH&#8322;</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Acetylated, amidated tuftsin analogue. Anxiolytic effect without sedation, tolerance, or dependence. GABAergic modulation.</p><div class="pep-card-foot"><div class="pep-card-price">€160<span class="pep-card-price-old">€240</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/vial-hands-2.png" class="pep-card-img" alt="Thymosin Alpha-1" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Immune &amp; Anti-Inflammatory</div><h4 class="pep-card-name">Thymosin <em>Alpha-1</em></h4><div class="pep-card-spec">10 mg/ml · 3 ml pen · 30 mg total</div><p class="pep-card-desc">28-amino-acid thymic peptide. Approved as Zadaxin in 35+ countries for hepatitis and cancer adjunct. Th1 immune polarisation.</p><div class="pep-card-foot"><div class="pep-card-price">€224<span class="pep-card-price-old">€336</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+
+      <div class="pep-card"><img src="images/productphotos/clean/pen-marble.png" class="pep-card-img" alt="KPV" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Immune &amp; Anti-Inflammatory</div><h4 class="pep-card-name">KPV</h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Tripeptide tail of α-MSH. Strongly anti-inflammatory via NF-κB suppression. Orally bioavailable, gut-active.</p><div class="pep-card-foot"><div class="pep-card-price">€160<span class="pep-card-price-old">€240</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <div class="pep-card"><img src="images/productphotos/clean/pen-hand.png" class="pep-card-img" alt="PT-141" loading="lazy"><div class="pep-card-body"><div class="pep-card-cat">Sexual Health</div><h4 class="pep-card-name">PT <em>141</em></h4><div class="pep-card-spec">5 mg/ml · 3 ml pen · 15 mg total</div><p class="pep-card-desc">Cyclic heptapeptide MC4R agonist. FDA-approved as Vyleesi for HSDD. Central arousal pathway, independent of vascular mechanism.</p><div class="pep-card-foot"><div class="pep-card-price">€165<span class="pep-card-price-old">€247</span></div><a href="application.html" class="pep-card-link">Order</a></div></div></div>
+      <a href="application.html" class="pep-cta-card">
+        <div class="pep-cta-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h13"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        </div>
+        <div class="pep-cta-eyebrow">Know what you want?</div>
+        <h3 class="pep-cta-h">Place your <em>order.</em></h3>
+        <p>Skip ahead to selecting peptides and quantities.</p>
+        <span class="pep-cta-link">Start your order &rarr;</span>
+      </a>
+    </div>
+
+    <div class="catalog-deep reveal">
+      <div class="catalog-deep-num">50+</div>
+      <div class="catalog-deep-text">
+        <h3>The 17 above are our shortlist. <em>Our full catalogue runs deeper.</em></h3>
+        <p>Aevivo carries over 50 peptides across every major category. If yours isn't shown above, it is almost certainly available on request.</p>
+      </div>
+      <a href="https://wa.me/351934126762?text=Hi%20Aevivo%20Clinical%2C%20I%27m%20looking%20for%20a%20specific%20peptide.%20Can%20you%20help%3F" target="_blank" rel="noopener" class="btn btn-fill">Ask on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT -->
+<section class="audit" id="audit">
+  <div class="container-narrow">
+    <div class="reveal">
+      <span class="eyebrow" style="display:block; margin-bottom:14px;">Independent Supplier Audit · For Verified Clinics</span>
+      <h2 style="margin-bottom:18px;">Know what your current supplier is <em>really shipping.</em></h2>
+      <p class="lede" style="margin-bottom:30px; max-width:720px;">Already buying peptides? Tell us who from. Within 5 business days we send back a written audit covering sourcing, batch documentation, public scrutiny, and any red flags we've encountered. Free, confidential, no sales follow-up.</p>
+      <div class="audit-points">
+        <div class="audit-point"><div class="t">Sourcing &amp; GMP</div><div class="d">Where they actually synthesize and what's verifiable.</div></div>
+        <div class="audit-point"><div class="t">Quality documentation</div><div class="d">CoA quality, HPLC purity, third-party testing.</div></div>
+        <div class="audit-point"><div class="t">Public scrutiny</div><div class="d">Regulatory actions, recalls, news, court cases.</div></div>
+        <div class="audit-point"><div class="t">Red &amp; green flags</div><div class="d">Concrete concerns plus where they hold up.</div></div>
+      </div>
+      <div class="audit-cta-row">
+        <a href="quality-check.html" class="btn btn-fill">Check your current peptide quality &rarr;</a>
+        <span class="meta">5 business days · Free · No obligation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BREAK -->
+<div class="photo-break" style="background-image: url('images/products/lifestyle-01.jpg');">
+  <div class="container">
+    <div class="photo-break-caption reveal">
+      <span class="eyebrow">Both Formats. Same Standard.</span>
+      <h3>Pens for the bedside. Vials for the pharmacy. <em>One supply chain.</em></h3>
+    </div>
+  </div>
+</div>
+
+<!-- STORY -->
+<section id="story">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Aevivo Story</span>
+      <h2>Built for what we couldn't find.</h2>
+    </div>
+    <div class="story-intro reveal" style="max-width:920px;">
+      <p>Peptides had become one of the most talked-about categories in longevity. The supply chain behind them had become one of the least trustworthy. Origins were vague, documentation was inconsistent, and buyers were asked to trust labels that no one could verify.</p>
+      <p>Aevivo was founded to build the supply we wanted to buy from: European synthesis, verified purity, and a Certificate of Analysis on record for every peptide. Delivered in a pen format that protects the peptide from production to use.</p>
+      <p>Suzanna and Tiago met at an art exhibition through a mutual friend. A long conversation about longevity science turned into a shared frustration with how the European peptide market was being supplied: heavy on marketing, light on documentation. Aevivo started as the supplier they wanted to buy from themselves.</p>
+    </div>
+
+    <div class="story-people">
+      <a href="story.html#suzanna" class="person-card reveal">
+        <div class="person-head">
+          <img src="Suze.jpeg" alt="Suzanna Howse">
+          <div>
+            <div class="name">Suzanna Howse</div>
+            <div class="role">Co-Founder</div>
+          </div>
+        </div>
+        <p>Four decades of building businesses across industries taught Suzanna that the quality of life you lead matters more than what you have in the bank. She came into longevity through her network of forward-thinkers, and an IV protocol experience in Colombia two years ago that she still refers to as the moment it clicked. Her frustration with the current peptide market is the misinformation. Her work at Aevivo is to fix it, one educated buyer at a time.</p>
+        <span class="read-more">Read Suzanna's story &rarr;</span>
+      </a>
+      <a href="story.html#tiago" class="person-card reveal">
+        <div class="person-head">
+          <img src="Tiago.jpeg" alt="Tiago Areias">
+          <div>
+            <div class="name">Tiago Areias</div>
+            <div class="role">Co-Founder</div>
+          </div>
+        </div>
+        <p>Tiago spent eleven years in a career that paid well and taught him a lot, then walked away to build something he actually believed in. A year of searching landed him on longevity, and what pulled him in was less the science and more the state of the supply chain, which he saw as broken in ways that were almost embarrassing. His frustration with the European peptide market is plain: too many companies asking buyers to simply trust them, with no documentation, no traceability, no accountability for what is inside the vial. His work at Aevivo is to build the supplier this market has been waiting for.</p>
+        <span class="read-more">Read Tiago's story &rarr;</span>
+      </a>
+    </div>
+
+    <div class="long-arc reveal">
+      <span class="eyebrow" style="display:block; margin-bottom:12px;">The Long Arc</span>
+      <h3>Peptides are the start.</h3>
+      <p>We are starting with peptide supply because it is the clearest entry point. The bigger work we are building toward is the full clinical infrastructure clinics need to run peptide protocols defensibly: documented supply, diagnostics, protocol resources, and case support for the practitioners doing the prescribing. Peptides are one tool. The goal is to give clinicians a supply chain and a documentation trail that match the standard their patients deserve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENTS -->
+<section class="commitments">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Brand Overview</span>
+      <h2>A new standard in <em>research peptides.</em></h2>
+      <p class="lede" style="max-width:720px;">Aevivo is built on four commitments: pharmaceutical-grade purity, complete analytical transparency, scientific rigour, and a presentation that reads as clinical rather than consumer. Certificates of Analysis with HPLC and mass spectrometry data are shared on request.</p>
+    </div>
+    <div class="commit-grid">
+      <div class="commit-card reveal"><div class="commit-head"><div class="commit-mark">A</div><span class="commit-num">01</span></div><h3>Pharmaceutical <em>purity</em></h3><p>&gt;98% average by HPLC. Sealed in pen cartridges under inert atmosphere. Synthesised in European GMP facilities. Independently QC'd before release.</p></div>
+      <div class="commit-card reveal"><div class="commit-head"><div class="commit-mark">A</div><span class="commit-num">02</span></div><h3>Full <em>transparency</em></h3><p>Certificates of Analysis available on request. When you get one, it includes chromatogram, MS spectrum, lot, method, release date. Nothing redacted, nothing vague.</p></div>
+      <div class="commit-card reveal"><div class="commit-head"><div class="commit-mark">A</div><span class="commit-num">03</span></div><h3>Scientific <em>rigour</em></h3><p>Product descriptions cite peer-reviewed research. No folk claims, no wellness vocabulary. Mechanism-based language, research-framed throughout.</p></div>
+      <div class="commit-card reveal"><div class="commit-head"><div class="commit-mark">A</div><span class="commit-num">04</span></div><h3>Elevated <em>presentation</em></h3><p>A clinical object can still be a beautiful one. Editorial typography, restrained palette, considered photography. No stock imagery, no pharmaceutical cliché.</p></div>
+    </div>
+    <div class="audience-row reveal">
+      <div><div class="tier">Primary</div><div class="aud">researchers</div></div>
+      <div><div class="tier">Secondary</div><div class="aud">clinicians</div></div>
+      <div><div class="tier">Tertiary</div><div class="aud">enthusiasts</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE PAPERS -->
+<section id="science">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Scientific Foundation</span>
+      <h2>Selected from <em>published literature.</em></h2>
+      <p class="lede">Each peptide in our catalog corresponds to peer-reviewed research. A selection of foundational studies is shown below. Full reference packs and Certificates of Analysis are shared with verified clinics on application.</p>
+    </div>
+    <div class="papers-grid">
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6073405/" target="_blank" rel="noopener" class="paper-card reveal">
+        <div class="paper-head"><span>Int. J. Molecular Sciences</span><span class="yr">2018</span></div>
+        <h3>Regenerative and Protective Actions of the GHK-Cu Peptide in the Light of the New Gene Data</h3>
+        <p>A comprehensive review showing GHK-Cu resets expression of more than 4,000 human genes toward a healthier pattern, with documented effects on skin remodelling, wound healing, and cancer-suppressor gene upregulation.</p>
+        <div class="paper-foot"><span>Pickart L., Margolina A.</span><span class="read">Read &rarr;</span></div>
+      </a>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/14631483/" target="_blank" rel="noopener" class="paper-card reveal">
+        <div class="paper-head"><span>Bull. Exp. Bio. &amp; Med.</span><span class="yr">2003</span></div>
+        <h3>Epitalon induces telomerase activity and telomere elongation in human somatic cells</h3>
+        <p>First demonstration that Epitalon induces telomerase activity in human somatic cells and causes telomere elongation, extending proliferative capacity beyond the Hayflick limit in cultured fibroblasts.</p>
+        <div class="paper-foot"><span>Khavinson V.Kh. et al.</span><span class="read">Read &rarr;</span></div>
+      </a>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/27138887/" target="_blank" rel="noopener" class="paper-card reveal">
+        <div class="paper-head"><span>Current Neuropharmacology</span><span class="yr">2016</span></div>
+        <h3>Brain-gut axis and pentadecapeptide BPC 157</h3>
+        <p>Review of BPC-157's role across the brain-gut axis, consolidating over two decades of preclinical research into tissue repair, serotonin and dopamine modulation, and cytoprotective signalling.</p>
+        <div class="paper-foot"><span>Sikiric P. et al.</span><span class="read">Read &rarr;</span></div>
+      </a>
+      <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2307563" target="_blank" rel="noopener" class="paper-card reveal">
+        <div class="paper-head"><span>NEJM</span><span class="yr">2023</span></div>
+        <h3>Semaglutide and cardiovascular outcomes in obesity without diabetes (SELECT)</h3>
+        <p>Landmark Phase 3 trial in 17,604 adults. First demonstration that a GLP-1 receptor agonist reduces major adverse cardiovascular events in a non-diabetic population. 20% relative MACE reduction.</p>
+        <div class="paper-foot"><span>Lincoff A.M. et al.</span><span class="read">Read &rarr;</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- QC -->
+<section class="qc">
+  <div class="container">
+    <div class="qc-head reveal">
+      <span class="eyebrow" style="display:block; margin-bottom:12px;">Quality Assurance</span>
+      <h2>Four-stage <em>verification.</em></h2>
+    </div>
+    <div class="qc-grid">
+      <div class="qc-card reveal"><div class="qc-num">01</div><div class="t">EU SPPS Synthesis</div><p>Solid phase peptide synthesis using Fmoc protected amino acids in European GMP certified facilities.</p></div>
+      <div class="qc-card reveal"><div class="qc-num">02</div><div class="t">HPLC Purification</div><p>Reverse phase HPLC purification with a minimum &ge;97% release specification. Lot release testing consistently verifies purity above 98%.</p></div>
+      <div class="qc-card reveal"><div class="qc-num">03</div><div class="t">Analytical Verification</div><p>Independent ESI-MS and analytical HPLC confirming molecular weight, sequence, and purity.</p></div>
+      <div class="qc-card reveal"><div class="qc-num">04</div><div class="t">CoA Documentation</div><p>Certificate of Analysis with chromatogram, mass spectrum, appearance, solubility, and storage data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section id="journal">
+  <div class="container">
+    <div class="journal-head reveal">
+      <div>
+        <span class="eyebrow">Journal</span>
+        <h2>The newest breakthroughs. The wildest buzz. <em>Our take.</em></h2>
+        <p class="lede">The latest research from the field, the hype we're watching, and our five cents on what actually matters. New pieces as they land.</p>
+      </div>
+    </div>
+    <div class="journal-grid">
+      <a href="blog/what-ends-up-in-the-bottle.html" class="journal-card reveal">
+        <div class="journal-thumb">
+          <svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice"><rect width="260" height="120" fill="rgba(86,90,69,0.06)"/><g transform="translate(60 60) rotate(-22)"><rect x="0" y="-7" width="90" height="14" rx="7" fill="#565A45" opacity="0.85"/><rect x="90" y="-5" width="10" height="10" rx="2" fill="#3F4434"/></g><g transform="translate(200 40)"><circle r="22" fill="none" stroke="#B14A3A" stroke-width="2.4"/><line x1="-16" y1="-16" x2="16" y2="16" stroke="#B14A3A" stroke-width="2.4"/></g></svg>
+        </div>
+        <div class="journal-body">
+          <div class="journal-meta"><span>Supply Chain</span><span class="read">7 min read</span></div>
+          <h3>What ends up in the bottle.</h3>
+          <p>Channel 4 exposed Synedica selling fake retatrutide pens as an Eli Lilly product. What the case, and independent testing, keeps revealing about the grey-market peptide trade.</p>
+          <span class="read-link">Read article &rarr;</span>
+        </div>
+      </a>
+      <a href="blog/fda-peptide-meeting.html" class="journal-card reveal">
+        <div class="journal-thumb">
+          <svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice"><rect width="260" height="120" fill="rgba(86,90,69,0.06)"/><g transform="translate(130 72)" stroke="#565A45" stroke-width="1.4" fill="none"><rect x="-42" y="-6" width="84" height="46"/><rect x="-34" y="-6" width="68" height="6" fill="#565A45" opacity="0.85"/><g transform="translate(0 -38)"><line x1="0" y1="0" x2="0" y2="32" stroke-width="1.8"/><ellipse cx="0" cy="-4" rx="8" ry="10" stroke-width="1.8"/></g></g></svg>
+        </div>
+        <div class="journal-body">
+          <div class="journal-meta"><span>Policy</span><span class="read">5 min read</span></div>
+          <h3>What the FDA's peptide stance means for international supply.</h3>
+          <p>What the FDA's compounded-peptide position means for researchers, clinicians, and anyone sourcing peptides outside the US.</p>
+          <span class="read-link">Read article &rarr;</span>
+        </div>
+      </a>
+      <a href="blog/reading-a-coa.html" class="journal-card reveal">
+        <div class="journal-thumb">
+          <svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice"><rect width="260" height="120" fill="rgba(86,90,69,0.06)"/><g transform="translate(20 100)" stroke="#565A45" stroke-width="1.4" fill="none"><path d="M0 0 L18 -6 L36 -16 L54 -10 L72 -54 L90 -8 L108 -28 L126 -14 L144 -60 L162 -10 L180 -22 L198 -6 L216 -2"/></g><line x1="20" y1="100" x2="240" y2="100" stroke="#565A45" stroke-width="1" opacity="0.4"/></svg>
+        </div>
+        <div class="journal-body">
+          <div class="journal-meta"><span>How To Buy</span><span class="read">4 min read</span></div>
+          <h3>Reading a Certificate of Analysis in under a minute.</h3>
+          <p>The three things to check on every CoA, and the four red flags most buyers miss.</p>
+          <span class="read-link">Read article &rarr;</span>
+        </div>
+      </a>
+      <a href="blog/inside-european-peptide-supply.html" class="journal-card reveal">
+        <div class="journal-thumb">
+          <svg viewBox="0 0 260 120" preserveAspectRatio="xMidYMid slice"><rect width="260" height="120" fill="rgba(86,90,69,0.06)"/><g stroke="#565A45" stroke-width="1.4" fill="none"><path d="M60 28 L60 60 L48 88 Q65 100 82 88 L70 60 L70 28 Z"/><path d="M170 22 L170 60 L154 92 Q178 106 202 92 L188 60 L188 22 Z"/><line x1="95" y1="65" x2="154" y2="75" stroke-dasharray="2 4"/></g></svg>
+        </div>
+        <div class="journal-body">
+          <div class="journal-meta"><span>Provenance</span><span class="read">6 min read</span></div>
+          <h3>Inside a European peptide supply chain.</h3>
+          <p>How a single peptide moves from SPPS synthesis to a sealed pen cartridge, step by step.</p>
+          <span class="read-link">Read article &rarr;</span>
+        </div>
+      </a>
+    </div>
+    <div class="journal-all"><a href="blog/index.html">See all articles &rarr;</a></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal" style="text-align: center; margin: 0 auto 56px;">
+      <span class="eyebrow">Support</span>
+      <h2 style="margin-top: 22px;">Frequently asked.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">What does "for research use only" mean?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">All products sold by Aevivo are intended strictly for in vitro laboratory research and educational purposes. They are not intended for human or animal consumption, clinical use, food additives, cosmetics, or any therapeutic application. Purchasers assume full responsibility for compliance with all applicable laws and regulations in their jurisdiction.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Where are your peptides synthesized?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">Our peptides are synthesized in European GMP-certified facilities using solid-phase peptide synthesis with Fmoc-protected amino acids. Our lead manufacturing partner is based in the European Union and brings deep, long-standing expertise in regulated peptide synthesis.</div></div></div>
+      <div class="faq-item"><button class="faq-q">What purity standards do you maintain?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">Every peptide has a minimum &ge;97% release specification, verified by analytical HPLC. Lot release testing consistently exceeds 98%. The specific verified purity for the batch you receive is documented on the Certificate of Analysis, which you can request at any time.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you provide Certificates of Analysis?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">For every peptide in our catalog, we hold a representative Certificate of Analysis on record, including HPLC purity chromatogram, mass spectrometry data confirming molecular weight and sequence identity, physical appearance, and recommended storage conditions. CoAs are not sent automatically but can be requested at any time by emailing info@aevivolongevity.com or via WhatsApp.</div></div></div>
+      <div class="faq-item"><button class="faq-q">What is the pen format?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">Our pre-filled pen system uses sealed cartridges with dial-based dosing. This eliminates reconstitution variables, reduces contamination risk from repeated septum puncture, and enables precise, repeatable dispensing for research protocols.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How long does fulfilment take?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">From close of a batch cycle to delivery at your address typically runs five to fourteen business days, depending on production timing, customs, and carrier. We provide an estimated window at the time of order confirmation.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How are products shipped and stored?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">Peptides ship in sealed pen cartridges under inert atmosphere, with temperature-controlled packaging where required. Storage conditions are specified on each product's Certificate of Analysis and in your order documentation. Most peptides are stable at 2-8&deg;C refrigerated.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you ship outside the European Union?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">EU shipping is our default. International shipping is handled case by case depending on destination regulations and peptide classification. Let us know your destination at the time of order and we will confirm whether we can serve it.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you offer wholesale arrangements?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">Volume arrangements are available case by case for clinics, laboratories, and pharmacies. Reach out with your context, intended volumes, and timelines, and we will come back with a proposal.</div></div></div>
+      <div class="faq-item"><button class="faq-q">What if my shipment arrives damaged or does not match?<span class="plus">+</span></button><div class="faq-a"><div class="faq-a-inner">Inspect every package on arrival. Any visible damage, temperature excursion evidence, or documentation discrepancy must be reported within 72 hours of delivery. Confirmed issues are resolved by replacement or refund. All sales are otherwise final once shipped. Full terms are in our Terms &amp; Conditions.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="signup">
+  <div class="container reveal">
+    <span class="eyebrow">Stay Updated</span>
+    <h2>New peptides &amp; <em>research updates.</em></h2>
+    <p>Product launches, published literature references, and early access to limited release peptides.</p>
+    <form class="signup-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed';">
+      <input type="email" placeholder="Your email" required>
+      <button type="submit" class="btn btn-fill">Subscribe</button>
+    </form>
+    <div class="small">No spam. Unsubscribe anytime.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-row">
+          <div class="footer-brand-mark">A</div>
+          <div class="footer-brand-name">AEVIVO<span class="clinical">CLINICAL</span></div>
+        </div>
+        <p class="footer-mission">European-synthesized research peptides. Analytical documentation on record for every peptide.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Browse</h5>
+        <a href="#catalog">Peptides</a>
+        <a href="story.html">Story</a>
+        <a href="#science">Science</a>
+        <a href="#journal">Journal</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h5>Act</h5>
+        <a href="application.html">Apply for clinic access</a>
+        <a href="quality-check.html">Audit your supplier</a>
+        <a href="https://wa.me/351934126762?text=Hi%20Aevivo%20Clinical%2C%20I%27m%20a%20practitioner%20interested%20in%20wholesale%20supply." target="_blank" rel="noopener">Talk on WhatsApp</a>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <a href="compliance.html">Compliance</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+
+    <div class="footer-disclaimer">
+      <span class="h">For Professional and Research Use Only</span>
+      <p>The peptide materials supplied by GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity ("Aevivo"), are intended exclusively for use by licensed medical professionals, qualified researchers, and authorised healthcare institutions operating in compliance with applicable national and European Union regulations.</p>
+      <p>These materials are not intended for self-administration, retail sale, or use by the general public. Aevivo does not provide medical advice, clinical protocols, or dosing recommendations. All decisions regarding the administration, compounding, or prescription of these materials remain the sole responsibility of the qualified professional receiving them.</p>
+      <p>Aevivo supplies analytically verified materials only. The purchaser assumes full responsibility for compliance with all applicable laws and regulations in their jurisdiction, including but not limited to those governed by INFARMED I.P. and the European Medicines Agency (EMA).</p>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity. NIF 519331800. INFARMED Cert. N.&ordm; 3800/DM/2026. Registered office: Calçada da Ajuda 35, Bloco 5, r/c esq., 1300-006 Lisboa, Portugal.</div>
+      <div>For research use only. Not for human consumption.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.parentElement.classList.toggle('open');
+    });
+  });
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+
+</body>
+</html>

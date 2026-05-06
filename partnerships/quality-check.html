@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Check your current peptide quality · Aevivo Clinical</title>
+<meta name="description" content="Send us your current peptide supplier. Within 5 business days we send back a written audit covering sourcing, documentation, public scrutiny, and red flags. Free, confidential.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .audit-included { padding: 24px 28px; background: var(--olive-tint); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 32px; }
+  .audit-included .h { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--olive); font-weight: 600; margin-bottom: 14px; }
+  .audit-included ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  @media (max-width: 600px) { .audit-included ul { grid-template-columns: 1fr; } }
+  .audit-included li { padding-left: 22px; position: relative; font-size: 14px; line-height: 1.55; color: var(--ink); font-weight: 400; }
+  .audit-included li::before { content: ""; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--olive); }
+  .summary-pre { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; font-family: var(--sans); font-size: 13px; color: var(--ink-soft); line-height: 1.7; font-weight: 350; white-space: pre-wrap; margin-bottom: 24px; overflow-x: auto; }
+</style>
+</head>
+<body>
+
+<div class="ruo-bar"><span class="ruo-main">For Research Use Only</span><span class="ruo-sep">|</span><span class="ruo-sub">Licensed practitioners only.</span></div>
+
+<nav class="nav solid" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="brand-mark">A</span><span class="brand-text"><span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">CLINICAL</span></span></a>
+    <div></div>
+    <div class="nav-right"><a href="index.html" class="text-link">&larr; Back to home</a></div>
+  </div>
+</nav>
+
+<main style="max-width:880px; margin:0 auto; padding: 150px clamp(20px,5vw,60px) 100px;">
+  <div id="step-form">
+    <span class="eyebrow" style="display:block; margin-bottom:16px;">Independent Supplier Audit</span>
+    <h1 style="font-size:clamp(34px,4.5vw,52px); line-height:1.08; margin-bottom:20px;">Check your current <em>peptide quality.</em></h1>
+    <p class="lede" style="margin-bottom:36px; max-width:680px;">Send us the name of your current supplier. Within 5 business days we research and send back a written audit covering sourcing, documentation, public scrutiny, and any red flags. Free, confidential, no sales follow-up.</p>
+
+    <div class="audit-included">
+      <div class="h">What you'll receive</div>
+      <ul>
+        <li>Sourcing &amp; GMP review</li>
+        <li>CoA quality assessment</li>
+        <li>HPLC purity benchmarks</li>
+        <li>Public scrutiny &amp; recall record</li>
+        <li>Regulatory action history</li>
+        <li>Concrete red &amp; green flags</li>
+      </ul>
+    </div>
+
+    <form id="audit-form" class="form-card">
+      <div class="form-row">
+        <label class="form-label" for="supplier">Current supplier name(s) <span style="color:var(--olive);">*</span></label>
+        <input class="form-input" type="text" id="supplier" name="supplier" placeholder="e.g. Research Peptides Europe, ChemPep, Bioniagara ..." required>
+        <div class="form-help">If you use more than one, list them all.</div>
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="peptides">Peptides you buy from them</label>
+        <input class="form-input" type="text" id="peptides" name="peptides" placeholder="e.g. BPC 157, Tirzepatide, GHK Cu">
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="concerns">What's prompting the check?</label>
+        <textarea class="form-textarea" id="concerns" name="concerns" rows="3" placeholder="Quality issue, pricing change, news article, batch inconsistency, or just a periodic audit."></textarea>
+      </div>
+      <div class="form-row two">
+        <div><label class="form-label" for="name">Your name <span style="color:var(--olive);">*</span></label><input class="form-input" type="text" id="name" name="name" required></div>
+        <div><label class="form-label" for="clinic">Clinic / business <span style="color:var(--olive);">*</span></label><input class="form-input" type="text" id="clinic" name="clinic" required></div>
+      </div>
+      <div class="form-row two">
+        <div><label class="form-label" for="email">Email <span style="color:var(--olive);">*</span></label><input class="form-input" type="email" id="email" name="email" required></div>
+        <div><label class="form-label" for="phone">WhatsApp / phone</label><input class="form-input" type="tel" id="phone" name="phone"></div>
+      </div>
+      <button type="submit" class="btn btn-fill btn-block">Continue to send &rarr;</button>
+      <div style="font-size: 11.5px; color: var(--ink-mute); text-align: center; margin-top: 14px; line-height: 1.6;">5 business days &middot; Free &middot; No sales follow-up &middot; Confidential</div>
+    </form>
+  </div>
+
+  <div id="step-summary" style="display:none;">
+    <span class="eyebrow" style="display:block; margin-bottom:16px;">Step 2 &middot; Send</span>
+    <h1 style="font-size:clamp(28px,3.6vw,42px); line-height:1.12; margin-bottom:20px;">Send us your <em>audit request.</em></h1>
+    <p class="lede" style="margin-bottom:24px; max-width:680px;">Pick the channel that fits. Either route delivers the same details to our team. We respond within 5 business days with a written audit.</p>
+    <pre class="summary-pre" id="summary-pre"></pre>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px;">
+      <a id="wa-btn" target="_blank" rel="noopener" href="#" class="btn btn-fill" style="flex:1; min-width:240px; background:#25D366; border-color:#128C7E;">Send via WhatsApp</a>
+      <a id="email-btn" href="#" class="btn btn-ghost" style="flex:1; min-width:240px;">Send by email</a>
+    </div>
+    <button type="button" id="back-btn" style="background:transparent; border:none; color:var(--ink-soft); font-size:13px; cursor:pointer; padding:0;">&larr; Edit request</button>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-row"><div class="footer-brand-mark">A</div><div class="footer-brand-name">AEVIVO <span class="clinical">CLINICAL</span></div></div><p class="footer-mission">European-synthesized research peptides.</p></div>
+      <div class="footer-col"><h5>Browse</h5><a href="catalog.html">Peptides</a><a href="story.html">Story</a><a href="index.html#science">Science</a></div>
+      <div class="footer-col"><h5>Act</h5><a href="application.html">Apply for clinic access</a><a href="quality-check.html">Audit your supplier</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="compliance.html">Compliance</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="footer-bottom"><div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity.</div><div>For research use only.</div></div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('audit-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var f = {
+    supplier: document.getElementById('supplier').value,
+    peptides: document.getElementById('peptides').value,
+    concerns: document.getElementById('concerns').value,
+    name: document.getElementById('name').value,
+    clinic: document.getElementById('clinic').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+  };
+  var lines = [
+    'Aevivo Clinical · Independent supplier audit request',
+    '',
+    'Current supplier(s): ' + f.supplier,
+  ];
+  if (f.peptides) lines.push('Peptides bought from them: ' + f.peptides);
+  if (f.concerns) { lines.push(''); lines.push('Why now: ' + f.concerns); }
+  lines.push('');
+  lines.push('From: ' + f.name + ' (' + f.clinic + ')');
+  lines.push('Email: ' + f.email);
+  if (f.phone) lines.push('Phone: ' + f.phone);
+  var summary = lines.join('\n');
+  document.getElementById('summary-pre').textContent = summary;
+  document.getElementById('wa-btn').href = 'https://wa.me/351934126762?text=' + encodeURIComponent(summary);
+  document.getElementById('email-btn').href = 'mailto:info@aevivolongevity.com?subject=' + encodeURIComponent('Aevivo Clinical · Supplier audit request · ' + (f.clinic||'')) + '&body=' + encodeURIComponent(summary);
+  document.getElementById('step-form').style.display = 'none';
+  document.getElementById('step-summary').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+document.getElementById('back-btn').addEventListener('click', function(){
+  document.getElementById('step-summary').style.display = 'none';
+  document.getElementById('step-form').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+<script src="assets/theme.js"></script>
+</body>
+</html>

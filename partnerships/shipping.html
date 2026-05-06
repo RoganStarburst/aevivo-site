@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Send your quote request · Aevivo Clinical</title>
+<meta name="description" content="Send your quote request to Aevivo Clinical via WhatsApp or email. We respond within 2 business days with verified pricing and batch documentation.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .summary-pre { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; font-family: var(--sans); font-size: 13px; color: var(--ink-soft); line-height: 1.7; font-weight: 350; white-space: pre-wrap; margin-bottom: 24px; overflow-x: auto; }
+</style>
+</head>
+<body>
+
+<div class="ruo-bar"><span class="ruo-main">For Research Use Only</span><span class="ruo-sep">|</span><span class="ruo-sub">Licensed practitioners only.</span></div>
+
+<nav class="nav solid" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="brand-mark">A</span><span class="brand-text"><span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">CLINICAL</span></span></a>
+    <div></div>
+    <div class="nav-right"><a href="orderlist.html" class="text-link">&larr; Edit quote</a></div>
+  </div>
+</nav>
+
+<main style="max-width:880px; margin:0 auto; padding: 150px clamp(20px,5vw,60px) 100px;">
+  <div id="empty-state" style="display:none; text-align:center; padding: 64px 0;">
+    <span class="eyebrow" style="display:block; margin-bottom:14px;">No quote request yet</span>
+    <h1 style="font-size:clamp(28px,4vw,42px); margin-bottom:22px;">Build a quote request first.</h1>
+    <a href="orderlist.html" class="btn btn-fill">Start a quote request</a>
+  </div>
+
+  <div id="confirm-state" style="display:none;">
+    <span class="eyebrow" style="display:block; margin-bottom:16px;">Quote Request &middot; Step 2 of 2</span>
+    <h1 style="font-size:clamp(34px,4.5vw,52px); line-height:1.08; margin-bottom:20px;">Send to <em>Aevivo Clinical.</em></h1>
+    <p class="lede" style="margin-bottom:32px; max-width:680px;">Pick the channel that fits your practice. Either route delivers the same details to our clinical team. We come back within 2 business days with verified pricing and batch documentation.</p>
+
+    <div class="form-card">
+      <span class="eyebrow" style="display:block; margin-bottom:14px;">Your request</span>
+      <pre class="summary-pre" id="summary-pre"></pre>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px;">
+        <a id="wa-btn" target="_blank" rel="noopener" href="#" class="btn btn-fill" style="flex:1; min-width:240px; background:#25D366; border-color:#128C7E;">Send via WhatsApp</a>
+        <a id="email-btn" href="#" class="btn btn-ghost" style="flex:1; min-width:240px;">Send by email</a>
+      </div>
+
+      <div style="margin-top:18px; padding-top:18px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-mute); line-height:1.65;">
+        After we reply with your verified quote, we'll confirm shipping address, lead time, and payment. Aevivo's standard EU shipping is cold-chain courier, signature on delivery. Outside the EU is handled case by case.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-row"><div class="footer-brand-mark">A</div><div class="footer-brand-name">AEVIVO <span class="clinical">CLINICAL</span></div></div><p class="footer-mission">European-synthesized research peptides.</p></div>
+      <div class="footer-col"><h5>Browse</h5><a href="catalog.html">Peptides</a><a href="story.html">Story</a><a href="index.html#faq">FAQ</a></div>
+      <div class="footer-col"><h5>Act</h5><a href="application.html">Apply for clinic access</a><a href="quality-check.html">Audit your supplier</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="compliance.html">Compliance</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="footer-bottom"><div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity.</div><div>For research use only.</div></div>
+  </div>
+</footer>
+
+<script>
+var raw;
+try { raw = sessionStorage.getItem('aevivoQuoteRequest'); } catch(e) {}
+if (!raw) {
+  document.getElementById('empty-state').style.display = 'block';
+} else {
+  var data = JSON.parse(raw);
+  var lines = [
+    'Aevivo Clinical · Quote request',
+    '',
+    'Clinic: ' + data.clinic,
+    'Practitioner: ' + data.name,
+    'Email: ' + data.email,
+  ];
+  if (data.phone) lines.push('Phone: ' + data.phone);
+  lines.push('');
+  lines.push('Peptides:');
+  data.picks.forEach(function(p){ lines.push('  · ' + p.peptide + ' (qty ' + p.qty + ')'); });
+  if (data.notes) { lines.push(''); lines.push('Notes: ' + data.notes); }
+  var summary = lines.join('\n');
+  document.getElementById('summary-pre').textContent = summary;
+  document.getElementById('wa-btn').href = 'https://wa.me/351934126762?text=' + encodeURIComponent(summary);
+  document.getElementById('email-btn').href = 'mailto:info@aevivolongevity.com?subject=' + encodeURIComponent('Aevivo Clinical · Quote request · ' + (data.clinic||'')) + '&body=' + encodeURIComponent(summary);
+  document.getElementById('confirm-state').style.display = 'block';
+}
+</script>
+<script src="assets/theme.js"></script>
+</body>
+</html>

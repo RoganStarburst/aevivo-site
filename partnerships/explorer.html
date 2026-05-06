@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Peptide Explorer · Aevivo Clinical</title>
+<meta name="description" content="Find the Aevivo peptides aligned with your research focus. Filter by category, format, and primary mechanism.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  .explorer-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start; }
+  @media (max-width: 900px) { .explorer-layout { grid-template-columns: 1fr; } }
+  .filter-card { padding: 24px 26px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; position: sticky; top: 110px; }
+  .filter-group { margin-bottom: 22px; }
+  .filter-group:last-child { margin-bottom: 0; }
+  .filter-group h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--olive); font-weight: 600; margin-bottom: 12px; font-family: var(--sans); }
+  .filter-pill { display: block; padding: 9px 14px; margin-bottom: 6px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: var(--ink-soft); cursor: pointer; transition: all .2s; user-select: none; }
+  .filter-pill input { display: none; }
+  .filter-pill:hover { border-color: var(--olive); color: var(--ink); }
+  .filter-pill.on { background: var(--olive); border-color: var(--olive); color: var(--paper); font-weight: 500; }
+  .results-count { font-size: 13px; color: var(--ink-mute); margin-bottom: 24px; }
+  .pep-grid { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 1100px) { .pep-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .pep-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="ruo-bar"><span class="ruo-main">For Research Use Only</span><span class="ruo-sep">|</span><span class="ruo-sub">Licensed practitioners only.</span></div>
+
+<nav class="nav solid" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="brand-mark">A</span><span class="brand-text"><span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">CLINICAL</span></span></a>
+    <div class="nav-links">
+      <a href="story.html">Story</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="explorer.html">Explorer</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+    <div class="nav-right"><a href="application.html" class="btn btn-fill btn-sm">Apply for clinic access</a></div>
+  </div>
+</nav>
+
+<section class="page-hero" style="padding-top: 150px;">
+  <div class="container">
+    <span class="eyebrow">Peptide Explorer</span>
+    <h1>Find the peptides <em>aligned with your research.</em></h1>
+    <p class="lede">Filter by research focus, format, and primary mechanism. Results pull from the full Aevivo Clinical catalog. Verified clinic pricing on application.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="explorer-layout">
+      <aside class="filter-card">
+        <div class="filter-group">
+          <h4>Research focus</h4>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="Recovery"> Recovery &amp; Repair</label>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="GH"> GH Secretagogues</label>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="Cellular"> Cellular Health</label>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="Cognitive"> Cognitive &amp; Neuro</label>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="Skin"> Longevity &amp; Skin</label>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="Metabolic"> Metabolic &amp; Weight</label>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="Immune"> Immune &amp; Anti-Inflammatory</label>
+          <label class="filter-pill"><input type="checkbox" data-filter="cat" value="Sexual"> Sexual Function</label>
+        </div>
+        <button id="reset" class="btn btn-ghost btn-sm" style="margin-top: 8px;">Reset filters</button>
+      </aside>
+
+      <div>
+        <div class="results-count" id="count"></div>
+        <div class="pep-grid" id="results"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-row"><div class="footer-brand-mark">A</div><div class="footer-brand-name">AEVIVO <span class="clinical">CLINICAL</span></div></div><p class="footer-mission">European-synthesized research peptides.</p></div>
+      <div class="footer-col"><h5>Browse</h5><a href="catalog.html">Peptides</a><a href="story.html">Story</a><a href="index.html#science">Science</a></div>
+      <div class="footer-col"><h5>Act</h5><a href="application.html">Apply for clinic access</a><a href="quality-check.html">Audit your supplier</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="compliance.html">Compliance</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="footer-bottom"><div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity.</div><div>For research use only.</div></div>
+  </div>
+</footer>
+
+<script>
+var data = [
+  {n:"BPC-157",cat:"Recovery",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Synthetic pentadecapeptide. The most-studied tissue-repair peptide in the literature."},
+  {n:"TB-500",cat:"Recovery",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-side",ds:"Active fragment of Thymosin Beta-4. Mobilises stem cells, reduces scar formation."},
+  {n:"BPC-157 + TB-500",cat:"Recovery",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-dial",ds:"Co-formulated tissue-repair stack with complementary mechanisms."},
+  {n:"CJC-1295 + Ipamorelin",cat:"GH",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-hand",ds:"Paired pituitary stack. Larger, cleaner endogenous GH pulses than either peptide alone."},
+  {n:"Ipamorelin",cat:"GH",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Selective ghrelin-receptor agonist. Cleanest of the GHRPs."},
+  {n:"Epithalon",cat:"Cellular",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"pen-dial",ds:"Pineal tetrapeptide. Telomerase activation, twelve-year mortality data from Russian gerontology."},
+  {n:"MOTS-C",cat:"Cellular",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Mitochondrial-encoded peptide. AMPK activation, ~10-15% lifespan extension in mouse models."},
+  {n:"SS-31",cat:"Cellular",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-hands",ds:"Cardiolipin-binding mitochondrial peptide. Reduces ROS at the source."},
+  {n:"NAD+ 600",cat:"Cellular",sp:"200 mg/ml · 3 ml pen · 600 mg",img:"vial-marble",ds:"High-concentration NAD+. Substrate for sirtuins, PARPs, cellular bioenergetics."},
+  {n:"NAD+ 300",cat:"Cellular",sp:"100 mg/ml · 3 ml pen · 300 mg",img:"vial-closeup",ds:"Standard NAD+ formulation for maintenance protocols."},
+  {n:"AC-Semax-NH₂",cat:"Cognitive",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-side",ds:"Acetylated ACTH(4-10) analogue. Upregulates BDNF and NGF for memory and cortical plasticity."},
+  {n:"AC-Selank-NH₂",cat:"Cognitive",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-dial",ds:"Acetylated tuftsin analogue. Anxiolytic without sedation, tolerance, or dependence."},
+  {n:"GHK-Cu",cat:"Skin",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-closeup",ds:"Copper-binding tripeptide. Genome-wide effects on collagen, elastin, DNA-repair gene expression."},
+  {n:"Retatrutide",cat:"Metabolic",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-marble",ds:"Triple GLP-1/GIP/glucagon agonist. ~24% mean weight loss at 48 weeks in Phase 2."},
+  {n:"Thymosin Alpha-1",cat:"Immune",sp:"10 mg/ml · 3 ml pen · 30 mg",img:"vial-hands-2",ds:"28-amino-acid thymic peptide. Approved as Zadaxin in 35+ countries."},
+  {n:"KPV",cat:"Immune",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-marble",ds:"Tripeptide tail of α-MSH. Strongly anti-inflammatory via NF-κB suppression."},
+  {n:"PT-141",cat:"Sexual",sp:"5 mg/ml · 3 ml pen · 15 mg",img:"pen-hand",ds:"Cyclic heptapeptide MC4R agonist. FDA-approved as Vyleesi for HSDD."},
+];
+
+var filters = { cat: new Set() };
+
+function render() {
+  var filtered = data.filter(function(p){
+    if (filters.cat.size && !filters.cat.has(p.cat)) return false;
+    return true;
+  });
+  document.getElementById('count').textContent = filtered.length + ' peptide' + (filtered.length===1?'':'s') + (filtered.length === data.length ? ' total' : ' match');
+  var html = filtered.map(function(it){
+    return '<div class="pep-card">'
+      + '<img class="pep-card-img" src="images/productphotos/clean/' + it.img + '.png" alt="' + it.n + '" loading="lazy">'
+      + '<div class="pep-card-body">'
+      + '<h4 class="pep-card-name">' + it.n + '</h4>'
+      + '<div class="pep-card-spec">' + it.sp + ' &middot; &gt;98% purity</div>'
+      + '<p class="pep-card-desc">' + it.ds + '</p>'
+      + '<div class="pep-card-foot"><span class="pep-card-price">Verified pricing on application</span><a href="application.html" class="pep-card-link">Apply</a></div>'
+      + '</div></div>';
+  }).join('');
+  document.getElementById('results').innerHTML = html;
+}
+
+document.querySelectorAll('.filter-pill input').forEach(function(cb){
+  cb.addEventListener('change', function(){
+    var k = cb.dataset.filter, v = cb.value;
+    if (cb.checked) filters[k].add(v); else filters[k].delete(v);
+    cb.parentElement.classList.toggle('on', cb.checked);
+    render();
+  });
+});
+
+document.getElementById('reset').addEventListener('click', function(){
+  filters.cat.clear();
+  document.querySelectorAll('.filter-pill input').forEach(function(cb){ cb.checked = false; cb.parentElement.classList.remove('on'); });
+  render();
+});
+
+render();
+</script>
+<script src="assets/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- AEVIVO ACCESS GATE -->
+<script>
+(function(){
+  var KEY='aevivo-gate-v1',PW='AEVIVO2026';
+  try{if(localStorage.getItem(KEY)===PW)return}catch(e){}
+  document.documentElement.setAttribute('data-aevivo-locked','1');
+  var css='html[data-aevivo-locked] body > *:not(#aevivo-gate){display:none !important}'
+    +'#aevivo-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0C1225;font-family:Inter,\'Helvetica Neue\',Arial,sans-serif;color:#FBF7EF;padding:24px}'
+    +'#aevivo-gate::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%);pointer-events:none}'
+    +'#aevivo-gate .gate-card{position:relative;max-width:440px;width:100%;text-align:center;padding:48px 36px;background:rgba(20,27,46,0.7);border:1px solid rgba(196,162,101,0.22);border-radius:18px;backdrop-filter:blur(18px)}'
+    +'#aevivo-gate .gate-mark{width:56px;height:56px;border:1.5px solid #C4A265;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:24px;color:#C4A265;font-weight:700;margin-bottom:22px}'
+    +'#aevivo-gate .gate-brand{font-size:11px;letter-spacing:4px;color:#C4A265;font-weight:600;text-transform:uppercase;margin-bottom:14px}'
+    +'#aevivo-gate .gate-heading{font-family:Georgia,\'Libre Baskerville\',serif;font-size:28px;font-weight:400;line-height:1.2;margin:0 0 10px;color:#FBF7EF}'
+    +'#aevivo-gate .gate-heading em{color:#C4A265;font-style:italic}'
+    +'#aevivo-gate .gate-sub{font-size:14px;color:rgba(251,247,239,0.65);font-weight:300;line-height:1.6;margin:0 0 28px}'
+    +'#aevivo-gate form{margin:0}'
+    +'#aevivo-gate input{width:100%;box-sizing:border-box;padding:14px 18px;background:rgba(251,247,239,0.05);border:1px solid rgba(196,162,101,0.22);border-radius:10px;color:#FBF7EF;font-size:14px;font-family:inherit;outline:none;letter-spacing:2px;text-align:center;margin-bottom:14px;transition:border-color 0.2s}'
+    +'#aevivo-gate input::placeholder{color:rgba(251,247,239,0.35);letter-spacing:1px}'
+    +'#aevivo-gate input:focus{border-color:#C4A265}'
+    +'#aevivo-gate button{width:100%;padding:14px 24px;background:#C4A265;color:#060A14;border:none;border-radius:999px;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}'
+    +'#aevivo-gate button:hover{background:#D4B67A}'
+    +'#aevivo-gate .gate-error{font-size:12px;color:#D14343;margin-top:12px;min-height:16px;letter-spacing:0.3px}'
+    +'#aevivo-gate .gate-foot{font-size:11px;color:rgba(251,247,239,0.4);margin-top:28px;letter-spacing:0.3px;line-height:1.5}'
+    +'@keyframes aevivo-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}'
+    +'#aevivo-gate.shake .gate-card{animation:aevivo-shake 0.4s ease}';
+  var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+  function render(){
+    var el=document.createElement('div');el.id='aevivo-gate';
+    el.innerHTML='<div class="gate-card"><div class="gate-mark">A</div><div class="gate-brand">Aevivo Longevity</div><h1 class="gate-heading">Private <em>preview.</em></h1><p class="gate-sub">Aevivo Longevity is in early access until launch. Enter your access code to continue.</p><form id="aevivo-gate-form"><input id="aevivo-gate-input" type="password" placeholder="Access code" autocomplete="off" autofocus/><button type="submit">Enter</button><div class="gate-error" id="aevivo-gate-err"></div></form><div class="gate-foot">For research use only. Not for human consumption.</div></div>';
+    document.body.appendChild(el);
+    var form=document.getElementById('aevivo-gate-form'),input=document.getElementById('aevivo-gate-input'),err=document.getElementById('aevivo-gate-err');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(input.value.trim().toUpperCase()===PW){
+        try{localStorage.setItem(KEY,PW)}catch(_){}
+        document.documentElement.removeAttribute('data-aevivo-locked');
+        el.remove();
+      }else{
+        err.textContent='Incorrect access code.';
+        el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
+        input.value='';input.focus();
+      }
+    });
+    setTimeout(function(){input.focus()},50);
+  }
+  if(document.readyState!=='loading')render();
+  else document.addEventListener('DOMContentLoaded',render);
+})();
+</script>
+<!-- /AEVIVO ACCESS GATE -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+(function(){try{var t=localStorage.getItem('aevivo-theme')||'light';document.documentElement.dataset.theme=t;window.__aevivo_theme=t;}catch(e){document.documentElement.dataset.theme='light';window.__aevivo_theme='light';}})();
+</script>
+<title>What ends up in the bottle · Aevivo Longevity</title>
+<meta name="description" content="Most US and EU peptide labels are resellers. Here is what independent testing keeps finding inside the vials they ship.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060A14'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%23C4A265' font-weight='700'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+html[data-theme="dark"] {
+  --bg: #0C1225; --white: #141B2E; --navy: #FBF7EF; --char: #141A2E;
+  --gold: #C4A265; --copper: #D4B67A; --cream: #0F1525;
+  --border: rgba(196,162,101,0.14); --text: #FBF7EF; --muted: rgba(251,247,239,0.6);
+  --nav-bg: rgba(12,18,37,0.88);
+  --card-bg: rgba(20,27,46,0.5); --card-bg-hover: rgba(20,27,46,0.85);
+  --callout-bg: rgba(196,162,101,0.06);
+  --redflag-bg: rgba(251,247,239,0.03);
+  --page-bg-grad: radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.055),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.035),transparent 40%),#0C1225;
+  --footer-bg: #060A14;
+}
+html[data-theme="light"] {
+  --bg: #FBF7EF; --white: #FFFFFF; --navy: #060A14; --char: #1A2744;
+  --gold: #C4A265; --copper: #8A6A2A; --cream: #F0EDE6;
+  --border: rgba(100,85,50,0.18); --text: #3A3F4B; --muted: #8B90A0;
+  --nav-bg: rgba(251,247,239,0.88);
+  --card-bg: rgba(255,255,255,0.75); --card-bg-hover: rgba(255,255,255,1);
+  --callout-bg: rgba(196,162,101,0.1);
+  --redflag-bg: rgba(138,106,42,0.04);
+  --page-bg-grad: radial-gradient(ellipse 140% 60% at 50% -10%,rgba(196,162,101,0.08),transparent 55%),radial-gradient(circle at 85% 95%,rgba(196,162,101,0.05),transparent 40%),#FBF7EF;
+  --footer-bg: #060A14;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--page-bg-grad);background-attachment:fixed;color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-weight:400;font-size:17px;line-height:1.75;overflow-x:hidden;position:relative}
+
+.ruo-bar{position:fixed;top:0;left:0;right:0;z-index:300;padding:11px 16px;background:#060A14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(196,162,101,0.12);font-family:'Inter',sans-serif}
+.ruo-bar .lbl{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:2px}
+.ruo-bar .sep{color:rgba(196,162,101,0.3)}
+.ruo-bar .note{font-size:12px;color:var(--muted);letter-spacing:0.3px}
+
+nav.nb{position:fixed;top:44px;left:0;right:0;z-index:200;backdrop-filter:blur(24px) saturate(1.4);background:var(--nav-bg);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+nav .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+nav .brand .mark{width:28px;height:28px;border:1px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);font-family:'Libre Baskerville',serif;font-weight:700}
+nav .brand .name{font-family:'Outfit',sans-serif;font-size:15px;letter-spacing:0.32em;text-transform:uppercase;color:var(--navy);font-weight:300}
+nav .back{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.3px;transition:color 0.2s}
+nav .back:hover{color:var(--gold)}
+
+main{max-width:820px;margin:0 auto;padding:140px clamp(20px,5vw,60px) 100px;position:relative;z-index:2}
+
+.breadcrumb{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+.breadcrumb a{color:var(--gold);text-decoration:none;opacity:0.8;transition:opacity 0.2s}
+.breadcrumb a:hover{opacity:1}
+.breadcrumb .sep{margin:0 10px;opacity:0.5}
+
+.eyebrow{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
+.meta{font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);margin-bottom:40px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.meta span.dot{opacity:0.4}
+
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(36px,5vw,58px);font-weight:400;line-height:1.05;color:var(--navy);margin-bottom:22px;letter-spacing:-0.3px}
+h1 em{color:var(--gold);font-style:italic}
+h2{font-family:'Libre Baskerville',serif;font-size:clamp(24px,3vw,32px);font-weight:400;color:var(--navy);margin:48px 0 16px;line-height:1.2}
+h2 em{color:var(--gold);font-style:italic}
+h3{font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--navy);margin:32px 0 10px;letter-spacing:0.08em;text-transform:uppercase}
+
+.lede{font-family:'Libre Baskerville',serif;font-size:clamp(20px,2.3vw,26px);line-height:1.45;color:var(--navy);font-weight:400;font-style:italic;margin:0 0 36px;max-width:720px}
+.lede em{color:var(--gold);font-style:italic}
+
+p{font-size:17px;line-height:1.8;color:var(--text);font-weight:300;margin-bottom:18px;max-width:720px}
+p strong{color:var(--gold);font-weight:600}
+
+ul,ol{margin:10px 0 22px 22px;font-size:17px;line-height:1.8;font-weight:300;color:var(--text)}
+li{margin-bottom:6px;max-width:700px}
+
+.callout{margin:28px 0;padding:20px 24px;border-left:3px solid var(--gold);background:rgba(196,162,101,0.06);border-radius:0 8px 8px 0;max-width:720px}
+.callout strong{color:var(--gold)}
+.callout p{margin-bottom:0;font-size:16px}
+
+.redflag{margin:20px 0;padding:16px 22px;border:1px solid var(--border);background:var(--redflag-bg);border-radius:8px;font-size:15px;max-width:720px}
+.redflag strong{color:var(--gold)}
+
+.pullquote{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,30px);line-height:1.3;color:var(--gold);font-weight:400;font-style:italic;margin:40px 0;padding:0 0 0 28px;border-left:3px solid var(--gold);max-width:720px}
+
+.hero-image{margin:0 0 36px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--card-bg);aspect-ratio:16/7;display:flex;align-items:center;justify-content:center;position:relative}
+.hero-image svg{width:100%;height:100%;display:block}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-caption{font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);margin:-28px 0 32px;max-width:720px;font-style:italic}
+
+.cta-box{margin:60px 0 0;padding:40px 38px;background:rgba(196,162,101,0.08);border:1px solid rgba(196,162,101,0.3);border-radius:16px;text-align:center}
+.cta-box h4{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.6vw,28px);font-weight:400;color:var(--navy);margin-bottom:10px;line-height:1.2}
+.cta-box h4 em{color:var(--gold);font-style:italic}
+.cta-box p{font-size:15px;color:var(--muted);margin:0 auto 24px;max-width:520px}
+.bp{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--bg);border:none;border-radius:999px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block}
+.bp:hover{background:var(--copper);transform:translateY(-1px)}
+
+footer{padding:30px clamp(20px,5vw,60px);border-top:1px solid var(--border);background:#060A14;font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);line-height:1.7;font-weight:300;text-align:center;position:relative;z-index:2}
+
+canvas#bgnet{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+
+@media(max-width:768px){main{padding:120px 20px 80px}}
+</style>
+<script>window.AEVIVO_MOON='<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"#C4A265\"><path d=\"M12 3a9 9 0 11-9 9c0-.46.03-.91.09-1.35A7 7 0 0013.35 2.91C12.91 2.97 12.46 3 12 3z\"/></svg>';window.AEVIVO_SUN='<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"#C4A265\"><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm0 17a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4 11a1 1 0 110 2H2a1 1 0 110-2h2zm18 0a1 1 0 110 2h-2a1 1 0 110-2h2zM6.22 4.22a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42L6.22 5.64a1 1 0 010-1.42zm11.14 11.14a1 1 0 011.42 0l1.41 1.41a1 1 0 11-1.41 1.42l-1.42-1.41a1 1 0 010-1.42zM6.22 19.78a1 1 0 010-1.42l1.42-1.41a1 1 0 111.41 1.41l-1.41 1.42a1 1 0 01-1.42 0zM17.36 8.64a1 1 0 010-1.42l1.41-1.41a1 1 0 111.42 1.42l-1.41 1.41a1 1 0 01-1.42 0z\"/></svg>';document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('tgl-icon');if(b){var t=document.documentElement.dataset.theme||'light';b.innerHTML=t==='dark'?window.AEVIVO_MOON:window.AEVIVO_SUN}});</script>
+</head>
+<body>
+<canvas id="bgnet"></canvas>
+<script>
+(function(){const canvas=document.getElementById('bgnet');const ctx=canvas.getContext('2d');const DPR=Math.min(window.devicePixelRatio||1,2);let W,H;function resize(){W=window.innerWidth;H=window.innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.scale(DPR,DPR);}resize();window.addEventListener('resize',resize);const N=Math.max(40,Math.min(140,Math.floor(W*H*0.00008)));const particles=[];for(let i=0;i<N;i++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.18,vy:(Math.random()-0.5)*0.18,r:Math.random()*1.3+0.4});const maxDist=150,maxDist2=maxDist*maxDist;let mx=-9999,my=-9999;window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});window.addEventListener('mouseleave',()=>{mx=-9999;my=-9999});function frame(){var isDark=(window.__aevivo_theme||document.documentElement.dataset.theme||'light')==='dark';var lineRGB=isDark?'196,162,101':'12,18,37';var dotRGB=isDark?'214,194,148':'12,18,37';var dotA=isDark?0.85:0.7;var lineMul=isDark?1:0.9;ctx.clearRect(0,0,W,H);for(const p of particles){p.x+=p.vx;p.y+=p.vy;if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;}for(let i=0;i<N;i++){for(let j=i+1;j<N;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d2=dx*dx+dy*dy;if(d2<maxDist2){const d=Math.sqrt(d2),a=0.28*(1-d/maxDist);ctx.strokeStyle='rgba('+lineRGB+','+(a*lineMul)+')';ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}}const mdx=particles[i].x-mx,mdy=particles[i].y-my,md2=mdx*mdx+mdy*mdy;if(md2<32400){const md=Math.sqrt(md2),a=0.25*(1-md/180);ctx.strokeStyle='rgba('+lineRGB+','+(a*lineMul)+')';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mx,my);ctx.stroke();}}for(const p of particles){ctx.fillStyle='rgba('+dotRGB+','+dotA+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}requestAnimationFrame(frame);}frame();})();
+</script>
+
+<div class="ruo-bar">
+  <span class="lbl">FOR RESEARCH USE ONLY</span>
+  <span class="sep">|</span>
+  <span class="note">Not for human consumption. Not evaluated by any regulatory body.</span>
+</div>
+<nav class="nb">
+  <a href="../index.html" class="brand">
+    <div class="mark">A</div>
+    <span class="name">Aevivo Longevity</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:16px">
+    <button onclick="(function(){var h=document.documentElement;var next=h.dataset.theme==='dark'?'light':'dark';h.dataset.theme=next;window.__aevivo_theme=next;try{localStorage.setItem('aevivo-theme',next)}catch(e){}var b=document.getElementById('tgl-icon');if(b){b.innerHTML=next==='dark'?AEVIVO_MOON:AEVIVO_SUN}})()" title="Toggle theme" aria-label="Toggle theme" style="width:34px;height:34px;border-radius:50%;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.25);display:flex;align-items:center;justify-content:center;transition:all 0.25s;cursor:pointer;padding:0" onmouseover="this.style.background='#C4A265';this.style.borderColor='#C4A265'" onmouseout="this.style.background='rgba(196,162,101,0.1)';this.style.borderColor='rgba(196,162,101,0.25)'"><span id="tgl-icon"></span></button>
+    <a href="https://wa.me/351934126762?text=Hi%20Aevivo%2C%20I%20have%20a%20question." target="_blank" rel="noopener" title="Chat on WhatsApp" style="width:34px;height:34px;border-radius:50%;background:#25D366;border:1px solid #25D366;display:flex;align-items:center;justify-content:center;transition:all 0.25s;text-decoration:none" onmouseover="this.style.background='#128C7E';this.style.borderColor='#128C7E'" onmouseout="this.style.background='#25D366';this.style.borderColor='#25D366'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a href="../index.html" class="back">← Back to home</a>
+  </div>
+</nav>
+
+<main>
+  <div class="breadcrumb"><a href="../index.html">Home</a><span class="sep">·</span><a href="index.html">Journal</a><span class="sep">·</span>What Ends Up in the Bottle</div>
+  <div class="eyebrow">Supply Chain · 7 min read</div>
+  <h1>What ends up <em>in the bottle.</em></h1>
+  <p class="lede">In October 2025, a Channel 4 News investigation showed the world what happens when an unregulated reseller dresses up cheap research material as a miracle drug. Here is what the Synedica case tells every peptide buyer about what is actually in the pen.</p>
+
+  <div class="hero-image">
+    <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--char)" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="var(--bg)" stop-opacity="0.05"/>
+        </linearGradient>
+        <linearGradient id="pen1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#C4A265" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#8A6A2A" stop-opacity="0.9"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="350" fill="url(#bg1)"/>
+      <g opacity="0.15" stroke="#C4A265" stroke-width="0.5" fill="none">
+        <circle cx="640" cy="90" r="40"/><circle cx="640" cy="90" r="60"/><circle cx="640" cy="90" r="80"/>
+        <line x1="120" y1="80" x2="240" y2="140"/><line x1="240" y1="140" x2="180" y2="260"/><line x1="180" y1="260" x2="320" y2="300"/>
+        <circle cx="120" cy="80" r="2.5" fill="#C4A265"/><circle cx="240" cy="140" r="2.5" fill="#C4A265"/><circle cx="180" cy="260" r="2.5" fill="#C4A265"/><circle cx="320" cy="300" r="2.5" fill="#C4A265"/>
+      </g>
+      <g transform="translate(280 140) rotate(-22)">
+        <rect x="0" y="-14" width="220" height="28" rx="14" fill="url(#pen1)" stroke="#C4A265" stroke-width="1"/>
+        <rect x="36" y="-8" width="6" height="16" fill="#FBF7EF" opacity="0.5"/>
+        <rect x="52" y="-8" width="6" height="16" fill="#FBF7EF" opacity="0.5"/>
+        <rect x="68" y="-8" width="6" height="16" fill="#FBF7EF" opacity="0.5"/>
+        <rect x="220" y="-10" width="18" height="20" rx="3" fill="#8A6A2A"/>
+        <line x1="238" y1="0" x2="260" y2="0" stroke="#C4A265" stroke-width="1.5"/>
+      </g>
+      <g transform="translate(520 80)">
+        <circle cx="0" cy="0" r="54" fill="none" stroke="#D14343" stroke-width="3"/>
+        <line x1="-38" y1="-38" x2="38" y2="38" stroke="#D14343" stroke-width="3"/>
+      </g>
+      <text x="40" y="320" font-family="'Libre Baskerville',serif" font-size="14" fill="#C4A265" opacity="0.6" font-style="italic">Illustration · the unregulated pen</text>
+    </svg>
+  </div>
+  <p class="hero-caption">An unregulated injection pen sold as an investigational peptide. Swap with a real editorial photo by dropping one into <code>/images/blog/bottle-hero.jpg</code>.</p>
+
+  <h2>The Synedica case, <em>in short</em></h2>
+
+  <p>On 22 October 2025, a Channel 4 News investigation in the United Kingdom exposed a company called <strong>Synedica</strong> selling injection pens marketed as retatrutide, a triple-agonist GLP-1 peptide that is still in Phase 3 clinical trials and has not been approved for human use in any country in the world.</p>
+
+  <p>The pens were sold online and on social media. The packaging and positioning implied the product came from the manufacturer running the trials, Eli Lilly. A second company, <strong>Alluvi</strong>, was named alongside Synedica in the same supply chain. When the Channel 4 reporter sent Eli Lilly a sample of the product, the company confirmed the pens were not theirs. They were counterfeit.</p>
+
+  <p>Following the broadcast, Eli Lilly publicly announced it would take legal action against both companies. Synedica's own website carries a disclaimer saying the product is "for research use only," which is the same four words almost every grey-market peptide reseller uses. In practice the pens were being marketed to the general public as a weight-loss drug, and distributing an investigational peptide outside of a clinical trial is illegal on both sides of the Atlantic.</p>
+
+  <div class="pullquote">
+    "For research use only" is the sentence that makes the reseller model legal on paper and indefensible in practice.
+  </div>
+
+  <p>The Synedica story is not unusual. It is this year's version of a pattern that has repeated inside the peptide industry for at least a decade. A company puts a logo on a website, orders drums of crude research material from an unregulated manufacturer in Hebei, Shandong or Sichuan, and relabels it. The markup is six to ten times. The quality control is a generic PDF. The product is sold under a "research use only" disclaimer that nobody believes.</p>
+
+  <p>The problem is not that the peptide was synthesised in China. Credible peptide chemistry happens in China every day, inside GMP-certified facilities audited by the FDA, EMA or MHRA. The problem is <strong>who synthesised a particular lot, under what conditions, and whether anyone ever tested it after it crossed the border</strong>.</p>
+
+  <h2>What independent testing <em>keeps finding</em></h2>
+
+  <p>When academic labs, regulators, or sceptical buyers send anonymously-purchased peptides to a credible analytical laboratory, the results cluster into a short list of problems. These are the ones that show up over and over.</p>
+
+  <h3>1. Wrong identity</h3>
+  <p>The label says BPC-157. The mass spectrometer says something close, but not that. A single amino acid substituted, a residue missing, a different acetylation pattern. The buyer thinks they bought a well-studied peptide. They bought an unknown one with no literature.</p>
+
+  <h3>2. Low actual purity</h3>
+  <p>The CoA claims greater than ninety-eight percent by HPLC. Independent testing finds a main peak at eighty-four percent, surrounded by synthesis byproducts and deletion sequences no one bothered to remove. The target peptide is diluted with impurities the buyer never paid for.</p>
+
+  <h3>3. Bacterial endotoxins</h3>
+  <p>This is the one that can actually hurt someone. Endotoxins are fragments of bacterial cell walls. Unregulated synthesis facilities do not control for them, because they do not have to. Endotoxin-contaminated peptide reconstituted in bacteriostatic water and injected produces a classic pyrogenic response: fever, chills, hypotension. In research use, it confounds the data. Outside research, the consequences are worse.</p>
+
+  <h3>4. Residual solvents</h3>
+  <p>Peptide synthesis uses dichloromethane, DMF, acetonitrile, and trifluoroacetic acid. Every legitimate facility runs gas chromatography to confirm those solvents have been removed. Many Chinese research-chemical facilities do not. Buyers end up with measurable DCM or TFA in their pens. The peptide still "works." The pen is still toxic.</p>
+
+  <h3>5. Heavy metals</h3>
+  <p>Peptide synthesis resins and scavengers contain trace palladium, copper, and iron. Legitimate release testing includes ICP-MS to confirm the metals have been removed within pharmacopoeial limits. Cheap manufacturers skip this test because the test itself costs more than the peptide.</p>
+
+  <div class="pullquote">
+    The peptide still "works." The pen is still toxic. That is the whole scandal, in two sentences.
+  </div>
+
+  <h2>Why the reseller model <em>rewards this</em></h2>
+
+  <p>A US or EU peptide website has one job. Buy low, mark up, ship. The economics make anything else unaffordable.</p>
+
+  <p>A credible lot release package in Europe costs between eight hundred and two thousand euros per batch, depending on the panel. Third-party endotoxin testing alone is three to five hundred euros. A proper ICP-MS heavy metals panel is another few hundred. Residual solvents by GC. Microbial limits. Water content by Karl Fischer.</p>
+
+  <p>If you are reselling ten-euro-a-gram research chemicals at eighty euros a gram, you cannot afford to run that testing. So you do not. You copy the supplier's CoA, put your own logo on it, and ship.</p>
+
+  <p>The buyer never finds out, because the buyer never tests. Research-use-only labelling means nobody has to. Until someone does, and the headline comes.</p>
+
+  <h2>The three questions <em>that catch a reseller</em></h2>
+
+  <p>If you are buying peptides from anyone, ask these three questions before you pay. If the answer to any of them is evasive, the supplier is a reseller, and what is in the bottle is a guess.</p>
+
+  <div class="callout">
+    <p><strong>1. Can you name the facility that synthesised this lot?</strong> A real supplier has a real answer: a facility, a country, a GMP status. "Hybrid synthesis, EU-certified" is not an answer. It is a dodge.</p>
+  </div>
+
+  <div class="callout">
+    <p><strong>2. Can you send me the full release package for this lot, not just the HPLC chromatogram?</strong> The full package should include MS confirmation, residual solvents, water content, appearance, and either endotoxin results or a statement of why that test was not run. A one-page "CoA" is marketing.</p>
+  </div>
+
+  <div class="callout">
+    <p><strong>3. Who is listed as the legal manufacturer on the package, and what is their regulatory status?</strong> If the brand on the website and the entity in the release package are different, the website is a reseller. That is fine, as long as the reseller names their upstream and the upstream is credible.</p>
+  </div>
+
+  <h2>What we do <em>differently</em></h2>
+
+  <p>Aevivo does not manufacture peptides. We do not pretend to. What we do is source from a single, named European GMP-certified facility, test every lot, and publish the release package tied to the batch you receive.</p>
+
+  <p>The facility is disclosed to buyers who ask. The release panel includes HPLC, MS, residual solvents, water content, and appearance as standard. Endotoxin testing is performed on every lot of parenteral-format peptides. Heavy metals are tested on every lot where synthesis chemistry introduces them.</p>
+
+  <p>None of that is heroic. It is what the reseller model cannot afford to do, and it is why the reseller model ships what it ships. We chose a different model so we could ship something different.</p>
+
+  <div class="cta-box">
+    <h4>Not sure what is in your current vial? Ask us.</h4>
+    <p>We will tell you exactly what an Aevivo release package looks like, and what to ask your current supplier if you suspect what is actually in the bottle.</p>
+    <a href="../orderlist.html" class="bp">Order your peptides →</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 Aevivo Longevity, a trademark of GENESE SOBRANCEIRA, LDA. Calçada da Ajuda 35, 1300-006 Lisboa · For research use only · <a href="../terms.html" style="color:var(--gold);text-decoration:none">Terms</a> · <a href="../privacy.html" style="color:var(--gold);text-decoration:none">Privacy</a>
+</footer>
+</body></html>
