@@ -15,7 +15,7 @@ Both website versions are single-file HTML pages deployed as static files on Git
 - 53+ products across 11 categories  
 - Includes: hero, educational section, product catalog, science references, quality section, "Aevivo Standard" mission, assessment form, FAQ, newsletter signup, cart  
 - Footer has Terms/Privacy as modal popups  
-- **Live at:** [https://suzeq493.github.io/aevivo-site/](https://suzeq493.github.io/aevivo-site/)
+- **Live at:** [https://aevivolongevity.com](https://aevivolongevity.com)
 
 ### v2 — Light Theme (index-v2.html, \~46KB)
 
@@ -24,19 +24,19 @@ Both website versions are single-file HTML pages deployed as static files on Git
 - \~58 products across 10 categories  
 - Includes: fixed RUO disclaimer bar, hero, pen delivery section, product catalog, science citations (3 specific papers), quality assurance, certificates section, FAQ, newsletter, cart  
 - Assessment form intentionally removed for RUO compliance  
-- **Live at:** [https://suzeq493.github.io/aevivo-site/index-v2.html](https://suzeq493.github.io/aevivo-site/index-v2.html)
+- **Live at:** [https://aevivolongevity.comindex-v2.html](https://aevivolongevity.comindex-v2.html)
 
 ### GitHub Repo
 
-- **URL:** github.com/SuzeQ493/aevivo-site  
+- **URL:** github.com/RoganStarburst/aevivo-site  
 - **Branch:** main  
 - **Deploy:** GitHub Pages (automatic on push to main)  
-- **Account:** SuzeQ493
+- **Account:** RoganStarburst (Thomas's account; owns the live site)
 
 ### How to Deploy Changes
 
 1. Edit the HTML file locally  
-2. Go to [https://github.com/SuzeQ493/aevivo-site/upload/main](https://github.com/SuzeQ493/aevivo-site/upload/main)  
+2. Go to [https://github.com/RoganStarburst/aevivo-site/upload/main](https://github.com/RoganStarburst/aevivo-site/upload/main)  
 3. Drag the updated file onto the upload area  
 4. Click "Commit changes"  
 5. Wait \~60 seconds for GitHub Pages to deploy

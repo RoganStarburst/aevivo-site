@@ -6,9 +6,9 @@ AEVIVO Longevity is a European research peptide company. This repo/folder contai
 
 ## Live Sites
 
-- **v1 (Navy/Dark theme):** [https://suzeq493.github.io/aevivo-site/](https://suzeq493.github.io/aevivo-site/) (index.html)  
-- **v2 (Light theme):** [https://suzeq493.github.io/aevivo-site/index-v2.html](https://suzeq493.github.io/aevivo-site/index-v2.html) (index-v2.html)  
-- **GitHub repo:** github.com/SuzeQ493/aevivo-site
+- **Production:** [https://aevivolongevity.com](https://aevivolongevity.com) (DNS confirmed via GitHub Pages CNAME)
+- **GitHub repo:** [github.com/RoganStarburst/aevivo-site](https://github.com/RoganStarburst/aevivo-site) - **Thomas owns it**. Pages serves from `main` root. Push directly; goes live within ~60s.
+- `SuzeQ493/aevivo-site` exists historically but is not the live source. Don't rely on it.
 
 ## Brand Identity
 
