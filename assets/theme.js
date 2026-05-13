@@ -24,4 +24,10 @@
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
   }
+
+  // Fallback: any .reveal still hidden after 1.5s gets force-revealed.
+  // Belt-and-braces for tall mobile grids or odd observer behaviour.
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
 })();
