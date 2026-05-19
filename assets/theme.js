@@ -1,4 +1,4 @@
-// Aevivo Clinical · shared client behaviour
+// Aevivo Longevity · shared client behaviour
 (function(){
   var nav = document.getElementById('nav');
   if (nav && !nav.classList.contains('solid')) {

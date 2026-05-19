@@ -1,4 +1,4 @@
-// Aevivo Clinical · access gate (must run before body renders)
+// Aevivo Longevity · access gate (must run before body renders)
 (function(){
   var KEY='aevivo-clinical-gate-v1',PW='CLINICS26';
   try{if(localStorage.getItem(KEY)===PW)return}catch(e){}
@@ -24,7 +24,7 @@
   var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
   function render(){
     var el=document.createElement('div');el.id='aevivo-gate';
-    el.innerHTML='<div class="gate-card"><div class="gate-mark">A</div><div class="gate-brand">Aevivo Clinical</div><h1 class="gate-heading">Practitioner <em>preview.</em></h1><p class="gate-sub">Aevivo Clinical is the EU-GMP supply channel for longevity, health and wellness clinics. Enter your access code to continue.</p><form id="aevivo-gate-form"><input id="aevivo-gate-input" type="password" placeholder="Access code" autocomplete="off" autofocus/><button type="submit">Enter</button><div class="gate-error" id="aevivo-gate-err"></div></form><div class="gate-foot">For research use only. Not for human consumption.</div></div>';
+    el.innerHTML='<div class="gate-card"><div class="gate-mark">A</div><div class="gate-brand">Aevivo Longevity</div><h1 class="gate-heading">Practitioner <em>preview.</em></h1><p class="gate-sub">Aevivo Longevity is the EU-GMP supply channel for longevity, health and wellness clinics. Enter your access code to continue.</p><form id="aevivo-gate-form"><input id="aevivo-gate-input" type="password" placeholder="Access code" autocomplete="off" autofocus/><button type="submit">Enter</button><div class="gate-error" id="aevivo-gate-err"></div></form><div class="gate-foot">For research use only. Not for human consumption.</div></div>';
     document.body.appendChild(el);
     var form=document.getElementById('aevivo-gate-form'),input=document.getElementById('aevivo-gate-input'),err=document.getElementById('aevivo-gate-err');
     form.addEventListener('submit',function(e){
