@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Book a Doctor Consultation · Aevivo Longevity</title>
+<meta name="description" content="A doctor who guides your whole health journey. Preventative, personalized, precision medicine with Dr. Andrea Sànchez. Fewer patients, more care. Book a free 15-minute consultation.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F8F5EE'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/theme.css?v=4">
+<!--
+  PHASE 1 SCOPE: this page does two things only, book a consultation + the quiz.
+  No video infra. Booking connects to Dr. Andrea's Google Calendar (Appointment
+  schedule); Andrea handles any payment herself. Phase 2 adds the platform, intake
+  flow, integrated video, etc.
+
+  REPLACE_ME (BOOKING-LINK): paste Andrea's Google Appointment Scheduling link into the
+  href="#book" CTAs (search BOOKING-LINK). Calendar > Create > Appointment schedule.
+
+  REPLACE_ME (QUIZ-LINK): the "Discover your optimized health" quiz page is the next
+  build. The quiz CTAs scroll to the #quiz teaser; its button points to quiz/ (to build).
+
+  Hero video: assets/hero-olive.mp4. Swap the file to change footage.
+-->
+<style>
+  /* ============ HERO (video) ============ */
+  .hero-video {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-media {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero-scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(38, 40, 31, 0.38) 0%, rgba(38, 40, 31, 0.52) 50%, rgba(38, 40, 31, 0.66) 100%),
+      linear-gradient(180deg, transparent 55%, rgba(248,245,238,0.55) 80%, var(--bg) 100%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-media { display: none; }
+    .hero-video { background: url('../assets/hero-olive-poster.jpg') center / cover no-repeat; }
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    width: 100%;
+    padding: 200px 0 140px;
+  }
+  @media (max-width: 700px) { .hero-content { padding: 160px 0 100px; } }
+  .hero-content .eyebrow { color: #E8E3D0; display: block; margin-bottom: 22px; font-size: 14px; }
+  .hero-content h1 {
+    color: #F5F1E4;
+    font-size: clamp(50px, 6.8vw, 100px);
+    max-width: 13ch;
+    margin-bottom: 28px;
+    text-shadow: 0 1px 30px rgba(38, 40, 31, 0.35);
+  }
+  .hero-content h1 em { color: #E2DCC2; }
+  .hero-content .lede {
+    color: #FAF8F2; max-width: 620px;
+    font-size: 21px; font-weight: 400; line-height: 1.65;
+    text-shadow: 0 1px 22px rgba(38, 40, 31, 0.55);
+  }
+  .hero-cta-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 44px; }
+
+  .btn-cream {
+    background: #F5F1E4;
+    color: var(--ink);
+    border-color: #F5F1E4;
+  }
+  .btn-cream:hover { background: #FFFFFF; border-color: #FFFFFF; }
+  .btn-line-cream { background: transparent; color: #F5F1E4; border-color: rgba(245, 241, 228, 0.7); }
+  .btn-line-cream:hover { border-color: #F5F1E4; background: rgba(245, 241, 228, 0.1); }
+
+  /* Nav over video: ghost cream frame until scrolled, then flat olive */
+  .nav.nav-overlay { top: 0; }
+  .nav.nav-overlay .nav-inner { grid-template-columns: 1fr auto; }
+  .nav.nav-overlay:not(.scrolled) .brand-mark { border-color: #F2EEE2; color: #F2EEE2; }
+  .nav.nav-overlay:not(.scrolled) .brand-name { color: #F2EEE2; }
+  .nav.nav-overlay:not(.scrolled) .brand-tagline { color: rgba(242, 238, 226, 0.75); }
+  .nav.nav-overlay:not(.scrolled) .btn-cream {
+    background: transparent;
+    color: #F5F1E4;
+    border-color: rgba(245, 241, 228, 0.7);
+  }
+  .nav.nav-overlay:not(.scrolled) .btn-cream:hover { border-color: #F5F1E4; background: rgba(245, 241, 228, 0.1); }
+  .nav.nav-overlay.scrolled .btn-cream {
+    background: var(--olive-deep);
+    color: #F5F1E4;
+    border-color: var(--olive-deep);
+  }
+
+  /* ============ FACTS STRIP ============ */
+  .facts { padding: 100px 0; position: relative; overflow: hidden; }
+  .facts::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background: url('../assets/dna-helix.svg') center / 1400px auto no-repeat;
+    opacity: 0.10;
+  }
+  .facts .container { position: relative; z-index: 1; }
+
+  /* ============ VIDEO BAND (b-roll sections) ============ */
+  .section.video-band { position: relative; overflow: hidden; padding: 150px 0; }
+  .video-band .band-media {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+  }
+  .video-band .band-scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(38, 40, 31, 0.55) 0%, rgba(38, 40, 31, 0.7) 100%);
+  }
+  .video-band .container { position: relative; z-index: 2; }
+  @media (prefers-reduced-motion: reduce) { .video-band .band-media { display: none; } .section.video-band { background: var(--olive-deep); } }
+  .facts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 760px) { .facts-row { grid-template-columns: 1fr; } }
+  .fact {
+    background: #FFFFFF; border: 1px solid var(--line); border-radius: 16px;
+    padding: 36px 32px; box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05);
+  }
+  .fact strong {
+    display: block; font-family: var(--serif); font-weight: 500;
+    font-size: 26px; color: var(--ink); margin-bottom: 8px;
+  }
+  .fact span { font-size: 18px; color: var(--ink-soft); line-height: 1.6; }
+
+  /* ============ SECTIONS ============ */
+  .section { padding: 110px 0; }
+  /* One cream only: "paper" sections share the page background */
+  .section.contrast { background: var(--olive-deep); }
+  .section.contrast .eyebrow { color: #D6CCB0; }
+  .section.contrast h2 { color: #F5F1E4; }
+  .section.contrast .lede, .section.contrast p { color: rgba(245, 241, 228, 0.82); }
+  .section.contrast .pillar p, .section.contrast .fact span { color: var(--ink-soft); }
+  .section.contrast .quote-band p { color: #F5F1E4; }
+  .section.contrast .quote-caption { color: #D6CCB0; }
+  .section.contrast .btn-fill {
+    background: #F5F1E4;
+    color: var(--ink);
+    border-color: #F5F1E4;
+  }
+  .section.contrast .btn-fill:hover { background: #FFFFFF; border-color: #FFFFFF; }
+  .section.contrast .btn-ghost { color: #F5F1E4; border-color: rgba(245, 241, 228, 0.7); }
+  .section.contrast .btn-ghost:hover { border-color: #F5F1E4; background: rgba(245, 241, 228, 0.1); }
+  @media (max-width: 700px) { .section { padding: 78px 0; } }
+  .section-head { max-width: 660px; margin-bottom: 60px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head .eyebrow { display: block; margin-bottom: 16px; }
+  .section-head h2 { margin-bottom: 18px; }
+  .section-head .lede { color: var(--ink-soft); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+  @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; gap: 32px; } }
+  .two-col .eyebrow { display: block; margin-bottom: 16px; }
+  .two-col h2 { max-width: 13ch; }
+  .two-col p + p { margin-top: 18px; }
+  .two-col .lede, .two-col p { font-size: 20px; line-height: 1.7; }
+  .two-col-media { width: 100%; margin-top: 24px; border-radius: 16px; border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05); }
+
+  /* ============ PILLARS (3 Ps) ============ */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 760px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar { padding: 40px 34px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05); }
+  .pillar h3 { font-size: clamp(26px, 2.6vw, 32px); margin-bottom: 12px; }
+  .pillar p { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); }
+
+  /* ============ CARE TEAM (image cards) ============ */
+  .care-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  @media (max-width: 1000px) { .care-grid { grid-template-columns: repeat(2, 1fr); max-width: 640px; margin: 0 auto; } }
+  @media (max-width: 520px) { .care-grid { grid-template-columns: 1fr; max-width: 420px; } }
+  .care-card {
+    position: relative; overflow: hidden; aspect-ratio: 4 / 5;
+    border-radius: 16px; border: 1px solid var(--line);
+    display: flex; align-items: flex-end; box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05);
+  }
+  .care-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .care-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(38,40,31,0.12) 0%, rgba(38,40,31,0.5) 45%, rgba(38,40,31,0.9) 100%); }
+  .care-content { position: relative; z-index: 2; padding: 24px 22px; }
+  .care-role { font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: #D6CCB0; font-weight: 500; }
+  .care-card h3 { font-size: 23px; color: #F5F1E4; margin: 6px 0 8px; }
+  .care-card p { font-size: 14px; line-height: 1.5; color: rgba(245,241,228,0.92); }
+  .care-network { text-align: center; max-width: 760px; margin: 44px auto 0; }
+  .care-network p { font-size: 17px; color: var(--ink-soft); }
+  .care-network strong { color: var(--ink); font-weight: 500; }
+
+  /* ============ PROBLEMS MARQUEE ============ */
+  .marquee {
+    overflow: hidden;
+    background: #FFFFFF;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 34px 0;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 45s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-list { display: flex; align-items: center; flex: 0 0 auto; }
+  .marquee-item {
+    display: flex; align-items: center;
+    font-family: var(--serif); font-size: clamp(20px, 2.2vw, 26px);
+    color: var(--ink); white-space: nowrap;
+  }
+  .marquee-item::after {
+    content: ""; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--olive); margin: 0 30px; flex: 0 0 auto;
+  }
+  @keyframes marquee-scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; row-gap: 14px; }
+    .marquee-list { flex-wrap: wrap; justify-content: center; row-gap: 14px; }
+    .marquee-list[aria-hidden="true"] { display: none; }
+  }
+  .problems-note { text-align: center; max-width: 720px; margin: 56px auto 0; font-size: 23px; line-height: 1.6; }
+
+  /* ============ PHASES (video cards) ============ */
+  .phases { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 760px) { .phases { grid-template-columns: 1fr; } }
+  .phase-card {
+    position: relative; overflow: hidden;
+    padding: 44px 38px; border-radius: 16px; border: 1px solid var(--line);
+    background: var(--olive-deep);
+    box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05);
+  }
+  .phase-media {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+  }
+  .phase-scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(38, 40, 31, 0.45) 0%, rgba(38, 40, 31, 0.62) 55%, rgba(38, 40, 31, 0.78) 100%);
+  }
+  .phase-content { position: relative; z-index: 2; }
+  @media (prefers-reduced-motion: reduce) { .phase-media { display: none; } }
+  .phase-card h3 { font-size: clamp(30px, 3vw, 38px); margin-bottom: 6px; color: #F5F1E4; }
+  .phase-tag { font-size: 13px; letter-spacing: 2.6px; text-transform: uppercase; color: #D6CCB0; font-weight: 500; }
+  .phase-list { list-style: none; padding: 0; margin: 22px 0 0; }
+  .phase-list li {
+    font-size: 19px; color: rgba(248, 245, 238, 0.94);
+    padding: 14px 0; border-top: 1px solid rgba(248, 245, 238, 0.22);
+  }
+
+  /* ============ TEAM (photo cards) ============ */
+  .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .team { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; } }
+  .member {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3 / 4; border-radius: 16px;
+    border: 1px solid var(--line);
+    background: var(--olive-deep);
+    box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05);
+  }
+  .member img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .member-panel {
+    position: absolute; left: 14px; right: 14px; bottom: 14px;
+    padding: 20px 22px; border-radius: 12px;
+    background: rgba(248, 245, 238, 0.88);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+  }
+  .member-role { font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--olive); font-weight: 500; }
+  .member-panel h3 { font-size: 24px; margin: 4px 0 0; }
+  .member-panel p {
+    font-size: 14.5px; line-height: 1.55; color: var(--ink-soft);
+    max-height: 0; opacity: 0; margin: 0; overflow: hidden;
+    transition: max-height .4s ease, opacity .3s ease, margin .4s ease;
+  }
+  .member:hover .member-panel p, .member:focus-within .member-panel p, .member:focus .member-panel p {
+    max-height: 200px; opacity: 1; margin-top: 10px;
+  }
+
+  /* ============ QUOTE ============ */
+  .quote-band { text-align: center; max-width: 860px; margin: 0 auto; }
+  .quote-band p {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 3.8vw, 48px); line-height: 1.28; color: var(--ink);
+  }
+  .quote-caption { margin-top: 26px; letter-spacing: 2.6px; text-transform: uppercase; font-size: 12px; color: var(--olive); font-weight: 500; }
+
+  /* ============ FLOW (step cards + arrow) ============ */
+  .flow { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  @media (max-width: 900px) { .flow { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .flow { grid-template-columns: 1fr; } }
+  .flow-arrow {
+    position: absolute; top: 50%; left: -34px; right: -22px; height: 2px;
+    background: var(--olive); transform: translateY(-50%); z-index: 0;
+  }
+  .flow-arrow::after {
+    content: ""; position: absolute; right: -1px; top: 50%; transform: translateY(-50%);
+    border-left: 14px solid var(--olive);
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+  }
+  @media (max-width: 900px) { .flow-arrow { display: none; } }
+  .fstep {
+    position: relative; z-index: 1; text-align: center;
+    padding: 32px 22px 28px;
+    background: #FFFFFF; border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05);
+  }
+  .fdot { display: none; }
+  .fstep h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin-bottom: 10px; color: var(--ink); }
+  .fstep p { font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); }
+
+  /* ============ PROTOCOL AREAS (image cards) ============ */
+  .protocol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 820px) { .protocol-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; } }
+  .protocol-card {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3 / 4; border-radius: 16px; border: 1px solid var(--line);
+    display: flex; align-items: flex-end;
+    box-shadow: 0 2px 12px rgba(44, 45, 39, 0.05);
+  }
+  .protocol-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .protocol-scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(38, 40, 31, 0.12) 0%, rgba(38, 40, 31, 0.55) 52%, rgba(38, 40, 31, 0.86) 100%);
+  }
+  .protocol-content { position: relative; z-index: 2; padding: 34px 30px; }
+  .protocol-num { font-size: 13px; letter-spacing: 3px; color: #D6CCB0; font-weight: 500; }
+  .protocol-card h3 { font-size: clamp(26px, 2.6vw, 32px); color: #F5F1E4; margin: 8px 0 10px; }
+  .protocol-card p { font-size: 16px; line-height: 1.6; color: rgba(245, 241, 228, 0.92); }
+
+  /* ============ QUIZ TEASER ============ */
+  .quiz-band { text-align: center; max-width: 680px; margin: 0 auto; }
+  .quiz-band .eyebrow { display: block; margin-bottom: 16px; }
+  .quiz-band h2 { margin-bottom: 18px; }
+  .quiz-band .lede { margin-bottom: 34px; color: var(--ink-soft); }
+
+  /* ============ FAQ ============ */
+  .faq { max-width: 760px; margin: 0 auto; }
+  .faq details { border-bottom: 1px solid var(--line-soft); }
+  .faq details:first-of-type { border-top: 1px solid var(--line-soft); }
+  .faq summary {
+    cursor: pointer; list-style: none;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+    padding: 25px 4px;
+    font-family: var(--serif); font-size: clamp(20px, 2.1vw, 24px); font-weight: 500; color: var(--ink);
+    transition: color .25s ease;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary:hover { color: var(--olive); }
+  .faq summary::after {
+    content: "+"; font-family: var(--sans); font-weight: 300; font-size: 24px;
+    color: var(--olive); flex: 0 0 auto; transition: transform .25s ease; line-height: 1;
+  }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { padding: 0 4px 26px; max-width: 64ch; font-size: 16.5px; color: var(--ink-soft); }
+
+  /* ============ CTA BAND ============ */
+  .cta-band { text-align: center; max-width: 660px; margin: 0 auto; }
+  .cta-band .eyebrow { display: block; margin-bottom: 16px; }
+  .cta-band h2 { margin-bottom: 18px; }
+  .cta-band .lede { margin-bottom: 38px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav nav-overlay" id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand" aria-label="Aevivo Longevity home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span class="brand-text">
+        <span class="brand-name">AEVIVO</span>
+        <span class="brand-tagline">LONGEVITY</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <!-- BOOKING-LINK -->
+      <a href="#book" class="btn btn-cream btn-sm">Book a consultation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-video">
+  <video class="hero-media" autoplay muted loop playsinline preload="auto" poster="../assets/hero-olive-poster.jpg">
+    <source src="../assets/hero-olive.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="container">
+      <span class="eyebrow">Preventative &middot; Personalized &middot; Precision Medicine</span>
+      <h1>Your health, <em>guided for life.</em></h1>
+      <p class="lede">Most medicine is built for the five-minute appointment. Aevivo gives you a team, led by your doctor, that learns your whole story and looks at your health from every angle. Online, wherever you are in the world, and with you through every phase of life, including the challenges other doctors waved away.</p>
+      <div class="hero-cta-row">
+        <!-- BOOKING-LINK -->
+        <a href="#book" class="btn btn-cream">Book your free consultation</a>
+        <!-- QUIZ-LINK -->
+        <a href="#quiz" class="btn btn-line-cream">Discover your optimized health</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FACTS STRIP -->
+<section class="facts">
+  <div class="container">
+    <div class="facts-row">
+      <div class="fact"><strong>A team, led by your doctor</strong><span>A holistic approach, starting with your functional doctor as your lead health architect.</span></div>
+      <div class="fact"><strong>Fewer patients, more care</strong><span>Real time and attention on every consultation</span></div>
+      <div class="fact"><strong>Telehealth, worldwide</strong><span>Online from home, wherever you are</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE Ps -->
+<section class="section contrast">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Our medicine</span>
+      <h2>Preventative. Personalized. Precision.</h2>
+      <p class="lede">Three principles behind everything we do, and what makes this different from the medicine you are used to.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Preventative</h3>
+        <p>We act before things break. Most of what limits people later in life can be seen, understood and changed now, while there is still time to change its course.</p>
+      </div>
+      <div class="pillar">
+        <h3>Personalized</h3>
+        <p>Your plan is built around you: your genetics, hormones, history and goals. Never a template, never a prescription written before anyone looked closely.</p>
+      </div>
+      <div class="pillar">
+        <h3>Precision</h3>
+        <p>Every decision is driven by your data: biomarkers, labs and measurable change over time. We read your biology, then we act on what it actually shows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">How it works</span>
+      <h2>From first call to ongoing care.</h2>
+    </div>
+    <div class="flow">
+      <span class="flow-arrow" aria-hidden="true"></span>
+      <div class="fstep">
+        <span class="fdot"></span>
+        <h3>Book your call</h3>
+        <p>Or take the 2-minute quiz first. No documents needed to begin.</p>
+      </div>
+      <div class="fstep">
+        <span class="fdot"></span>
+        <h3>Meet your doctor</h3>
+        <p>A free 15-minute online consultation to understand your story.</p>
+      </div>
+      <div class="fstep">
+        <span class="fdot"></span>
+        <h3>Targeted testing</h3>
+        <p>The right labs to read your biology. Without data, we are tapping in the dark.</p>
+      </div>
+      <div class="fstep">
+        <span class="fdot"></span>
+        <h3>Your journey</h3>
+        <p>A personalised journey built around you, never a template.</p>
+      </div>
+      <div class="fstep">
+        <span class="fdot"></span>
+        <h3>Ongoing support</h3>
+        <p>Your team stays with you and adapts the plan as you progress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROTOCOL AREAS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Different packages</span>
+      <h2>Built around your goal.</h2>
+      <p class="lede">These are not steps on a ladder. Most people begin by building a foundation, then choose where to go from there. You might push for peak performance, optimise for longevity, or pursue both at once. Your goal sets the focus.</p>
+    </div>
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <img src="../images/protocol/foundation.jpg" alt="Foundation">
+        <div class="protocol-scrim" aria-hidden="true"></div>
+        <div class="protocol-content">
+          <h3>Foundation</h3>
+          <p>Often the starting point. Many arrive with real problems to solve, so we bring you back to a strong metabolic baseline for the body to build on.</p>
+        </div>
+      </div>
+      <div class="protocol-card">
+        <img src="../images/protocol/peak.jpg" alt="Peak performance">
+        <div class="protocol-scrim" aria-hidden="true"></div>
+        <div class="protocol-content">
+          <h3>Peak performance</h3>
+          <p>For when you want to find your ceiling. We build toward peak health and performance, and push to see what is actually possible for you.</p>
+        </div>
+      </div>
+      <div class="protocol-card">
+        <img src="../images/protocol/longevity.jpg" alt="Longevity">
+        <div class="protocol-scrim" aria-hidden="true"></div>
+        <div class="protocol-content">
+          <h3>Longevity</h3>
+          <p>Maximum health, maintained across every phase of life, for the longest and strongest healthspan you can have.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A TEAM AROUND YOU -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">How we work</span>
+      <h2>Care from every angle.</h2>
+      <p class="lede">Think of us as your health stewards, guiding your ship across the open sea of life and seeing it safely back to harbour, again and again. Your personal functional medicine doctor is your lead longevity architect, the one who sets the course. Around them works a full team of specialists who handle the day to day, so you are cared for between check-ins, not only during them.</p>
+    </div>
+    <div class="care-grid">
+      <div class="care-card">
+        <img src="../images/care/doctor.jpg" alt="Your lead doctor">
+        <div class="care-scrim" aria-hidden="true"></div>
+        <div class="care-content">
+          <span class="care-role">Lead longevity architect</span>
+          <h3>Your doctor</h3>
+          <p>A functional medicine doctor who sets your course and leads every main check-in.</p>
+        </div>
+      </div>
+      <div class="care-card">
+        <img src="../images/care/nutrition.jpg" alt="Nutrition">
+        <div class="care-scrim" aria-hidden="true"></div>
+        <div class="care-content">
+          <span class="care-role">Fuel</span>
+          <h3>Nutrition</h3>
+          <p>Nutritionists who build food around your biology and your goals.</p>
+        </div>
+      </div>
+      <div class="care-card">
+        <img src="../images/care/movement.jpg" alt="Movement and body mechanics">
+        <div class="care-scrim" aria-hidden="true"></div>
+        <div class="care-content">
+          <span class="care-role">Body mechanics</span>
+          <h3>Movement</h3>
+          <p>Training, mobility and physiotherapy, so the body moves the way it should.</p>
+        </div>
+      </div>
+      <div class="care-card">
+        <img src="../images/care/mind.jpg" alt="Mental health">
+        <div class="care-scrim" aria-hidden="true"></div>
+        <div class="care-content">
+          <span class="care-role">Mind and body</span>
+          <h3>Mental health</h3>
+          <p>Somatic and mental health specialists, because the mind is never separate from the body.</p>
+        </div>
+      </div>
+      <div class="care-card">
+        <img src="../images/care/nursing.jpg" alt="Nursing">
+        <div class="care-scrim" aria-hidden="true"></div>
+        <div class="care-content">
+          <span class="care-role">Day to day</span>
+          <h3>Nursing</h3>
+          <p>Nurses who carry the plan between check-ins and keep you on track.</p>
+        </div>
+      </div>
+    </div>
+    <div class="care-network">
+      <p>And wherever you are, a <strong>worldwide network of licensed local doctors</strong> handles country-specific needs, like the prescriptions your protocol calls for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEWER PATIENTS, MORE CARE -->
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <span class="eyebrow">Why we are different</span>
+        <h2>Fewer patients. More care.</h2>
+        <img class="two-col-media" src="../images/care/nurse-care.jpg" alt="A nurse with a patient" loading="lazy">
+      </div>
+      <div>
+        <p class="lede">Standard medicine runs on volume. You get five minutes, a quick label, and a prescription written before anyone really looked at you. Low energy, stubborn weight, brain fog, broken sleep, these get waved away or band-aided, when they could be understood and resolved.</p>
+        <p>Aevivo is built the other way around. Your doctor takes fewer patients, and brings in the team, so each person gets real time, real attention, and a plan that genuinely fits. That is what it takes to change the direction of your health, not just quiet its symptoms for a while.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT PEOPLE COME FOR -->
+<section class="section" id="problems">
+  <div class="container">
+    <div class="section-head center" style="margin-bottom:48px;">
+      <span class="eyebrow">What we treat</span>
+      <h2>The things that get dismissed elsewhere.</h2>
+    </div>
+  </div>
+  <div class="marquee" aria-label="Conditions and concerns we address">
+    <div class="marquee-track">
+      <div class="marquee-list">
+        <span class="marquee-item">Hormonal imbalance</span>
+        <span class="marquee-item">Stubborn weight</span>
+        <span class="marquee-item">Brain fog</span>
+        <span class="marquee-item">Persistent fatigue</span>
+        <span class="marquee-item">Poor sleep</span>
+        <span class="marquee-item">Low libido</span>
+        <span class="marquee-item">Gut &amp; digestion</span>
+        <span class="marquee-item">Mood &amp; anxiety</span>
+        <span class="marquee-item">Low testosterone</span>
+        <span class="marquee-item">Perimenopause symptoms</span>
+        <span class="marquee-item">Slow recovery</span>
+        <span class="marquee-item">Metabolic health</span>
+      </div>
+      <div class="marquee-list" aria-hidden="true">
+        <span class="marquee-item">Hormonal imbalance</span>
+        <span class="marquee-item">Stubborn weight</span>
+        <span class="marquee-item">Brain fog</span>
+        <span class="marquee-item">Persistent fatigue</span>
+        <span class="marquee-item">Poor sleep</span>
+        <span class="marquee-item">Low libido</span>
+        <span class="marquee-item">Gut &amp; digestion</span>
+        <span class="marquee-item">Mood &amp; anxiety</span>
+        <span class="marquee-item">Low testosterone</span>
+        <span class="marquee-item">Perimenopause symptoms</span>
+        <span class="marquee-item">Slow recovery</span>
+        <span class="marquee-item">Metabolic health</span>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <p class="problems-note lede">If a doctor once told you your results were normal while you still felt far from yourself, this is for you. We look deeper, and we keep looking until we understand what is actually driving it.</p>
+  </div>
+</section>
+
+<!-- LIFE PHASES -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Every phase of life</span>
+      <h2>Women and men are different.</h2>
+      <p class="lede">We understand the difference, and we treat it. Female and male biology move through their own distinct phases, each with its own needs, in body and in mind. Your care should move with them, not start only once something goes wrong.</p>
+    </div>
+    <div class="phases">
+      <div class="phase-card">
+        <video class="phase-media" autoplay muted loop playsinline preload="metadata" poster="../assets/phase-women-poster.jpg">
+          <source src="../assets/phase-women.mp4" type="video/mp4">
+        </video>
+        <div class="phase-scrim" aria-hidden="true"></div>
+        <div class="phase-content">
+          <h3>For Women</h3>
+          <ul class="phase-list">
+            <li>Puberty &amp; adolescence</li>
+            <li>Fertility &amp; pre-conception</li>
+            <li>Pregnancy: pre and post-partum</li>
+            <li>Perimenopause</li>
+            <li>Menopause</li>
+            <li>Post-menopause &amp; beyond</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-card">
+        <video class="phase-media" autoplay muted loop playsinline preload="metadata" poster="../assets/phase-men-poster.jpg">
+          <source src="../assets/phase-men.mp4" type="video/mp4">
+        </video>
+        <div class="phase-scrim" aria-hidden="true"></div>
+        <div class="phase-content">
+          <h3>For Men</h3>
+          <ul class="phase-list">
+            <li>Puberty &amp; adolescence</li>
+            <li>Peak years &amp; fertility</li>
+            <li>Early andropause</li>
+            <li>Andropause &amp; midlife</li>
+            <li>Mature years &amp; beyond</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Who we are</span>
+      <h2>The people behind your care.</h2>
+    </div>
+    <div class="team">
+      <div class="member" tabindex="0">
+        <img src="../images/team/andrea.jpg" alt="Dr. Andrea Sànchez Garcia">
+        <div class="member-panel">
+          <span class="member-role">Lead Doctor</span>
+          <h3>Dr. Andrea Sànchez</h3>
+          <p>Physician in precision, regenerative and longevity medicine. Director of the European Academy of Personalised Medicine, Barcelona.</p>
+        </div>
+      </div>
+      <div class="member" tabindex="0">
+        <img src="../images/team/suzanna.jpg" alt="Suzanna Howse">
+        <div class="member-panel">
+          <span class="member-role">Co-Founder</span>
+          <h3>Suzanna Howse</h3>
+          <!-- REPLACE_ME: 1-2 line bio for Suzanna -->
+          <p>Co-founder of Aevivo Longevity.</p>
+        </div>
+      </div>
+      <div class="member" tabindex="0">
+        <img src="../images/team/tiago.jpg" alt="Tiago Areias">
+        <div class="member-panel">
+          <span class="member-role">Co-Founder</span>
+          <h3>Tiago Areias</h3>
+          <!-- REPLACE_ME: 1-2 line bio for Tiago -->
+          <p>Co-founder of Aevivo Longevity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WE BUILT THIS -->
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <span class="eyebrow">Why we built this</span>
+        <h2>Built for what we couldn't find.</h2>
+        <img class="two-col-media" src="../images/care/sea.jpg" alt="A sailboat on the open sea" loading="lazy">
+      </div>
+      <div>
+        <p class="lede">Aevivo began with a frustration its founders knew firsthand: care that treats you as a set of symptoms instead of a person. Five-minute appointments. Specialists who never speak to each other. Real concerns brushed aside because one lab value looked normal.</p>
+        <p>So we built the care we could not find. One team, around one person, looking at the whole picture, and staying with you for the long run. That is Aevivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- QUOTE -->
+<section class="section contrast">
+  <div class="container">
+    <div class="quote-band">
+      <p>Your health at eighty is being written now. The difference is whether someone is reading along.</p>
+      <div class="quote-caption">The Aevivo principle</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ TEASER -->
+<section class="section contrast video-band" id="quiz">
+  <video class="band-media" autoplay muted loop playsinline preload="metadata" poster="../assets/quiz-broll-poster.jpg">
+    <source src="../assets/quiz-broll.mp4" type="video/mp4">
+  </video>
+  <div class="band-scrim" aria-hidden="true"></div>
+  <div class="container">
+    <div class="quiz-band">
+      <span class="eyebrow">Not sure where to start</span>
+      <h2>Discover your optimized health.</h2>
+      <p class="lede">A two-minute quiz to map where you are today and where the biggest gains are. You will get a clear sense of your priorities, and you can book your call with that context already in hand.</p>
+      <!-- QUIZ-LINK: points to quiz/ (next build) -->
+      <a href="quiz/" class="btn btn-fill">Start the quiz</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Questions</span>
+      <h2>What people ask before booking.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Is the consultation really free?</summary>
+        <p>Yes. The first 15-minute call costs nothing and carries no obligation. It exists so you and the doctor can find out whether this is the right path for you before any money changes hands.</p>
+      </details>
+      <details>
+        <summary>What happens on the call?</summary>
+        <p>You talk. Dr. Andrea listens to your story, your goals, and what you have already tried, then tells you honestly what she would do next in your situation: specific tests, a protocol, or a therapy you may already have in mind.</p>
+      </details>
+      <details>
+        <summary>Do I need lab results before booking?</summary>
+        <p>No. You can book with nothing in hand. If you already have recent bloodwork or reports, the optional questionnaire we send after booking lets you share them, which helps the doctor prepare.</p>
+      </details>
+      <details>
+        <summary>Is everything online?</summary>
+        <p>Yes. Consultations happen by video, so you can join from anywhere. Dr. Andrea consults in Portuguese, Spanish, English, German and Italian.</p>
+      </details>
+      <details>
+        <summary>What does it cost after the free call?</summary>
+        <p>That depends on the path you choose. On the call, Dr. Andrea lays out your options and what each involves, transparently. You decide if and how you continue. Nothing is hidden in the first conversation.</p>
+      </details>
+      <details>
+        <summary>What happens to my data?</summary>
+        <p>Your information is stored securely in the EU under GDPR, and it always belongs to you. We never sell or share it.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section contrast" id="book">
+  <div class="container">
+    <div class="cta-band">
+      <span class="eyebrow">Start today</span>
+      <h2>Ready when you are.</h2>
+      <p class="lede">One free conversation is enough to understand where you stand, and what is possible from here.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <!-- BOOKING-LINK -->
+        <a href="#book" class="btn btn-fill">Book your free consultation</a>
+        <!-- QUIZ-LINK -->
+        <a href="#quiz" class="btn btn-ghost">Take the quiz first</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-row">
+          <div class="footer-brand-mark">A</div>
+          <div class="footer-brand-name">AEVIVO <span class="clinical">LONGEVITY</span></div>
+        </div>
+        <p class="footer-mission">Precision and longevity medicine, delivered through doctor-led consultations and personalised journeys.</p>
+      </div>
+      <div class="footer-col"><h5>Clinic</h5><a href="#book">Book a consultation</a><a href="#quiz">Take the quiz</a><a href="../index.html">Aevivo home</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="../compliance.html">Compliance</a><a href="../terms.html">Terms &amp; Conditions</a><a href="../privacy.html">Privacy Policy</a></div>
+      <div class="footer-col"><h5>Talk to us</h5><a href="https://wa.me/4915126628914" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:info@aevivolongevity.com">info@aevivolongevity.com</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 GÉNESE SOBRANCEIRA, LDA, doing business as Aevivo Longevity. NIF 519331800.</div>
+      <div>Consultations are informational and do not replace urgent or emergency care.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/theme.js?v=2"></script>
+</body>
+</html>

@@ -8,18 +8,18 @@
   try{if(localStorage.getItem(KEY)===PW)return}catch(e){}
   document.documentElement.setAttribute('data-aevivo-locked','1');
   var css='html[data-aevivo-locked] body > *:not(#aevivo-gate){display:none !important}'
-    +'#aevivo-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#EFE8DA;font-family:Inter,system-ui,sans-serif;color:#2C2D27;padding:24px}'
-    +'#aevivo-gate .gate-card{position:relative;max-width:440px;width:100%;text-align:center;padding:48px 36px;background:#F5EFE3;border:1px solid #C9BFA8;border-radius:14px}'
+    +'#aevivo-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#F8F5EE;font-family:Inter,system-ui,sans-serif;color:#2C2D27;padding:24px}'
+    +'#aevivo-gate .gate-card{position:relative;max-width:440px;width:100%;text-align:center;padding:48px 36px;background:#F8F5EE;border:1px solid #D4CDB9;border-radius:14px}'
     +'#aevivo-gate .gate-mark{width:54px;height:54px;border:1.2px solid #2C2D27;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;color:#2C2D27;font-weight:500;margin-bottom:22px}'
     +'#aevivo-gate .gate-brand{font-size:11px;letter-spacing:4px;color:#565A45;font-weight:600;text-transform:uppercase;margin-bottom:14px}'
     +'#aevivo-gate .gate-heading{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;font-weight:400;line-height:1.15;margin:0 0 12px;color:#2C2D27}'
     +'#aevivo-gate .gate-heading em{color:#565A45;font-style:italic}'
     +'#aevivo-gate .gate-sub{font-size:14px;color:#54564E;font-weight:300;line-height:1.65;margin:0 0 28px}'
     +'#aevivo-gate form{margin:0}'
-    +'#aevivo-gate input{width:100%;box-sizing:border-box;padding:14px 18px;background:#EFE8DA;border:1px solid #C9BFA8;border-radius:10px;color:#2C2D27;font-size:14px;font-family:inherit;outline:none;letter-spacing:2px;text-align:center;margin-bottom:14px;transition:border-color .2s}'
+    +'#aevivo-gate input{width:100%;box-sizing:border-box;padding:14px 18px;background:#F8F5EE;border:1px solid #D4CDB9;border-radius:10px;color:#2C2D27;font-size:14px;font-family:inherit;outline:none;letter-spacing:2px;text-align:center;margin-bottom:14px;transition:border-color .2s}'
     +'#aevivo-gate input::placeholder{color:#8A887D;letter-spacing:1px}'
     +'#aevivo-gate input:focus{border-color:#565A45}'
-    +'#aevivo-gate button{width:100%;padding:14px 24px;background:linear-gradient(180deg,#797D62,#5A5E45,#3F4231);color:#F2EEE2;border:none;border-radius:999px;font-family:inherit;font-weight:600;font-size:11px;letter-spacing:2.4px;text-transform:uppercase;cursor:pointer;transition:opacity .2s}'
+    +'#aevivo-gate button{width:100%;padding:22px 24px;background:#44483A;color:#F5F1E4;border:none;border-radius:999px;font-family:inherit;font-weight:600;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:opacity .2s}'
     +'#aevivo-gate button:hover{opacity:.92}'
     +'#aevivo-gate .gate-error{font-size:12px;color:#B14A3A;margin-top:12px;min-height:16px;letter-spacing:.3px}'
     +'#aevivo-gate .gate-foot{font-size:11px;color:#8A887D;margin-top:28px;letter-spacing:.3px;line-height:1.5}'
@@ -55,20 +55,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Aevivo Longevity · EU-GMP Peptide Supply for Clinics and Practitioners</title>
 <meta name="description" content="European-sourced, GMP-certified peptide pens and vials for longevity, health and wellness clinics. CoA per batch. Verified pricing on application.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F0E9DC'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23F8F5EE'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Georgia' fill='%232C2D27' font-weight='600'>A</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #EFE8DA;
-    --bg-warm: #E9E0CE;
-    --paper: #F5EFE3;
+    --bg: #F8F5EE;
+    --bg-warm: #F8F5EE;
+    --paper: #F8F5EE;
     --ink: #2C2D27;
     --ink-soft: #54564E;
     --ink-mute: #8A887D;
-    --line: #C9BFA8;
-    --line-soft: #DDD4BE;
+    --line: #D4CDB9;
+    --line-soft: #E7E1D1;
     --olive: #565A45;
     --olive-deep: #44483A;
     --olive-tint: rgba(86,90,69,0.08);
@@ -118,10 +118,10 @@
   /* Buttons */
   .btn {
     display: inline-flex; align-items: center; justify-content: center;
-    padding: 15px 32px;
+    padding: 27px 44px;
     font-family: var(--sans);
-    font-size: 10.5px;
-    letter-spacing: 2.4px;
+    font-size: 13px;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
     font-weight: 500;
     border: 1px solid var(--olive);
@@ -134,17 +134,16 @@
     text-decoration: none;
   }
   .btn-fill {
-    background: linear-gradient(180deg, #797D62 0%, #5A5E45 48%, #3F4231 100%);
-    color: #F2EEE2;
-    border-color: #3F4231;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 1px 2px rgba(44,45,39,0.18);
+    background: var(--olive-deep);
+    color: #F5F1E4;
+    border-color: var(--olive-deep);
   }
   .btn-fill:hover {
-    background: linear-gradient(180deg, #5A5E45 0%, #424632 50%, #2F3225 100%);
+    background: #2F3225;
     border-color: #2F3225;
   }
   .btn-ghost:hover { background: var(--olive-tint); }
-  .btn-sm { padding: 10px 22px; font-size: 9.5px; letter-spacing: 2.2px; }
+  .btn-sm { padding: 22px 30px; font-size: 11.5px; letter-spacing: 1.6px; }
 
   /* RUO bar */
   .ruo-bar {
@@ -173,7 +172,7 @@
     transition: background .3s, border-color .3s, backdrop-filter .3s;
   }
   .nav.scrolled {
-    background: rgba(239,232,218,0.92);
+    background: rgba(248,245,238,0.92);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     border-bottom-color: var(--line-soft);
   }
@@ -267,11 +266,11 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(to right,
-      rgba(239,232,218,0.94) 0%,
-      rgba(239,232,218,0.82) 24%,
-      rgba(239,232,218,0.50) 48%,
-      rgba(239,232,218,0.15) 70%,
-      rgba(239,232,218,0) 100%);
+      rgba(248,245,238,0.94) 0%,
+      rgba(248,245,238,0.82) 24%,
+      rgba(248,245,238,0.50) 48%,
+      rgba(248,245,238,0.15) 70%,
+      rgba(248,245,238,0) 100%);
     pointer-events: none;
     z-index: 1;
   }
@@ -280,7 +279,7 @@
     position: absolute;
     left: 0; right: 0; bottom: 0;
     height: 90px;
-    background: linear-gradient(to bottom, rgba(239,232,218,0) 0%, var(--bg) 100%);
+    background: linear-gradient(to bottom, rgba(248,245,238,0) 0%, var(--bg) 100%);
     pointer-events: none;
     z-index: 2;
   }
@@ -306,18 +305,18 @@
     .hero { min-height: 640px; max-height: 880px; background-position: 78% center; padding-top: 110px; }
     .hero::before {
       background: linear-gradient(to bottom,
-        rgba(239,232,218,0.96) 0%,
-        rgba(239,232,218,0.85) 30%,
-        rgba(239,232,218,0.55) 55%,
-        rgba(239,232,218,0.15) 78%,
-        rgba(239,232,218,0) 100%);
+        rgba(248,245,238,0.96) 0%,
+        rgba(248,245,238,0.85) 30%,
+        rgba(248,245,238,0.55) 55%,
+        rgba(248,245,238,0.15) 78%,
+        rgba(248,245,238,0) 100%);
     }
     .hero-content { max-width: 100%; }
   }
   @media (max-width: 700px) {
     .hero { min-height: 580px; padding-top: 150px; }
     .hero h1 { font-size: clamp(38px, 9vw, 56px); }
-    .nav .btn.btn-sm { padding: 9px 14px; font-size: 10.5px; letter-spacing: 0.6px; white-space: nowrap; }
+    .nav .btn.btn-sm { padding: 17px 14px; font-size: 10.5px; letter-spacing: 0.6px; white-space: nowrap; }
   }
 
   /* Trust strip */
@@ -622,12 +621,12 @@
   }
   .photo-break-caption {
     position: relative; z-index: 2;
-    color: #F5EFE3;
+    color: #F8F5EE;
     padding: 60px 0;
   }
   .photo-break-caption .eyebrow { color: rgba(245,239,227,0.75); }
   .photo-break-caption h3 {
-    color: #F5EFE3;
+    color: #F8F5EE;
     font-size: clamp(28px, 3.4vw, 42px);
     line-height: 1.15;
     max-width: 720px;
@@ -827,17 +826,17 @@
   .footer-brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
   .footer-brand-mark {
     width: 28px; height: 28px;
-    border: 1px solid #F5EFE3;
+    border: 1px solid #F8F5EE;
     border-radius: 4px;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 16px; color: #F5EFE3; font-weight: 500;
+    font-family: var(--serif); font-size: 16px; color: #F8F5EE; font-weight: 500;
   }
-  .footer-brand-name { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #F5EFE3; font-weight: 500; }
+  .footer-brand-name { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #F8F5EE; font-weight: 500; }
   .footer-brand-name .clinical { color: #D6CCB0; margin-left: 4px; }
   .footer-mission { font-size: 13.5px; line-height: 1.7; max-width: 320px; }
   .footer-col h5 { font-family: var(--sans); font-size: 10.5px; letter-spacing: 2.4px; text-transform: uppercase; color: #D6CCB0; margin-bottom: 16px; font-weight: 600; }
   .footer-col a { display: block; font-size: 13px; padding: 4px 0; }
-  .footer-col a:hover { color: #F5EFE3; }
+  .footer-col a:hover { color: #F8F5EE; }
   .footer-disclaimer {
     border-top: 1px solid rgba(245,239,227,0.14);
     padding-top: 22px; margin-bottom: 18px;
