@@ -99,13 +99,7 @@
   }
 
   /* ============ FACTS STRIP ============ */
-  .facts { padding: 100px 0; position: relative; overflow: hidden; }
-  .facts::before {
-    content: ""; position: absolute; inset: 0; z-index: 0;
-    background: url('../assets/dna-helix.svg') center / 1400px auto no-repeat;
-    opacity: 0.10;
-  }
-  .facts .container { position: relative; z-index: 1; }
+  .facts { padding: 100px 0; }
 
   /* ============ VIDEO BAND (b-roll sections) ============ */
   .section.video-band { position: relative; overflow: hidden; padding: 150px 0; }
@@ -119,6 +113,12 @@
   }
   .video-band .container { position: relative; z-index: 2; }
   @media (prefers-reduced-motion: reduce) { .video-band .band-media { display: none; } .section.video-band { background: var(--olive-deep); } }
+
+  /* ============ IMAGE BAND (full-bleed photo bg + overlay) ============ */
+  .section.image-band { position: relative; overflow: hidden; }
+  .image-band .band-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .image-band .band-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(38,40,31,0.62) 0%, rgba(38,40,31,0.74) 100%); }
+  .image-band .container { position: relative; z-index: 2; }
   .facts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   @media (max-width: 760px) { .facts-row { grid-template-columns: 1fr; } }
   .fact {
@@ -138,7 +138,8 @@
   .section.contrast .eyebrow { color: #D6CCB0; }
   .section.contrast h2 { color: #F5F1E4; }
   .section.contrast .lede, .section.contrast p { color: rgba(245, 241, 228, 0.82); }
-  .section.contrast .pillar p, .section.contrast .fact span { color: var(--ink-soft); }
+  .section.contrast .pillar p, .section.contrast .fact span, .section.contrast .fstep p { color: var(--ink-soft); }
+  .section.contrast .fstep h3 { color: var(--ink); }
   .section.contrast .quote-band p { color: #F5F1E4; }
   .section.contrast .quote-caption { color: #D6CCB0; }
   .section.contrast .btn-fill {
@@ -240,7 +241,6 @@
     background: linear-gradient(180deg, rgba(38, 40, 31, 0.45) 0%, rgba(38, 40, 31, 0.62) 55%, rgba(38, 40, 31, 0.78) 100%);
   }
   .phase-content { position: relative; z-index: 2; }
-  @media (prefers-reduced-motion: reduce) { .phase-media { display: none; } }
   .phase-card h3 { font-size: clamp(30px, 3vw, 38px); margin-bottom: 6px; color: #F5F1E4; }
   .phase-tag { font-size: 13px; letter-spacing: 2.6px; text-transform: uppercase; color: #D6CCB0; font-weight: 500; }
   .phase-list { list-style: none; padding: 0; margin: 22px 0 0; }
@@ -303,6 +303,8 @@
     border-top: 8px solid transparent; border-bottom: 8px solid transparent;
   }
   @media (max-width: 900px) { .flow-arrow { display: none; } }
+  .video-band .flow-arrow { background: rgba(214,204,176,0.85); }
+  .video-band .flow-arrow::after { border-left-color: rgba(214,204,176,0.85); }
   .fstep {
     position: relative; z-index: 1; text-align: center;
     padding: 32px 22px 28px;
@@ -483,8 +485,8 @@
 <section class="section">
   <div class="container">
     <div class="section-head center">
-      <span class="eyebrow">Different packages</span>
-      <h2>Built around your goal.</h2>
+      <span class="eyebrow">Most common needs</span>
+      <h2>Different packages, based on where you are.</h2>
       <p class="lede">These are not steps on a ladder. Most people begin by building a foundation, then choose where to go from there. You might push for peak performance, optimise for longevity, or pursue both at once. Your goal sets the focus.</p>
     </div>
     <div class="protocol-grid">
@@ -562,12 +564,12 @@
         </div>
       </div>
       <div class="care-card">
-        <img src="../images/care/nursing.jpg" alt="Nursing">
+        <img src="../images/care/recovery.jpg" alt="Recovery">
         <div class="care-scrim" aria-hidden="true"></div>
         <div class="care-content">
           <span class="care-role">Day to day</span>
-          <h3>Nursing</h3>
-          <p>Nurses who carry the plan between check-ins and keep you on track.</p>
+          <h3>Recovery</h3>
+          <p>Sleep, mobility and active recovery, plus the nursing support that keeps the plan on track between check-ins.</p>
         </div>
       </div>
     </div>
@@ -578,13 +580,14 @@
 </section>
 
 <!-- FEWER PATIENTS, MORE CARE -->
-<section class="section">
+<section class="section contrast image-band">
+  <img class="band-media" src="../images/care/fewer-bg.jpg" alt="An active, healthy couple" loading="lazy">
+  <div class="band-scrim" aria-hidden="true"></div>
   <div class="container">
     <div class="two-col">
       <div>
         <span class="eyebrow">Why we are different</span>
         <h2>Fewer patients. More care.</h2>
-        <img class="two-col-media" src="../images/care/nurse-care.jpg" alt="A nurse with a patient" loading="lazy">
       </div>
       <div>
         <p class="lede">Standard medicine runs on volume. You get five minutes, a quick label, and a prescription written before anyone really looked at you. Low energy, stubborn weight, brain fog, broken sleep, these get waved away or band-aided, when they could be understood and resolved.</p>
@@ -649,9 +652,7 @@
     </div>
     <div class="phases">
       <div class="phase-card">
-        <video class="phase-media" autoplay muted loop playsinline preload="metadata" poster="../assets/phase-women-poster.jpg">
-          <source src="../assets/phase-women.mp4" type="video/mp4">
-        </video>
+        <img class="phase-media" src="../images/phase/women.jpg" alt="A woman thriving" loading="lazy">
         <div class="phase-scrim" aria-hidden="true"></div>
         <div class="phase-content">
           <h3>For Women</h3>
@@ -666,9 +667,7 @@
         </div>
       </div>
       <div class="phase-card">
-        <video class="phase-media" autoplay muted loop playsinline preload="metadata" poster="../assets/phase-men-poster.jpg">
-          <source src="../assets/phase-men.mp4" type="video/mp4">
-        </video>
+        <img class="phase-media" src="../images/phase/men.jpg" alt="A man thriving" loading="lazy">
         <div class="phase-scrim" aria-hidden="true"></div>
         <div class="phase-content">
           <h3>For Men</h3>
@@ -724,13 +723,14 @@
 </section>
 
 <!-- WHY WE BUILT THIS -->
-<section class="section">
+<section class="section contrast image-band">
+  <img class="band-media" src="../images/care/scientist.jpg" alt="A scientist at work" loading="lazy">
+  <div class="band-scrim" aria-hidden="true"></div>
   <div class="container">
     <div class="two-col">
       <div>
         <span class="eyebrow">Why we built this</span>
         <h2>Built for what we couldn't find.</h2>
-        <img class="two-col-media" src="../images/care/sea.jpg" alt="A sailboat on the open sea" loading="lazy">
       </div>
       <div>
         <p class="lede">Aevivo began with a frustration its founders knew firsthand: care that treats you as a set of symptoms instead of a person. Five-minute appointments. Specialists who never speak to each other. Real concerns brushed aside because one lab value looked normal.</p>
@@ -753,10 +753,8 @@
 </section>
 
 <!-- QUIZ TEASER -->
-<section class="section contrast video-band" id="quiz">
-  <video class="band-media" autoplay muted loop playsinline preload="metadata" poster="../assets/quiz-broll-poster.jpg">
-    <source src="../assets/quiz-broll.mp4" type="video/mp4">
-  </video>
+<section class="section contrast image-band" id="quiz">
+  <img class="band-media" src="../assets/quiz-broll-poster.jpg" alt="Light through trees" loading="lazy">
   <div class="band-scrim" aria-hidden="true"></div>
   <div class="container">
     <div class="quiz-band">
